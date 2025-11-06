@@ -1,0 +1,83 @@
+
+/* main.css */
+
+/* Root color and font variables */
+:root {
+  --color-cream: #F0E3CE;
+  --color-yellow: #E7A73C;
+  --color-orange: #D67A2E;
+  --color-burnt: #B44A25;
+  --color-teal: #2A6E62;
+  --color-dark: #0B2D36;
+  --font-display: 'Pacifico', cursive;
+  --font-body: 'Roboto', sans-serif;
+}
+
+/* Base body styling */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+  margin: 0;
+  padding: 0;
+}
+
+/* Header and Navigation */
+header {
+  background-color: var(--color-teal);
+  color: var(--color-cream);
+  padding: 20px 0;
+  text-align: center;
+}
+
+nav a {
+  color: var(--color-cream);
+  padding: 0 15px;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+#hero {
+  background: linear-gradient(135deg, var(--color-orange), var(--color-yellow));
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--color-dark);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-family: var(--font-display);
+}
+
+#ecosystem {
+  margin: 40px 0;
+}
+
+#ecosystem h2 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+#ecosystem #mermaid-diagram {
+  text-align: center;
+  margin-top: 20px;
+}
+
+footer {
+  background-color: var(--color-teal);
+  color: var(--color-cream);
+  padding: 15px 0;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+}

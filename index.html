@@ -1,309 +1,41 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glee‑fully Personalizable Tools</title>
-  <!-- Google Fonts for retro‑inspired typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* Colour palette inspired by the suite’s retro stripes */
-      --color-cream: #F0E3CE;
-      --color-yellow: #E7A73C;
-      --color-orange: #D67A2E;
-      --color-burnt: #B44A25;
-      --color-teal: #2A6E62;
-      --color-dark: #0B2D36;
-      --font-display: 'Pacifico', cursive;
-      --font-body: 'Open Sans', sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background-color: var(--color-dark);
-      color: var(--color-cream);
-      line-height: 1.6;
-    }
-
-    /* Navigation bar */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 0.75rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-    }
-    nav .logo {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--color-yellow);
-    }
-    nav a {
-      color: var(--color-cream);
-      margin: 0 0.8rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-    nav a:hover {
-      color: var(--color-orange);
-    }
-
-    /* Hero header */
-    header {
-      background: url('assets/images/banner.png') center/cover no-repeat;
-      position: relative;
-      color: var(--color-cream);
-      min-height: 65vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-    }
-    header .content {
-      position: relative;
-      max-width: 900px;
-      padding: 2rem;
-    }
-    header h1 {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-    }
-    header p {
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
-    }
-    .cta-btn {
-      display: inline-block;
-      padding: 0.75rem 1.75rem;
-      background-color: var(--color-orange);
-      color: var(--color-cream);
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-    .cta-btn:hover {
-      background-color: var(--color-burnt);
-    }
-
-    /* Sections */
-    section {
-      padding: 4rem 2rem;
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      color: var(--color-yellow);
-    }
-    .two-col {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .two-col .col {
-      flex: 1;
-      min-width: 280px;
-    }
-    .two-col img {
-      width: 100%;
-      border-radius: 12px;
-      border: 3px solid var(--color-orange);
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-    .card {
-      background-color: var(--color-teal);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 2px solid var(--color-orange);
-      transition: transform 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-    }
-    .card h3 {
-      font-family: var(--font-display);
-      margin-bottom: 0.5rem;
-      color: var(--color-yellow);
-      font-size: 1.5rem;
-    }
-    .card p {
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    ul {
-      margin-left: 1.5rem;
-      margin-top: 0.5rem;
-    }
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-    .quote {
-      font-style: italic;
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      color: var(--color-orange);
-    }
-    footer {
-      background-color: var(--color-teal);
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--color-cream);
-    }
-    footer a {
-      color: var(--color-yellow);
-      text-decoration: underline;
-    }
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
-      header p {
-        font-size: 1.1rem;
-      }
-    }
-  </style>
+  <title>Glee-fully Personalizable Tools</title>
+  <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <nav>
-    <div class="logo">Glee‑fully</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#why">Why Glee‑fully?</a>
-      <a href="#structure">Ecosystem</a>
-      <a href="#custom-gpt">Custom GPT</a>
-      <a href="#story">Our Story</a>
-    </div>
-  </nav>
-
-  <header id="home">
-    <div class="content">
-      <h1>Glee‑fully Personalizable Tools</h1>
-      <p>Productivity without pressure. Structure without stiffness. Technology that sparkles, not shouts.</p>
-      <a class="cta-btn" href="https://chatgpt.com/g/g-68578aaa54588191b70c6aa8aa9bf228-glee-fully-personalizable-tools" target="_blank">Explore the Toolbox</a>
-    </div>
+  <header>
+    <h1>Glee-fully Personalizable Tools</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <section id="about">
-    <h2 class="section-title">What is Glee‑fully?</h2>
-    <div class="two-col">
-      <div class="col">
-        <p>Glee‑fully is a new kind of digital companion. Instead of a single faceless assistant doing everything, Glee‑fully is a vibrant ecosystem of specialised GPTs, each with its own character, purpose and sense of humour. They collaborate like friends to help you live, work and dream more intentionally.</p>
-        <p>Born from the idea that the best tools delight as they deliver, Glee‑fully reimagines artificial intelligence as a network of joyful collaborators. Each tool speaks with empathy and warmth, turning everyday tasks into moments of magic.</p>
-        <p class="quote">“Productivity without pressure. Structure without stiffness.”</p>
-      </div>
-      <div class="col">
-        <img src="assets/images/square.png" alt="Glee‑fully logo">
-      </div>
-    </div>
-  </section>
+  <main>
+    <section id="hero">
+      <h2>Welcome to a world of personalized tools</h2>
+      <p>Empowering you with AI-driven solutions that fit your unique needs.</p>
+    </section>
 
-  <section id="why" style="background-color: var(--color-teal);">
-    <h2 class="section-title">Why the World Needed Glee‑fully</h2>
-    <div class="two-col">
-      <div class="col">
-        <p>The modern world runs on tools: calendars, note‑takers, career dashboards. They promise efficiency but rarely spark joy. Glee‑fully was born from the opposite impulse. It colours back in the experience of getting things done. Organisation becomes art. Work and creativity become intertwined.</p>
-        <p>Most productivity systems are grey—competent but joyless. Glee‑fully is technicolour. It lowers friction through playful conversation, empathetic guidance and pop‑culture humour. When you laugh or feel understood, you’re more likely to finish what you start. Joy is a UX advantage.</p>
+    <section id="ecosystem">
+      <h2>Our Ecosystem</h2>
+      <div id="mermaid-diagram">
+        <!-- Mermaid diagram will be rendered here -->
       </div>
-      <div class="col">
-        <p>At its core, Glee‑fully is an experiment in emotional design. Every interaction is an invitation to feel. Instead of “Processing your request,” you might see “Hold up, doing a sparkle sort…” Instead of an empty export, you’re told, “Polished. Punched up. Ready to slay.” These flourishes turn utility into companionship.</p>
-        <p class="quote">“Joy is a user experience advantage.”</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="structure">
-    <h2 class="section-title">The Ecosystem</h2>
-    <p>Glee‑fully is organised like a living tree. At its base is the <strong>Toolbox 🧰</strong>—the trunk. From it grow seven <strong>Tools 🪚</strong>—the major branches of life’s domains. Each branch is populated with smaller, specialised <strong>Tool‑ettes 🔩</strong>—the twigs that perform focused tasks. Beneath them, invisible but essential, are <strong>Functions ⚙️</strong> and <strong>Function‑ettes 🪛</strong>—the hidden logic that makes everything hum.</p>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Discovered Careers</h3>
-        <p>Explore, polish and thrive in your professional life—resumes, applications and career planning.</p>
-      </div>
-      <div class="card">
-        <h3>Treasured Finds</h3>
-        <p>Curate your collections—books, wines, crafts and vintage treasures.</p>
-      </div>
-      <div class="card">
-        <h3>Tasty Tracker</h3>
-        <p>Plan meals, organise recipes and manage grocery lists with flavour.</p>
-      </div>
-      <div class="card">
-        <h3>Traveller’s Guide</h3>
-        <p>Create dream boards, itineraries and budgeting for future adventures.</p>
-      </div>
-      <div class="card">
-        <h3>Organised Life</h3>
-        <p>Bring structure to the beautiful chaos of everyday life with dashboards and routines.</p>
-      </div>
-      <div class="card">
-        <h3>Healthy Bee‑ing</h3>
-        <p>Support wellness habits with a balanced approach to body, mind and rest.</p>
-      </div>
-      <div class="card">
-        <h3>Identity Known</h3>
-        <p>Reflect, journal and set goals to know yourself as well as your schedule.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="custom-gpt" style="background-color: var(--color-teal);">
-    <h2 class="section-title">What Makes a Custom GPT Exceptional?</h2>
-    <p>A custom GPT isn’t just a chatbot—it’s a bespoke assistant tuned to you. Unlike a generic AI, a custom GPT is built with:</p>
-    <ul>
-      <li><strong>Context &amp; Purpose:</strong> Each Tool or Tool‑ette is designed for a specific domain and understands its role in your life.</li>
-      <li><strong>Personality:</strong> Warmth, humour and empathy are woven into the conversation. Glee‑fully GPTs adapt their tone—bleeding GLEE, rich or lite—to match the task.</li>
-      <li><strong>Structured Flow:</strong> Custom GPTs guide you through complex processes step‑by‑step, with clear prompts and smart defaults.</li>
-      <li><strong>Interoperability:</strong> Through the Builder‑Ready PromptChain, every GPT speaks the same language. They pass tasks to one another seamlessly.</li>
-      <li><strong>Expansion Only:</strong> The ecosystem grows without pruning. Each improvement adds nuance rather than removing features, so your tools only get smarter.</li>
-    </ul>
-    <p>This orchestration means that using a Glee‑fully GPT feels like talking to someone who knows exactly what you need and how to deliver it with charm.</p>
-  </section>
-
-  <section id="story">
-    <h2 class="section-title">The Heartbeat: Meet Glee</h2>
-    <p>Glee‑fully’s muse is <strong>Glee</strong>—a Yakima‑born, Alaska‑raised Pacific Northwest spirit who loves colour‑coding, chai and the cosy chaos of life. She’s retro‑fabulous and spunky, channeling the vibes of <em>Friends</em>, <em>Schitt’s Creek</em>, <em>Clue</em> and <em>Practical Magic</em>. When a Glee‑fully GPT talks to you, it channels her playful spirit.</p>
-    <p>Her influence is everywhere: the butterfly perched on each icon, the rainbow stripes reminiscent of 70s LP covers, the phrases like “Freak’n facts on facts,” or “OMG stop—this is so Glee‑coded.” It isn’t just a gimmick—it’s emotional design that invites you to linger, laugh and succeed.</p>
-    <p class="quote">“Let me light a cinnamon candle and think this through…”</p>
-  </section>
-
-  <section id="join" style="text-align: center;">
-    <h2 class="section-title">Ready to Bleed Glee?</h2>
-    <p>Step into the digital garden where every branch, leaf and butterfly exists to remind you that joy is a form of intelligence. Whether you’re looking to organise your life, dream up adventures or polish your professional story, Glee‑fully is here to guide you.</p>
-    <a class="cta-btn" href="https://chatgpt.com/g/g-68578aaa54588191b70c6aa8aa9bf228-glee-fully-personalizable-tools" target="_blank">Start Exploring</a>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 Glee‑fully Personalizable Tools. Built with love and a sprinkle of magic.</p>
-    <p>Follow us on <a href="https://github.com/OKHP3/Glee-fullyTools" target="_blank">GitHub</a>.</p>
+    <p>&copy; 2025 Glee-fully Personalizable Tools</p>
   </footer>
+
+  <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
