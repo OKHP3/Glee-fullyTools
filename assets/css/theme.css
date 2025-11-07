@@ -503,6 +503,31 @@ button {
   }
 }
 
+<<<<<<< HEAD
+.hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-visual {
+  max-width: 320px;
+  margin-left: auto;
+}
+
+.hero-illustration {
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 899px) {
+  .hero-visual {
+    max-width: 260px;
+    margin: 0 auto 1.5rem;
+  }
+}
+
+=======
 .hero-side {
   display: flex;
   flex-direction: column;
@@ -615,6 +640,7 @@ button {
   }
 }
 
+>>>>>>> 4e4f74cb8a042c497f055d5dcd62aca69d98cfa0
 /* ===== SECTION STYLES ==================================================== */
 
 .section-header {
