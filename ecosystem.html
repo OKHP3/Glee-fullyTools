@@ -4,17 +4,29 @@
     <meta charset="utf-8" />
     <title>The Glee-fully Ecosystem</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Discover the Glee-fully Toolbox: Toolbox, Tools, Tool-ettes, Functions, and Function-ettes — a living tree of personalizable GPTs." />
+    <meta name="description" content="Glee-fully Personalizable Tools — a joyful retro toolbox of Custom GPTs that turn everyday life into something beautifully organized and deeply personal." />
     <link rel="stylesheet" href="assets/css/theme.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body class="glee-main">
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <header class="site-header">
       <div class="container">
         <div class="logo">
           <img src="assets/img/Glee-fullyTools TitleLowCenterButterflyLeftToolbox Square 1024.png" alt="Glee-fully logo" width="40" height="40" />
           <span class="brand">Glee-fully</span>
         </div>
-        <nav class="primary-nav"><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li></ul></nav>
+        <nav class="primary-nav" id="navigation">
+          <ul>
+            <li><a href="index.html#why">Why Glee-fully</a></li>
+            <li><a href="ecosystem.html">Our Ecosystem</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </nav>
+        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
       </div>
     </header>
 
@@ -28,6 +40,16 @@
         <article class="card"><h3>Tool-ettes 🔩🌿</h3><p>Smaller GPTs built for focus — a single task, finely tuned personality, instantly helpful.</p></article>
         <article class="card"><h3>Functions ⚙️🍃</h3><p>Specialized utilities that power multiple Tools — math, sorting, formatting, or memory routines.</p></article>
         <article class="card"><h3>Function-ettes 🪛🍂</h3><p>Tiny helpers that add sparkle and automation — the leaves that make the ecosystem feel alive.</p></article>
+      
+        <!-- Insert your Mermaid diagram here -->
+        <div class="mermaid">
+            graph TD
+            A[Glee-fully Toolbox] --> B[Tools]
+            B --> C[Tool-ettes]
+            C --> D[Functions]
+            D --> E[Function-ettes]
+        </div>
+      
       </div>
 
       <h2>What Makes a Custom GPT Different?</h2>
@@ -41,7 +63,36 @@
     </main>
 
     <footer class="site-footer">
-      <div class="footer-bottom"><p><em>Inspired by Glee’s sparkle, fueled by iced chai, and loaded with facts-on-facts.</em></p></div>
+      <div class="container footer-grid">
+        <div class="footer-column">
+          <h3>Glee-fully Personalizable Tools</h3>
+          <p>Smart design made human — a joyful suite of custom GPT Tools built with heart.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Navigation</h4>
+          <ul><li><a href="index.html#why">Why Glee-fully</a></li><li><a href="ecosystem.html">Ecosystem</a></li><li><a href="about.html">About Us</a></li></ul>
+        </div>
+        <div class="footer-column">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="mailto:contact@glee-fully.tools">contact@glee-fully.tools</a></li>
+            <li><a href="mailto:support@glee-fully.tools">support@glee-fully.tools</a></li>
+            <li><a href="https://ko-fi.com/gleefullypersonalizabletools" target="_blank" rel="noopener">Ko-fi</a></li>
+            <li><a href="https://youtube.com/@glee-fullytools?si=FV-2or4pjB9EizC_" target="_blank" rel="noopener">YouTube</a></li>
+            <li><a href="https://facebook.com/OverKillHillP3/" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/company/overkillhillp3" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© <span id="current-year-glee"></span> Glee-fully Personalizable Tools. All rights reserved.<br><em>Inspired by Glee’s sparkle, fueled by iced chai, and loaded with facts-on-facts.</em></p>
+      </div>
     </footer>
+    
+    <script src="assets/js/app.js"></script>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({startOnLoad:true});
+    </script>
   </body>
 </html>
