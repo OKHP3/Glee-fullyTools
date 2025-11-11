@@ -12,7 +12,7 @@ Explore our tools and see how we can help you grow:
 - **Persona Engine** – Develop your digital persona for business and creative pursuits
 - **Identity Tracker** – Keep track of your evolving personal and professional identity
 
-[Visit Glee‑fullyTools](https://gleefully.tools) for more.
+[Visit Glee‑fully Personalizable Tools™](https://gleefully.tools) for more.
 
 ## 💡 How It Works
 
@@ -20,39 +20,26 @@ Each of our tools is designed to be **fully personalizable**. As you interact wi
 
 ### 💌 General Feedback
 
-We’re constantly improving! If you have any suggestions, feedback, or want to share your experience with **Glee‑fullyTools**, please feel free to reach out to us directly at:
+We’re constantly improving! If you have any suggestions, feedback, or want to share your experience with **Glee‑fully Personalizable Tools™**, please feel free to reach out to us directly at:
 
-- **Feedback Email**: [Glee‑fullyTools@outlook.com](mailto:Glee-fullyTools@outlook.com?subject=Feedback%20-%20Toolbox%20GPT)
-- **Ko‑Fi Support**: [Support our tools on Ko‑Fi](https://ko-fi.com/gleefullypersonalizabletools?source=Glee-fully%20Toolbox%20GPT)
+- **Feedback Email**: [feedback@glee-fully.tools](mailto:feedback@glee-fully.tools)
+- **Ko‑Fi Support**: [Support our tools on Ko‑Fi](https://ko-fi.com/gleefullypersonalizabletools)
 
 ## 📧 Contact Information
 
 For inquiries, collaborations, or general questions, you can reach us at:
 
-- **General Email**: [Glee‑fully@outlook.com](mailto:Glee-fully@outlook.com)
-- **Tool-Specific Email**: [Glee‑fullyPersonalizableTools@outlook.com](mailto:Glee-fullyPersonalizableTools@outlook.com)
+- **General Email**: [contact@glee-fully.tools](mailto:contact@glee-fully.tools)
+- **Tool-Specific Email**: [support@glee-fully.tools](mailto:support@glee-fully.tools)
 
 ## 🔗 Quick Links
 
 - [Glee‑fullyTools Official Site](https://gleefully.tools)
-- [Glee‑fully Personalizable Tools on Ko‑Fi](https://ko-fi.com/gleefullypersonalizabletools?source=Glee-fully%20Toolbox%20GPT)
+- [Glee‑fully Personalizable Tools on Ko‑Fi](https://ko-fi.com/gleefullypersonalizabletools)
 
 ## 📚 Get Started
 
 To begin exploring, simply start with the **Glee‑fullyTools** platform at [https://gleefully.tools](https://gleefully.tools) and select the tool that best suits your needs. From there, you can begin customizing your experience and making it truly your own.
-
----
-
-## 🔧 Setup Instructions
-
-1. **Clone the Repository**: To get started, clone this repository to your local machine.
-    ```bash
-    git clone https://github.com/OKHP3/Glee-fullyTools.git
-    ```
-
-2. **Open the Index Page**: Once cloned, open the `index.html` file to view the tools.
-
-3. **Personalize**: Customize the page content, design, and links to suit your specific needs.
 
 ---
 
