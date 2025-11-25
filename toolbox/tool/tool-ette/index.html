@@ -2,23 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Glee‑fully Tools – Tool‑ette (Twig) detail template</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GPT Name – Glee‑fully Tool‑ette Detail</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    />
     <meta
       name="description"
-      content="Template for Glee‑fully Tool‑ette (Twig) detail pages."
+      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
     />
-    <meta property="og:title" content="Glee‑fully Personalizable Tools™ 🧰🌳" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="GPT Name – Glee‑fully Personalizable Tools" />
     <meta
       property="og:description"
-      content="Glee‑fully Personalizable Tools™ — a joyful retro toolbox of Custom GPTs that turn everyday life into something beautifully organized and deeply personal."
+      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
     <meta
       property="og:image"
       content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
     />
+
+    <!-- Shared theme + typography -->
     <link rel="stylesheet" href="/assets/css/theme.css" />
     <link
       rel="icon"
@@ -28,7 +35,7 @@
     />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Glee-fully typography -->
+    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
     <link
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
@@ -52,7 +59,7 @@
         <nav class="primary-nav" id="navigation">
           <ul>
             <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
+            <li><a href="/toolbox/">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
             <li><a href="/universe/">OKHP³™ Universe</a></li>
@@ -60,219 +67,259 @@
             <li><a href="/contact/">Contact</a></li>
           </ul>
         </nav>
-        <button
-          class="nav-toggle"
-          aria-controls="navigation"
-          aria-expanded="false"
-        >
-          <span class="bar"></span><span class="bar"></span
-          ><span class="bar"></span>
+        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO ************************************************************** -->
-      <section class="hero">
-        <div
-          class="brand-stripes brand-stripes--glee"
-          aria-hidden="true"
-        ></div>
+      <!-- HERO: GPT name, launch button, quick pitch -->
+      <section class="hero glee-hero">
+        <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="hero-inner container">
-          <div class="hero-copy reveal-on-scroll">
-            <p class="eyebrow">Tool‑ette · Twig 🔩🌿 · Leaf‑level work</p>
-            <h1>GPT Name (Tool‑ette / Twig)</h1>
-            <p class="hero-subtitle">
-              Brief tagline describing what this Tool‑ette actually does for the
-              user.
-            </p>
-            <p>
-              This page is for <strong>leaf‑level GPTs</strong> that perform
-              specific tasks: resume building, journaling, tracking, planning,
-              etc. Each Tool‑ette lives inside a parent Tool (Branch).
-            </p>
-            <p>
-              <strong>Parent Tool:</strong> Name the parent Branch here and link
-              to its detail page.
-            </p>
-            <div class="hero-actions">
-              <a
-                href="https://chatgpt.com/"
-                class="btn btn-primary"
-                target="_blank"
-                rel="noopener"
-              >
-                Open this Tool‑ette in ChatGPT
-              </a>
-              <a href="/toolbox/tool/" class="btn btn-quiet">Back to parent Tool</a>
+          <div class="hero-grid">
+            <div class="hero-copy reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/tool/">Parent Tool Name</a>
+              </p>
+              <h1>GPT Name</h1>
+              <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
+              <p class="hero-tagline">
+                2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
+                and how it makes life easier inside the Glee‑fully Toolbox.
+              </p>
+
+              <div class="hero-actions">
+                <!-- Highlighted launch button – update href to this custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “GPT Name” in ChatGPT
+                </a>
+
+                <!-- Optional secondary action back to parent Tool page -->
+                <a href="/toolbox/tool/" class="btn btn-quiet">
+                  Back to Parent Tool Name
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
+                handy.
+              </p>
+            </div>
+
+            <div class="hero-visual reveal-on-scroll">
+              <!-- Swap this with a GPT-specific illustration if you’d like -->
+              <img
+                src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
+                alt="Illustration representing GPT Name"
+              />
             </div>
           </div>
-          <div class="hero-visual reveal-on-scroll">
-            <img
-              src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-              alt="Illustration for this Tool‑ette"
-            />
-          </div>
         </div>
       </section>
 
-      <!-- WHAT IT DOES + ELEVATOR PITCH ************************************ -->
-      <section class="content-section container reveal-on-scroll">
-        <header class="section-header">
-          <h2>What this Tool‑ette does</h2>
-          <p>
-            Paste the Tool‑ette’s <strong>“Full Description”</strong> from the
-            inventory markdown here. Explain what the user can accomplish in one
-            focused session.
-          </p>
-        </header>
-
-        <div class="two-column">
-          <div>
-            <p>
-              Replace this paragraph with a warm, user‑facing explanation of the
-              Tool‑ette’s job: what inputs it expects, what outputs it returns,
-              and how it keeps things simple.
+      <!-- WHAT IT DOES / PURPOSE -->
+      <section class="section content-section">
+        <div class="container reveal-on-scroll">
+          <header class="section-header">
+            <h2 class="section-title">What this Tool‑ette does</h2>
+            <p class="section-subtitle">
+              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
             </p>
+          </header>
 
-            <blockquote class="manifesto-blockquote">
-              Paste the Tool‑ette’s <strong>Elevator Pitch</strong> here — one
-              or two paragraphs that sell the experience in your Glee‑fully
-              voice.
-            </blockquote>
-          </div>
+          <div class="grid grid-3">
+            <article class="card">
+              <h3>Core purpose</h3>
+              <p>
+                One short paragraph explaining the main job of this GPT
+                (e.g., “Helps you build and maintain a structured inventory of…”).
+              </p>
+            </article>
 
-          <aside class="card">
-            <h3>Canonical snapshot</h3>
-            <ul class="feature-list">
-              <li><strong>ID:</strong> e.g., #01a</li>
-              <li><strong>Type:</strong> Tool‑ette (Twig 🔩🌿)</li>
-              <li><strong>Parent Tool:</strong> name of the Branch 🌵</li>
-              <li>
-                <strong>Toolbox:</strong> Glee‑fully Personalizable Tools
-                (Trunk 🧰🌳)
-              </li>
-              <li>
-                <strong>GPT link:</strong> paste the ChatGPT URL for this
-                Tool‑ette.
-              </li>
-            </ul>
-          </aside>
-        </div>
-      </section>
+            <article class="card">
+              <h3>Best for</h3>
+              <p>
+                Describe ideal users or scenarios:
+                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+              </p>
+            </article>
 
-      <!-- PRIMARY FUNCTIONS (LEAVES) *************************************** -->
-      <section class="content-section container reveal-on-scroll">
-        <header class="section-header">
-          <h2>Primary functions (Leaves)</h2>
-          <p>
-            From the markdown, copy the Tool‑ette’s
-            <strong>“Primary Functions”</strong> list. Each bullet here should
-            map to one leaf‑level capability.
-          </p>
-        </header>
-
-        <ul class="feature-list">
-          <li>
-            <strong>Leaf 1:</strong> Describe the first key function of this
-            Tool‑ette.
-          </li>
-          <li>
-            <strong>Leaf 2:</strong> Describe another important capability.
-          </li>
-          <li>
-            <strong>Leaf 3:</strong> Add more leaves as needed.
-          </li>
-        </ul>
-      </section>
-
-      <!-- BEST FOR / NOT FOR *********************************************** -->
-      <section class="content-section container reveal-on-scroll">
-        <header class="section-header">
-          <h2>Best‑fit use cases</h2>
-          <p>
-            Help users know when this Tool‑ette is the right pick, and when to
-            hop elsewhere.
-          </p>
-        </header>
-
-        <div class="two-column">
-          <div>
-            <h3>Best for…</h3>
-            <ul class="feature-list">
-              <li>
-                The core scenarios this Tool‑ette was explicitly designed to
-                handle.
-              </li>
-              <li>Specific user types or moods it serves especially well.</li>
-              <li>Typical inputs the GPT loves to work with.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Not designed for…</h3>
-            <ul class="feature-list">
-              <li>
-                Tasks that should live in another Tool‑ette, Tool, or AskJamie.
-              </li>
-              <li>
-                Any regulated / high‑risk decisions (legal, medical, financial,
-                etc.).
-              </li>
-              <li>
-                Long‑term storage of sensitive personal data (remind users to
-                keep files on their side).
-              </li>
-            </ul>
+            <article class="card">
+              <h3>Inputs &amp; outputs</h3>
+              <p>
+                Explain what users bring in (text, lists, uploads, prompts) and what comes out
+                (plans, logs, exports, checklists, etc.).
+              </p>
+            </article>
           </div>
         </div>
       </section>
 
-      <!-- WORKS WELL WITH *************************************************** -->
-      <section class="content-section container reveal-on-scroll">
-        <header class="section-header">
-          <h2>Works well with</h2>
-          <p>
-            Optionally list sibling Tool‑ettes or Tools that pair nicely with
-            this one.
-          </p>
-        </header>
-
-        <div class="grid grid-3">
-          <article class="card">
-            <h3>Sibling Tool‑ette</h3>
-            <p>
-              One sentence on how this sibling complements or extends the
-              current Tool‑ette.
+      <!-- PRIMARY FUNCTIONS / LEAVES -->
+      <section class="section content-section stripe-bg">
+        <div class="container reveal-on-scroll">
+          <header class="section-header">
+            <h2 class="section-title">Core functions (Leaves)</h2>
+            <p class="section-subtitle">
+              Highlight the concrete actions this GPT can take on the user’s behalf.
             </p>
-            <p><a href="/toolbox/tool/tool-ette/">Open sibling Tool‑ette →</a></p>
-          </article>
+          </header>
 
-          <article class="card">
-            <h3>Parent Tool</h3>
-            <p>
-              Brief reminder of what the parent Branch does and why you might
-              step back up a level.
-            </p>
-            <p><a href="/toolbox/tool/">Back to parent Tool →</a></p>
-          </article>
+          <ul>
+            <li>
+              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
+              One sentence about what this function does and why it’s helpful.
+            </li>
+            <li>
+              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
+              Another specific function (log, analyze, export, transform, etc.).
+            </li>
+            <li>
+              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
+              Add as many list items as needed to cover the most important capabilities.
+            </li>
+          </ul>
         </div>
       </section>
 
-      <!-- CONVERSATION STARTERS ******************************************** -->
-      <section class="content-section container reveal-on-scroll">
-        <header class="section-header">
-          <h2>Conversation starters</h2>
-          <p>
-            Add 3–5 example prompts that show the Tool‑ette at its best. Tie
-            them to the leaf functions above.
-          </p>
-        </header>
+      <!-- WHY IT BEATS VANILLA CHATGPT -->
+      <section class="section content-section">
+        <div class="container reveal-on-scroll">
+          <header class="section-header">
+            <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
+            <p class="section-subtitle">
+              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+            </p>
+          </header>
 
-        <ul class="feature-list">
-          <li>“Help me with …” prompt tailored to Leaf 1.</li>
-          <li>“Review / rewrite / plan …” prompt tailored to Leaf 2.</li>
-          <li>“Summarize / export / reflect on …” prompt for Leaf 3.</li>
-        </ul>
+          <div class="grid grid-3">
+            <article class="card">
+              <h3>Pre‑tuned brain</h3>
+              <p>
+                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
+                so users don’t have to re‑explain themselves every time.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Suite‑aware &amp; ecosystem‑ready</h3>
+              <p>
+                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
+                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Repeatable, export‑friendly workflows</h3>
+              <p>
+                Call out templates, checklists, logs, or export flows that make results reusable
+                instead of one‑off responses.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- GETTING STARTED / HOW TO USE -->
+      <section class="section content-section stripe-bg">
+        <div class="container reveal-on-scroll">
+          <header class="section-header">
+            <h2 class="section-title">Getting started</h2>
+            <p class="section-subtitle">
+              Help users take their first step in under a minute.
+            </p>
+          </header>
+
+          <ol>
+            <li>
+              <strong>Step 1 – Arrive with something small.</strong>
+              Suggest an easy first use case (one list, one trip, one project, etc.).
+            </li>
+            <li>
+              <strong>Step 2 – Paste or upload.</strong>
+              Explain how to bring existing notes, docs, or data into the conversation.
+            </li>
+            <li>
+              <strong>Step 3 – Choose a path.</strong>
+              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
+              export).
+            </li>
+            <li>
+              <strong>Step 4 – Save what matters.</strong>
+              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ECOSYSTEM: PARENT TOOL + SIBLING TOOL‑ETTES -->
+      <section class="section content-section">
+        <div class="container reveal-on-scroll">
+          <header class="section-header">
+            <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
+            <p class="section-subtitle">
+              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
+              Toolbox so users always know where to go next.
+            </p>
+          </header>
+
+          <div class="grid grid-3">
+            <!-- Parent Tool card -->
+            <article class="card">
+              <h3>Parent Tool (Branch)</h3>
+              <p>
+                One‑sentence description of the parent Tool — what category it covers and how it
+                groups its Tool‑ettes.
+              </p>
+              <p>
+                <a href="/toolbox/tool/" class="btn btn-quiet">
+                  Visit Parent Tool Name
+                </a>
+              </p>
+            </article>
+
+            <!-- Sibling Tool‑ettes -->
+            <article class="card">
+              <h3>Sibling Tool‑ettes</h3>
+              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <ul class="link-list">
+                <li>
+                  <a href="/toolbox/tool/sibling-tool-ette-1/">
+                    Sibling Tool‑ette #1
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/tool/sibling-tool-ette-2/">
+                    Sibling Tool‑ette #2
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/tool/sibling-tool-ette-3/">
+                    Sibling Tool‑ette #3
+                  </a>
+                </li>
+              </ul>
+            </article>
+
+            <!-- Back to Toolbox -->
+            <article class="card">
+              <h3>Back to the Toolbox</h3>
+              <p>
+                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
+                your next Tool or Tool‑ette.
+              </p>
+              <p>
+                <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
+              </p>
+            </article>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -280,10 +327,7 @@
       <div class="container footer-grid">
         <div class="footer-column">
           <h3>Glee‑fully Personalizable Tools</h3>
-          <p>
-            Smart design made human — a joyful suite of custom GPT Tools built
-            with heart.
-          </p>
+          <p>Smart design made human — a joyful suite of custom GPT Tools built with heart.</p>
         </div>
         <div class="footer-column">
           <h4>Navigation</h4>
@@ -292,22 +336,13 @@
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
             <li><a href="/about/">About Us</a></li>
-            <li><a href="/legal/">Legal</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h4>Connect</h4>
           <ul>
-            <li>
-              <a href="mailto:contact@glee-fully.tools"
-                >contact@glee-fully.tools</a
-              >
-            </li>
-            <li>
-              <a href="mailto:support@glee-fully.tools"
-                >support@glee-fully.tools</a
-              >
-            </li>
+            <li><a href="mailto:contact@glee-fully.tools">contact@glee-fully.tools</a></li>
+            <li><a href="mailto:support@glee-fully.tools">support@glee-fully.tools</a></li>
             <li>
               <a
                 href="https://ko-fi.com/gleefullypersonalizabletools"
@@ -345,10 +380,9 @@
       </div>
       <div class="footer-bottom">
         <p>
-          © <span id="current-year-glee"></span> Glee‑fully Personalizable
-          Tools. All rights reserved.<br /><em
-            >Inspired by Glee’s sparkle, fueled by iced chai, and loaded with
-            facts-on-facts.</em
+          © <span id="current-year-glee"></span> Glee‑fully Personalizable Tools. All rights
+          reserved.<br /><em
+            >Inspired by Glee’s sparkle, fueled by iced chai, and loaded with facts-on-facts.</em
           >
         </p>
       </div>
