@@ -93,6 +93,41 @@
         </div>
       </section>
 
+      <section class="content-section container reveal-on-scroll ko-fi-section">
+        <div class="two-column">
+          <div class="ko-fi-copy">
+            <h2>Support the toolbox with Ko‑fi</h2>
+            <p>
+              Glee‑fully started as a love letter, not a product line. The tools here are a tribute to Glee’s color, care,
+              and way of seeing the world — something we’re sharing carefully and in very small doses.
+            </p>
+            <p>
+              Ko‑fi is a creator support platform that lets people send one‑time tips or small donations using trusted
+              payment providers like PayPal and Stripe. Your payment details don’t pass through this site — they’re handled
+              directly by those processors, the same way they are on many online shops.
+            </p>
+            <p>
+              There’s no expectation that these tools will ever be “sold” in a traditional sense. They’re here as a gentle
+              way to share a little piece of Glee’s personality with the world. If that work has helped you and you’d like
+              to say thank you, Ko‑fi is the easiest way to do it.
+            </p>
+          </div>
+          <aside class="card ko-fi-highlight" aria-label="Ko‑fi support">
+            <h3>Buy Glee a chai</h3>
+            <p>
+              Most support goes back into hosting, design time, and building more tiny tools with heart. But the hope is
+              simple: that every now and then, someone’s thank‑you tip is just enough to buy Glee one of her favorites —
+              a venti 12‑pump iced chai tea latte from Starbucks.
+            </p>
+            <a class="btn-primary"
+               href="https://ko-fi.com/gleefullypersonalizabletools"
+               target="_blank" rel="noopener">
+              Visit <strong>our</strong> Ko‑fi page
+            </a>
+          </aside>
+        </div>
+      </section>
+
       <section class="content-section container reveal-on-scroll">
         <h2>What to include in your note</h2>
         <p>
@@ -181,6 +216,15 @@
           nodeSpacing: 60,
           rankSpacing: 70
         }
+      });
+    </script>
+    <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+    <script>
+      kofiWidgetOverlay.draw('gleefullypersonalizabletools', {
+        type: 'floating-chat',
+        'floating-chat.donateButton.text': 'Support Us',
+        'floating-chat.donateButton.background-color': '#f45d22',
+        'floating-chat.donateButton.text-color': '#fff'
       });
     </script>
   </body>
