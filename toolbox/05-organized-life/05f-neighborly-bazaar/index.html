@@ -2,44 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <title>Neighborly Bazaar — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
     <meta
       name="viewport"
       content="width=device-width,initial-scale=1"
     />
     <meta
       name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
+      content="Neighborly Bazaar is a custom GPT that helps you evaluate, price, and list household items so you can turn clutter into fair, neighbor‑friendly sales and donations."
     />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
+    <meta property="og:title" content="Neighborly Bazaar — Glee‑fully Personalizable Tool™" />
     <meta
       property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
+      content="A cheerful resale companion inside Glee‑fully Organized Life that helps you price, list, and safely re‑home your extra stuff through local‑minded guidance."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
     <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
+      property="og:url"
+      content="https://glee-fully.tools/toolbox/05-organized-life/05f-neighborly-bazaar/"
     />
-
-    <!-- Shared theme + typography -->
+    
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <!-- Shared theme + Glee fonts -->
     <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
+    <link rel="icon" href="/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
     <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
@@ -48,18 +39,20 @@
     <header class="site-header">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img
+              src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
+              alt="Glee‑fully logo"
+              width="40"
+              height="40"
+            />
+            <span class="brand">Glee‑fully</span>
+          </a>
         </div>
-        <nav class="primary-nav" id="navigation">
+        <nav class="primary-nav" id="navigation" aria-label="Primary">
           <ul>
             <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
             <li><a href="/universe/">OKHP³™ Universe</a></li>
@@ -68,62 +61,67 @@
           </ul>
         </nav>
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
+      <!-- HERO: Neighborly Bazaar, launch button, quick pitch -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/05-organized-life/">Glee‑fully Organized Life</a>
+              </p>
+              <h1 id="hero-title">Neighborly Bazaar</h1>
+              <p class="hero-subtitle">
+                Turn extra stuff into neighborly wins — clutter out, good vibes in.
+              </p>
+              <p class="hero-tagline">
+                Neighborly Bazaar is a Custom GPT within the Glee‑fully Organized Life branch of the
+                Glee‑fully Personalizable Tools suite. It’s your cheerful resale companion — part
+                local market, part magic wand — helping forgotten things find fresh beginnings while
+                you reclaim space, cash, and a little peace of mind. With a few photos or short
+                descriptions, it helps you decide what’s worth listing, price it fairly, craft
+                friendly listings, and choose the right local platforms so the whole process feels
+                light, simple, and, well… gleeful.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <a
+                  href="https://chatgpt.com/g/g-68ec5c6defc08191aec4fff67dac4891-neighborly-bazaar-by-glee-fully"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Neighborly Bazaar” in ChatGPT
+                </a>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
+                <!-- Secondary action back to parent Tool page -->
+                <a href="/toolbox/05-organized-life/" class="btn btn-quiet">
+                  Back to Glee‑fully Organized Life
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with a small pile of “I should deal
+                with this” items nearby.
+              </p>
+            </article>
 
             <div class="hero-visual reveal-on-scroll" aria-hidden="true">
               <!-- Swap this with a GPT-specific illustration if you’d like -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Neighborly Bazaar"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -140,7 +138,8 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              A resale‑savvy helper that walks you from “Is this worth anything?” to “It’s sold,
+              donated, or re‑homed” without turning your weekend into a spreadsheet project.
             </p>
           </header>
 
@@ -148,24 +147,32 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Neighborly Bazaar helps you evaluate, price, and re‑home household items through
+                local marketplaces and community channels. It turns closets, garages, and “someday”
+                piles into a simple flow: identify what you’ve got, see what it’s roughly worth,
+                decide where it should go, and send it on its way. Less guilt, less guesswork, more
+                clear space and neighbor‑level goodwill.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Great when you’re clearing a room, prepping for a move, rotating kids’ gear, or
+                finally tackling that “sell/donate” corner. Especially helpful if you like the idea
+                of resale but don’t want to obsess over comps, wording, or whether something belongs
+                on Facebook Marketplace, a yard sale table, or in the donation bin.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                Bring in quick photos or short descriptions of items, rough purchase details, and
+                where you’re willing to sell or meet. Neighborly Bazaar returns item evaluations,
+                condition notes, suggested price ranges, platform recommendations, listing titles and
+                descriptions, garage‑sale style price maps, and simple summaries of what you sold,
+                donated, or re‑homed.
               </p>
             </article>
           </div>
@@ -178,22 +185,50 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              Concrete, reusable actions Neighborly Bazaar can take on your behalf.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>📸 FUNCTION⚙️ (🍃Leaf) – Identify &amp; Evaluate Items:</strong>
+              Use photos or short descriptions to recognize household goods, assign categories, and
+              estimate condition grades using simple, built‑in depreciation and category logic.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>💰 FUNCTION⚙️ (🍃Leaf) – Suggest Fair Local Pricing:</strong>
+              Approximate fair price ranges by comparing against common local marketplaces
+              (Facebook Marketplace, OfferUp, Craigslist, Nextdoor, VarageSale) and then propose an
+              explainable price band grounded in typical local demand and condition.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>📝 FUNCTION⚙️ (🍃Leaf) – Craft Friendly Listings:</strong>
+              Generate clear, platform‑aware titles and descriptions with tone alignment, photo
+              tips, and smart keyword placement so your items show up in searches and sound like a
+              real person wrote them.
+            </li>
+            <li>
+              <strong>🪩 FUNCTION⚙️ (🍃Leaf) – Recommend Resale Venues:</strong>
+              Match each item to the most effective local or regional platform based on category,
+              condition, price point, and how far you want your “visibility radius” to reach.
+            </li>
+            <li>
+              <strong>🧭 FUNCTION⚙️ (🍃Leaf) – Guide Safe Meet‑Ups &amp; Payments:</strong>
+              Offer contextual safety prompts, suggested meet‑up locations, payment best practices,
+              and fraud‑prevention steps — all wrapped in Neighborly Bazaar’s built‑in trust and
+              safety checklist.
+            </li>
+            <li>
+              <strong>🪙 FUNCTION⚙️ (🍃Leaf) – Operate Garage Sale Mode:</strong>
+              Switch into yard‑sale mode with batch pricing rules, bundle suggestions, and
+              rule‑of‑thumb multipliers that help you price tables of stuff quickly without losing
+              the plot.
+            </li>
+            <li>
+              <strong>📦 FUNCTION⚙️ (🍃Leaf) – Track &amp; Reflect on Results:</strong>
+              Summarize what’s sold, donated, or re‑homed, showing cumulative earnings and reclaimed
+              space — reinforcing Organized Life’s reflective design ethos so you can actually see
+              the impact of letting things go.
             </li>
           </ul>
         </div>
@@ -205,7 +240,8 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              Because you don’t want to re‑explain your whole resale strategy every time you open a
+              new chat.
             </p>
           </header>
 
@@ -213,22 +249,28 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Neighborly Bazaar comes pre‑loaded with categories for common household items,
+                condition language, pricing heuristics, and a friendly, neighbor‑first tone. It
+                remembers that you’re here to clear space without getting taken advantage of — and
+                it keeps nudging you toward clear decisions instead of endless “maybe later” piles.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                This Tool‑ette understands that it lives inside Glee‑fully Organized Life. It plays
+                nicely with Task Maestro, Thrifty Spender, and Lifestyle Wallboard so your resale
+                decisions can feed into to‑do lists, simple spending views, or visual dashboards —
+                instead of floating around as one‑off chats.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Instead of tossing out one clever listing and calling it a day, Neighborly Bazaar
+                leans on templates, checklists, and export‑ready text. Copy‑paste listing bundles
+                into your favorite marketplace, reuse price maps for future yard sales, or drop
+                summary tables into whatever app you already use to track money and stuff.
               </p>
             </article>
           </div>
@@ -241,27 +283,32 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              Take the first step in under a minute — no full‑house overhaul required.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Grab one small “zone.”</strong>
+              Pick a shelf, a bin, a corner of the garage, or a pile you’ve been ignoring. You’re
+              not tackling the whole house — just this little cluster.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Snap or list your items.</strong>
+              Open Neighborly Bazaar in ChatGPT and paste a short list of items or upload a few
+              photos with quick notes like when you bought them and their rough condition.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Choose your mode.</strong>
+              Ask for <em>“pricing help,”</em> <em>“listing help,”</em> or
+              <em>“garage sale mode.”</em> Neighborly Bazaar will walk you through valuations,
+              where to post, safety checks, and ready‑to‑paste listing blurbs.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Post, donate, or let go.</strong>
+              Copy your listings into your chosen marketplace, mark what’s being donated or
+              re‑homed, and let the Tool‑ette summarize what you cleared — cash earned, space
+              reclaimed, and stories that found a new home.
             </li>
           </ol>
         </div>
@@ -273,8 +320,8 @@
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              See how Neighborly Bazaar fits into the broader Organized Life branch and where you
+              might want to go next.
             </p>
           </header>
 
@@ -283,12 +330,14 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                <strong>Glee‑fully Organized Life</strong> is the branch that brings order to your
+                everyday chaos. It includes Tool‑ettes for to‑dos, budgets, gifting, calendars, and
+                visual dashboards — all working together so home life feels managed instead of
+                overwhelming.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/05-organized-life/" class="btn btn-quiet">
+                  Visit Glee‑fully Organized Life
                 </a>
               </p>
             </article>
@@ -296,21 +345,24 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>
+                Neighborly Bazaar is one twig on this branch. Explore its siblings when you’re ready
+                to tune the rest of your day‑to‑day.
+              </p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/05-organized-life/05a-task-maestro/">
+                    #05a – Task Maestro · Everyday task orchestration
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/05-organized-life/05b-thrifty-spender/">
+                    #05b – Thrifty Spender · Gentle budgeting &amp; spending awareness
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/05-organized-life/05e-lifestyle-wallboard/">
+                    #05e – Lifestyle Wallboard · At‑a‑glance life dashboards
                   </a>
                 </li>
               </ul>
@@ -331,7 +383,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">
