@@ -2,128 +2,113 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Resume Customizer — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Resume Customizer by Glee‑fully transforms a general‑purpose resume into tailored, keyword‑aware versions for specific job descriptions." />
+    <meta property="og:title" content="Resume Customizer — Glee‑fully Personalizable Tool™" />
+    <meta property="og:description" content="Analyze job postings, match them to your resume, and rewrite key sections so every version fits the role." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
+      <!-- HERO: Resume Customizer, launch button, quick pitch -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/01-discovered-careers/">Glee‑fully Discovered Careers</a>
+              </p>
+              <h1 id="hero-title">Resume Customizer</h1>
+              <p class="hero-subtitle">Turn one resume into a stack of role‑specific versions.</p>
+              <p class="hero-tagline">
+                Resume Customizer reads the job posting, scans your resume, and shows you exactly where to tighten the story.
+                It tunes your summary, bullets, and skills to mirror the language hiring teams expect&mdash;without turning you into a buzzword robot.
+                Built as a twig in the Glee‑fully Discovered Careers branch, it plugs right into the rest of your career‑development toolkit.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <!-- Highlighted launch button – update href to this custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/g-685a97b415848191a6ad3aaa42a630f7-resume-customizer-by-glee-fully"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Resume Customizer” in ChatGPT
+                </a>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
+                <!-- Optional secondary action back to parent Tool page -->
+                <a href="/toolbox/01-discovered-careers/" class="btn btn-quiet">
+                  Back to Glee‑fully Discovered Careers
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with your resume, job postings, and notes handy.
+              </p>
+            </article>
 
             <div class="hero-visual reveal-on-scroll" aria-hidden="true">
               <!-- Swap this with a GPT-specific illustration if you’d like -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Resume Customizer"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -140,7 +125,7 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              Turn one solid resume into a set of focused, job‑specific versions built around real postings.
             </p>
           </header>
 
@@ -148,24 +133,26 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Resume Customizer helps you transform a general resume into a tailored one for a specific job.
+                You bring the role description and your resume; it handles the comparison, keyword alignment, and suggested rewrites.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Ideal for job‑seekers who already have a baseline resume (maybe from Resume Builder) and are applying
+                to multiple roles, companies, or job families. Especially helpful if you’re tired of guessing which
+                keywords matter or you’re stepping back into the market after a break.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                Inputs: job postings, your resume (pasted text or uploaded file), plus any notes about tone or focus.
+                Outputs: cleaned‑up summaries and bullets, a skills section tuned to the posting, and neatly grouped
+                versions you can copy into Word, Google Docs, or your favorite resume template.
               </p>
             </article>
           </div>
@@ -184,16 +171,24 @@
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>FUNCTION⚙️ (🍃Leaf) – Job posting analyzer:</strong>
+              Pulls out must‑have skills, responsibilities, and repeated phrases from each job description so you see what matters most.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>FUNCTION⚙️ (🍃Leaf) – Resume‑to‑role matcher:</strong>
+              Maps your experience and skills against the posting, surfacing alignment, gaps, and places where your language could be sharper.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>FUNCTION⚙️ (🍃Leaf) – Targeted rewrite assistant:</strong>
+              Drafts or refines your summary, experience bullets, and skills language so they echo the posting without copying it word‑for‑word.
+            </li>
+            <li>
+              <strong>FUNCTION⚙️ (🍃Leaf) – Version manager:</strong>
+              Helps you keep track of multiple tailored versions by role, company, or job family, so you’re not digging through mystery files.
+            </li>
+            <li>
+              <strong>FUNCTION⚙️ (🍃Leaf) – Export helper:</strong>
+              Packages outputs in clean, copy‑ready chunks you can drop straight into resumes, applications, or applicant tracking forms.
             </li>
           </ul>
         </div>
@@ -205,7 +200,7 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              Because you shouldn’t have to re‑teach “how resumes work” every time you open a new chat.
             </p>
           </header>
 
@@ -213,22 +208,23 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Resume Customizer is wired to think like a hiring‑savvy, keyword‑aware editor. It knows to ask for the job posting,
+                your resume, and your constraints, then works in a structured way instead of tossing back generic “make it stronger” advice.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                This Tool‑ette understands its home in the Glee‑fully Discovered Careers branch. It assumes your base resume may come
+                from Resume Builder, that bLinkIn Tuner will handle LinkedIn, and that Career Fitness and Career Seeker are tracking
+                the bigger picture of your search.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Instead of one‑off replies, you get reusable patterns: clear prompts, labeled versions, and copy‑ready blocks for summary,
+                experience, and skills. It’s built for people running dozens of applications, not just tinkering with one document.
               </p>
             </article>
           </div>
@@ -241,27 +237,26 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              Go from job posting to tailored resume in just a few steps.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Bring a real job posting.</strong>
+              Paste the full job description or upload it. If there are multiple versions, grab the one you’d actually apply to.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Share your current resume.</strong>
+              Paste the text, upload a file, or drop in rough bullets. Don’t worry about formatting; the Tool‑ette cares about content, not fonts.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Choose what to tailor first.</strong>
+              Tell Resume Customizer whether to focus on your summary, a specific role in your experience, or a full top‑to‑bottom pass.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Export and label the version.</strong>
+              Copy the updated sections into your resume, give the file a clear name (like “Company‑Role‑MMYY”), and save the chat thread so you can refine later.
             </li>
           </ol>
         </div>
@@ -273,8 +268,7 @@
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              See how Resume Customizer fits into the Discovered Careers branch and where to go next in the suite.
             </p>
           </header>
 
@@ -283,12 +277,12 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                Glee‑fully Discovered Careers is the career branch of the Toolbox&mdash;everything built to help you explore options,
+                polish your story, and move from “I should update my resume” to “I’m ready to hit submit.”
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/01-discovered-careers/" class="btn btn-quiet">
+                  Visit Glee‑fully Discovered Careers
                 </a>
               </p>
             </article>
@@ -296,22 +290,37 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
-              <ul class="link-list">
+              <p>Pair Resume Customizer with its neighbors on this branch for a full career‑readiness pipeline.</p>
+              <ul>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/01-discovered-careers/01a-resume-builder/">
+                    Resume Builder (#01a)
                   </a>
+                  &mdash; Build or refresh your baseline resume from scratch.
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/01-discovered-careers/01c-career-fitness/">
+                    Career Fitness (#01c)
                   </a>
+                  &mdash; Audit your skills, gaps, and growth areas against the roles you’re targeting.
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/01-discovered-careers/01d-letter-composer/">
+                    Letter Composer (#01d)
                   </a>
+                  &mdash; Draft cover letters, thank‑you notes, and outreach messages that match your resume story.
+                </li>
+                <li>
+                  <a href="/toolbox/01-discovered-careers/01e-blinkin-tuner/">
+                    bLinkIn Tuner (#01e)
+                  </a>
+                  &mdash; Tune your LinkedIn presence so it lines up with your tailored resume versions.
+                </li>
+                <li>
+                  <a href="/toolbox/01-discovered-careers/01f-career-seeker/">
+                    Career Seeker (#01f)
+                  </a>
+                  &mdash; Plan, track, and de‑stress your actual job search and follow‑ups.
                 </li>
               </ul>
             </article>
@@ -331,7 +340,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">

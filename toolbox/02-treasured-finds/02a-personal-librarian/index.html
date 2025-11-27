@@ -2,128 +2,118 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Personal Librarian — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Personal Librarian by Glee‑fully is your cozy digital library assistant for tracking every book you own, what you’ve read, and what you want to read next." />
+    <meta property="og:title" content="Personal Librarian — Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta property="og:description" content="Log physical books, Kindle titles, and audiobooks, track your reading status and ratings, and export clean lists — all from one friendly GPT Twig in the Glee‑fully Treasured Finds branch." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
+      <!-- HERO: Personal Librarian, launch button, quick pitch -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/02-treasured-finds/">Glee‑fully Treasured Finds</a>
+              </p>
+              <h1 id="hero-title">Personal Librarian</h1>
+              <p class="hero-subtitle">
+                A cozy, no‑overdue‑fees home for your whole reading life.
+              </p>
+              <p class="hero-tagline">
+                Personal Librarian is your digital library assistant inside ChatGPT. Log physical
+                books, Kindle titles, and audiobooks; track what you’re reading, what you’ve
+                finished, and what’s still on your TBR; and export clean lists whenever you need
+                them. Because it lives on the Glee‑fully Treasured Finds branch, your shelves stay
+                in sync with gifts, decor, supplies, and the rest of your curated finds.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <!-- Highlighted launch button – update href to this custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/g-68576b99c56c81918f1210a5442ab558-personal-librarian-by-glee-fully"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Personal Librarian” in ChatGPT
+                </a>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
+                <!-- Optional secondary action back to parent Tool page -->
+                <a href="/toolbox/02-treasured-finds/" class="btn btn-quiet">
+                  Back to Glee‑fully Treasured Finds
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best used with your book stack, wishlists, and notes
+                within reach.
+              </p>
+            </article>
 
             <div class="hero-visual reveal-on-scroll" aria-hidden="true">
-              <!-- Swap this with a GPT-specific illustration if you’d like -->
+              <!-- GPT-specific illustration placeholder -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Personal Librarian and a calm, organized bookshelf"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -140,7 +130,7 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              A calm, searchable home for every book you own, read, or want to remember.
             </p>
           </header>
 
@@ -148,25 +138,33 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Personal Librarian keeps a single, structured record of your reading life — what you
+                own, what you’re in the middle of, what you’ve finished, and what you’re eyeing
+                next. Instead of juggling screenshots, stacks on the nightstand, and half‑finished
+                lists, you get one calm log you can actually maintain.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Great if you’re the person with books in every room and no clue what you’ve already
+                read. Perfect for mood readers, parents tracking family reading, or anyone who wants
+                to see their habits over time without turning reading into a second job.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                You bring the messy bits — half‑typed lists, titles you remember, notes from other
+                apps. Personal Librarian turns them into a clean, reusable view.
               </p>
+              <ul class="pill-list">
+                <li class="pill">Inputs: titles, authors, formats, quick notes, existing lists</li>
+                <li class="pill">Outputs: tidy tables by status, format, genre, or rating</li>
+                <li class="pill">Exports: CSV, DOCX‑friendly tables, or simple text blocks</li>
+              </ul>
             </article>
           </div>
         </div>
@@ -178,22 +176,39 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              Concrete, repeatable actions this GPT can take on your behalf — no spreadsheet skills
+              required.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>FUNCTION⚙️ (🍃Leaf) – Log Books by Title &amp; Author:</strong>
+              Capture physical copies, Kindle titles, audiobooks, and more in a consistent schema
+              (title, author, format, series, edition, and notes) so you don’t have to rebuild it
+              every time you sit down to organize.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>FUNCTION⚙️ (🍃Leaf) – Track Reading Status:</strong>
+              Mark each book as unread, reading, finished, or abandoned, then reshuffle your view by
+              “currently reading,” “on deck,” or “done and dusted” with a single prompt.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>FUNCTION⚙️ (🍃Leaf) – Rate &amp; Reflect:</strong>
+              Add star ratings and short impressions, pull highlights about what you loved (or
+              didn’t), and spot patterns in your reading tastes over time — genres, authors, or
+              themes you keep coming back to.
+            </li>
+            <li>
+              <strong>FUNCTION⚙️ (🍃Leaf) – Wishlist &amp; Tag:</strong>
+              Save books you want to try later and tag them by genre, series, author, mood, season,
+              or your own custom labels that match the rest of the Glee‑fully Toolbox.
+            </li>
+            <li>
+              <strong>FUNCTION⚙️ (🍃Leaf) – Export or Share Your Library:</strong>
+              Export slices of your library — like “holiday reads,” “kid‑friendly,” or “five‑star
+              favorites” — as CSV, DOCX‑ready tables, or simple text blocks you can drop into notes,
+              spreadsheets, or other Glee‑fully Tools.
             </li>
           </ul>
         </div>
@@ -205,7 +220,8 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              A blank chat can talk about books. Personal Librarian remembers how <em>you</em> track
+              them.
             </p>
           </header>
 
@@ -213,22 +229,29 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Personal Librarian arrives with a ready‑made structure for books — status, format,
+                tags, ratings, notes, and more. Its instructions tell it how to log and update
+                entries, so you’re not re‑explaining “here’s how I track my shelves” every single
+                session.
               </p>
             </article>
             <article class="card">
-              <h3>Suite‑aware &amp; ecosystem‑ready</h3>
+              <h3>Suite‑aware &amp; branch‑smart</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                This Tool‑ette is a Twig on the Glee‑fully Treasured Finds branch, so it understands
+                how your reading life fits alongside candles, décor, gifts, supplies, and other
+                favorites. It follows the same trunk‑branch‑twig‑leaf structure and BLEED GLEE
+                conventions the rest of the suite uses, which keeps your tags and decisions
+                consistent.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Instead of one‑off chats, you get repeatable patterns: “Log these new books,” “Show
+                my TBR by genre,” “Build a one‑page reading recap.” Outputs are designed to export
+                cleanly, so you can hand them off to book clubs, planners, or other Glee‑fully Tools
+                without wrestling the formatting.
               </p>
             </article>
           </div>
@@ -241,27 +264,34 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              Go from “I should really organize my books” to “hey, that was painless” in a few
+              minutes.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Start small.</strong>
+              Grab 5–10 books you’ve recently bought, borrowed, or finished. Use that small stack as
+              your pilot so you can see how the library feels before you commit your whole shelf.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Copy what you already have.</strong>
+              Paste a reading list from Notes, an export from Goodreads/StoryGraph, or just type a
+              handful of titles and authors. Personal Librarian will clean it up and slot each book
+              into your catalog.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Choose your mode.</strong>
+              Tell the GPT whether you’re logging your current shelf, building a future TBR, or
+              backfilling your reading history. It will suggest a simple structure and follow‑up
+              prompts that match the way you want to work today.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Save the views that matter.</strong>
+              Ask for exports — like a CSV of finished reads this year or a table of “next up”
+              picks — then save them to your notes app, planner, or files so you’re not hunting
+              through old chats later.
             </li>
           </ol>
         </div>
@@ -273,8 +303,8 @@
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              Personal Librarian is one Twig on a bigger Branch. Here’s how it fits and where you
+              might want to go next.
             </p>
           </header>
 
@@ -283,34 +313,67 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                Personal Librarian lives on the
+                <strong>Glee‑fully Treasured Finds</strong> branch — the part of your Toolbox that
+                tracks the items and memories you love to collect. From candles to keepsakes, gifts
+                to books, Treasured Finds helps you catalog, tag, and actually enjoy your curated
+                treasures instead of losing them in a closet.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/02-treasured-finds/" class="btn btn-quiet">
+                  Explore Glee‑fully Treasured Finds
                 </a>
+              </p>
+            </article>
+
+            <!-- How this Twig plays with others -->
+            <article class="card">
+              <h3>How this Twig plays with the rest</h3>
+              <p>
+                Personal Librarian doesn’t sit alone. Flag a title as “giftable” and send it toward
+                <em>Present Hoarder</em>, surface display‑worthy editions for
+                <em>Decor Detective</em>, or tie favorite authors and moods into your
+                <em>Scentinal</em> or <em>Spirited</em> Journals. The whole branch works like one
+                system, sharing tags, notes, and little decisions across the suite.
               </p>
             </article>
 
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>
+                These Tool‑ettes share the same Treasured Finds branch and play nicely with Personal
+                Librarian:
+              </p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/02-treasured-finds/02b-decor-detective/">
+                    02b – Decor Detective
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/02-treasured-finds/02c-present-hoarder/">
+                    02c – Present Hoarder
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/02-treasured-finds/02d-scentinal-journal/">
+                    02d – Scentinal Journal
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/02-treasured-finds/02e-spirited-journal/">
+                    02e – Spirited Journal
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/02-treasured-finds/02f-supply-haus/">
+                    02f – Supply Haus
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/02-treasured-finds/02g-bag-nabbit/">
+                    02g – Bag Nabbit
                   </a>
                 </li>
               </ul>
@@ -324,14 +387,15 @@
                 your next Tool or Tool‑ette.
               </p>
               <p>
-                <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
+                <a href="/toolbox/" class="btn btn-quiet">
+                  Browse the full Glee‑fully Toolbox
+                </a>
               </p>
             </article>
           </div>
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">

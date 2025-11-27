@@ -1,337 +1,326 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
-    <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Career Seeker — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="description" content="Career Seeker is your retro-bright job search cockpit inside the Glee‑fully Discovered Careers branch — a focused place to define targets, track roles, manage applications, and keep follow-ups moving without burning out.">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
-    <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
-      <section class="hero glee-hero" aria-labelledby="hero-title">
-        <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
-        <div class="glee-glow" aria-hidden="true"></div>
+    <main id="main-content" class="page-main">
+      <article class="tool-page tool-ette tool-ette-career-seeker">
+        <header class="page-hero">
+          <p class="page-eyebrow">
+            Tool‑ette · Twig in
+            <a href="/toolbox/01-discovered-careers/">Discovered Careers</a>
+          </p>
 
-        <div class="hero-inner container">
-          <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+          <h1 class="page-title">Career Seeker</h1>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+          <p class="page-tagline">
+            A calmer, brighter command center for your job search — from “maybe I should look” to offer in hand.
+          </p>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
+          <p class="page-lede">
+            Career Seeker is the Glee‑fully Tool‑ette you open when you’re actively looking for your next role.
+            Instead of juggling tabs, spreadsheets, and half‑finished applications, it pulls your job leads, target roles,
+            and real‑life constraints into one structured, conversational workspace. You get a focused search plan,
+            clear positioning, and a way to keep every application and follow‑up moving without turning the hunt into a second full‑time job.
+          </p>
 
-            </div>
+          <ul class="page-highlights">
+            <li>Pre‑tuned for real‑world job searches, not vague “what should I do with my life?” musings.</li>
+            <li>Built‑in structure for defining targets, tracking applications, and nudging you on next steps.</li>
+            <li>Designed to plug into the rest of the Discovered Careers branch so résumés, outreach, and reflection all line up.</li>
+          </ul>
 
-            <div class="hero-visual reveal-on-scroll" aria-hidden="true">
-              <!-- Swap this with a GPT-specific illustration if you’d like -->
-              <img
-                src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
-                class="glee-hero-img"
-                loading="lazy"
-                width="1536"
-                height="768"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+          <div class="hero-cta">
+            <!-- Replace YOUR-GPT-ID-HERE with the real GPT ID when you’re ready -->
+            <a class="button button-primary"
+              href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
+              target="_blank" rel="noopener">
+              Launch “Career Seeker” in ChatGPT
+            </a>
 
-      <!-- WHAT IT DOES / PURPOSE -->
-      <section class="section content-section">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">What this Tool‑ette does</h2>
-            <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+            <a class="button button-ghost" href="/toolbox/01-discovered-careers/">
+              Back to Discovered Careers
+            </a>
+
+            <p class="cta-note">
+              Opens in ChatGPT in a new tab. Best experienced with your notes, résumé, and job links handy.
             </p>
-          </header>
-
-          <div class="grid grid-3">
-            <article class="card">
-              <h3>Core purpose</h3>
-              <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
-              </p>
-            </article>
-
-            <article class="card">
-              <h3>Best for</h3>
-              <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
-              </p>
-            </article>
-
-            <article class="card">
-              <h3>Inputs &amp; outputs</h3>
-              <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
-              </p>
-            </article>
           </div>
-        </div>
-      </section>
 
-      <!-- PRIMARY FUNCTIONS / LEAVES -->
-      <section class="section content-section stripe-bg">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">Core functions (Leaves)</h2>
-            <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
-            </p>
-          </header>
+          <figure class="hero-illustration">
+            <!-- Swap to the real asset path when the illustration is ready -->
+            <img src="/assets/img/toolbox/career-seeker-illustration.svg"
+                alt="A retro-bright dashboard view showing job leads, applications, and follow-ups organized across a branching tree.">
+          </figure>
+        </header>
 
+        <section id="what-it-does" class="section section-what-it-does">
+          <h2>What this Tool‑ette does</h2>
+
+          <p>
+            Career Seeker keeps your job search from dissolving into a mess of open tabs and mental load.
+            It gives you a single place to define what “the right next role” actually looks like, capture roles and companies,
+            and manage applications through each stage — from “interesting” to “offer accepted.”
+          </p>
+
+          <h3>Core purpose</h3>
+          <p>
+            Turn scattered job ideas into a focused, trackable search pipeline. Career Seeker helps you articulate your
+            target roles, compare opportunities, decide what’s worth pursuing, and stay on top of every application and
+            follow‑up without losing sight of your energy, values, or real‑world constraints.
+          </p>
+
+          <h3>Best for</h3>
           <ul>
-            <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+            <li>Mid‑career professionals who know they’re ready for “what’s next” but refuse to make job hunting a second unpaid job.</li>
+            <li>People returning to the workforce or pivoting industries who need help translating their story into the roles they’re chasing.</li>
+            <li>Multi‑hyphenate humans (creative + technical, corporate + freelance, etc.) choosing between overlapping paths.</li>
+            <li>Anyone who’s tired of forgetting which résumé went where, when interviews are, or who they promised to follow up with.</li>
+          </ul>
+
+          <h3>Inputs &amp; outputs</h3>
+          <p>Bring Career Seeker the pieces you already have — it assembles the structure around them.</p>
+
+          <div class="io-grid">
+            <div class="io-column">
+              <h4>What you bring in</h4>
+              <ul>
+                <li>Your current résumé, LinkedIn profile, or a quick bullet list of your work history.</li>
+                <li>Links or pasted descriptions for roles, companies, and job boards you’re watching.</li>
+                <li>Non‑negotiables like pay range, schedule, location, benefits, and “never again” job patterns.</li>
+                <li>Your constraints and hopes: timing, energy level, caregiving responsibilities, growth targets.</li>
+              </ul>
+            </div>
+            <div class="io-column">
+              <h4>What you get out</h4>
+              <ul>
+                <li>A clear target‑role profile you can reuse across the Discovered Careers Tools.</li>
+                <li>A structured search board with stages (interested, applied, interviewing, offer, on hold, passed).</li>
+                <li>Side‑by‑side comparisons of roles, including tradeoffs, likely stressors, and long‑term upside.</li>
+                <li>Follow‑up prompts, outreach drafts, and summaries you can copy into Sheets, Notion, or your own tracker.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="core-functions" class="section section-core-functions">
+          <h2>Core functions (Leaves)</h2>
+
+          <p>
+            Under the Discovered Careers branch, Career Seeker handles the hands‑on, day‑to‑day work of searching and applying.
+          </p>
+
+          <ul class="function-list">
+            <li class="function-item">
+              <h3>FUNCTION⚙️ (Leaf) – Target Role Clarifier</h3>
+              <p>
+                Helps you translate “I just want something better” into one to three concrete role profiles, complete with must‑haves,
+                nice‑to‑haves, and hard boundaries you use to screen every opportunity.
+              </p>
             </li>
-            <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+
+            <li class="function-item">
+              <h3>FUNCTION⚙️ (Leaf) – Search Board &amp; Pipeline</h3>
+              <p>
+                Builds a lightweight job board inside the conversation, organizing leads by stage so you always know what you’ve touched,
+                what needs action today, and what can safely be ignored.
+              </p>
             </li>
-            <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+
+            <li class="function-item">
+              <h3>FUNCTION⚙️ (Leaf) – Messaging &amp; Follow‑Up Coach</h3>
+              <p>
+                Drafts outreach messages, recruiter replies, and thank‑you notes in your voice, while reminding you
+                when to nudge, when to wait, and when to gracefully close the loop.
+              </p>
+            </li>
+
+            <li class="function-item">
+              <h3>FUNCTION⚙️ (Leaf) – Fit &amp; Red‑Flag Scanner</h3>
+              <p>
+                Reads job descriptions with you, calling out potential red flags, workload signals, cultural clues, and alignment
+                with your stated values, limits, and long‑term direction.
+              </p>
             </li>
           </ul>
-        </div>
-      </section>
+        </section>
 
-      <!-- WHY IT BEATS VANILLA CHATGPT -->
-      <section class="section content-section">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
-            <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
-            </p>
-          </header>
+        <section id="why-not-vanilla" class="section section-why">
+          <h2>Why use this instead of vanilla ChatGPT?</h2>
 
-          <div class="grid grid-3">
-            <article class="card">
-              <h3>Pre‑tuned brain</h3>
-              <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Suite‑aware &amp; ecosystem‑ready</h3>
-              <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Repeatable, export‑friendly workflows</h3>
-              <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+          <p>
+            Generic ChatGPT can brainstorm résumés and cover letters, but it doesn’t remember your whole search or how it fits into
+            the Glee‑fully system. Career Seeker does.
+          </p>
 
-      <!-- GETTING STARTED / HOW TO USE -->
-      <section class="section content-section stripe-bg">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">Getting started</h2>
-            <p class="section-subtitle">
-              Help users take their first step in under a minute.
-            </p>
-          </header>
+          <h3>Pre‑tuned brain</h3>
+          <p>
+            Career Seeker comes pre‑loaded with instructions, examples, and tone tailored to job hunting as an actual human being —
+            not a robot optimizing for buzzwords. It already understands stages of a search, emotional overhead, burnout risk, and the
+            difference between “I need a job” and “I’m ready for a better fit.” You don’t have to keep re‑explaining yourself every
+            time you open a new chat.
+          </p>
+
+          <h3>Suite‑aware &amp; ecosystem‑ready</h3>
+          <p>
+            This Tool‑ette knows it lives under the <strong>Discovered Careers</strong> branch and that it’s just one part of your work story.
+            It’s designed to hand off cleanly to other Tools and Tool‑ettes — like résumé polishers, interview prep helpers, and reflection
+            journals in the <strong>Identity Known</strong> branch — so your story, metrics, and decisions stay consistent across the suite.
+          </p>
+
+          <h3>Repeatable, export‑friendly workflows</h3>
+          <p>
+            Instead of one‑off advice, Career Seeker builds trackers, tables, and prompts you can reuse. It can turn a conversation into
+            a job‑search dashboard you copy to your notes app, a weekly check‑in script you run every Sunday, or a recap you share with
+            a mentor, coach, or partner.
+          </p>
+        </section>
+
+        <section id="getting-started" class="section section-getting-started">
+          <h2>Getting started</h2>
+
+          <p>
+            You don’t need a perfect résumé or a locked‑in target to get value. Start small and let the Tool do the organizing.
+          </p>
 
           <ol>
             <li>
               <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              Start with one role you’re considering or a short list of “maybe” job posts. That’s enough to get Career Seeker thinking with you.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Paste your context.</strong>
+              Drop in your current résumé or a quick bullet list of your work history, plus links or pasted descriptions for the roles you’re eyeing.
             </li>
             <li>
               <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              Use a guided starter prompt such as:
+              <em>
+                “I’m in active job search mode. Here’s my background, the kind of roles I’m exploring, my constraints,
+                and what I definitely don’t want next: [paste details]. Help me define a clear target role profile and
+                build a simple tracker we can reuse.”
+              </em>
             </li>
             <li>
               <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              When something clicks — a target profile, comparison table, or follow‑up checklist — copy it into your preferred system
+              (Docs, Sheets, Notion, paper planner) so you can bring it back in future sessions.
             </li>
           </ol>
-        </div>
-      </section>
+        </section>
 
-      <!-- ECOSYSTEM: PARENT TOOL + SIBLING TOOL‑ETTES -->
-      <section class="section content-section">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
-            <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
-            </p>
-          </header>
+        <section id="ecosystem-home" class="section section-ecosystem">
+          <h2>Where it lives in the Glee‑fully Toolbox</h2>
 
-          <div class="grid grid-3">
-            <!-- Parent Tool card -->
-            <article class="card">
-              <h3>Parent Tool (Branch)</h3>
-              <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
-              </p>
-              <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
-                </a>
-              </p>
-            </article>
+          <p>
+            Career Seeker is one twig on the Discovered Careers branch — the part of the tree focused on finding, landing, and growing
+            work that actually fits.
+          </p>
 
-            <!-- Sibling Tool‑ettes -->
-            <article class="card">
-              <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
-              <ul class="link-list">
-                <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
-                  </a>
-                </li>
-                <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
-                  </a>
-                </li>
-                <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
-                  </a>
-                </li>
-              </ul>
-            </article>
+          <h3>Parent Tool (Branch)</h3>
+          <p>
+            <strong>Discovered Careers</strong> is the branch for exploring roles, shaping your story, and managing the moving pieces
+            of a modern career: résumés, applications, networking, and check‑ins on how it’s all feeling.
+          </p>
+          <p>
+            <a class="text-link" href="/toolbox/01-discovered-careers/">
+              Visit Discovered Careers
+            </a>
+          </p>
 
-            <!-- Back to Toolbox -->
-            <article class="card">
-              <h3>Back to the Toolbox</h3>
-              <p>
-                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
-                your next Tool or Tool‑ette.
-              </p>
-              <p>
-                <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+          <h3>Sibling Tool‑ettes</h3>
+          <p>
+            Career Seeker works best alongside these other focused helpers under the same branch:
+          </p>
+          <ul>
+            <li>
+              <a href="/toolbox/01-discovered-careers/01a-resume-builder/">
+                Résumé Builder
+              </a>
+              — shapes targeted résumés and profiles from the role profiles you define here.
+            </li>
+            <li>
+              <a href="/toolbox/01-discovered-careers/01c-interview-prep-lab/">
+                Interview Prep Lab
+              </a>
+              — turns your target roles and applications into realistic question sets and practice sessions.
+            </li>
+            <li>
+              <a href="/toolbox/01-discovered-careers/01e-networking-notes/">
+                Networking Notes
+              </a>
+              — tracks people, conversations, and warm intros that support your search.
+            </li>
+          </ul>
+
+          <h3>Back to the Toolbox</h3>
+          <p>
+            Ready to wander into another branch — food, travel, home, health, or identity?
+            Head back to the main Glee‑fully Toolbox and pick your next Tool or Tool‑ette.
+          </p>
+          <p>
+            <a class="button button-secondary" href="/toolbox/">
+              Open the Toolbox
+            </a>
+          </p>
+        </section>
+      </article>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">

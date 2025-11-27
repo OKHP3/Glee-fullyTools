@@ -2,336 +2,423 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Blinkin Tuner — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Blinkin Tuner is a Glee‑fully Tool‑ette in the Discovered Careers branch. Capture tiny flashes of interest or dread from your day and tune them into real career signals you can track, compare, and act on." />
+    <meta property="og:title" content="Blinkin Tuner — Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta property="og:description" content="Turn blink‑and‑you‑miss‑it reactions into career data. Blinkin Tuner helps you log, tag, and pattern‑match the moments that actually matter for your next role." />
+    <meta property="og:url" content="https://glee-fully.tools/toolbox/01-discovered-careers/01e-blinkin-tuner/" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
-      <section class="hero glee-hero" aria-labelledby="hero-title">
-        <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
-        <div class="glee-glow" aria-hidden="true"></div>
+      <!-- HERO / INTRO BLOCK -->
+      <section class="content-section container">
+        <header class="section-header">
+          <p class="eyebrow h-accent">
+            Tool‑ette · Twig in
+            <a href="/toolbox/01-discovered-careers/">Discovered Careers</a>
+          </p>
+          <h1>Blinkin Tuner</h1>
+          <p class="hero-subtitle">
+            The place you park all those “huh, that felt good” and “wow, never again” moments
+            before they disappear into the week.
+          </p>
+          <p class="hero-tagline">
+            Blinkin Tuner turns split‑second reactions from your real life into structured,
+            re-usable career data — so “what should I do next?” isn’t just a feeling, it’s a pattern.
+          </p>
 
-        <div class="hero-inner container">
-          <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
-
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
-
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
-
-            <div class="hero-visual reveal-on-scroll" aria-hidden="true">
-              <!-- Swap this with a GPT-specific illustration if you’d like -->
-              <img
-                src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
-                class="glee-hero-img"
-                loading="lazy"
-                width="1536"
-                height="768"
-              />
-            </div>
+          <div class="hero-actions">
+            <!-- Swap in the real custom GPT link once you have it -->
+            <a
+              href="https://chatgpt.com/g/YOUR-BLINKIN-TUNER-GPT-ID-HERE"
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener"
+            >
+              Launch “Blinkin Tuner” in ChatGPT
+            </a>
+            <a href="/toolbox/01-discovered-careers/" class="btn btn-quiet">
+              Back to Discovered Careers
+            </a>
           </div>
+
+          <p class="note">
+            Opens in ChatGPT in a new tab. Best experienced with your notes, calendar, or task
+            list handy.
+          </p>
+        </header>
+
+        <!-- Optional hero visual – update src if/when you have the art asset -->
+        <div class="tool-hero-visual">
+          <img
+            src="/assets/img/toolbox/01e-blinkin-tuner-hero-1536.png"
+            alt="Retro illustration of blinking signal lights over a career dashboard, representing Blinkin Tuner tuning tiny moments into clear patterns."
+            loading="lazy"
+            width="1536"
+            height="768"
+          />
         </div>
       </section>
 
-      <!-- WHAT IT DOES / PURPOSE -->
-      <section class="section content-section">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">What this Tool‑ette does</h2>
-            <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
-            </p>
-          </header>
+      <!-- WHAT THIS TOOL-ETTE DOES -->
+      <section class="content-section container">
+        <header class="section-header">
+          <h2>What this Tool‑ette does</h2>
+          <p class="note">
+            Blinkin Tuner is the “signal board” for your work life. You feed it tiny flashes of
+            curiosity, frustration, relief, or energy, and it tunes them into patterns about
+            how you like to work, with whom, and on what.
+          </p>
+        </header>
 
-          <div class="grid grid-3">
-            <article class="card">
-              <h3>Core purpose</h3>
-              <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
-              </p>
-            </article>
+        <article>
+          <h3>Core purpose</h3>
+          <p>
+            The core job of Blinkin Tuner is simple: catch the moments you’d normally shrug off
+            and turn them into evidence. Instead of guessing at your next role from job boards
+            or personality tests, you anchor decisions in how your actual days feel — task by
+            task, meeting by meeting, project by project.
+          </p>
 
-            <article class="card">
-              <h3>Best for</h3>
-              <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
-              </p>
-            </article>
-
-            <article class="card">
-              <h3>Inputs &amp; outputs</h3>
-              <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- PRIMARY FUNCTIONS / LEAVES -->
-      <section class="section content-section stripe-bg">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">Core functions (Leaves)</h2>
-            <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
-            </p>
-          </header>
-
+          <h3>Best for</h3>
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              Career‑curious folks who have a pile of half‑formed ideas (“I could be a lot of
+              things…”) and want real signals, not just vibes.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              Burned‑out professionals trying to separate what’s broken about their current job
+              from what they still enjoy when it’s in the right environment.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              People coming back to work after a break who need a practical way to rediscover
+              what they actually like doing now, not ten years ago.
+            </li>
+            <li>
+              Multipotentialites and generalists who want clearer language for their patterns
+              so they can talk about themselves without rambling.
             </li>
           </ul>
-        </div>
+
+          <h3>Inputs &amp; outputs</h3>
+          <p><strong>Inputs you bring in:</strong></p>
+          <ul>
+            <li>
+              Quick notes from your day (“Loved mentoring the intern”, “Lost track of time in
+              that data review”, “Drained after back‑to‑back status calls”).
+            </li>
+            <li>
+              Lists of past roles, projects, or side gigs, even if they feel random or
+              “non‑professional”.
+            </li>
+            <li>
+              Job postings or role ideas you’re considering and want to test against your
+              real‑world reactions.
+            </li>
+          </ul>
+
+          <p><strong>Outputs Blinkin Tuner gives you:</strong></p>
+          <ul>
+            <li>
+              A structured “blink log” — tagged lists of what lights you up, what drains you,
+              and what lands in the middle.
+            </li>
+            <li>
+              Pattern summaries (“You keep lighting up when you explain complex systems to
+              non‑experts…”).
+            </li>
+            <li>
+              Draft role shapes and environment preferences you can carry into other Glee‑fully
+              career Tools.
+            </li>
+            <li>
+              Export‑ready tables and checklists you can copy into a doc, spreadsheet, or
+              notes app.
+            </li>
+          </ul>
+        </article>
       </section>
 
-      <!-- WHY IT BEATS VANILLA CHATGPT -->
-      <section class="section content-section">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
-            <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
-            </p>
-          </header>
+      <!-- CORE FUNCTIONS (LEAVES) -->
+      <section class="content-section container">
+        <header class="section-header">
+          <h2>Core functions (Leaves)</h2>
+          <p class="note">
+            Each Leaf is a repeatable action Blinkin Tuner can run for you — so you don’t have
+            to reinvent the process every time you sit down to think about your career.
+          </p>
+        </header>
 
-          <div class="grid grid-3">
-            <article class="card">
-              <h3>Pre‑tuned brain</h3>
-              <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Suite‑aware &amp; ecosystem‑ready</h3>
-              <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Repeatable, export‑friendly workflows</h3>
-              <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
-              </p>
-            </article>
-          </div>
-        </div>
+        <ul class="grid grid-3">
+          <li class="card">
+            <h3>FUNCTION⚙️ (Leaf) – Blink Log Builder</h3>
+            <p>
+              Drop in scattered notes, journal lines, or calendar entries and Blinkin Tuner
+              turns them into a tagged “blink log” — separating sparks, drains, and neutral
+              moments with simple labels you can scan later.
+            </p>
+          </li>
+
+          <li class="card">
+            <h3>FUNCTION⚙️ (Leaf) – Pattern Tuner</h3>
+            <p>
+              Once you’ve logged a few days or weeks, this Leaf clusters your blinks into
+              themes — things like “systems explainer”, “deep‑focus builder”, or “emergency
+              problem‑solver” — and reflects back what keeps repeating.
+            </p>
+          </li>
+
+          <li class="card">
+            <h3>FUNCTION⚙️ (Leaf) – Role Fit Check</h3>
+            <p>
+              Paste a job posting, role idea, or internal opportunity and Blinkin Tuner
+              compares it against your blink patterns, calling out likely energizers,
+              red‑flags, and “watch out for this part” areas.
+            </p>
+          </li>
+
+          <li class="card">
+            <h3>FUNCTION⚙️ (Leaf) – Experiment Builder</h3>
+            <p>
+              Converts your patterns into low‑risk experiments: small projects, conversations,
+              or tests you can run in the next 30–60 days to validate whether a direction
+              actually fits your life.
+            </p>
+          </li>
+
+          <li class="card">
+            <h3>FUNCTION⚙️ (Leaf) – Storyline Extractor</h3>
+            <p>
+              Pulls language from your blink log and patterns you can reuse in resumes,
+              LinkedIn, or “tell me about yourself” answers, without sounding generic or
+              forced.
+            </p>
+          </li>
+
+          <li class="card">
+            <h3>FUNCTION⚙️ (Leaf) – Hand‑off to Other Tools</h3>
+            <p>
+              Packages key insights into clean summaries you can carry into other Glee‑fully
+              Tools — like broader Discovered Careers mapping or more tactical resume and
+              job‑search helpers — so you’re not starting from scratch.
+            </p>
+          </li>
+        </ul>
       </section>
 
-      <!-- GETTING STARTED / HOW TO USE -->
-      <section class="section content-section stripe-bg">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">Getting started</h2>
-            <p class="section-subtitle">
-              Help users take their first step in under a minute.
-            </p>
-          </header>
+      <!-- WHY THIS INSTEAD OF VANILLA CHATGPT -->
+      <section class="content-section container">
+        <header class="section-header">
+          <h2>Why use this instead of vanilla ChatGPT?</h2>
+          <p class="note">
+            You could ask a blank chat, sure. But Blinkin Tuner is already wired to think in
+            blink‑level signals, not one‑off advice. It remembers the shape of the work you
+            like and keeps pushing you back to evidence.
+          </p>
+        </header>
 
-          <ol>
+        <article>
+          <h3>Pre‑tuned brain</h3>
+          <p>
+            Blinkin Tuner comes preloaded with instructions about what counts as a “blink”, how
+            to tag it, and how to avoid turning every conversation into a generic pep talk.
+            It’s set up to:
+          </p>
+          <ul>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              Ask you for concrete moments, not just abstract preferences (“Tell me about a
+              meeting that left you oddly energized…”).
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              Push for specifics — environment, people, pace, stakes — so the patterns actually
+              mean something.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              Stay grounded and humane: no shaming, no “just hustle harder” pep, and no
+              pretending it can make decisions for you.
+            </li>
+          </ul>
+
+          <h3>Suite‑aware &amp; ecosystem‑ready</h3>
+          <p>
+            Blinkin Tuner knows it lives inside the
+            <strong>Discovered Careers</strong> branch of the Glee‑fully Toolbox. It understands:
+          </p>
+          <ul>
+            <li>
+              How its blink logs connect to higher‑level mapping in the parent Discovered
+              Careers Tool.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              When to suggest handing your patterns off to other Tool‑ettes focused on
+              storytelling, search strategy, or day‑to‑day planning.
             </li>
-          </ol>
-        </div>
+            <li>
+              The trunk/branch/twig/leaf structure of Glee‑fully, so your career work doesn’t
+              live in a single isolated chat.
+            </li>
+          </ul>
+
+          <h3>Repeatable, export‑friendly workflows</h3>
+          <p>
+            You’re not here for one pretty answer — you’re here to build a reusable system.
+            Blinkin Tuner:
+          </p>
+          <ul>
+            <li>
+              Outputs results in clean tables, lists, and checklists you can copy straight into
+              docs, spreadsheets, or notes.
+            </li>
+            <li>
+              Helps you name and save “Blink Sessions” so you can come back and add new data
+              over time.
+            </li>
+            <li>
+              Suggests how to store your logs across the broader Glee‑fully suite so patterns
+              stay findable, not buried in old chats.
+            </li>
+          </ul>
+        </article>
       </section>
 
-      <!-- ECOSYSTEM: PARENT TOOL + SIBLING TOOL‑ETTES -->
-      <section class="section content-section">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
-            <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
-            </p>
-          </header>
+      <!-- GETTING STARTED -->
+      <section class="content-section container">
+        <header class="section-header">
+          <h2>Getting started</h2>
+          <p class="note">
+            You don’t need a five‑year plan to use Blinkin Tuner. You just need one day’s worth
+            of honest reactions.
+          </p>
+        </header>
 
-          <div class="grid grid-3">
-            <!-- Parent Tool card -->
-            <article class="card">
-              <h3>Parent Tool (Branch)</h3>
-              <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
-              </p>
-              <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
-                </a>
-              </p>
-            </article>
+        <ol>
+          <li>
+            <strong>Step 1 – Arrive with something small.</strong>
+            Bring one recent day or week: a calendar screenshot, a short journal entry, a brain
+            dump of what you did and how it felt.
+          </li>
+          <li>
+            <strong>Step 2 – Paste or upload your raw material.</strong>
+            Drop that text into Blinkin Tuner and ask it to build your first blink log. Don’t
+            overthink it — messy is fine.
+          </li>
+          <li>
+            <strong>Step 3 – Choose a path.</strong>
+            Tell the Tool which mode you want:
+            <em>“Log today’s blinks”</em>, <em>“Tune my patterns so far”</em>, or
+            <em>“Check this role against my blinks”</em>.
+          </li>
+          <li>
+            <strong>Step 4 – Save what matters.</strong>
+            When you see patterns that feel right, copy the summaries or tables into your
+            notes, a doc, or the parent Discovered Careers Tool so they don’t get lost.
+          </li>
+        </ol>
+      </section>
 
-            <!-- Sibling Tool‑ettes -->
-            <article class="card">
-              <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
-              <ul class="link-list">
-                <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
-                  </a>
-                </li>
-                <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
-                  </a>
-                </li>
-                <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
-                  </a>
-                </li>
-              </ul>
-            </article>
+      <!-- WHERE IT LIVES IN THE TOOLBOX -->
+      <section class="content-section container">
+        <header class="section-header">
+          <h2>Where it lives in the Glee‑fully Toolbox</h2>
+          <p class="note">
+            Every Tool‑ette in Glee‑fully is a Twig on a Branch growing from a shared Trunk.
+            Blinkin Tuner is part of the Discovered Careers branch — the part of the tree that
+            helps you notice, test, and name the work that actually fits.
+          </p>
+        </header>
 
-            <!-- Back to Toolbox -->
-            <article class="card">
-              <h3>Back to the Toolbox</h3>
-              <p>
-                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
-                your next Tool or Tool‑ette.
-              </p>
-              <p>
-                <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
-              </p>
-            </article>
-          </div>
-        </div>
+        <article>
+          <h3>Parent Tool (Branch) — Discovered Careers</h3>
+          <p>
+            <strong>Discovered Careers</strong> is the Branch that turns your real‑world
+            experiences, hunches, and “maybe I could…” ideas into navigable options. It groups
+            Tool‑ettes that help you explore patterns, test directions, and translate all of it
+            into next steps — without demanding a single “forever” answer.
+          </p>
+          <p>
+            <a href="/toolbox/01-discovered-careers/" class="btn btn-quiet">
+              Visit Discovered Careers
+            </a>
+          </p>
+
+          <h3>Sibling Tool‑ettes</h3>
+          <p>
+            Blinkin Tuner is designed to sit alongside other Tool‑ettes in the Discovered
+            Careers branch — focused on deeper mapping, story building, and practical next
+            steps. As those siblings come online, this section will link you directly to them
+            so you can move through the branch without losing your place.
+          </p>
+          <!-- When sibling Tool‑ettes are live, replace this paragraph with direct links like:
+          <ul>
+            <li><a href="/toolbox/01-discovered-careers/01a-example-tool/">Signal Scanner</a></li>
+            <li><a href="/toolbox/01-discovered-careers/01b-example-tool/">Storyline Studio</a></li>
+            <li><a href="/toolbox/01-discovered-careers/01c-example-tool/">Experiment Planner</a></li>
+          </ul>
+          -->
+
+          <h3>Back to the Toolbox</h3>
+          <p>
+            Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
+            your next Tool or Tool‑ette.
+          </p>
+          <p>
+            <a href="/toolbox/" class="btn btn-primary">Open the Toolbox</a>
+          </p>
+        </article>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">
