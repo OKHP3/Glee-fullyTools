@@ -2,128 +2,114 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Motif Muse — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Motif Muse is a design‑savvy Glee‑fully Tool‑ette GPT that pulls color palettes, motifs, and style tags out of your photos so you can name and reuse the looks you love." />
+    <meta property="og:title" content="Motif Muse — Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta property="og:description" content="Motif Muse helps you turn screenshots and photos into named color palettes, motifs, and style tags so your favorite looks are easy to talk about, save, and re‑use." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
+      <!-- HERO: Motif Muse, launch button, quick pitch -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/07-identity-known/">Glee‑fully Identity Known</a>
+              </p>
+              <h1 id="hero-title">Motif Muse</h1>
+              <p class="hero-subtitle">Give your favorite looks a name, not just a feeling.</p>
+              <p class="hero-tagline">
+                Motif Muse helps you put words to the clothes, rooms, art, and packaging that keep tugging at your brain.
+                Upload a photo or screenshot and it translates “I just like this” into clear color palettes, motifs, and style labels.
+                Perfect for moodboards, vision boards, or anyone who wants a more intentional, repeatable aesthetic.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <!-- Highlighted launch button – update href to this custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Motif Muse” in ChatGPT
+                </a>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
+                <!-- Optional secondary action back to parent Tool page -->
+                <a href="/toolbox/07-identity-known/" class="btn btn-quiet">
+                  Back to Glee‑fully Identity Known
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
+                handy.
+              </p>
+            </article>
 
             <div class="hero-visual reveal-on-scroll" aria-hidden="true">
               <!-- Swap this with a GPT-specific illustration if you’d like -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Motif Muse"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -140,7 +126,7 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              See how Motif Muse turns casual screenshots into named palettes and reusable style notes.
             </p>
           </header>
 
@@ -148,24 +134,26 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Motif Muse helps you name and categorize the visual styles, color schemes, and design motifs that spark joy,
+                so you can find them again on purpose instead of hoping you stumble across them later.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Great for anyone who collects screenshots of outfits, interiors, album covers, book jackets, menus, or packaging and thinks,
+                “this is so me, but I don’t know why.” Especially helpful if you’re building a moodboard, planning a room or wardrobe refresh,
+                or trying to describe your vibe to a designer, stylist, or future you.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                You bring photos or screenshots of clothing, décor, artwork, branding, or product packaging — plus any rough notes about the feeling you’re going for.
+                Motif Muse sends back named color palettes, pattern and motif labels, style tags (vintage, minimalist, dopamine décor, etc.), and simple style cards
+                you can reuse in your notes, boards, or planning tools.
               </p>
             </article>
           </div>
@@ -178,22 +166,38 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              See the specific style‑focused jobs Motif Muse can run for you.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>🎨FUNCTION⚙️ (🍃Leaf) – Palette extractor:</strong>
+              Pulls named color palettes from clothing, interiors, art, or packaging and can label them in plain language or hex codes so you can reuse the exact combo later.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>🧵FUNCTION⚙️ (🍃Leaf) – Pattern identifier:</strong>
+              Spots common pattern types — chevron, toile, herringbone, stripes, florals, geometrics, and more — and gives you language to describe them.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>🎯FUNCTION⚙️ (🍃Leaf) – Style matcher:</strong>
+              Connects your image to known design styles and movements (mid‑century, cottagecore, brutalist, dopamine décor, etc.) so you can tag and search by vibe.
+            </li>
+            <li>
+              <strong>📌FUNCTION⚙️ (🍃Leaf) – Use‑case suggester:</strong>
+              Suggests where a look naturally fits — from wardrobe capsules to room makeovers or brand moodboards — and how bold or subtle it might feel in each context.
+            </li>
+            <li>
+              <strong>📋FUNCTION⚙️ (🍃Leaf) – Motif organizer:</strong>
+              Groups your saved examples by vibe, era, motif family, or specific moodboard so you can see patterns in what you’re drawn to over time.
+            </li>
+            <li>
+              <strong>🖼️FUNCTION⚙️ (🍃Leaf) – Style card maker:</strong>
+              Packages results into simple style cards or swatch lists you can copy into notes, design briefs, or planning docs.
+            </li>
+            <li>
+              <strong>📥FUNCTION⚙️ (🍃Leaf) – Suite handoff:</strong>
+              Routes discoveries to sibling Glee‑fully Tool‑ettes when needed — like Roost Wrangler for home décor choices or Maker Matcher for craft and material questions.
             </li>
           </ul>
         </div>
@@ -205,7 +209,7 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              See why a purpose‑built style and motif brain beats a generic “act like a designer” prompt every time.
             </p>
           </header>
 
@@ -213,22 +217,26 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Motif Muse shows up already assuming you’re here to name a look, not argue about color theory.
+                It’s wired to pull palettes, patterns, and style tags out of your images, keep the language friendly instead of fussy,
+                and gently nudge you to capture the “why” behind what you like. It’s also instructed not to shop, push brands, or replace
+                design software — it’s an aesthetic whisperer you can use alongside your favorite tools.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                As part of the Glee‑fully Identity Known branch, Motif Muse knows it’s just one member of a recognition crew.
+                When your photo is really about a home, place, craft, or mystery object, it can point you toward siblings like Roost Wrangler,
+                Sight Seeker, Snap Decoder, Maker Matcher, or Self Fixer — keeping your questions routed to the right Twig without losing the thread.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Instead of a one‑time “that was neat” answer, Motif Muse packages your results as reusable style cards — palette names,
+                swatch lists, motif notes, and usage ideas you can copy into Notion, a design brief, or a physical journal.
+                Once you lock in a look that feels like you, you can keep reusing the same language, colors, and tags across rooms, outfits, and projects.
               </p>
             </article>
           </div>
@@ -241,27 +249,26 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              Go from “pretty picture” to a saved, named motif card in just a few steps.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Grab one image you love.</strong>
+              Start with a single photo or screenshot — an outfit mirror selfie, a room, album cover, book jacket, or product package that already feels like “you.”
             </li>
             <li>
               <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              Upload the image and, if you’d like, add a short note like “help me name the style, colors, and motifs here” so Motif Muse knows what to focus on.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Ask for a motif card.</strong>
+              Ask Motif Muse to pull a color palette, name the pattern types, suggest style labels, and jot down where this look might work best in your life.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Save what sticks.</strong>
+              Copy the palette names, swatches, and tags into your notes, moodboards, or planning tools so you can reuse the look on future projects.
             </li>
           </ol>
         </div>
@@ -283,12 +290,12 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                Glee‑fully Identity Known is the recognition branch of the suite — built to help you identify what you’re looking at
+                in real life and in photos, from critters and houses to décor, crafts, and mystery objects.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/07-identity-known/" class="btn btn-quiet">
+                  Visit Glee‑fully Identity Known
                 </a>
               </p>
             </article>
@@ -296,21 +303,36 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>Motif Muse sits alongside a small crew of recognition‑style Tool‑ettes that specialize in different kinds of “what is this?” questions.</p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/07-identity-known/07a-critter-spotter/">
+                    Critter Spotter — IDs animals, breeds, and wildlife.
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/07-identity-known/07b-roost-wrangler/">
+                    Roost Wrangler — decodes home, furniture, and architecture styles.
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/07-identity-known/07c-sight-seeker/">
+                    Sight Seeker — recognizes scenery, landmarks, and constellations.
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07d-snap-decoder/">
+                    Snap Decoder — interprets screenshots, quotes, and on‑screen messages.
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07f-maker-matcher/">
+                    Maker Matcher — names crafts, tools, and creative hobbies.
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07g-self-fixer/">
+                    Self Fixer — identifies mystery objects, broken parts, and DIY bits.
                   </a>
                 </li>
               </ul>
@@ -331,7 +353,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">

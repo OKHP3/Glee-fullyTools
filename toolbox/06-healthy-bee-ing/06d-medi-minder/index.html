@@ -2,128 +2,118 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Medi Minder — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Medi Minder is a Glee&#8209;fully  Tool‑ette GPT for keeping meds, refills, and doctor appointments organized with calm, logistics‑only reminders — not medical advice." />
+    <meta property="og:title" content="Medi Minder — Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta property="og:description" content="Medi Minder is a Glee&#8209;fully  Tool‑ette GPT for keeping meds, refills, and doctor appointments organized with calm, logistics‑only reminders — not medical advice." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
+      <!-- HERO: Medi Minder, launch button, quick pitch -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/06-healthy-bee-ing/">Glee‑fully Healthy Bee‑ing</a>
+              </p>
+              <h1 id="hero-title">Medi Minder 💊</h1>
+              <p class="hero-subtitle">
+                A calm, logistics‑only sidekick for meds, refills, and appointments.
+              </p>
+              <p class="hero-tagline">
+                Let’s be honest: keeping medications, refills, and doctor visits straight is a job.
+                Medi Minder gives all of that a single, organized home so your brain doesn’t have to
+                carry every date, dose, and detail at once. It lives on the Glee‑fully Healthy Bee‑ing
+                branch as the reliable place where all the “when, how much, and with who” finally lines
+                up.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <!-- Highlighted launch button – update href to this custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Medi Minder” in ChatGPT
+                </a>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
+                <!-- Optional secondary action back to parent Tool page -->
+                <a href="/toolbox/06-healthy-bee-ing/" class="btn btn-quiet">
+                  Back to Glee‑fully Healthy Bee‑ing
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with your current med list, refill
+                dates, and upcoming appointments handy.
+              </p>
+            </article>
 
             <div class="hero-visual reveal-on-scroll" aria-hidden="true">
               <!-- Swap this with a GPT-specific illustration if you’d like -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Medi Minder in the Glee‑fully Healthy Bee‑ing toolbox"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -134,13 +124,14 @@
         </div>
       </section>
 
-      <!-- WHAT IT DOES / PURPOSE -->
+      <!-- WHAT THIS TOOL-ETTE DOES -->
       <section class="section content-section">
         <div class="container reveal-on-scroll">
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              A logistics‑first GPT that keeps meds, refills, and appointments from slipping through
+              the cracks.
             </p>
           </header>
 
@@ -148,24 +139,30 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Medi Minder tracks medications, refills, and doctor appointments in one steady
+                place. It doesn’t diagnose or replace a clinician — it handles the moving parts:
+                which meds you take, when they’re due, who prescribed them, and what’s coming up
+                next on your calendar.
               </p>
             </article>
 
             <article class="card">
-              <h3>Best for</h3>
+              <h3>Problems it solves</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                If you’ve ever double‑booked an appointment, missed a refill window, or dug through
+                portals and pill bottles to remember what you take and why, this is for you. Medi
+                Minder untangles scattered reminders, paper printouts, and “I’ll remember that”
+                moments into a clear, gently structured view of your ongoing care.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                You bring in whatever you already have — a typed med list, photos of prescription
+                labels, portal notes, upcoming appointment dates, or even a quick brain dump. Medi
+                Minder turns that into a simple schedule, refill timeline, appointment tracker, and
+                exportable logs you can share with a doctor, pharmacist, or caregiver.
               </p>
             </article>
           </div>
@@ -178,22 +175,40 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              The concrete, repeatable actions Medi Minder can take on your behalf.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>💊 FUNCTION⚙️ (🍃Leaf) – Medication reminders:</strong>
+              Set up customizable medication reminders with names, doses, timing windows, and “with
+              food / without food” notes so you always know what’s due and when.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>📅 FUNCTION⚙️ (🍃Leaf) – Appointment calendar:</strong>
+              Capture doctor, specialist, lab, and therapy appointments with quick text‑style
+              entries and optional notes about why you’re going, what to ask, or what to bring.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>📦 FUNCTION⚙️ (🍃Leaf) – Refill countdown:</strong>
+              Track prescription refill windows and remaining doses, so you’re nudged to request
+              a refill before you run out instead of scrambling at the last minute.
+            </li>
+            <li>
+              <strong>🤝 FUNCTION⚙️ (🍃Leaf) – Caregiver mode:</strong>
+              Organize meds and appointments in a way that’s easy to share with a trusted partner,
+              family member, or caregiver, including clean summaries they can read at a glance.
+            </li>
+            <li>
+              <strong>📝 FUNCTION⚙️ (🍃Leaf) – Side‑effect logging:</strong>
+              Log how you felt after doses or visits, tying notes back to specific meds or
+              appointments so you can spot patterns and bring better information to your care team.
+            </li>
+            <li>
+              <strong>📤 FUNCTION⚙️ (🍃Leaf) – Exportable history:</strong>
+              Generate simple, copy‑paste‑ready tables or summaries of meds, refills, and visits
+              that you can drop into a message, portal, spreadsheet, or document.
             </li>
           </ul>
         </div>
@@ -205,7 +220,8 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              A pre‑tuned, safety‑aware logistics brain that already knows it’s here to organize,
+              not to play doctor.
             </p>
           </header>
 
@@ -213,68 +229,80 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Medi Minder is configured with clear instructions that it handles scheduling and
+                tracking, not diagnosis or treatment. It knows to ask for the right basics (med
+                name, dose, timing, prescriber, refill dates) and to format everything into clean,
+                reusable tables instead of loose paragraphs you have to reorganize later.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                This Tool‑ette understands that it lives inside Glee‑fully Healthy Bee‑ing. It knows
+                Care Check is where you triage symptoms, Calm Keep is for stress and rest, Snappy
+                Count looks at meals, Moody Log tracks hydration and mood, and Maven Wise supports
+                midlife and hormonal changes. Medi Minder stays in its lane: logistics, history,
+                and prep work that make those other conversations more grounded.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Instead of one‑off chats, Medi Minder leans on repeatable patterns: med lists you
+                can refresh each month, refill countdowns you can re‑use, appointment logs you
+                can export before each visit. The goal is simple: less rewriting, less hunting,
+                more “copy, paste, done.”
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- GETTING STARTED / HOW TO USE -->
+      <!-- GETTING STARTED -->
       <section class="section content-section stripe-bg">
         <div class="container reveal-on-scroll">
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              Set Medi Minder up in under ten minutes, then let it carry the mental load from there.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Gather what you already know.</strong>
+              Grab your current med list, pill bottles, prescription labels, portal notes, and any
+              upcoming appointment dates. Imperfect is fine; this is a starting snapshot, not a
+              legal document.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Tell Medi Minder your basics.</strong>
+              Paste your list in or type it out: medication names, doses, how often you take them,
+              who prescribed them, and when your next refills or visits are expected.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Choose what to organize first.</strong>
+              Ask it to build a daily schedule, highlight today’s meds, map out the coming week,
+              or prep a one‑page summary for an upcoming appointment. Keep the ask focused; you
+              can always add more later.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Save and reuse the outputs.</strong>
+              Copy schedules into your calendar, download logs as files, or paste summaries into
+              a note you can bring to appointments. Treat Medi Minder as the living “source of
+              truth” you can keep updating over time.
             </li>
           </ol>
         </div>
       </section>
 
-      <!-- ECOSYSTEM: PARENT TOOL + SIBLING TOOL‑ETTES -->
+      <!-- WHERE IT LIVES IN THE TOOLBOX -->
       <section class="section content-section">
         <div class="container reveal-on-scroll">
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              Connected to a bigger health story, not just a standalone reminder bot.
             </p>
           </header>
 
@@ -283,12 +311,14 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                <strong>Glee‑fully Healthy Bee‑ing</strong> is the wellness branch of the Toolbox.
+                It focuses on everyday health realities — stress, sleep, movement, meds, hydration,
+                mood, and midlife changes — and turns them into small, sustainable steps instead of
+                all‑or‑nothing plans.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/06-healthy-bee-ing/" class="btn btn-quiet">
+                  Visit Glee‑fully Healthy Bee‑ing
                 </a>
               </p>
             </article>
@@ -296,21 +326,34 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>
+                Medi Minder is one twig on this branch. Explore its siblings when you’re ready to
+                round out the rest of your wellness picture:
+              </p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/06-healthy-bee-ing/06a-care-check/">
+                    Care Check 🩺 — symptom triage and urgency guidance
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/06-healthy-bee-ing/06b-calm-keep/">
+                    Calm Keep 😌 — stress, sleep, and micro‑movement balance
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/06-healthy-bee-ing/06c-snappy-count/">
+                    Snappy Count 🍽️ — quick, photo‑friendly nutrition awareness
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/06-healthy-bee-ing/06e-moody-log/">
+                    Moody Log 💧🌙 — hydration, mood, and reflection timeline
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/06-healthy-bee-ing/06f-maven-wise/">
+                    Maven Wise 🌸 — midlife and hormonal change support
                   </a>
                 </li>
               </ul>
@@ -331,7 +374,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">

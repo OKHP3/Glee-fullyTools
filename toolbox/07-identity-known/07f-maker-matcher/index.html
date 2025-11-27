@@ -2,97 +2,83 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Maker Matcher — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Maker Matcher helps you figure out what craft or hobby you're looking at from a photo, tool, or work‑in‑progress, then tags it and suggests where to explore next." />
+    <meta property="og:title" content="Maker Matcher — Glee‑fully Personalizable Tool‑ette™" />
+    <meta property="og:description" content="Discovery‑first GPT that identifies crafts, tools, and creative hobbies from your images or descriptions, then hands you off to tutorials and inspiration across the Glee‑fully Toolbox." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
-      <section class="hero glee-hero" aria-labelledby="hero-title">
-        <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
-        <div class="glee-glow" aria-hidden="true"></div>
-
-        <div class="hero-inner container">
-          <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
+      <!-- HERO: Maker Matcher, launch button, quick pitch -->
+      <section class="hero glee-hero">
+        <div class="container glee-hero-inner">
+          <div class="grid grid-2 hero-grid">
+            <div class="hero-copy">
+              <div class="glee-hero-card reveal-on-scroll">
                 <!-- Breadcrumb-style context -->
                 <p class="eyebrow">
                   Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
+                  <a href="/toolbox/07-identity-known/">Glee‑fully Identity Known</a>
                 </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
+                <h1>Maker Matcher</h1>
+                <p class="hero-subtitle">Turn “what is this craft?” moments into named, tagged hobbies.</p>
                 <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
+                  Maker Matcher is a discovery‑first GPT in the Glee‑fully Identity Known branch. Snap a photo of a
+                  mystery tool, half‑finished project, or craft‑fair booth and it will name the likely craft, medium,
+                  and category, then tag it for later. Instead of deep lessons, it gives you friendly IDs, tags, and
+                  paths into the rest of the Toolbox so you can explore tutorials when you’re ready.
                 </p>
 
                 <div class="hero-actions">
@@ -103,32 +89,31 @@
                     target="_blank"
                     rel="noopener"
                   >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
+                    Launch “Maker Matcher” in ChatGPT
                   </a>
 
                   <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
+                  <a href="/toolbox/07-identity-known/" class="btn btn-quiet">
+                    Back to Glee‑fully Identity Known
                   </a>
                 </div>
                 <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
+                  Opens in ChatGPT (desktop or mobile). You’ll need a ChatGPT account to use this Tool‑ette.
                 </p>
-              </article>
-
+              </div>
             </div>
 
-            <div class="hero-visual reveal-on-scroll" aria-hidden="true">
-              <!-- Swap this with a GPT-specific illustration if you’d like -->
-              <img
-                src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
-                class="glee-hero-img"
-                loading="lazy"
-                width="1536"
-                height="768"
-              />
+            <div class="hero-visual reveal-on-scroll">
+              <figure class="hero-figure">
+                <img
+                  src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
+                  alt="Illustration representing Maker Matcher"
+                  class="glee-hero-img"
+                  loading="lazy"
+                  width="1536"
+                  height="768"
+                />
+              </figure>
             </div>
           </div>
         </div>
@@ -140,7 +125,7 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              Show how this GPT turns “what am I looking at?” moments into named crafts and starter paths.
             </p>
           </header>
 
@@ -148,24 +133,27 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Maker Matcher helps you identify the craft, hobby, or making practice behind a tool, workspace, or
+                finished object. It translates “I saw this cool thing at a market” into “that’s needle‑felting” or
+                “that’s resin casting” so you can search, learn, or talk about it by name.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Great for curious makers, shoppers, and gift‑givers who keep bumping into interesting handmade things
+                and don’t know what they’re called. Especially helpful if you browse craft fairs, thrift stores,
+                Pinterest boards, or maker spaces and want a low‑pressure way to explore new hobbies.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                Bring in photos of tools, materials, in‑progress projects, or craft‑show tables — or just describe what
+                you’re seeing in plain language. Maker Matcher returns likely craft types, materials, and categories,
+                plus quick definitions, tags, and optional handoffs into sibling tools for tutorials and inspiration.
               </p>
             </article>
           </div>
@@ -178,22 +166,45 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              See the specific ways Maker Matcher reads your images and turns them into named, tagged crafts.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>🧶 FUNCTION⚙️ (🍃Leaf) – Identify the craft or hobby:</strong>
+              Turn photos of projects, booths, or handmade objects into named craft types like macramé, wheel‑thrown
+              pottery, resin casting, or origami.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>🛠️ FUNCTION⚙️ (🍃Leaf) – Recognize tools and materials:</strong>
+              Spot hooks, looms, molds, cutters, brushes, and other tools in a workspace photo and connect them to the
+              crafts they belong to.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>🎯 FUNCTION⚙️ (🍃Leaf) – Suggest craft families:</strong>
+              Group what it sees into categories like fiber arts, sculpture, paper crafts, or mixed media so you know
+              which aisle — or YouTube rabbit hole — to explore.
+            </li>
+            <li>
+              <strong>📚 FUNCTION⚙️ (🍃Leaf) – Offer 101‑level definitions:</strong>
+              Provide short explanations of each craft or technique, along with beginner‑friendly next steps and terms
+              you can search for.
+            </li>
+            <li>
+              <strong>📸 FUNCTION⚙️ (🍃Leaf) – Tag works‑in‑progress:</strong>
+              Capture snapshots of your own projects and label them by technique, materials, and effort level for future
+              reference.
+            </li>
+            <li>
+              <strong>📥 FUNCTION⚙️ (🍃Leaf) – Route to sibling tools:</strong>
+              When you’re ready to go deeper, hand off to Motif Muse, Self Fixer, or other Glee‑fully siblings to find
+              tutorials, color ideas, or repair guidance.
+            </li>
+            <li>
+              <strong>🗂️ FUNCTION⚙️ (🍃Leaf) – Export a hobby profile card:</strong>
+              Summarize what you’ve discovered — crafts, materials, and interest tags — into a reusable snapshot you can
+              save, share, or revisit across the Toolbox.
             </li>
           </ul>
         </div>
@@ -205,7 +216,7 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              Understand why a purpose‑built craft identifier beats a blank, generic chat window.
             </p>
           </header>
 
@@ -213,22 +224,25 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Maker Matcher is pre‑tuned to speak “maker,” with vocab for materials, tools, and craft families already
+                wired in. You don’t have to teach it what a warp, slip stitch, or bisque firing is — it starts from a
+                shared baseline and gently flags uncertainty instead of pretending to be exact.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                It understands the Glee‑fully Identity Known branch and its siblings, so it knows when your mystery item
+                belongs with Critter Spotter, Motif Muse, or Self Fixer instead. That suite awareness keeps you in the
+                right lane — ID first here, then deeper learning, design, or repair work with the rest of the Toolbox.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Each session can end in a tidy hobby profile card: craft name, materials, tags, and suggested next
+                steps. You can reuse that structure whenever you stumble across a new “what is this?” find, keeping your
+                discoveries searchable instead of scattered in chat history.
               </p>
             </article>
           </div>
@@ -241,27 +255,30 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              Make it easy to try Maker Matcher once — then come back any time you bump into a new mystery craft.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Grab a mystery craft.</strong>
+              Pick one thing you’re curious about — a tool on your desk, a half‑finished project, or a photo from a
+              craft fair or thrift store.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Share what you see.</strong>
+              Upload a clear photo (or a couple of angles) and/or type a quick description of the object, materials, and
+              where you found it.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Tell it what you want.</strong>
+              Ask for “Just name the craft,” “Give me a beginner summary,” or “Tag this for my hobby list” so Maker
+              Matcher knows how deep to go right now.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Capture the hobby card.</strong>
+              Copy the profile card and tags into your notes app, planner, or Glee‑fully trunk so you can find this
+              craft again when you’re ready to try it.
             </li>
           </ol>
         </div>
@@ -273,8 +290,7 @@
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              Show where Maker Matcher sits inside the Glee‑fully Toolbox so you always know what to try next.
             </p>
           </header>
 
@@ -283,12 +299,12 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                Glee‑fully Identity Known is the recognition branch of the suite, built to turn photos, screenshots, and
+                “what is this?” moments into tagged, cross‑linked identities.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/07-identity-known/" class="btn btn-quiet">
+                  Visit Glee‑fully Identity Known
                 </a>
               </p>
             </article>
@@ -296,21 +312,21 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>Hop to the other recognition Twigs that live on this same branch.</p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/07-identity-known/07a-critter-spotter/">
+                    Critter Spotter (#07a)
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/07-identity-known/07e-motif-muse/">
+                    Motif Muse (#07e)
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/07-identity-known/07g-self-fixer/">
+                    Self Fixer (#07g)
                   </a>
                 </li>
               </ul>
@@ -320,8 +336,8 @@
             <article class="card">
               <h3>Back to the Toolbox</h3>
               <p>
-                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
-                your next Tool or Tool‑ette.
+                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose your next Tool or
+                Tool‑ette.
               </p>
               <p>
                 <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
@@ -331,7 +347,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">

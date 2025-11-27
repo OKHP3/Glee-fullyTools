@@ -2,128 +2,113 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Moody Log — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Moody Log is a gentle wellness timeline that combines weekly self‑photos, hydration tracking, and mood check‑ins to show how your body and emotions connect." />
+    <meta property="og:title" content="Moody Log — Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta property="og:description" content="Track hydration, mood, and body changes in one calm, private timeline so you can spot patterns and make kinder choices about your well‑being." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
-      <section class="hero glee-hero" aria-labelledby="hero-title">
+      <!-- HERO: Moody Log, launch button, quick pitch -->
+      <section class="section hero hero--tool-ette">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/06-healthy-bee-ing/">Glee-fully Healthy Bee-ing</a>
+              </p>
+              <h1>Moody Log</h1>
+              <p class="hero-subtitle">Hydration, mood, and body snapshots—logged together so you can see what your days are really made of.</p>
+              <p class="hero-tagline">
+                Moody Log pairs quick mood check‑ins, hydration notes, and optional body snapshots into a single, private wellness timeline.
+                It helps you spot patterns between how you feel and how you care for yourself—without spreadsheets, shame, or overthinking.
+                Over time, you get a kind, visual record of your highs, lows, and in‑between days so you can make small, steady changes that actually stick.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <!-- Highlighted launch button – update href to this custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/g-68b701ef56948191af70510fd4989fa2-moody-log-by-glee-fully"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Moody Log” in ChatGPT
+                </a>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
+                <!-- Optional secondary action back to parent Tool page -->
+                <a href="/toolbox/06-healthy-bee-ing/" class="btn btn-quiet">
+                  Back to Glee-fully Healthy Bee-ing
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files handy.
+              </p>
+            </article>
 
             <div class="hero-visual reveal-on-scroll" aria-hidden="true">
               <!-- Swap this with a GPT-specific illustration if you’d like -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Moody Log"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -140,7 +125,7 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              A calm wellness log that turns hydration, mood swings, and body snapshots into a story you can actually read.
             </p>
           </header>
 
@@ -148,24 +133,24 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Moody Log pairs body snapshot journaling with hydration and emotional reflections to show patterns of well‑being.
+                Instead of guessing why you feel “off,” it gathers your water intake, moods, and optional self‑photos into a single, gentle timeline so you can see what’s changing—and what’s helping.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Great for people who feel like their mood and energy are “all over the place,” anyone trying to build healthier habits without obsessing, and folks who want insight without turning life into a spreadsheet.
+                Especially helpful if you’re already using other Healthy Bee‑ing Tools—like Care Check, Calm Keep, Snappy Count, Medi Minder, or Maven Wise—and want one place to see how everything fits together.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                You bring simple things: quick 1–10 mood ratings, “what I drank today,” a few notes about sleep or stress, and optional self‑photos—or text descriptions if you prefer not to use images.
+                Moody Log returns structured daily entries, week‑over‑week timelines, and side‑by‑side views of hydration and mood that you can export, share with a care team, or keep as a private wellness journal.
               </p>
             </article>
           </div>
@@ -178,22 +163,34 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              The specific things Moody Log can do for you—beyond “talking about feelings.”
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>📸FUNCTION⚙️ (🍃Leaf) – Weekly self‑photo journaling:</strong>
+              Capture a quick weekly body snapshot—or a short written description—so you can see gradual changes over time while keeping everything private and under your control.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>💧FUNCTION⚙️ (🍃Leaf) – Hydration tracking with a twist:</strong>
+              Log water and other drinks in plain language, then let Moody Log translate that into an easy hydration summary using gentle, encouraging metaphors instead of guilt.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>🌙FUNCTION⚙️ (🍃Leaf) – Mood check‑ins with context:</strong>
+              Record simple mood ratings or words, plus optional notes about sleep, stress, hormones, or life events so your emotional highs and lows have real‑world context.
+            </li>
+            <li>
+              <strong>📊FUNCTION⚙️ (🍃Leaf) – Hydration‑vs‑mood overlays:</strong>
+              Generate table‑ and chart‑style summaries that line up your mood, hydration, and key notes on the same timeline, making it easier to spot patterns you’d otherwise miss.
+            </li>
+            <li>
+              <strong>🔔FUNCTION⚙️ (🍃Leaf) – Gentle pattern nudges:</strong>
+              When familiar dips show up—low water, low mood, or repeating stressors—Moody Log offers small, realistic suggestions or reflection prompts instead of alarm bells.
+            </li>
+            <li>
+              <strong>📆FUNCTION⚙️ (🍃Leaf) – Long‑view wellness timeline:</strong>
+              Build a long‑term record of your body and emotions that you can scroll through by week or month, export for appointments, or simply use as a mirror that reflects growth with kindness.
             </li>
           </ul>
         </div>
@@ -205,7 +202,7 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              Because you don’t need another blank chat box—you need a calm, structured place to track how you actually feel and why.
             </p>
           </header>
 
@@ -213,22 +210,25 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Moody Log already knows it’s a wellness timeline, not a productivity drill sergeant.
+                Its instructions are wired for gentle tracking, emotional nuance, and realistic habits, with guardrails against crash‑diet talk, self‑shaming, or amateur diagnosing.
+                You don’t have to keep prompting “act like a mood tracker” or rebuild the same structure—Moody Log shows up ready to log, reflect, and normalize what you’re going through.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                Moody Log lives on the Glee‑fully Healthy Bee‑ing branch alongside Care Check, Calm Keep, Snappy Count, Medi Minder, and Maven Wise.
+                Paste in notes or summaries from those Tools and it will help you line up symptoms, stress, sleep, food, meds, and midlife changes against your mood and hydration timeline.
+                The whole hive works together: Care Check for reassurance, Calm Keep for regulation, Snappy Count for awareness, Medi Minder for rhythms—and Moody Log as the mirror that shows how it all feels over time.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Moody Log leans on reusable prompts and templates: daily check‑ins, weekly reflections, 30‑day pattern scans, and appointment‑prep summaries.
+                Outputs are structured as timelines, tables, and highlight reels you can copy into your notes app, journal, or patient portal.
+                Instead of one‑off answers, you get a living log you can keep building on every time you come back.
               </p>
             </article>
           </div>
@@ -241,27 +241,26 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              You don’t have to overhaul your life—just start with one honest day and let the timeline grow from there.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Capture one day.</strong>
+              Start with today (or yesterday). Tell Moody Log how much you drank, how you’d rate your mood, and anything that felt especially good or hard.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Add a snapshot.</strong>
+              If you’re comfortable, add a quick self‑photo or a short written “body snapshot” describing how you feel in your own skin—no filters, no pressure.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Pick a mode.</strong>
+              Ask Moody Log to act as a <em>Daily Check‑In</em>, <em>Weekly Reflection</em>, or <em>30‑Day Pattern Scan</em> and follow the prompts it gives you.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Save the story.</strong>
+              Copy the timeline or summary table into your notes app, journal, or care portal. Next time you visit, bring a few new days of data and let the story keep unfolding.
             </li>
           </ol>
         </div>
@@ -273,8 +272,7 @@
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider Toolbox so users always know where to go next.
             </p>
           </header>
 
@@ -283,12 +281,11 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                Glee-fully Healthy Bee-ing is the wellness hive of the Glee‑fully Toolbox—six Tool‑ettes working together to support everyday habits, symptom context, and lifestyle balance without panic or perfectionism.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/06-healthy-bee-ing/" class="btn btn-quiet">
+                  Visit Glee-fully Healthy Bee-ing
                 </a>
               </p>
             </article>
@@ -296,21 +293,31 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>Explore the other Tool‑ettes on the Healthy Bee‑ing branch when you need more targeted support.</p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/06-healthy-bee-ing/06a-care-check/">
+                    #06a – Care Check 🩺 — symptom triage and urgency guidance
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/06-healthy-bee-ing/06b-calm-keep/">
+                    #06b – Calm Keep 😌 — stress, sleep, and micro‑movement balance
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/06-healthy-bee-ing/06c-snappy-count/">
+                    #06c – Snappy Count 🍽️ — quick photo‑based nutrition awareness
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/06-healthy-bee-ing/06d-medi-minder/">
+                    #06d – Medi Minder 💊 — medication, refill, and appointment tracking
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/06-healthy-bee-ing/06f-maven-wise/">
+                    #06f – Maven Wise 🌸 — midlife and hormonal change support
                   </a>
                 </li>
               </ul>
@@ -320,8 +327,7 @@
             <article class="card">
               <h3>Back to the Toolbox</h3>
               <p>
-                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
-                your next Tool or Tool‑ette.
+                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose your next Tool or Tool‑ette.
               </p>
               <p>
                 <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
@@ -331,7 +337,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">

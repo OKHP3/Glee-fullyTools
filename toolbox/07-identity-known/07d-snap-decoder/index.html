@@ -2,145 +2,126 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Snap Decoder — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Snap Decoder by Glee&#8209;fully turns your screenshot stash into a searchable story — decoding quotes, error messages, and saved moments so you remember why you captured them." />
+    <meta property="og:title" content="Snap Decoder — Glee&#8209;fully Personalizable Tool‑ette™" />
+    <meta property="og:description" content="A reflective Glee&#8209;fully Tool‑ette GPT that interprets screenshots, quote captures, and UI glitches into clear explanations, tags, and next steps." />   
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
-      <section class="hero glee-hero" aria-labelledby="hero-title">
-        <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
-        <div class="glee-glow" aria-hidden="true"></div>
+      <!-- HERO: Snap Decoder, launch button, quick pitch -->
+      <section aria-labelledby="hero-title" class="hero glee-hero">
+        <div aria-hidden="true" class="brand-stripes brand-stripes--glee"></div>
+        <div aria-hidden="true" class="glee-glow"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/07-identity-known/">
+                  Glee‑fully Identity Known
+                </a>
+              </p>
+              <h1 id="hero-title">Snap Decoder</h1>
+              <p class="hero-subtitle">Decode why you saved that screenshot in the first place.</p>
+              <p class="hero-tagline">
+                Snap Decoder turns stray screenshots, quote grabs, and odd error popups into context you can use. It pulls out the text, reads the moment, and helps you tag, journal, or take action so your camera roll stops being a guilt pile and starts acting like a memory bank.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <!-- Highlighted launch button – update href to this custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/g-685b073a236481919de38600d5ebdcbb-lifestyle-wallboard-by-glee-fully"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Snap Decoder” in ChatGPT
+                </a>
+                <!-- Optional secondary action back to parent Tool page -->
+                <a class="btn btn-quiet" href="/toolbox/07-identity-known/">
+                  Back to Glee‑fully Identity Known
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files handy.
+              </p>
+            </article>
+          </div>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
-
-            <div class="hero-visual reveal-on-scroll" aria-hidden="true">
-              <!-- Swap this with a GPT-specific illustration if you’d like -->
-              <img
-                src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
-                class="glee-hero-img"
-                loading="lazy"
-                width="1536"
-                height="768"
-              />
-            </div>
+          <div class="hero-visual reveal-on-scroll" aria-hidden="true">
+            <!-- Swap this with a GPT-specific illustration if you’d like -->
+            <img
+              src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
+              alt="Illustration representing Snap Decoder"
+              width="1536"
+            />
           </div>
         </div>
       </section>
 
-      <!-- WHAT IT DOES / PURPOSE -->
+      <!-- WHAT IT DOES -->
       <section class="section content-section">
         <div class="container reveal-on-scroll">
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              Snap Decoder is your “why did I save this?” assistant for screenshots, quotes, and UI oddities.
             </p>
           </header>
 
@@ -148,64 +129,77 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Snap Decoder extracts the meaning and moment behind your saved screenshots — from inspirational quotes to confusing error messages. It turns visual clutter into clean explanations, small stories, and next steps.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Best for people who screenshot everything: quote hoarders, chronic tab‑closers, support pros, and anyone who wants their camera roll and desktop captures to feel intentional instead of chaotic.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                Bring in screenshots, saved images, or pasted error text — plus optional voice notes when that helps. You’ll get decoded messages, suggested actions, tags or themes, and export-ready summaries for journals, task lists, or knowledge bases.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- PRIMARY FUNCTIONS / LEAVES -->
+      <!-- CORE FUNCTIONS (LEAVES) -->
       <section class="section content-section stripe-bg">
         <div class="container reveal-on-scroll">
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              Each Leaf is a concrete task Snap Decoder can run on your screenshots.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>🖼️ FUNCTION⚙️ (🍃Leaf) – Screenshot analyzer: </strong>
+              Analyze screenshots for embedded text, layout, and visual signals that matter.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>🧠 FUNCTION⚙️ (🍃Leaf) – Capture‑intent summarizer: </strong>
+              Infer why you saved the screenshot and condense it into a short, memorable takeaway.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>🛠️ FUNCTION⚙️ (🍃Leaf) – Error message decoder: </strong>
+              Detect and label system errors or UI glitches, then translate them into plain‑English fixes.
+            </li>
+            <li>
+              <strong>🎙️ FUNCTION⚙️ (🍃Leaf) – Voice‑note tagger: </strong>
+              Let you attach quick voice notes so future‑you remembers the feeling or task behind the snap.
+            </li>
+            <li>
+              <strong>📋 FUNCTION⚙️ (🍃Leaf) – Smart organizer: </strong>
+              Group screenshots by theme, urgency, project, or sentiment so you can actually find them later.
+            </li>
+            <li>
+              <strong>📎 FUNCTION⚙️ (🍃Leaf) – Snapshot journal exporter: </strong>
+              Export cleaned text and context into a running “snapshot journal” or reminder capsule.
+            </li>
+            <li>
+              <strong>📥 FUNCTION⚙️ (🍃Leaf) – Branch router: </strong>
+              Hand off unrecognized objects or tricky visuals to other Glee‑fully branches or agents for deeper interpretation.
             </li>
           </ul>
         </div>
       </section>
 
-      <!-- WHY IT BEATS VANILLA CHATGPT -->
+      <!-- WHY NOT VANILLA CHATGPT -->
       <section class="section content-section">
         <div class="container reveal-on-scroll">
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              Because Snap Decoder already speaks “camera roll” and knows it’s part of a bigger toolbox.
             </p>
           </header>
 
@@ -213,55 +207,53 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Snap Decoder arrives pre‑loaded with expectations about screenshots — where text hides, why people save them, and how to separate signal from visual noise. You don’t have to explain that this blurry quote or weird dialog box matters; it assumes it does.
               </p>
             </article>
+
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                It sits inside the Glee‑fully Identity Known branch, so it knows when to call in siblings. A mystery critter, a landmark, or a home interior can be routed to Critter Spotter, Sight Seeker, Roost Wrangler, or other Twigs instead of leaving you stuck.
               </p>
             </article>
+
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Instead of one‑off answers, Snap Decoder leans on reusable flows: snapshot journals, troubleshooting logs, quote digests, and tag‑based exports you can drop into your notes app, help desk, or personal wiki.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- GETTING STARTED / HOW TO USE -->
+      <!-- GETTING STARTED -->
       <section class="section content-section stripe-bg">
         <div class="container reveal-on-scroll">
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              You can get value in under a minute with a single screenshot.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Grab one screenshot.</strong>
+              Pick a single screenshot that’s been nagging you — a saved quote, a confusing popup, or a random image you meant to “deal with later.”
             </li>
             <li>
               <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              Drop the screenshot into ChatGPT (or paste the error text) and tell Snap Decoder what kind of help you want.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Choose a mode.</strong>
+              Ask it to explain the error, turn quotes into reminders, tag the moment, or file the snapshot into a journal or troubleshooting log.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Save the story, not just the image.</strong>
+              Copy the summary, tags, or journal entry into your notes app or task system so the meaning sticks around even if the screenshot doesn’t.
             </li>
           </ol>
         </div>
@@ -273,8 +265,7 @@
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              Snap Decoder is a Twig on the Glee‑fully Identity Known branch, alongside other recognition‑focused Tool‑ettes.
             </p>
           </header>
 
@@ -283,12 +274,11 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                Glee‑fully Identity Known is the recognition hub of the suite — the branch that helps you name, label, and make sense of whatever you’re looking at, from critters to constellations to cryptic UI.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/07-identity-known/" class="btn btn-quiet">
+                  Visit Glee‑fully Identity Known
                 </a>
               </p>
             </article>
@@ -296,22 +286,27 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>
+                Snap Decoder shares its branch with other visual recognition Tool‑ettes. When a screenshot isn’t about text or UI, you can hop sideways to a sibling that’s built for that view.
+              </p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
-                  </a>
+                  <a href="/toolbox/07-identity-known/07a-critter-spotter/">Critter Spotter</a> — IDs animals, breeds, and wildlife with a dash of trivia.
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
-                  </a>
+                  <a href="/toolbox/07-identity-known/07b-roost-wrangler/">Roost Wrangler</a> — Decodes homes, furniture, and architecture styles from photos.
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
-                  </a>
+                  <a href="/toolbox/07-identity-known/07c-sight-seeker/">Sight Seeker</a> — Recognizes scenery, landmarks, and constellations in your shots.
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07e-motif-muse/">Motif Muse</a> — Extracts color palettes, motifs, and visual design patterns.
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07f-maker-matcher/">Maker Matcher</a> — Names crafts, tools, and creative hobbies from work‑in‑progress pics.
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07g-self-fixer/">Self Fixer</a> — Spots mystery objects, broken parts, and DIY bits that need attention.
                 </li>
               </ul>
             </article>
@@ -320,8 +315,7 @@
             <article class="card">
               <h3>Back to the Toolbox</h3>
               <p>
-                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
-                your next Tool or Tool‑ette.
+                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose your next Tool or Tool‑ette.
               </p>
               <p>
                 <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
@@ -331,7 +325,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">

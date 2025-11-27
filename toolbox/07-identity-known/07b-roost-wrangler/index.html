@@ -2,128 +2,113 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Roost Wrangler — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Roost Wrangler decodes your home’s architecture and furniture style from photos so you can name, tag, and admire your space — no shopping, no renovation pressure, just clear language for what you already love." />
+    <meta property="og:title" content="Roost Wrangler — Glee‑fully Personalizable Tool™" />
+    <meta property="og:description" content="Roost Wrangler decodes your home’s architecture and furniture style from photos so you can name, tag, and admire your space — no shopping, no renovation pressure, just clear language for what you already love." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
+      <!-- HERO: Roost Wrangler, launch button, quick pitch -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/07-identity-known/">Glee‑fully Identity Known</a>
+              </p>
+              <h1 id="hero-title">Roost Wrangler</h1>
+              <p class="hero-subtitle">
+                Name the style of your house, room, or favorite chair without getting lost in designer jargon.
+              </p>
+              <p class="hero-tagline">
+                Roost Wrangler looks at exteriors, interiors, and furniture photos and translates them into plain‑English styles, eras, and vibes. It adds light history and mood tags so you can describe your space with confidence — no valuations, no remodel pressure, just recognition and aesthetic joy.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <!-- Highlighted launch button – update href to this custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/g-68b4fd1f885481919e71f55d6b2d5106-roost-wrangler-by-glee-fully"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Roost Wrangler” in ChatGPT
+                </a>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
+                <!-- Optional secondary action back to parent Tool page -->
+                <a href="/toolbox/07-identity-known/" class="btn btn-quiet">
+                  Back to Glee‑fully Identity Known
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with your photos, notes, or listings handy.
+              </p>
+            </article>
 
             <div class="hero-visual reveal-on-scroll" aria-hidden="true">
               <!-- Swap this with a GPT-specific illustration if you’d like -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Roost Wrangler"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -140,7 +125,7 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              A quick overview of Roost Wrangler’s purpose and the problems it actually solves.
             </p>
           </header>
 
@@ -148,24 +133,21 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Roost Wrangler helps you put a name to the look of your home and furniture. It translates exterior shots, room photos, and single pieces into style labels, eras, and mood tags so you can talk about your space with more confidence.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Best for curious homeowners, renters, and thrifters who keep asking, “What style is this, actually?”. It shines when you’re cataloging your place, writing a listing, building a moodboard, or trying to match a new piece to what you already own.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                Bring in photos of exteriors, interiors, or individual pieces, plus any notes you already have about age, region, or source. Roost Wrangler returns style names, design eras, plain‑language descriptions, tags by room and vibe, and ideas for how to log or group what you’ve found.
               </p>
             </article>
           </div>
@@ -178,22 +160,38 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              The concrete actions Roost Wrangler can take on your behalf.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>🏠 FUNCTION⚙️ (🍃Leaf) – Exterior style ID:</strong>
+              Reads facades, rooflines, and overall proportions to suggest likely architectural styles (for example, craftsman, ranch, Tudor, or bungalow) with a short plain‑English explanation.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>🛋️ FUNCTION⚙️ (🍃Leaf) – Furniture &amp; era match:</strong>
+              Spots sofas, chairs, tables, and casegoods and maps them to design eras such as mid‑century, farmhouse, or contemporary so you can describe pieces accurately.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>🧾 FUNCTION⚙️ (🍃Leaf) – Style backstory:</strong>
+              Adds light historical or cultural context so you know where a style comes from, how it evolved, and where it typically shows up in everyday homes.
+            </li>
+            <li>
+              <strong>📐 FUNCTION⚙️ (🍃Leaf) – Look‑alike comparisons:</strong>
+              Compares your upload to nearby styles and sibling looks to help you say, “It’s almost like X, but with Y details,” instead of guessing blindly.
+            </li>
+            <li>
+              <strong>🔖 FUNCTION⚙️ (🍃Leaf) – Room, vibe &amp; tag system:</strong>
+              Tags items by room, mood, color story, and period influence so you can keep a consistent language across listings, notes, and moodboards.
+            </li>
+            <li>
+              <strong>🖼️ FUNCTION⚙️ (🍃Leaf) – Visual logs &amp; moodboards:</strong>
+              Helps you turn a string of uploads into a simple moodboard or “house profile” that captures your home’s recurring shapes, textures, and themes.
+            </li>
+            <li>
+              <strong>📥 FUNCTION⚙️ (🍃Leaf) – Sibling tool hand‑offs:</strong>
+              When you drift into screenshots, colors, or mystery gadgets, Roost Wrangler can point you toward sibling tools like Motif Muse, Snap Decoder, or Self Fixer instead of forcing a bad guess.
             </li>
           </ul>
         </div>
@@ -205,7 +203,7 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              How Roost Wrangler is smarter, kinder, and more structured than a blank chat window.
             </p>
           </header>
 
@@ -213,22 +211,19 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Roost Wrangler is pre‑tuned to prioritize recognition over opinion. It asks for context like room use, location, and what you already know, then maps what it sees to likely styles and eras. Clear guardrails keep it out of valuations, renovation plans, and hard design directives — the focus stays on naming, context, and calm, non‑judgy explanations.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                Sitting on the Glee‑fully Identity Known branch, Roost Wrangler understands it’s part of a family of “what am I looking at?” tools. When your images drift toward animals, scenery, motifs, screenshots, or mystery gadgets, it can suggest sibling Tool‑ettes like Critter Spotter, Sight Seeker, Motif Muse, Snap Decoder, Maker Matcher, or Self Fixer instead of guessing outside its lane.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Conversations are shaped around repeatable flows: house profiles, room‑by‑room logs, thrifted‑finds trackers, and simple style summaries for listings. You can reuse the same tags and language across sessions, then copy everything straight into your notes app, design doc, or planning tool without rebuilding the logic every time.
               </p>
             </article>
           </div>
@@ -241,27 +236,26 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              Take your first step with Roost Wrangler in under a minute.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Start with a single photo.</strong>
+              Snap or grab one exterior shot, room photo, or a picture of a single piece of furniture you’re curious about.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Upload &amp; say what you know.</strong>
+              Drop the image into the chat and add any details you already have — rough age, region, hand‑me‑down story, or what you were told when you bought it.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Ask what you want to learn.</strong>
+              Tell Roost Wrangler what matters most right now: a style name, design era, listing‑ready description, comparison to similar looks, or which sibling tool might help next.
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Save your house profile.</strong>
+              Copy the style summary, tags, and comparison notes into your notes app or design doc, or keep building a room‑by‑room log in the same conversation.
             </li>
           </ol>
         </div>
@@ -273,8 +267,7 @@
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              See how Roost Wrangler fits into the Identity Known branch and what’s next when you’re ready to explore.
             </p>
           </header>
 
@@ -283,12 +276,11 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                Glee‑fully Identity Known is the recognition hub of the toolbox — the branch that helps you put words to what you’re seeing, whether it’s a pet, a building, a landscape, or a pattern in your everyday life.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/07-identity-known/" class="btn btn-quiet">
+                  Visit Glee‑fully Identity Known
                 </a>
               </p>
             </article>
@@ -296,21 +288,36 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>Explore the other recognition Twigs that share the Identity Known branch with Roost Wrangler.</p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/07-identity-known/07a-critter-spotter/">
+                    #07a – Critter Spotter · IDs animals, breeds, and wildlife with light trivia.
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/07-identity-known/07c-sight-seeker/">
+                    #07c – Sight Seeker · Recognizes scenery, landmarks, and constellations.
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/07-identity-known/07d-snap-decoder/">
+                    #07d – Snap Decoder · Interprets screenshots, quotes, and error messages.
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07e-motif-muse/">
+                    #07e – Motif Muse · Extracts color palettes, motifs, and design patterns.
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07f-maker-matcher/">
+                    #07f – Maker Matcher · Names crafts, tools, and creative hobbies.
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/07-identity-known/07g-self-fixer/">
+                    #07g – Self Fixer · Identifies mystery objects, broken parts, and DIY bits.
                   </a>
                 </li>
               </ul>
@@ -320,8 +327,7 @@
             <article class="card">
               <h3>Back to the Toolbox</h3>
               <p>
-                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
-                your next Tool or Tool‑ette.
+                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose your next Tool or Tool‑ette.
               </p>
               <p>
                 <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
@@ -331,7 +337,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">
