@@ -2,128 +2,120 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Maven Wise — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Maven Wise is a gentle midlife &amp; hormonal‑change companion GPT that helps you track symptoms, spot patterns, and prepare better conversations with your real‑world care team." />
+    <meta name="keywords" content="Glee-fully, personalizable tools, custom GPT, midlife support, hormonal change, perimenopause, menopause, symptom tracking, health management, wellness companion" />
+    <meta name="author" content="Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#111827" />
+    <meta property="og:title" content="Maven Wise — Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta property="og:description" content="Midlife &amp; hormonal‑change support GPT for perimenopause, menopause, and beyond—track symptoms, see patterns, and bring clearer stories to your care team." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <!-- Shared theme + typography -->
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
+      <!-- HERO: Maven Wise, launch button, quick pitch -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
 
         <div class="hero-inner container">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
-                </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
-                <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
-                </p>
+            <!-- PAPER CARD WRAPPER -->
+            <article class="glee-hero-card reveal-on-scroll">
+              <!-- Breadcrumb-style context -->
+              <p class="eyebrow">
+                Tool‑ette · Twig in
+                <a href="/toolbox/06-healthy-bee-ing/">Healthy Bee-ing</a>
+              </p>
+              <h1 id="hero-title">Maven Wise</h1>
+              <p class="hero-subtitle">
+                Midlife &amp; hormonal‑change support that turns “something’s off” into patterns you can actually work with.
+              </p>
+              <p class="hero-tagline">
+                Maven Wise is a calm, midlife‑savvy GPT built for perimenopause, menopause, and other hormonal shifts that rarely fit into a neat app.
+                You log symptoms, cycles, sleep, mood, and energy in plain language; it organizes everything into timelines, patterns, and gentle lifestyle ideas.
+                It’s not a doctor—it’s the wise friend who helps you remember what your body’s been trying to say.
+              </p>
 
-                <div class="hero-actions">
-                  <!-- Highlighted launch button – update href to this custom GPT URL -->
-                  <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
-                    class="btn btn-primary"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
-                  </a>
+              <div class="hero-actions">
+                <!-- Highlighted launch button – custom GPT URL -->
+                <a
+                  href="https://chatgpt.com/g/g-68b5056858dc8191a8021e8a66cbc91f-maven-wise"
+                  class="btn btn-primary"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Launch “Maven Wise” in ChatGPT
+                </a>
 
-                  <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
-                  </a>
-                </div>
-                <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
-                </p>
-              </article>
-
-            </div>
+                <!-- Optional secondary action back to parent Tool page -->
+                <a href="/toolbox/06-healthy-bee-ing/" class="btn btn-quiet">
+                  Back to Healthy Bee-ing
+                </a>
+              </div>
+              <p class="note-small">
+                Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files handy—and always alongside real‑world medical care.
+              </p>
+            </article>
 
             <div class="hero-visual reveal-on-scroll" aria-hidden="true">
-              <!-- Swap this with a GPT-specific illustration if you’d like -->
+              <!-- GPT-specific illustration hook -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Maven Wise"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -140,7 +132,7 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              A grounded midlife companion: track symptoms, spot trends, and bring a clearer story to your real‑world care team.
             </p>
           </header>
 
@@ -148,24 +140,24 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Maven Wise helps you make sense of midlife hormonal changes—perimenopause, menopause, and similar transitions—without turning your life into a science project.
+                It gathers your scattered notes about hot flashes, sleep issues, brain fog, mood swings, and energy dips into a simple, readable picture over time.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Best for people in their late 30s through 50s who feel their body is changing but don’t want to live inside a medical forum to understand it.
+                It’s especially helpful if you’re juggling work, caregiving, and everything else while your hormones are shifting and you need one place to keep an honest, stigma‑free record.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                You bring quick daily check‑ins, symptom notes, cycle details (if relevant), meds or supplements you’re trying, and any big life factors like stress, travel, or schedule changes.
+                Maven Wise returns structured logs, simple summaries, appointment‑ready recaps, and suggestions for questions to ask your doctor—all clearly framed as information, not diagnosis or treatment.
               </p>
             </article>
           </div>
@@ -178,22 +170,34 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              The specific ways Maven Wise supports midlife &amp; hormonal change—cycle tracking, energy journaling, and kinder lifestyle choices.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>🌸 FUNCTION⚙️ (🍃Leaf) – Cycle &amp; symptom tracking:</strong>
+              Log cycles, hot flashes, night sweats, sleep shifts, and other symptoms in your own words, and Maven Wise organizes them into a simple timeline so you can see how things change week to week.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>⚡ FUNCTION⚙️ (🍃Leaf) – Energy‑level journal:</strong>
+              Track your daily energy, mood, and focus alongside context like stress, movement, and food so you can plan big days around your real capacity instead of pretending you’re at 100% every day.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>🍵 FUNCTION⚙️ (🍃Leaf) – Lifestyle ideas &amp; micro‑adjustments:</strong>
+              Generates gentle, low‑pressure ideas—hydration, rest, light exercise, cooling strategies, and routine tweaks—tailored to the patterns you’ve logged, never as one‑size‑fits‑all prescriptions.
+            </li>
+            <li>
+              <strong>📈 FUNCTION⚙️ (🍃Leaf) – Symptom pattern views:</strong>
+              Turns raw entries into easy‑to‑scan tables and trend descriptions so you can quickly spot spikes, lulls, and likely triggers, and bring those patterns into future appointments.
+            </li>
+            <li>
+              <strong>📖 FUNCTION⚙️ (🍃Leaf) – Short, plain‑language explainers:</strong>
+              Offers brief educational snippets about common midlife hormonal changes and terms you’ll hear, always with reminders to check anything worrying or confusing with a licensed clinician.
+            </li>
+            <li>
+              <strong>💬 FUNCTION⚙️ (🍃Leaf) – Story prompts &amp; reflection:</strong>
+              Provides prompts that help you tell your story—what’s changing, how it feels, and what you want from support—reducing shame and making hard conversations with partners or providers easier to start.
             </li>
           </ul>
         </div>
@@ -205,7 +209,7 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              Maven Wise is pre‑tuned for midlife &amp; hormonal change, connected to its sibling Tool‑ettes, and built for reusable, export‑friendly workflows.
             </p>
           </header>
 
@@ -213,22 +217,25 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Maven Wise is tuned specifically for midlife and hormonal change—not generic wellness chatter.
+                It arrives already briefed on perimenopause and menopause patterns, a validating, stigma‑free tone, and clear boundaries around medical advice,
+                so it focuses on tracking, reflection, and preparation instead of pretending to be your doctor.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                Maven Wise knows it lives inside the Healthy Bee‑ing branch.
+                It can point you toward Care Check when something feels urgent, coordinate with Medi Minder when meds or supplements enter the picture,
+                and lean on Moody Log when emotional patterns matter.
+                Everything stays within the same trunk‑branch‑twig‑leaf structure, so the whole hive feels coherent instead of like disconnected chats.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                You get reusable check‑in templates, weekly review formats, and appointment‑prep outlines you can return to again and again.
+                Outputs are easy to copy into your notes app, journal, or patient portal, so your history lives in one place instead of vanishing into one‑off conversations.
               </p>
             </article>
           </div>
@@ -241,40 +248,38 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              Take your first step with Maven Wise in under a minute—no perfect data, no spreadsheets required.
             </p>
           </header>
 
           <ol>
             <li>
-              <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              <strong>Step 1 – Share your stage.</strong>
+              Tell Maven Wise your age range, whether you’re in perimenopause, menopause, or “not sure yet,” and what’s currently bugging you most.
             </li>
             <li>
-              <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              <strong>Step 2 – Paste what you already have.</strong>
+              Drop in recent notes, calendar entries, tracking‑app exports, or even a quick list from memory—Maven Wise will help convert that into a structured log.
             </li>
             <li>
-              <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              <strong>Step 3 – Pick today’s focus.</strong>
+              Say what you want right now: “Set up a daily check‑in,” “Spot patterns from the last month,” or “Help me prep for my next appointment.”
             </li>
             <li>
-              <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              <strong>Step 4 – Save your snapshot.</strong>
+              Copy the log, summary, or question list into your notebook, notes app, or portal message so that each session builds on the last instead of starting from scratch.
             </li>
           </ol>
         </div>
       </section>
 
-      <!-- ECOSYSTEM: PARENT TOOL + SIBLING TOOL‑ETTES -->
+      <!-- ECOSYSTEM: WHERE THIS TOOL-ETTE LIVES -->
       <section class="section content-section">
         <div class="container reveal-on-scroll">
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              Maven Wise is one twig on the Healthy Bee‑ing branch—designed to work alongside its sibling Tool‑ettes and the wider Glee‑fully ecosystem.
             </p>
           </header>
 
@@ -283,12 +288,13 @@
             <article class="card">
               <h3>Parent Tool (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                <strong>Glee‑fully Healthy Bee-ing</strong> is the wellness hive of the suite—six twigs working together to bring more clarity to everyday health.
+                From symptom check‑ins to stress tracking, food awareness to medication reminders, it’s designed to replace worry with reassurance and confusion with confidence.
+                Maven Wise is its midlife sage, helping you see your hormonal story more clearly.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/06-healthy-bee-ing/" class="btn btn-quiet">
+                  Visit Healthy Bee-ing
                 </a>
               </p>
             </article>
@@ -296,21 +302,34 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>
+                On this branch, Maven Wise works alongside other health‑first Tool‑ettes that handle urgency, stress, food, meds, and mood.
+                They’re designed to play nicely together so you’re never stuck wondering where to go next.
+              </p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/06-healthy-bee-ing/06a-care-check/">
+                    Care Check · symptom triage &amp; “is this urgent?” clarity 🩺
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/06-healthy-bee-ing/06b-calm-keep/">
+                    Calm Keep · stress, sleep, and micro‑movement balance 😌
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/06-healthy-bee-ing/06c-snappy-count/">
+                    Snappy Count · quick photo‑based nutrition awareness 🍽️
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/06-healthy-bee-ing/06d-medi-minder/">
+                    Medi Minder · medication, refill, and appointment tracking 💊
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/06-healthy-bee-ing/06e-moody-log/">
+                    Moody Log · hydration, mood, and reflection timeline 💧🌙
                   </a>
                 </li>
               </ul>
@@ -320,18 +339,19 @@
             <article class="card">
               <h3>Back to the Toolbox</h3>
               <p>
-                Ready to explore another branch? Jump back to the full Glee‑fully suite and choose
-                your next Tool or Tool‑ette.
+                Ready to explore another branch?
+                Jump back to the full Glee‑fully suite and choose whatever part of life needs backup next—careers, travel, organizing, identity, or something else entirely.
               </p>
               <p>
-                <a href="/toolbox/" class="btn btn-quiet">Open the Toolbox</a>
+                <a href="/toolbox/" class="btn btn-quiet">
+                  Open the Toolbox
+                </a>
               </p>
             </article>
           </div>
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">
