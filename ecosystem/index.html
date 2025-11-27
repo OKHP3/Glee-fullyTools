@@ -2,51 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Toolbox Ecosystem — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <title>Ecosystem — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Visual ecosystem map of the Glee‑fully Toolbox — from the main trunk GPT through seven Tools (branches) and their Tool‑ettes (twigs)."
-    />
-    <meta property="og:title" content="Toolbox Ecosystem — Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
-    <meta
-      property="og:description"
-      content="See how the Glee‑fully Toolbox trunk, seven Tools, and dozens of Tool‑ettes connect across your life."
-    />
+    <meta name="description" content="Visual ecosystem map of the Glee‑fully Toolbox — from the main trunk GPT through seven Tools (branches) and their Tool‑ettes (twigs)." />
+    <meta property="og:title" content="Ecosystem — Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta property="og:description" content="Visual ecosystem map of the Glee‑fully Toolbox — from the main trunk GPT through seven Tools (branches) and their Tool‑ettes (twigs)." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/ecosystem/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="icon" href="assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="manifest" href="site.webmanifest" />
 
-    <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-16x16.png"
-      sizes="16x16"
-      type="image/png"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="/assets/img/favicons/apple-touch-icon.png"
-      sizes="180x180"
-      type="image/png"
-    />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- Local layout for the Mermaid container so it feels like part of the hero card -->
     <style>
@@ -75,31 +47,39 @@
   </head>
 
   <body class="glee-main">
-    <a href="/#main" class="skip-link">Skip to content</a>
+    <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
             <li><a href="/toolbox/">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/" aria-current="page">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
