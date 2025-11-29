@@ -2,118 +2,102 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>[TOOL-ETTE NAME] — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1"
-    />
-    <meta
-      name="description"
-      content="Short, search‑friendly description of this specific Glee‑fully Tool‑ette GPT."
-    />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="[TOOL-ETTE NAME] — Glee‑fully Personalizable Tool™" />
-    <meta
-      property="og:description"
-      content="Short sentence pitching what this Tool‑ette GPT is for and who it helps."
-    />
+    <title>Thrifty Spender — Glee&#8209;fully Personalizable Tools™ 🧰🌳</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Thrifty Spender is a Glee‑fully custom GPT that keeps your bills, budgets, and spending habits in one place so you can stay ahead of due dates." />
+    <meta property="og:title" content="Thrifty Spender — Glee‑fully Personalizable Tool™" />
+    <meta property="og:description" content="Track recurring bills, build simple budgets, and get calm spending insights inside the Glee‑fully Organized Life branch of your personal toolbox." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://glee-fully.tools/toolbox/tool/tool-ette/" />
-    <meta
-      property="og:image"
-      content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-    />
-
-    <!-- Shared theme + typography -->
+    <meta property="og:url" content="https://glee-fully.tools/" />
+    <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
     <link rel="stylesheet" href="/assets/css/theme.css" />
-    <link
-      rel="icon"
-      href="/assets/img/favicons/favicon-32x32.png"
-      sizes="32x32"
-      type="image/png"
-    />
+    <link rel="icon" href="/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
+    <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Glee‑fully typography: Fredoka (headings), Poppins (subheadings), Open Sans (body), DM Sans (accent) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Glee-fully typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body class="glee-main">
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="site-header">
+    <header class="site-header" id="top">
       <div class="container">
         <div class="logo">
-          <img
-            src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png"
-            alt="Glee-fully logo"
-            width="40"
-            height="40"
-          />
-          <span class="brand">Glee‑fully</span>
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
         </div>
-        <nav class="primary-nav" id="navigation">
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
-            <li><a href="/#why">Why Glee‑fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
             <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
-            <li><a href="/universe/">OKHP³™ Universe</a></li>
-            <li><a href="/about/">About Us</a></li>
-            <li><a href="/contact/">Contact</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
+
         <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
           <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
-      <section class="hero glee-hero" aria-labelledby="hero-title">
-        <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
-        <div class="glee-glow" aria-hidden="true"></div>
-
-        <div class="hero-inner container">
+      <!-- HERO: Thrifty Spender, launch button, quick pitch -->
+      <section class="section hero-section">
+        <div class="container">
           <div class="hero-grid">
+            <div class="hero-copy">
               <!-- PAPER CARD WRAPPER -->
               <article class="glee-hero-card reveal-on-scroll">
                 <!-- Breadcrumb-style context -->
                 <p class="eyebrow">
                   Tool‑ette · Twig in
-                  <a href="/toolbox/tool/">Parent Tool Name</a>
+                  <a href="/toolbox/05-organized-life/">Glee‑fully Organized Life</a>
                 </p>
-                <h1>[TOOL-ETTE NAME]</h1>
-                <p class="hero-subtitle">Short, personality‑rich tagline for this GPT.</p>
+                <h1>Thrifty Spender</h1>
+                <p class="hero-subtitle">A calm, practical money buddy that keeps your bills and budget on one page.</p>
                 <p class="hero-tagline">
-                  2–3 sentence elevator pitch explaining what this Tool‑ette does, who it’s for,
-                  and how it makes life easier inside the Glee‑fully Toolbox.
+                  Thrifty Spender helps you see where your money actually goes, without needing a complicated app or spreadsheet.
+                  Log your recurring bills, sketch a simple monthly budget, and spot patterns in your spending so you can make clearer, calmer decisions.
                 </p>
 
                 <div class="hero-actions">
                   <!-- Highlighted launch button – update href to this custom GPT URL -->
                   <a
-                    href="https://chatgpt.com/g/YOUR-GPT-ID-HERE"
+                    href="https://chatgpt.com/g/g-685ef48bfc808191b4414bace0810239-thrifty-spender-by-glee-fully"
                     class="btn btn-primary"
                     target="_blank"
                     rel="noopener"
                   >
-                    Launch “[TOOL-ETTE NAME]” in ChatGPT
+                    Launch “Thrifty Spender” in ChatGPT
                   </a>
 
                   <!-- Optional secondary action back to parent Tool page -->
-                  <a href="/toolbox/tool/" class="btn btn-quiet">
-                    Back to Parent Tool Name
+                  <a href="/toolbox/05-organized-life/" class="btn btn-quiet">
+                    Back to Glee‑fully Organized Life
                   </a>
                 </div>
                 <p class="note-small">
-                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files
-                  handy.
+                  Opens in ChatGPT in a new tab. Best experienced with your notes, lists, or files handy.
                 </p>
               </article>
 
@@ -123,7 +107,7 @@
               <!-- Swap this with a GPT-specific illustration if you’d like -->
               <img
                 src="/assets/img/Glee-fullyTools%20ButterflyLoopLeft%20Wide%201536.png"
-                alt="Illustration representing [TOOL-ETTE NAME]"
+                alt="Illustration representing Thrifty Spender"
                 class="glee-hero-img"
                 loading="lazy"
                 width="1536"
@@ -140,7 +124,7 @@
           <header class="section-header">
             <h2 class="section-title">What this Tool‑ette does</h2>
             <p class="section-subtitle">
-              Give a clear, high‑level overview of this GPT’s purpose and the problems it solves.
+              A quick snapshot of how Thrifty Spender helps you see, plan, and steady your everyday spending.
             </p>
           </header>
 
@@ -148,24 +132,24 @@
             <article class="card">
               <h3>Core purpose</h3>
               <p>
-                One short paragraph explaining the main job of this GPT
-                (e.g., “Helps you build and maintain a structured inventory of…”).
+                Thrifty Spender keeps your recurring bills, budgets, and everyday spending patterns in one neat place.
+                It turns scattered charges into a simple monthly view so you can see what’s due, what changed, and what needs attention.
               </p>
             </article>
 
             <article class="card">
               <h3>Best for</h3>
               <p>
-                Describe ideal users or scenarios:
-                “Great for…”, “Perfect when you need…”, “Especially helpful if…”.
+                Ideal for busy adults who want to feel on top of money without becoming full‑time budget nerds.
+                Great when you’re juggling subscriptions, family expenses, or just trying to stop saying “where did it all go?” at the end of the month.
               </p>
             </article>
 
             <article class="card">
               <h3>Inputs &amp; outputs</h3>
               <p>
-                Explain what users bring in (text, lists, uploads, prompts) and what comes out
-                (plans, logs, exports, checklists, etc.).
+                Bring in whatever you have — a quick list of bills, pasted transactions, or a basic export from your bank or spreadsheet.
+                Thrifty Spender turns that into clean tables, category summaries, reminders, and budget snapshots you can reuse or save.
               </p>
             </article>
           </div>
@@ -178,22 +162,34 @@
           <header class="section-header">
             <h2 class="section-title">Core functions (Leaves)</h2>
             <p class="section-subtitle">
-              Highlight the concrete actions this GPT can take on the user’s behalf.
+              The core money jobs Thrifty Spender can handle for you, so you’re not juggling everything in your head.
             </p>
           </header>
 
           <ul>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              One sentence about what this function does and why it’s helpful.
+              <strong>💸 FUNCTION⚙️ (🍃Leaf): Log recurring bills and due dates.</strong>
+              List out your rent or mortgage, utilities, subscriptions, and any other repeating charges so nothing slips through the cracks.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Another specific function (log, analyze, export, transform, etc.).
+              <strong>📊 FUNCTION⚙️ (🍃Leaf): Track spending against monthly budgets.</strong>
+              Set simple targets by category, then see how your real‑world spending compares as the month rolls along.
             </li>
             <li>
-              <strong>FUNCTION⚙️ (🍃Leaf) – Name:</strong>
-              Add as many list items as needed to cover the most important capabilities.
+              <strong>🔔 FUNCTION⚙️ (🍃Leaf): Get reminders for upcoming or missed payments.</strong>
+              Ask Thrifty Spender to highlight what’s due soon, what’s late, and which bills jumped more than usual.
+            </li>
+            <li>
+              <strong>🧾 FUNCTION⚙️ (🍃Leaf): Break down spending by category.</strong>
+              Group charges into everyday buckets like groceries, utilities, fun, and family so you can spot where to trim — without judgment.
+            </li>
+            <li>
+              <strong>📅 FUNCTION⚙️ (🍃Leaf): View trends over time.</strong>
+              Compare this month to last month (or last year) to see whether your spending is drifting up, down, or holding steady.
+            </li>
+            <li>
+              <strong>📥 FUNCTION⚙️ (🍃Leaf): Export summaries for other tools.</strong>
+              Turn your results into tidy tables you can copy into spreadsheets, budgeting apps, or your own personal finance system.
             </li>
           </ul>
         </div>
@@ -205,7 +201,7 @@
           <header class="section-header">
             <h2 class="section-title">Why use this instead of vanilla ChatGPT?</h2>
             <p class="section-subtitle">
-              Spell out how this Tool‑ette is smarter, kinder, or more structured than a blank chat.
+              Why a pre‑tuned money Tool‑ette beats starting from a blank chat when you’re dealing with real‑life bills.
             </p>
           </header>
 
@@ -213,22 +209,22 @@
             <article class="card">
               <h3>Pre‑tuned brain</h3>
               <p>
-                Describe the custom instructions, schema, tone, and safeguards baked into this GPT
-                so users don’t have to re‑explain themselves every time.
+                Thrifty Spender comes pre‑loaded with budgeting logic, bill‑tracking prompts, and friendly guardrails.
+                It already understands recurring bills, one‑time charges, and categories, so you’re not rebuilding your system every time you open a new chat.
               </p>
             </article>
             <article class="card">
               <h3>Suite‑aware &amp; ecosystem‑ready</h3>
               <p>
-                Explain how this GPT understands its parent Tool, sibling Tool‑ettes, and the
-                trunk‑branch‑twig‑leaf structure of the Glee‑fully Toolbox.
+                It knows it lives on the Glee‑fully Organized Life branch, alongside tools for tasks, calendars, gifting, and dashboards.
+                That means it can align with Task Maestro, Scheduling Wizard, and Lifestyle Wallboard so your money picture lines up with your time and priorities.
               </p>
             </article>
             <article class="card">
               <h3>Repeatable, export‑friendly workflows</h3>
               <p>
-                Call out templates, checklists, logs, or export flows that make results reusable
-                instead of one‑off responses.
+                Budgets, bill logs, and category breakdowns are built as reusable views — monthly snapshots, reminder lists, and export‑ready tables.
+                You can rerun the same flow each month and simply update the numbers instead of reinventing your whole setup.
               </p>
             </article>
           </div>
@@ -241,27 +237,26 @@
           <header class="section-header">
             <h2 class="section-title">Getting started</h2>
             <p class="section-subtitle">
-              Help users take their first step in under a minute.
+              A simple four‑step path to get your first month of bills and budgets into view.
             </p>
           </header>
 
           <ol>
             <li>
               <strong>Step 1 – Arrive with something small.</strong>
-              Suggest an easy first use case (one list, one trip, one project, etc.).
+              Start with one month of activity — your latest statement, or a simple list of the bills you remember off the top of your head.
             </li>
             <li>
               <strong>Step 2 – Paste or upload.</strong>
-              Explain how to bring existing notes, docs, or data into the conversation.
+              Paste your transactions or bill list directly into the chat, or upload a basic export/CSV. Thrifty Spender will do the sorting and grouping for you.
             </li>
             <li>
               <strong>Step 3 – Choose a path.</strong>
-              Offer 2–3 starting prompts or “modes” this GPT can run (e.g., organize, analyze,
-              export).
+              Tell it what you want to do: “Set up my monthly bills,” “Build a starter budget by category,” or “Show me where most of my money went last month.”
             </li>
             <li>
               <strong>Step 4 – Save what matters.</strong>
-              Nudge users to download, copy, or save the outputs somewhere they’ll reuse them.
+              Save the bill log or budget view you like — copy it into your budgeting app or notes, or export the table so you can update it next month in a few clicks.
             </li>
           </ol>
         </div>
@@ -273,22 +268,21 @@
           <header class="section-header">
             <h2 class="section-title">Where it lives in the Glee‑fully Toolbox</h2>
             <p class="section-subtitle">
-              Connect this Tool‑ette to its parent Tool, sibling Tool‑ettes, and the wider
-              Toolbox so users always know where to go next.
+              See how Thrifty Spender fits inside Glee‑fully Organized Life, and which Tool‑ettes to visit when you’re ready for the next layer of support.
             </p>
           </header>
 
           <div class="grid grid-3">
             <!-- Parent Tool card -->
             <article class="card">
-              <h3>Parent Tool (Branch)</h3>
+              <h3>Glee‑fully Organized Life (Branch)</h3>
               <p>
-                One‑sentence description of the parent Tool — what category it covers and how it
-                groups its Tool‑ettes.
+                This branch organizes your everyday life with joy — from to‑dos and schedules to budgets and gifting.
+                It groups together practical, lightweight Tool‑ettes that help you see your time, money, and commitments in one connected ecosystem.
               </p>
               <p>
-                <a href="/toolbox/tool/" class="btn btn-quiet">
-                  Visit Parent Tool Name
+                <a href="/toolbox/05-organized-life/" class="btn btn-quiet">
+                  Visit Glee‑fully Organized Life
                 </a>
               </p>
             </article>
@@ -296,21 +290,31 @@
             <!-- Sibling Tool‑ettes -->
             <article class="card">
               <h3>Sibling Tool‑ettes</h3>
-              <p>Link to the other Tool‑ettes that live on this same branch.</p>
+              <p>The rest of the Glee‑fully Organized Life branch lives right alongside Thrifty Spender.</p>
               <ul class="link-list">
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-1/">
-                    Sibling Tool‑ette #1
+                  <a href="/toolbox/05-organized-life/05a-task-maestro/">
+                    Task Maestro — your smarter to‑do and reminder system
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-2/">
-                    Sibling Tool‑ette #2
+                  <a href="/toolbox/05-organized-life/05c-giftlist-helper/">
+                    Giftlist Helper — remember who you’re gifting, and when
                   </a>
                 </li>
                 <li>
-                  <a href="/toolbox/tool/sibling-tool-ette-3/">
-                    Sibling Tool‑ette #3
+                  <a href="/toolbox/05-organized-life/05d-scheduling-wizard/">
+                    Scheduling Wizard — align calendars, commitments, and energy
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/05-organized-life/05e-lifestyle-wallboard/">
+                    Lifestyle Wallboard — see your life at a glance, not just your calendar
+                  </a>
+                </li>
+                <li>
+                  <a href="/toolbox/05-organized-life/05f-neighborly-bazaar/">
+                    Neighborly Bazaar — organize local swaps, sales, and shared stuff
                   </a>
                 </li>
               </ul>
@@ -331,7 +335,6 @@
         </div>
       </section>
     </main>
-
 
     <footer class="site-footer">
       <div class="container footer-grid">
