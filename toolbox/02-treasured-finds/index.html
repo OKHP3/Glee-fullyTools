@@ -62,24 +62,29 @@
           </ul>
         </nav>
 
-        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
+
       </div>
     </header>
 
     <main id="main">
-      <!-- Hero -->
-      <section class="hero">
+      <!-- HERO: TOOL OVERVIEW + PRIMARY CTA -->
+      <section class="hero glee-hero" aria-labelledby="hero-title">
         <div
           class="brand-stripes brand-stripes--glee"
           aria-hidden="true"
         ></div>
-        <div class="hero-inner container">
+        <div class="glee-glow" aria-hidden="true"></div>
+
+        <div class="container hero-inner reveal-on-scroll">
           <div class="hero-grid">
-            <div class="hero-copy">
-              <p class="hero-eyebrow">
+            <!-- 🔸 PAPER CARD -->
+            <article class="glee-hero-card">
+              <div>
+                <p class="eyebrow h-accent">
                 Tool · Branch · #02 — Glee‑fully Personalizable Tools™
               </p>
               <h1>Glee‑fully Treasured Finds</h1>
