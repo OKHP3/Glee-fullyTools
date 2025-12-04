@@ -21,22 +21,67 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
 
-  <main id="main">
-      <!-- HERO: Supply Haus, launch button, quick pitch -->
+  <body class="glee-main">
+    <a href="/#main" class="skip-link">Skip to content</a>
+
+    <header class="site-header" id="top">
+      <div class="container">
+        <div class="logo">
+          <a href="/" aria-label="Glee‑fully home">
+            <img src="/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" alt="Glee‑fully logo" width="40" height="40" />
+          </a>
+          <span class="brand">Glee&#8209;fully</span>
+        </div>
+
+        <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
+          <ul>
+            <li><a href="/#why">Why Glee&#8209;fully</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
+            <li><a href="/ecosystem/">Our Ecosystem</a></li>
+            <li><a href="/persona/">The Voice &amp; Muse</a></li>
+
+            <!-- About cluster: Universe / About / Contact / Legal -->
+            <li class="has-submenu">
+              <a href="/about/">About</a>
+              <ul class="submenu" aria-label="About menu">
+                <li><a href="/universe/">OKHP³™ Universe</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+                <li><a href="/legal/">Legal</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+
+      </div>
+      <section class="site-specials site-specials--glee" aria-label="Featured Glee‑fully tool">
+        <span class="site-specials-label">Today’s Sparkle</span>
+        <a class="site-specials-link" href="/toolbox/05-organized-life/05f-neighborly-bazaar/">
+          🔦 Neighborly Bazaar GPT —  helps you evaluate, price, and re‑home household items with Glee 💫
+        </a>
+      </section>
+
+    </header>
+
+    <main id="main">
+      <!-- HERO: TOOL OVERVIEW + PRIMARY CTA -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
-
-        <div class="hero-inner container">
+        <div class="container hero-inner reveal-on-scroll">
           <div class="hero-grid">
-            <!-- PAPER CARD WRAPPER -->
-            <article class="glee-hero-card reveal-on-scroll">
-              <!-- Breadcrumb-style context -->
-              <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/02-treasured-finds/">Glee‑fully Treasured Finds</a>
+            <!-- 🔸 PAPER CARD -->
+            <article class="glee-hero-card">
+              <div>
+                <p class="eyebrow h-accent">
+                <a href="/ecosystem/">🌍 Ecosystem</a> · <a href="/toolbox/02-treasured-finds/">🪚 Tool #02 – Treasured Finds</a>
                 </p>
-              <h1>Supply Haus</h1>
+                <h1 id="hero-title">Supply Haus</h1>
               <p class="hero-subtitle">A calm, crafty home base for tracking every ribbon, bottle, and bin.</p>
               <p class="hero-tagline">
                   The craft‑supply brain you wish your junk drawer had. Supply Haus keeps a living inventory of everything from glitter and glue sticks to backup tape, tools, and kits, so you always know what you’ve got, what’s low, and what needs to go on the next supply run.

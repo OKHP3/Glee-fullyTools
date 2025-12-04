@@ -22,7 +22,7 @@
   </head>
 
   <body class="glee-main">
-    <a href="#main" class="skip-link">Skip to content</a>
+    <a href="/#main" class="skip-link">Skip to content</a>
 
     <header class="site-header" id="top">
       <div class="container">
@@ -53,27 +53,33 @@
           </ul>
         </nav>
 
-        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
+
       </div>
+      <section class="site-specials site-specials--glee" aria-label="Featured Glee‑fully tool">
+        <span class="site-specials-label">Today’s Sparkle</span>
+        <a class="site-specials-link" href="/toolbox/05-organized-life/05f-neighborly-bazaar/">
+          🔦 Neighborly Bazaar GPT —  helps you evaluate, price, and re‑home household items with Glee 💫
+        </a>
+      </section>
+
     </header>
 
     <main id="main">
-      <!-- HERO: [TOOL-ETTE NAME], launch button, quick pitch -->
+      <!-- HERO: TOOL OVERVIEW + PRIMARY CTA -->
       <section class="hero glee-hero" aria-labelledby="hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
-
-        <div class="hero-inner container">
+        <div class="container hero-inner reveal-on-scroll">
           <div class="hero-grid">
-              <!-- PAPER CARD WRAPPER -->
-              <article class="glee-hero-card reveal-on-scroll">
-                <!-- Breadcrumb-style context -->
-                <p class="eyebrow">
-                  Tool‑ette · Twig in
-                  <a href="/toolbox/06-healthy-bee-ing/">Glee‑fully Healthy Bee‑ing</a>
+            <!-- 🔸 PAPER CARD -->
+            <article class="glee-hero-card">
+              <div>
+                <p class="eyebrow h-accent">
+                <a href="/ecosystem/">🌍 Ecosystem</a> · <a href="/toolbox/06/">🪚 Tool #06 – Healthy Bee‑ing</a>
                 </p>
                 <h1 id="hero-title">Care Check 🩺</h1>
                 <p class="hero-subtitle">A calm, plain‑language symptom check‑in before you spiral into late‑night searches.</p>

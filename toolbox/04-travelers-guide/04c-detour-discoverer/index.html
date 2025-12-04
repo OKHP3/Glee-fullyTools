@@ -22,7 +22,7 @@
   </head>
 
   <body class="glee-main">
-    <a href="#main" class="skip-link">Skip to content</a>
+    <a href="/#main" class="skip-link">Skip to content</a>
 
     <header class="site-header" id="top">
       <div class="container">
@@ -53,20 +53,35 @@
           </ul>
         </nav>
 
-        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
+
       </div>
+      <section class="site-specials site-specials--glee" aria-label="Featured Glee‑fully tool">
+        <span class="site-specials-label">Today’s Sparkle</span>
+        <a class="site-specials-link" href="/toolbox/05-organized-life/05f-neighborly-bazaar/">
+          🔦 Neighborly Bazaar GPT —  helps you evaluate, price, and re‑home household items with Glee 💫
+        </a>
+      </section>
+
     </header>
 
     <main id="main">
-      <!-- HERO: Detour Discoverer overview -->
-      <section class="hero content-section" aria-labelledby="hero-title">
-        <div class="container reveal-on-scroll">
-          <header class="section-header">
-            <p class="eyebrow h-accent">Traveler’s Guide · Tool‑ette · #04c</p>
-            <h1 id="hero-title">Detour Discoverer</h1>
+      <!-- HERO: TOOL OVERVIEW + PRIMARY CTA -->
+      <section class="hero glee-hero" aria-labelledby="hero-title">
+        <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
+        <div class="glee-glow" aria-hidden="true"></div>
+        <div class="container hero-inner reveal-on-scroll">
+          <div class="hero-grid">
+            <!-- 🔸 PAPER CARD -->
+            <article class="glee-hero-card">
+              <div>
+                <p class="eyebrow h-accent">
+                <a href="/ecosystem/">🌍 Ecosystem</a> · <a href="/toolbox/04-travelers-guide/">🪚 Tool #04 – Traveler’s Guide</a>
+                </p>
+                <h1 id="hero-title">Detour Discoverer</h1>
             <p class="hero-subtitle">
               Find the side trips that make the story — without blowing up your route, your time,
               or your energy.
