@@ -74,7 +74,7 @@
       }
       
       /* Put this in the <style> block or theme.css */
-.glee‑mermaid‑shell--mini {
+      .glee‑mermaid‑shell--mini {
         margin-top: 1rem;
         width: 100%;
         max-width: 100%;
@@ -87,6 +87,22 @@
         background: var(--color-surface);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
         overflow-x: auto;            /* allows long diagrams to scroll on mobile */
+      }
+
+      /* Compact wrapper for branch diagrams */
+      .glee-mermaid-shell--mini {
+        margin-top: 1rem;
+        width: 100%;
+        max-width: 100%;
+      }
+      .glee-mermaid-shell--mini .mermaid {
+        width: 100%;
+        min-height: 12rem;
+        padding: 0.75rem 0.9rem;
+        border-radius: 1rem;
+        background: var(--color-surface);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+        overflow-x: auto;  /* allows wide diagrams to scroll on mobile */
       }
 
     </style>
