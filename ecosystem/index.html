@@ -10,16 +10,22 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://glee-fully.tools/" />
     <meta property="og:image" content="https://glee-fully.tools/assets/img/Glee-fullyTools%20ButterflyWaiting%20Square%201024.png" />
+    <link rel="canonical" href="https://glee-fully.tools/" />
     <link rel="stylesheet" href="/assets/css/theme.css" />
     <link rel="icon" href="/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png" />
     <link rel="apple-touch-icon" href="/assets/img/favicons/apple-touch-icon.png" sizes="180x180" type="image/png" />
-    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Glee&#8209;fully Personalizable Tools™ 🧰🌳" />
+    <meta name="robots" content="index, follow" />
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Glee-fully typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  </head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" />
 
     <!-- Local layout for the Mermaid container so it feels like part of the hero card -->
     <style>
@@ -48,7 +54,7 @@
   </head>
 
   <body class="glee-main">
-    <a href="#main" class="skip-link">Skip to content</a>
+    <a href="/#main" class="skip-link">Skip to content</a>
 
     <header class="site-header" id="top">
       <div class="container">
@@ -62,8 +68,8 @@
         <nav class="primary-nav" id="navigation" aria-label="Primary navigation">
           <ul>
             <li><a href="/#why">Why Glee&#8209;fully</a></li>
-            <li><a href="/toolbox/">Opening The Toolbox</a></li>
-            <li><a href="/ecosystem/" aria-current="page">Our Ecosystem</a></li>
+            <li><a href="/toolbox/" aria-current="page">Opening The Toolbox</a></li>
+            <li><a href="/ecosystem/">Our Ecosystem</a></li>
             <li><a href="/persona/">The Voice &amp; Muse</a></li>
 
             <!-- About cluster: Universe / About / Contact / Legal -->
@@ -79,38 +85,59 @@
           </ul>
         </nav>
 
-        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        <button class="nav-toggle" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
+
       </div>
+      <section class="site-specials site-specials--glee" aria-label="Featured Glee‑fully tool">
+        <span class="site-specials-label">Today’s Sparkle</span>
+        <a class="site-specials-link" href="/toolbox/05-organized-life/05f-neighborly-bazaar/">
+          🔦 Neighborly Bazaar GPT —  helps you evaluate, price, and re‑home household items with Glee 💫
+        </a>
+      </section>
+
     </header>
 
     <main id="main">
-      <!-- HERO: Toolbox ecosystem map -->
+      <!-- HERO: TOOL OVERVIEW + PRIMARY CTA -->
       <section class="hero glee-hero" aria-labelledby="ecosystem-hero-title">
         <div class="brand-stripes brand-stripes--glee" aria-hidden="true"></div>
         <div class="glee-glow" aria-hidden="true"></div>
-
         <div class="container hero-inner reveal-on-scroll">
           <div class="hero-grid">
-            <div class="glee-hero-card">
-              <p class="hero-eyebrow">Toolbox ecosystem</p>
-              <h1 id="ecosystem-hero-title">The Glee‑fully Toolbox, at a glance.</h1>
-              <p class="hero-tagline">
-                One map for the whole suite — from the Glee‑fully Toolbox trunk to seven
-                category‑level Tools and their Tool‑ettes.
-              </p>
-              <p>
-                Use this as your “you are here” layer when you hop between GPTs,
-                Tool‑ettes, and future experiments across the Glee‑fully universe.
-              </p>
-              <div class="hero-actions">
-                <a href="/toolbox/" class="btn btn-primary">Look in the Box</a>
-                <a href="#branches" class="btn btn-quiet">Browse branches &amp; twigs</a>
-              </div>
-            </div>
+            <!-- 🔸 PAPER CARD -->
+            <article class="glee-hero-card">
+              <div>
+                <p class="eyebrow h-accent">
+                <a href="/universe/">🔭 OKHP³™ Universe</a> · <a href="/toolbox/">🧰 Toolbox #00</a>
+                </p>
+                <h1 id="ecosystem-hero-title">Glee‑fully Ecosystem Map</h1>
+                <p class="hero-tagline">
+                  Visual ecosystem map of the Glee‑fully Toolbox —
+                  from the main trunk GPT through seven Tools (branches)
+                  and their Tool‑ettes (twigs).
+                </p>
 
+                <div class="glee-hero-card">
+                  <p class="hero-eyebrow">Toolbox ecosystem</p>
+                  <h1 id="ecosystem-hero-title">The Glee‑fully Toolbox, at a glance.</h1>
+                  <p class="hero-tagline">
+                    One map for the whole suite — from the Glee‑fully Toolbox trunk to seven
+                    category‑level Tools and their Tool‑ettes.
+                  </p>
+                  <p>
+                    Use this as your “you are here” layer when you hop between GPTs,
+                    Tool‑ettes, and future experiments across the Glee‑fully universe.
+                  </p>
+                  <div class="hero-actions">
+                    <a href="/toolbox/" class="btn btn-primary">Look in the Box</a>
+                    <a href="#branches" class="btn btn-quiet">Browse branches &amp; twigs</a>
+                  </div>
+                </div>
+              </div>
+            </article>
             <div class="glee-hero-illustration">
               <figure class="glee-mermaid-shell" aria-label="Diagram of the Glee-fully Toolbox trunk and seven Tools">
                 <pre class="mermaid">
@@ -163,7 +190,7 @@
 
         <div class="grid grid-3">
           <article class="card">
-            <h3>Trunk 🌳 — The Toolbox</h3>
+            <h3 href="/toolbox/">Trunk 🌳 — The Toolbox</h3>
             <p>
               <strong>Glee‑fully Personalizable Tools</strong> is the command center.
               It introduces the structure, links to all seven Tools, and helps you
@@ -204,126 +231,126 @@
         <div class="grid grid-3">
           <!-- 01 Discovered Careers -->
           <article class="card">
-            <h3>#01 — Discovered Careers</h3>
+            <h3 href="/toolbox/01-discovered-careers/">#01 — Discovered Careers</h3>
             <p>
               Career clarity, search, and polish. This branch is your personal career studio:
               mapping options, tuning résumés, and getting you ready for your next move.
             </p>
             <h4>Tool‑ettes in this branch</h4>
             <ul class="feature-list">
-              <li>01a — Resume Builder</li>
-              <li>01b — Resume Customizer</li>
-              <li>01c — Career Fitness</li>
-              <li>01d — Letter Composer</li>
-              <li>01e — bLinkIn Tuner</li>
+              <li><a href="/toolbox/01-discovered-careers/01a-resume-builder/">01a — Resume Builder</a></li>
+              <li><a href="/toolbox/01-discovered-careers/01b-resume-customizer/">01b — Resume Customizer</a></li>
+              <li><a href="/toolbox/01-discovered-careers/01c-career-fitness/">01c — Career Fitness</a></li>
+              <li><a href="/toolbox/01-discovered-careers/01d-letter-composer/">01d — Letter Composer</a></li>
+              <li><a href="/toolbox/01-discovered-careers/01e-blinkin-tuner/">01e — bLinkIn Tuner</a></li>
               <li>01f — Career Seeker</li>
             </ul>
           </article>
 
           <!-- 02 Treasured Finds -->
           <article class="card">
-            <h3>#02 — Treasured Finds</h3>
+            <h3 href="/toolbox/02-treasured-finds/">#02 — Treasured Finds</h3>
             <p>
               Collections, keepsakes, and thoughtful gifting. This branch tracks the objects,
               spaces, and supplies that make your world feel like yours.
             </p>
             <h4>Tool‑ettes in this branch</h4>
             <ul class="feature-list">
-              <li>02a — Personal Librarian</li>
-              <li>02b — Decor Detective</li>
-              <li>02c — Present Hoarder</li>
-              <li>02d — Scentinal Journal</li>
-              <li>02e — Spirited Journal</li>
-              <li>02f — Supply Haus</li>
-              <li>02g — Bag Nabbit</li>
+              <li><a href="/toolbox/02-treasured-finds/02a-personal-librarian/">02a — Personal Librarian</a></li>
+              <li><a href="/toolbox/02-treasured-finds/02b-decor-detective/">02b — Decor Detective</a></li>
+              <li><a href="/toolbox/02-treasured-finds/02c-present-hoarder/">02c — Present Hoarder</a></li>
+              <li><a href="/toolbox/02-treasured-finds/02d-scentinal-journal/">02d — Scentinal Journal</a></li>
+              <li><a href="/toolbox/02-treasured-finds/02e-spirited-journal/">02e — Spirited Journal</a></li>
+              <li><a href="/toolbox/02-treasured-finds/02f-supply-haus/">02f — Supply Haus</a></li>
+              <li><a href="/toolbox/02-treasured-finds/02g-bag-nabbit/">02g — Bag Nabbit</a></li>
             </ul>
           </article>
 
           <!-- 03 Tasty Tracker -->
           <article class="card">
-            <h3>#03 — Tasty Tracker</h3>
+            <h3 href="/toolbox/03-tasty-tracker/">#03 — Tasty Tracker</h3>
             <p>
               Food, flavors, and kitchen logistics. This branch keeps menus aligned with
               your tastes, pantry, and future cravings — without killing the joy of eating.
             </p>
             <h4>Tool‑ettes in this branch</h4>
             <ul class="feature-list">
-              <li>03a — Flavor Meister</li>
-              <li>03b — Menu Conductor</li>
-              <li>03c — Wishful Tastes</li>
-              <li>03d — Pantry Shopper</li>
-              <li>03e — Palatably Profiled</li>
+              <li><a href="/toolbox/03-tasty-tracker/03a-flavor-meister/">03a — Flavor Meister</a></li>
+              <li><a href="/toolbox/03-tasty-tracker/03b-menu-conductor/">03b — Menu Conductor</a></li>
+              <li><a href="/toolbox/03-tasty-tracker/03c-wishful-tastes/">03c — Wishful Tastes</a></li>
+              <li><a href="/toolbox/03-tasty-tracker/03d-pantry-shopper/">03d — Pantry Shopper</a></li>
+              <li><a href="/toolbox/03-tasty-tracker/03e-palatably-profiled/">03e — Palatably Profiled</a></li>
             </ul>
           </article>
 
           <!-- 04 Traveler’s Guide -->
           <article class="card">
-            <h3>#04 — Traveler’s Guide</h3>
+            <h3 href="/toolbox/04-travelers-guide/">#04 — Traveler’s Guide</h3>
             <p>
               Trips, micro‑adventures, and memory‑keeping. This branch covers
               planning, improvising, and remembering where you’ve been.
             </p>
             <h4>Tool‑ettes in this branch</h4>
             <ul class="feature-list">
-              <li>04a — Journey Diary</li>
-              <li>04b — Itinerary Hacker</li>
-              <li>04c — Detour Discoverer</li>
-              <li>04d — Dreamland Journeys</li>
-              <li>04e — Memento Log</li>
+              <li><a href="/toolbox/04-travelers-guide/04a-journey-diary/">04a — Journey Diary</a></li>
+              <li><a href="/toolbox/04-travelers-guide/04b-itinerary-hacker/">04b — Itinerary Hacker</a></li>
+              <li><a href="/toolbox/04-travelers-guide/04c-detour-discoverer/">04c — Detour Discoverer</a></li>
+              <li><a href="/toolbox/04-travelers-guide/04d-dreamland-journeys/">04d — Dreamland Journeys</a></li>
+              <li><a href="/toolbox/04-travelers-guide/04e-memento-log/">04e — Memento Log</a></li>
             </ul>
           </article>
 
           <!-- 05 Organized Life -->
           <article class="card">
-            <h3>#05 — Organized Life</h3>
+            <h3 href="/toolbox/05-organized-life/">#05 — Organized Life</h3>
             <p>
               Everyday logistics: tasks, money, gifts, schedules, and neighborhood life.
               This branch is the control panel for your practical world.
             </p>
             <h4>Tool‑ettes in this branch</h4>
             <ul class="feature-list">
-              <li>05a — Task Maestro</li>
-              <li>05b — Thrifty Spender</li>
-              <li>05c — Giftlist Helper</li>
-              <li>05d — Scheduling Wizard</li>
-              <li>05e — Lifestyle Wallboard</li>
-              <li>05f — Neighborly Bazaar</li>
+              <li><a href="/toolbox/05-organized-life/05a-task-maestro/">05a — Task Maestro</a></li>
+              <li><a href="/toolbox/05-organized-life/05b-thrifty-spender/">05b — Thrifty Spender</a></li>
+              <li><a href="/toolbox/05-organized-life/05c-giftlist-helper/">05c — Giftlist Helper</a></li>
+              <li><a href="/toolbox/05-organized-life/05d-scheduling-wizard/">05d — Scheduling Wizard</a></li>
+              <li><a href="/toolbox/05-organized-life/05e-lifestyle-wallboard/">05e — Lifestyle Wallboard</a></li>
+              <li><a href="/toolbox/05-organized-life/05f-neighborly-bazaar/">05f — Neighborly Bazaar</a></li>
             </ul>
           </article>
 
           <!-- 06 Healthy Bee-ing -->
           <article class="card">
-            <h3>#06 — Healthy Bee‑ing</h3>
+            <h3 href="/toolbox/06-healthy-bee-ing/">#06 — Healthy Bee‑ing</h3>
             <p>
               Mood, energy, and self‑care routines. This branch keeps an eye on how you’re
               feeling, what supports you, and how to pace your days.
             </p>
             <h4>Tool‑ettes in this branch</h4>
             <ul class="feature-list">
-              <li>06a — Care Check</li>
-              <li>06b — Calm Keep</li>
-              <li>06c — Snappy Count</li>
-              <li>06d — Medi Minder</li>
-              <li>06e — Moody Log</li>
-              <li>06f — Maven Wise</li>
+              <li><a href="/toolbox/06-healthy-bee-ing/06a-care-check/">06a — Care Check</a></li>
+              <li><a href="/toolbox/06-healthy-bee-ing/06b-calm-keep/">06b — Calm Keep</a></li>
+              <li><a href="/toolbox/06-healthy-bee-ing/06c-snappy-count/">06c — Snappy Count</a></li>
+              <li><a href="/toolbox/06-healthy-bee-ing/06d-medi-minder/">06d — Medi Minder</a></li>
+              <li><a href="/toolbox/06-healthy-bee-ing/06e-moody-log/">06e — Moody Log</a></li>
+              <li><a href="/toolbox/06-healthy-bee-ing/06f-maven-wise/">06f — Maven Wise</a></li>
             </ul>
           </article>
 
           <!-- 07 Identity Known -->
           <article class="card">
-            <h3>#07 — Identity Known</h3>
+            <h3 href="/toolbox/07-identity-known/">#07 — Identity Known</h3>
             <p>
               Home, aesthetic, and self‑expression. This branch helps you name and refine
               the patterns that make your space and style feel like you.
             </p>
             <h4>Tool‑ettes in this branch</h4>
             <ul class="feature-list">
-              <li>07a — Critter Spotter</li>
-              <li>07b — Roost Wrangler</li>
-              <li>07c — Sight Seeker</li>
-              <li>07d — Snap Decoder</li>
-              <li>07e — Motif Muse</li>
-              <li>07f — Maker Matcher</li>
+              <li><a href="/toolbox/07-identity-known/07a-critter-spotter/">07a — Critter Spotter</a></li>
+              <li><a href="/toolbox/07-identity-known/07b-roost-wrangler/">07b — Roost Wrangler</a></li>
+              <li><a href="/toolbox/07-identity-known/07c-sight-seeker/">07c — Sight Seeker</a></li>
+              <li><a href="/toolbox/07-identity-known/07d-snap-decoder/">07d — Snap Decoder</a></li>
+              <li><a href="/toolbox/07-identity-known/07e-motif-muse/">07e — Motif Muse</a></li>
+              <li><a href="/toolbox/07-identity-known/07f-maker-matcher/">07f — Maker Matcher</a></li>
               <li>07g — Self Fixer</li>
             </ul>
           </article>
