@@ -1,4 +1,4 @@
-// Mermaid diagram initialization for Glee-fully Personalizable Tools™
+// Mermaid diagram initialization for OverKill Hill P³
 // Relies on YAML front-matter in each diagram for theme/look (theme: neutral, look: neo).
 // initialize() intentionally omits themeVariables to avoid overriding the YAML config.
 import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
