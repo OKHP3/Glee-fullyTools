@@ -165,16 +165,16 @@ templates are invisible to validators, indexer, sitemap, and feed.
 
 ## Audit artifacts (2026-05-03)
 
-All audit documents live in `docs/` (moved 2026-05-04 to reduce root clutter):
+All audit documents live in `assets/docs/` (non-crawlable, skipped by all HTML-walking tools):
 
-* `docs/FINAL_AUDIT_2026-05-03.md` — comprehensive 26-row change log, canonical reference
-* `docs/OPEN_TODOS_2026-05-03.md` — 3 placeholder GPT URLs + deferred editorial items
-* `docs/AUDIT_PAGE_INVENTORY_2026-05-03.md` — Phase 0 page inventory
-* `docs/AUDIT_LINKS_2026-05-03.md` — Phase 3 link audit
-* `docs/AUDIT_ASSETS_2026-05-03.md` — Phase 7 asset inventory
-* `docs/AUDIT_ACCESSIBILITY_2026-05-03.md` — Phase 8 accessibility audit
-* `docs/AUDIT_PERFORMANCE_2026-05-03.md` — Phase 10 performance audit
-* `docs/gleefully-replit-theme-guide.md` — Replit app theme configuration guide
+* `assets/docs/FINAL_AUDIT_2026-05-03.md` — comprehensive 26-row change log, canonical reference
+* `assets/docs/OPEN_TODOS_2026-05-03.md` — 3 placeholder GPT URLs + deferred editorial items
+* `assets/docs/AUDIT_PAGE_INVENTORY_2026-05-03.md` — Phase 0 page inventory
+* `assets/docs/AUDIT_LINKS_2026-05-03.md` — Phase 3 link audit
+* `assets/docs/AUDIT_ASSETS_2026-05-03.md` — Phase 7 asset inventory
+* `assets/docs/AUDIT_ACCESSIBILITY_2026-05-03.md` — Phase 8 accessibility audit
+* `assets/docs/AUDIT_PERFORMANCE_2026-05-03.md` — Phase 10 performance audit
+* `assets/docs/gleefully-replit-theme-guide.md` — Replit app theme configuration guide
 
 Machine-readable JSON outputs live in `audit/` (written by tools on each run):
 `audit/validation-report-2026-05-03.json`, `audit/links-report-2026-05-03.json`, `audit/asset-inventory-2026-05-03.json`
