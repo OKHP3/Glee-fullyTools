@@ -15,6 +15,15 @@ invariant).
 - If you need config/secrets, stop and ask. Never invent credentials.
 - Summarize what you changed and why at the end.
 
+> **AGENTS.md sync circuit** — This file is one of three kept in lockstep.
+> Any structural edit to sections 1–5 must be propagated to the other two repos
+> before the session closes. Section 2.2.1 (per-site inventory) is intentionally
+> site-specific and does not need to match line-for-line.
+>
+> - **OverKill Hill P³:** https://github.com/OKHP3/OverKill-Hill/blob/main/AGENTS.md
+> - **AskJamie™:** https://github.com/OKHP3/AskJamie/blob/main/AGENTS.md
+> - **Glee-fully Tools:** https://github.com/OKHP3/Glee-fullyTools/blob/main/AGENTS.md
+
 ---
 
 ## Repository Hygiene Standard
@@ -567,8 +576,10 @@ by default and must be gitignored, moved to a proper home, or deleted.
   committed.
 - **`playwright-report/`**: same.
 - **`coverage/`**: same.
-- **`dist/`**, **`build/`**, **`.next/`**, **`.vite/`**: build output.
-  Gitignore.
+- **`build/`**, **`.next/`**, **`.vite/`**: build output. Gitignore.
+- **`dist/`**: build output — gitignore. Note: in OverKill Hill P³, `dist/` serves
+  as the cross-site sync staging area and is intentional; see that repo's
+  AGENTS.md sections 2.2.1 and 3.2.
 - **`node_modules/`**: already gitignored by default; verify.
 
 #### 3.3 IDE and OS junk
