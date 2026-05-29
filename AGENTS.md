@@ -21,7 +21,7 @@ invariant).
 **Brand:** Glee-fully Tools (Coral / Cream)
 **Body scope class:** `glee-main` (pages set `<body class="glee-main">`)
 **Canonical stylesheet:** https://raw.githubusercontent.com/OKHP3/OverKill-Hill/main/assets/css/theme.css
-**Version:** 2.0
+**Version:** 2.1
 
 This section governs how files and folders are named, what structure all sibling
 repos share, what counts as detritus, and the brand contract this repo serves.
@@ -324,6 +324,9 @@ When the repo accumulates working artifacts, paste this message to Replit Agent:
 > D. RENAME. Wait for "go" before executing.
 
 ---
+
+---
+
 ### 6. Brand contract (Glee-fully Tools)
 
 This repo serves the Glee-fully Tools brand.
