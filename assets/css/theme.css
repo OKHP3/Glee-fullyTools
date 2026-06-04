@@ -180,17 +180,19 @@ html[data-theme="light"] .projects-main .hero {
   text-decoration-color: var(--okh-orange);
 }
 
-/* Footer — hardcoded #020617 bg; keep all footer text readable */
-html[data-theme="light"] .site-footer {
+/* Footer — hardcoded #020617 bg on OKH; keep footer text readable.
+   Scoped to non-Glee pages: Glee uses a cream footer (#fff7f1) and has its
+   own dark-mode overrides; applying near-white text there makes it invisible. */
+html[data-theme="light"] body:not(.glee-main) .site-footer {
   color: rgba(229, 231, 235, 0.75);
 }
-html[data-theme="light"] .footer-column a {
+html[data-theme="light"] body:not(.glee-main) .footer-column a {
   color: rgba(229, 231, 235, 0.6);
 }
-html[data-theme="light"] .footer-column a:hover {
+html[data-theme="light"] body:not(.glee-main) .footer-column a:hover {
   color: var(--okh-orange);
 }
-html[data-theme="light"] .footer-bottom {
+html[data-theme="light"] body:not(.glee-main) .footer-bottom {
   color: rgba(229, 231, 235, 0.45);
 }
 
@@ -4265,6 +4267,210 @@ html[data-theme="light"] .article-body h2 {
    ║  glee-fully.tools — scoped via .glee-main                                  ║
    ╚════════════════════════════════════════════════════════════════════════════╝ */
 
+/* ── Glee dark mode ───────────────────────────────────────────────────────────
+   Triggered by OS (prefers-color-scheme: dark) unless user pinned light, OR by
+   JS setting html[data-color-scheme="dark"] via the header toggle button.
+   When toggle is "system" the attr is absent; the media query takes over.
+   Token palette: bg #1a1210, surface #241c1a, fg #f0e8e0, accent #f07585.    */
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main {
+    --color-bg:           #1a1210;
+    --color-surface:      #241c1a;
+    --color-surface-soft: #2e2220;
+    --color-fg:           #f0e8e0;
+    --color-muted:        rgba(240, 232, 224, 0.58);
+    --color-accent:       #f07585;
+    --color-border:       rgba(240, 200, 190, 0.15);
+  }
+}
+html[data-color-scheme="dark"] .glee-main {
+  --color-bg:           #1a1210;
+  --color-surface:      #241c1a;
+  --color-surface-soft: #2e2220;
+  --color-fg:           #f0e8e0;
+  --color-muted:        rgba(240, 232, 224, 0.58);
+  --color-accent:       #f07585;
+  --color-border:       rgba(240, 200, 190, 0.15);
+}
+
+/* Explicit light pin — overrides OS dark preference when user chose light */
+html[data-color-scheme="light"] .glee-main {
+  --color-bg:           #f6f2ee;
+  --color-surface:      #fffdfa;
+  --color-surface-soft: #fff7f1;
+  --color-fg:           #2e2b29;
+  --color-muted:        #7a736f;
+  --color-accent:       #d94f63;
+  --color-border:       rgba(46, 43, 41, 0.12);
+}
+
+/* Glee light-mode toggle — coral solid so it's unmistakable on cream header */
+.glee-main .theme-toggle {
+  background: #d35b2d;
+  border-color: #d35b2d;
+  color: #fff;
+}
+.glee-main .theme-toggle:hover,
+.glee-main .theme-toggle:focus-visible {
+  background: #b84a22;
+  border-color: #b84a22;
+  outline: none;
+}
+
+/* Page background */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main { background: #1a1210; }
+}
+html[data-color-scheme="dark"] .glee-main { background: #1a1210; }
+
+/* Site header */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .site-header {
+    background: rgba(26, 18, 16, 0.92);
+    border-color: rgba(240, 200, 190, 0.12);
+  }
+}
+html[data-color-scheme="dark"] .glee-main .site-header {
+  background: rgba(26, 18, 16, 0.92);
+  border-color: rgba(240, 200, 190, 0.12);
+}
+
+/* Nav dropdown submenu */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .nav-dropdown {
+    background: #241c1a;
+    border-color: rgba(240, 200, 190, 0.15);
+  }
+}
+html[data-color-scheme="dark"] .glee-main .nav-dropdown {
+  background: #241c1a;
+  border-color: rgba(240, 200, 190, 0.15);
+}
+
+/* Hero card */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .glee-hero-card {
+    background: #241c1a;
+    border-color: rgba(240, 200, 190, 0.12);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  }
+}
+html[data-color-scheme="dark"] .glee-main .glee-hero-card {
+  background: #241c1a;
+  border-color: rgba(240, 200, 190, 0.12);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Stripe sections */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .stripe-section     { background: #241c1a; }
+  html:not([data-color-scheme="light"]) .glee-main .stripe-section--alt { background: #2e2220; }
+}
+html[data-color-scheme="dark"] .glee-main .stripe-section     { background: #241c1a; }
+html[data-color-scheme="dark"] .glee-main .stripe-section--alt { background: #2e2220; }
+
+/* Sparkle banner */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .site-specials {
+    background: rgba(240, 117, 133, 0.14);
+    border-color: rgba(240, 117, 133, 0.25);
+    color: #f0e8e0;
+  }
+}
+html[data-color-scheme="dark"] .glee-main .site-specials {
+  background: rgba(240, 117, 133, 0.14);
+  border-color: rgba(240, 117, 133, 0.25);
+  color: #f0e8e0;
+}
+
+/* Footer */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .site-footer {
+    background: #120d0b;
+    border-color: rgba(240, 200, 190, 0.1);
+    color: rgba(240, 232, 224, 0.7);
+  }
+  html:not([data-color-scheme="light"]) .glee-main .footer-column a       { color: rgba(240, 232, 224, 0.58); }
+  html:not([data-color-scheme="light"]) .glee-main .footer-column a:hover  { color: #f07585; }
+  html:not([data-color-scheme="light"]) .glee-main .footer-bottom {
+    color: rgba(240, 232, 224, 0.38);
+    border-color: rgba(240, 200, 190, 0.1);
+  }
+}
+html[data-color-scheme="dark"] .glee-main .site-footer {
+  background: #120d0b;
+  border-color: rgba(240, 200, 190, 0.1);
+  color: rgba(240, 232, 224, 0.7);
+}
+html[data-color-scheme="dark"] .glee-main .footer-column a      { color: rgba(240, 232, 224, 0.58); }
+html[data-color-scheme="dark"] .glee-main .footer-column a:hover { color: #f07585; }
+html[data-color-scheme="dark"] .glee-main .footer-bottom {
+  color: rgba(240, 232, 224, 0.38);
+  border-color: rgba(240, 200, 190, 0.1);
+}
+
+/* Search modal */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .search-modal-backdrop { background: rgba(26, 18, 16, 0.85); }
+  html:not([data-color-scheme="light"]) .glee-main .search-modal          { background: #241c1a; border-color: rgba(240, 200, 190, 0.15); }
+  html:not([data-color-scheme="light"]) .glee-main .search-input          { background: #2e2220; border-color: rgba(240, 200, 190, 0.2); color: #f0e8e0; }
+  html:not([data-color-scheme="light"]) .glee-main .search-result-item:hover { background: #2e2220; }
+}
+html[data-color-scheme="dark"] .glee-main .search-modal-backdrop { background: rgba(26, 18, 16, 0.85); }
+html[data-color-scheme="dark"] .glee-main .search-modal          { background: #241c1a; border-color: rgba(240, 200, 190, 0.15); }
+html[data-color-scheme="dark"] .glee-main .search-input          { background: #2e2220; border-color: rgba(240, 200, 190, 0.2); color: #f0e8e0; }
+html[data-color-scheme="dark"] .glee-main .search-result-item:hover { background: #2e2220; }
+
+/* Search page inline results */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main [data-glee-search-inline-results] .search-result-item {
+    background: #241c1a;
+    border-color: rgba(240, 200, 190, 0.1);
+  }
+}
+html[data-color-scheme="dark"] .glee-main [data-glee-search-inline-results] .search-result-item {
+  background: #241c1a;
+  border-color: rgba(240, 200, 190, 0.1);
+}
+
+/* Keep-exploring tray */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .keep-exploring {
+    background: #2e2220;
+    border-color: rgba(240, 200, 190, 0.12);
+  }
+}
+html[data-color-scheme="dark"] .glee-main .keep-exploring {
+  background: #2e2220;
+  border-color: rgba(240, 200, 190, 0.12);
+}
+
+/* Latest pill */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .latest-pill { background: rgba(240, 117, 133, 0.18); color: #f07585; }
+}
+html[data-color-scheme="dark"] .glee-main .latest-pill { background: rgba(240, 117, 133, 0.18); color: #f07585; }
+
+/* Construction overlay */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .construction-overlay { background: rgba(26, 18, 16, 0.97); }
+}
+html[data-color-scheme="dark"] .glee-main .construction-overlay { background: rgba(26, 18, 16, 0.97); }
+
+/* Header toggle button tint on Glee dark pages */
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .theme-toggle {
+    background: rgba(36, 28, 26, 0.85);
+    border-color: rgba(240, 200, 190, 0.22);
+    color: #f0e8e0;
+  }
+}
+html[data-color-scheme="dark"] .glee-main .theme-toggle {
+  background: rgba(36, 28, 26, 0.85);
+  border-color: rgba(240, 200, 190, 0.22);
+  color: #f0e8e0;
+}
 
 /* ── Light-mode brand surface tones ──────────────────────────────────────────
    The shared :root[data-theme="light"] sets OKH's warm-paper baseline.
