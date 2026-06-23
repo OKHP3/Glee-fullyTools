@@ -15,6 +15,28 @@ invariant).
 - If you need config/secrets, stop and ask. Never invent credentials.
 - Summarize what you changed and why at the end.
 
+---
+
+## Project Identity
+
+| Field | Value |
+|---|---|
+| Suite | Glee-fully |
+| Type | Website / Suite Root |
+| Status | Active |
+| GitHub | https://github.com/OKHP3/Glee-fullyTools |
+| Notion Anchor | https://app.notion.com/p/2cc812e0ced480f3862af0b8caee1aa8 |
+
+**Purpose:** Root website for the Glee-fully personalizable GPT tools suite. Serves as the public hub and entry point for all Glee-fully tool branches.
+
+**Local dev paths:**
+- Windows: `C:\Users\jamie\OKH-Local\Websites\glee-fullytools`
+- Mac: `/Volumes/OKH-Local/04_GitHub_Mirrors/Glee-fullyTools`
+
+**Related repos:**
+- [Glee-fullyTools-FoundRy](https://github.com/OKHP3/Glee-fullyTools-FoundRy)
+- [glee-fully-gpt00-personalizable-tools](https://github.com/OKHP3/glee-fully-gpt00-personalizable-tools)
+
 > **AGENTS.md sync circuit** — This file is one of three kept in lockstep.
 > Any structural edit to sections 1–5 must be propagated to the other two repos
 > before the session closes. Section 2.2.1 (per-site inventory) is intentionally
@@ -236,7 +258,6 @@ These names are reserved for detritus (see Section 3) and must not be used
 as legitimate folders: `_unused/`, `attached_assets/`, `attached-assets/`,
 `_drafts/`, `_scratch/`, `_old/`, `tmp/`, `temp/`, `unused/`.
 
-#### 2.2 Directory schema and expected contents
 #### 2.2 Directory purposes and expected contents
 
 The definitions below describe the purpose and expected contents of every
@@ -336,11 +357,6 @@ Expected naming patterns:
 May contain sub-folders for organizing related documents (e.g., `sister-site-sync/`
 for cross-site coordination files). Machine-generated JSON output belongs in
 `assets/audit/`, not here. Superseded docs move to `docs/archive/`.
-
----
-
-**`assets/downloads/`**
-*(See above.)*
 
 ---
 
@@ -705,6 +721,11 @@ These apply in every session, regardless of task:
 - No new dependencies unless explicitly requested.
 - All user-facing content must use US English per the Language Standard in
   Section 0. UK and Commonwealth spellings are defects, not stylistic variants.
+- **ROY principle:** ratio of understanding produced to explanation invested.
+  Verbosity must earn its space. Prefer punchy standalone lines over prose
+  consolidation. Do not pad responses.
+- **AutoCAD version:** R10 (locked, not negotiable). Do not reference or suggest
+  any other AutoCAD release in this project's documentation or tooling.
 
 ---
 
