@@ -30,7 +30,7 @@ invariant).
 **Purpose:** Root website for the Glee-fully personalizable GPT tools suite. Serves as the public hub and entry point for all Glee-fully tool branches.
 
 **Local dev paths:**
-- Windows: `C:\Users\jamie\OKH-Local\Websites\glee-fullytools`
+- Windows: `C:\Users\jamie\OKH-Local\04_GitHub_Mirrors\glee-fullytools`
 - Mac: `/Volumes/OKH-Local/04_GitHub_Mirrors/Glee-fullyTools`
 
 **Related repos:**
