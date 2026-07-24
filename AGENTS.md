@@ -37,7 +37,7 @@ invariant).
 - [Glee-fullyTools-FoundRy](https://github.com/OKHP3/Glee-fullyTools-FoundRy)
 - [glee-fully-gpt00-personalizable-tools](https://github.com/OKHP3/glee-fully-gpt00-personalizable-tools)
 
-## Verified repository context (2026-07-13)
+## Verified repository context (2026-07-24)
 
 This section records the current project understanding from repository evidence.
 Update it when the structure, runtime, deployment model, or validation baseline
@@ -67,8 +67,9 @@ dates and counts.
 
 ### Architecture and entry points
 
-- Production content is 61 HTML pages: the homepage, supporting pages, the
-  Toolbox hub, seven branch pages, and 42 tool-ette pages. HTML under `assets/`
+- Production content is 62 HTML pages: the homepage, supporting pages, the
+  Toolbox hub, seven branch pages, 42 tool-ette pages, and the site's utility
+  pages. HTML under `assets/`
   and `.agents/` is development or agent content and is excluded by site tools.
 - `assets/css/theme.css` is the shared stylesheet. `assets/js/app.js` provides
   shared browser behavior, including navigation, search, theme handling, and
@@ -86,14 +87,16 @@ dates and counts.
 
 ### Verified validation baseline
 
-The following commands passed on 2026-07-13 from the repository root:
+The repository's latest recorded validation passed on 2026-07-13. The current
+tree contains 62 production HTML pages and 60 sitemap URLs. Re-run these
+commands after any content or tooling change to establish a current baseline:
 
 ```bash
 python3 scripts/validate-site.py
-# Scanned 61 pages; 0 issues; 0 warnings
+# Expected: 62 pages; 0 issues; 0 warnings
 
 python3 scripts/check-links.py
-# 2,414 internal links; 0 broken links; 59 sitemap URLs; 0 sitemap mismatches
+# Expected: 0 broken links and 0 sitemap mismatches; link totals vary by content
 ```
 
 After HTML content changes, rebuild `assets/data/search-index.json` with
