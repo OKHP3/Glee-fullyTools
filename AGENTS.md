@@ -115,6 +115,18 @@ Playwright runner documented in `replit.md`.
   still actively maintained. Do not add or upgrade dependencies without owner
   approval.
 
+### Governance files added 2026-08-03
+
+The following governance files were created during the 14-skill compliance pass:
+
+- `LIFECYCLE.md` — repository lifecycle state (Active); update when state transitions
+- `docs/adr/` — Architecture Decision Records for significant technical decisions;
+  see `docs/adr/README.md` for the index. Add new ADRs here for framework, tooling,
+  or security decisions.
+- `brand-styles/` — Visual brand style registry (okhp3-brand-style-registry format);
+  `brand-styles/profiles/glee-fully.yaml` is the active Glee-fully brand profile.
+  Do not hand-edit the profile — use the brand-style-registry skill workflow instead.
+
 > **AGENTS.md sync circuit** — This file is one of three kept in lockstep.
 > Any structural edit to sections 1–5 must be propagated to the other two repos
 > before the session closes. Section 2.2.1 (per-site inventory) is intentionally
@@ -622,7 +634,7 @@ baseline -- update it here when the inventory changes materially.
 | `assets/img/webp/` | 270 WebP files | Fully populated; hero images and all GPT icon variants at 150/300/512/600/1024w |
 | `assets/js/` | `app.js` (40 KB), `mermaid-init.js`, `sparkle-loader.js` | Only Glee currently has `sparkle-loader.js` |
 | `assets/templates/` | 10 templates + `INDEX.md` | Toolbox-specific types: `template--hub-branch.html`, `template--hub-toolbox.html`, `template--tool-detail.html` |
-| `docs/` | `.gitkeep` only | Add project-level planning docs here |
+| `docs/` | `adr/` subfolder with 5 ADRs + `README.md`; `.gitkeep` | ADRs added 2026-08-03; archive still empty |
 | `docs/archive/` | `.gitkeep` only | Add archived sprint docs here |
 | `scripts/` | 55 scripts | Largest toolchain; includes Glee-specific GPT-icon and toolbox scripts |
 
