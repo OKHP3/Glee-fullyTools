@@ -722,14 +722,25 @@ def scan_css_file(path: Path) -> list[dict]:
 
 # Patterns that open a dark-mode scoped block:
 #   @media (prefers-color-scheme: dark) { … }
-#   html[data-color-scheme="dark"] .foo { … }
+#   html[data-color-scheme="dark"] .foo { … }   ← Glee-fully toggle
+#   html[data-theme="dark"] .foo { … }          ← OKH JS toggle
 _DARK_BLOCK_OPEN_RE = re.compile(
     r'(?:'
     r'@media\s*\(\s*prefers-color-scheme\s*:\s*dark\s*\)'
     r'|html\[data-color-scheme=["\'\']dark["\'\'][^{]*'
+    r'|html\[data-theme=["\'\']dark["\'\'][^{]*'
     r')\s*\{',
     re.IGNORECASE,
 )
+
+# OKH dark-mode surfaces (used when the scoped block is data-theme="dark").
+# These are the root defaults for the OKH site — JS writes data-theme="dark"
+# to restore the default dark palette after a light-mode override.
+# Source: :root { --color-bg: #2a2320 (--okh-espresso); --color-surface: #111827 }
+_OKH_DARK_SURFACES = {
+    "bg":      "#2a2320",
+    "surface": "#111827",
+}
 
 # Matches a text `color:` with a hex value (not a CSS var or --def)
 _DM_HEX_COLOR_RE = re.compile(
@@ -788,6 +799,15 @@ def scan_dark_mode_hex_colors(css_paths):
         )
 
         for block_start_line, selector_ctx, block_content in _extract_dark_blocks(clean):
+            # Use OKH dark surfaces for html[data-theme="dark"] blocks;
+            # use the Glee/prefers-color-scheme surfaces for all other dark blocks.
+            if "data-theme" in selector_ctx:
+                _dm_bg      = _OKH_DARK_SURFACES["bg"]
+                _dm_surface = _OKH_DARK_SURFACES["surface"]
+            else:
+                _dm_bg      = DARK_MODE["bg"]
+                _dm_surface = DARK_MODE["surface"]
+
             for ln_offset, raw_line in enumerate(block_content.splitlines()):
                 stripped = raw_line.strip()
                 if stripped.startswith("--"):
@@ -808,11 +828,11 @@ def scan_dark_mode_hex_colors(css_paths):
                     continue
                 seen.add(key)
 
-                bg_ratio   = contrast_ratio(hex_val, DARK_MODE["bg"])
-                surf_ratio = contrast_ratio(hex_val, DARK_MODE["surface"])
+                bg_ratio   = contrast_ratio(hex_val, _dm_bg)
+                surf_ratio = contrast_ratio(hex_val, _dm_surface)
                 worst_ratio = min(bg_ratio, surf_ratio)
                 worst_bg = (
-                    DARK_MODE["bg"] if bg_ratio <= surf_ratio else DARK_MODE["surface"]
+                    _dm_bg if bg_ratio <= surf_ratio else _dm_surface
                 )
 
                 passes_aa_normal = worst_ratio >= 4.5
