@@ -302,6 +302,29 @@ document.addEventListener("DOMContentLoaded", () => {
           if (primaryDismiss) primaryDismiss.click();
         }
       });
+
+      // Move focus into the overlay's dismiss button so keyboard users are
+      // not left stranded on skip-link or outside the modal (WCAG 2.4.3)
+      const overlayFocusable = Array.from(
+        constructionOverlay.querySelectorAll(
+          'button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (overlayFocusable.length) {
+        requestAnimationFrame(() => overlayFocusable[0].focus());
+      }
+
+      // Focus trap — keep Tab/Shift+Tab inside the overlay while it is visible (WCAG 2.1.1)
+      constructionOverlay.addEventListener("keydown", (e) => {
+        if (e.key !== "Tab" || !overlayFocusable.length) return;
+        const first = overlayFocusable[0];
+        const last  = overlayFocusable[overlayFocusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+        }
+      });
     }
   }
 
