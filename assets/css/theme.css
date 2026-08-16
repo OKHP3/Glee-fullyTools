@@ -778,6 +778,13 @@ button {
   color: #6b6b6b;
 }
 
+/* Keep top-level navigation targets usable on touch screens. */
+.glee-main .site-header .primary-nav > ul > li > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
 /* Glee/AskJamie mobile toggle styling */
 .askjamie-main .nav-toggle,
 .glee-main .nav-toggle {
@@ -1959,7 +1966,102 @@ body.construction-dismissed .construction-overlay,
   background: rgba(196, 106, 44, 0.18);
   color: var(--okh-amber, #d99257);
   border-color: rgba(196, 106, 44, 0.45);
-}/* Draft notice — unpublished writing pages */
+}
+
+/* Glee-fully dedicated search page */
+.glee-search-page {
+  padding: 2rem 0 4rem;
+}
+.glee-search-page__hero {
+  margin-bottom: 2rem;
+}
+.glee-search-page__lede {
+  max-width: 720px;
+}
+.glee-search-page__form {
+  max-width: 640px;
+  margin: 1.5rem auto 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 1rem;
+  background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border-subtle, #2a2f37);
+  border-radius: var(--radius-md, 12px);
+}
+.glee-search-page__form:focus-within {
+  border-color: var(--okh-orange, #c46a2c);
+}
+.glee-search-page__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--color-muted, #9ca3af);
+  flex: 0 0 auto;
+}
+.glee-search-page__form input {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: var(--color-fg, #1a1a1a);
+  font-size: 1.05rem;
+  outline: none;
+}
+.glee-search-page__status {
+  text-align: center;
+  color: var(--color-muted, #9ca3af);
+  font-size: 0.85rem;
+  margin: 0.25rem 0 1.5rem;
+}
+.glee-search-page__categories {
+  max-width: 720px;
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+.glee-search-page__categories button {
+  background: transparent;
+  color: var(--color-muted, #9ca3af);
+  border: 1px solid var(--color-border-subtle, #2a2f37);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+.glee-search-page__categories button[aria-pressed="true"] {
+  background: rgba(196, 106, 44, 0.18);
+  color: var(--okh-amber, #d99257);
+  border-color: rgba(196, 106, 44, 0.45);
+}
+.glee-search-page__results {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.glee-search-page__results > li {
+  border: 1px solid var(--color-border-subtle, #2a2f37);
+  border-radius: var(--radius-md, 12px);
+  background: var(--color-surface, #fff);
+  overflow: hidden;
+}
+.glee-search-page__results .okh-search-result {
+  border-top: none;
+}
+.glee-search-page__results .okh-search-result:hover {
+  background: rgba(196, 106, 44, 0.08);
+}
+.glee-search-page__results-wrap:empty,
+.glee-search-page__results:empty {
+  min-height: 1px;
+}
+
+/* Draft notice — unpublished writing pages */
 .draft-notice {
   background-color: color-mix(in srgb, var(--okh-amber) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--okh-amber) 40%, transparent);
