@@ -537,6 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
           '<button type="button" class="okh-search-close" aria-label="Close search">Esc</button>' +
         "</div>" +
         '<div class="okh-search-results" role="list" aria-label="Search results"></div>' +
+        '<div class="okh-search-status" role="status" aria-live="polite" aria-atomic="true" style="position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden;white-space:nowrap"></div>' +
         '<div class="okh-search-footer">' +
           '<div class="okh-search-keys">' +
             "<span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>" +
@@ -572,6 +573,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!overlay) return;
     const input    = overlay.querySelector(".okh-search-input");
     const list     = overlay.querySelector(".okh-search-results");
+    const statusEl = overlay.querySelector(".okh-search-status");
     const closeBtn = overlay.querySelector(".okh-search-close");
 
     let entries        = [];
@@ -626,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function render() {
       const q = input.value.trim();
-      if (!q) { renderEmpty(); currentResults = []; lastTokens = []; return; }
+      if (!q) { renderEmpty(); currentResults = []; lastTokens = []; if (statusEl) statusEl.textContent = ""; return; }
       lastTokens     = tokenize(q);
       currentResults = search(entries, q, 12);
       if (!currentResults.length) {
@@ -634,6 +636,7 @@ document.addEventListener("DOMContentLoaded", () => {
           '<div class="okh-search-noresults"><p>No matches for <strong>' +
           escapeHtml(q) + "</strong>.</p><p>Try <em>resume</em>, <em>recipe</em>, " +
           "<em>budget</em>, or <em>journal</em>.</p></div>";
+        if (statusEl) statusEl.textContent = "No matches for " + q;
         return;
       }
       list.innerHTML = currentResults.map((r) => (
@@ -641,6 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
           renderResultHtml(r, lastTokens) +
         "</a>"
       )).join("");
+      if (statusEl) statusEl.textContent = currentResults.length + (currentResults.length === 1 ? " result" : " results") + " for " + q;
       setActive(0);
     }
     input.addEventListener("input", render);

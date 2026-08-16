@@ -44,7 +44,7 @@
   --color-surface: #111827;
   --color-surface-soft: #181f26;
   --color-fg: #e5e7eb;
-  --color-muted: var(--okh-gray);
+  --color-muted: #9ca3af; /* WCAG 1.4.3: #6b7280 only ≈3.4:1 on dark bg #2a2320; #9ca3af gives ≈6.4:1 (AA pass) */
   --color-accent: var(--okh-orange);
   --color-border-subtle: rgba(249, 250, 251, 0.08);
   /* Mermaid theming – OverKill Hill (default) */
@@ -894,7 +894,7 @@ button {
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
   border-color: var(--okh-orange, #c46a2c);
-  outline: none;
+  /* outline:none removed — global button:focus-visible rule supplies the 2px accessible outline */
 }
 .theme-toggle .tt-icon {
   width: 1rem;
@@ -1667,7 +1667,7 @@ body.construction-dismissed .construction-overlay,
 .okh-search-trigger:focus-visible {
   border-color: var(--okh-orange, var(--okh-orange));
   color: var(--okh-orange, var(--okh-orange));
-  outline: none;
+  /* outline:none removed — global button:focus-visible rule supplies the 2px accessible outline */
 }
 .okh-search-trigger .okh-search-icon {
   width: 1em;
@@ -4610,7 +4610,7 @@ html[data-color-scheme="dark"] .glee-main .brand-stripes--glee {
 .glee-main .glee-color-toggle:hover,
 .glee-main .glee-color-toggle:focus-visible {
   border-color: #d94f63;
-  outline: none;
+  /* outline:none removed — global button:focus-visible rule supplies the 2px accessible outline */
 }
 
 /* ── Glee color-scheme toggle – auto-state "following device" dashed-border cue ──
@@ -5784,7 +5784,7 @@ html[data-color-scheme="dark"] .askjamie-main .brand-stripes--jamie {
 .askjamie-main .glee-color-toggle:hover,
 .askjamie-main .glee-color-toggle:focus-visible {
   border-color: #2d6f7e;
-  outline: none;
+  /* outline:none removed — global button:focus-visible rule supplies the 2px accessible outline */
 }
 
 /* ── AskJamie color-scheme toggle – auto-state "following device" dashed-border cue ──
