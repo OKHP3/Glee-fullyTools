@@ -47,6 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const expanded = navToggle.getAttribute("aria-expanded") === "true";
       navToggle.setAttribute("aria-expanded", String(!expanded));
     });
+
+    // Close nav on Escape and return focus to trigger (WCAG 2.1.1)
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && header.classList.contains("nav-open")) {
+        header.classList.remove("nav-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.focus();
+      }
+    });
   }
 
   // Header shadow
@@ -101,7 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
       dark:   "Switch to system mode",
     };
 
-    const savedTheme = localStorage.getItem("okh-theme");
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem("okh-theme"); } catch (_) {}
     let currentState = STATES.includes(savedTheme) ? savedTheme : "system";
 
     function applyThemeState(state) {
@@ -165,7 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Restore saved state (the early-init <head> script already applied it before
     // first paint for pages that include it; this just syncs the button).
-    const savedScheme = localStorage.getItem(LS_KEY);
+    let savedScheme = null;
+    try { savedScheme = localStorage.getItem(LS_KEY); } catch (_) {}
     let schemeState   = SCH_STATES.includes(savedScheme) ? savedScheme : "auto";
 
     function applySchemeState(state) {
@@ -259,9 +270,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const storageKey = `glee-wip-dismissed:${wipKey}`;
 
     // If user already dismissed this specific WIP page, hide overlay
-    if (localStorage.getItem(storageKey) === "true") {
+    let wipDismissed = false;
+    try { wipDismissed = localStorage.getItem(storageKey) === "true"; } catch (_) {}
+    if (wipDismissed) {
       body.classList.add("construction-dismissed");
-      constructionOverlay.setAttribute("hidden", "true");
+      constructionOverlay.setAttribute("hidden", "");
     } else {
       // Wire up dismiss buttons
       const dismissButtons = constructionOverlay.querySelectorAll(
@@ -272,7 +285,11 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", () => {
           body.classList.add("construction-dismissed");
           constructionOverlay.setAttribute("aria-hidden", "true");
-          localStorage.setItem(storageKey, "true");
+          constructionOverlay.setAttribute("hidden", "");
+          try { localStorage.setItem(storageKey, "true"); } catch (_) {}
+          // Return focus to main content heading after overlay dismissal (WCAG 2.4.3)
+          const mainTarget = document.querySelector("#main h1, #main");
+          if (mainTarget) mainTarget.focus({ preventScroll: true });
         });
       });
 
