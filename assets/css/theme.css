@@ -4507,7 +4507,7 @@ html[data-theme="light"] .glee-main {
   text-decoration: none;
 }
 .glee-breadcrumb-item a:hover {
-  color: #d94f63;             /* Glee coral on hover */
+  color: #b8354a;             /* WCAG 1.4.3 fix: darkened from #d94f63 (3.59:1) → #b8354a (5.16:1 on cream #f6f2ee, AA ✓) */
   text-decoration: underline;
 }
 .glee-breadcrumb-current {
