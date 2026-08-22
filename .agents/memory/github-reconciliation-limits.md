@@ -8,3 +8,9 @@ For a public GitHub repository, fetch the live branch with credential helpers di
 **Why:** The Replit GitHub connector can read and create individual Git blobs, but its Git Database tree operation is unavailable and its Contents write path can be blocked by the connector proxy. The proxy can also truncate large request bodies while returning a misleading success response. Git transport with a valid PAT remains the reliable path for publishing a complete tree.
 
 **How to apply:** Verify blob SHAs and never advance a branch after a size-mismatched API response. Use recovery refs before rebasing or pruning. After reconciliation, a clean local `main` that is ahead of verified `origin/main` is ready for a normal fast-forward push; force-push is unnecessary unless the remote moves independently.
+
+Stale generated `subrepl-*` remote definitions can remain in `.git/config` after their branches are removed. Remove those remotes after archiving their branch tips, but preserve the managed backup remote and GitHub `origin`.
+
+**Why:** Commands that enumerate all remotes can repeatedly contact obsolete Replit SSH endpoints, creating project-specific noise that is independent of GitHub authentication.
+
+**How to apply:** A clean `git fetch --all --prune` after removing only the generated `subrepl-*` remotes confirms the remote fan-out is resolved; test `origin` authentication separately.
