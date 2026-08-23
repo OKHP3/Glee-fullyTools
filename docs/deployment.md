@@ -6,12 +6,11 @@ This repository is the source of truth for the public site at
 ## Publishing source
 
 - **Source branch:** `main`
-- **Current Pages mode:** GitHub-managed legacy branch publishing from the `main` root
-- **Current handoff:** external to the visible repository workflows; the existing Pages build history is the active deployment mechanism
-- **Repository-owned workflow:** prepared as `.github/workflows/deploy-pages.yml` in the deployment plan, but not installed because the available GitHub connection cannot create commits that add workflow files (`CreateCommitOnBranch` is permission-restricted)
-- **Migration prerequisite:** a repository owner must enable workflow-file write access for the deployment connection, add the prepared workflow, and change the Pages source from legacy branch publishing to GitHub Actions
+- **Current Pages mode:** GitHub Actions deployment
+- **Repository-owned workflow:** `.github/workflows/pages.yml`
+- **Release flow:** the workflow validates the exact `main` commit, builds a static Pages artifact, and deploys that artifact to GitHub Pages.
 
-The managed handoff must remain in place until that prerequisite is completed. Removing or changing it before then would stop publication. This limitation is intentional and reviewable here rather than being mistaken for a source-controlled deploy.
+GitHub Pages is the sole public publishing target. Replit’s local preview workflow is for development only and does not publish the site.
 
 ## Artifact and paths
 

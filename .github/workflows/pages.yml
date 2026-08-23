@@ -37,15 +37,6 @@ jobs:
       - name: Check generated search index
         run: python3 scripts/build-search-index.py --check
 
-      - name: Capture stale search index diff
-        if: failure()
-        run: |
-          mkdir -p assets/audit
-          cp assets/data/search-index.json /tmp/search-index-before-ci.json
-          python3 scripts/build-search-index.py
-          git diff --no-color -- assets/data/search-index.json > assets/audit/search-index-ci-diff.txt
-          cp /tmp/search-index-before-ci.json assets/data/search-index.json
-
       - name: Check generated portfolio statistics
         run: python3 scripts/sync-portfolio-stats.py --check
 

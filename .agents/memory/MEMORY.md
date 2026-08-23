@@ -4,3 +4,4 @@
 - [Pseudo-element dark mode](pseudo-element-dark-mode.md) — Dark mode rules on a container don't override ::before pseudo-elements with hardcoded backgrounds. Always add a matching ::before rule in the dark mode block.
 - [Skills compliance pass](skills-compliance-2026-08-03.md) — 14 skills reviewed 2026-08-03; created docs/adr/, brand-styles/, LIFECYCLE.md; okhp3-vite-github-pages and vercel-react-best-practices not applicable (no Vite/React).
 - [GitHub reconciliation limits](github-reconciliation-limits.md) — Public fetch resolves stale refs; Replit’s GitHub connector can upload blobs but cannot reliably create trees or Contents commits.
+- [Search index parser portability](search-index-parser-portability.md) — exclude iframe fallback markup from search extraction so generated output is stable across Python updates.
