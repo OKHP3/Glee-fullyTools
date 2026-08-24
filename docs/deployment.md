@@ -28,4 +28,23 @@ GitHub Pages custom-domain and HTTPS settings remain attached to `glee-fully.too
 
 ## Release guardrails
 
-Run `node .agents/skills/publishing-trigger-check/audit-sites.mjs --strict --json` from the audit repository before release. A successful managed Pages run is currently required while the external handoff remains. The repository validation workflows continue to protect HTML, links, responsive layout, and sparkle behavior. Visual content, navigation, and brand tokens are not changed by this handoff.
+Run the repository-owned checks from a clean checkout before merging a release
+change:
+
+```bash
+python3 scripts/build-search-index.py --check
+python3 scripts/sync-portfolio-stats.py --check
+python3 scripts/sync-css-version.py --check
+python3 scripts/validate-site.py
+python3 scripts/check-links.py
+python3 scripts/audit-site.py --quiet
+python3 scripts/check-accent-contrast.py --strict
+python3 scripts/check-glee-dark-coverage.py --section all --require-both
+```
+
+The Pages workflow repeats the required checks and performs browser QA before
+building the artifact. The previous reference to an external
+`publishing-trigger-check` command is not an executable prerequisite in this
+checkout and has been removed from the release contract. The repository
+validation workflows continue to protect HTML, links, responsive layout, and
+sparkle behavior.
