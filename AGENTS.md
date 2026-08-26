@@ -599,7 +599,7 @@ Script categories (last updated 2026-08-23 — all 66 scripts classified):
   `check-glee-dark-coverage.py`, `check-mtb-version.py`,
   `responsive-audit.py`, `run-viewport-qa.py`,
   `viewport-qa.py`, `site-audit.py`, `sparkle-qa.py`,
-  `check-public-headers.py`;
+  `check-public-headers.py`, `check-workflow-actions.py`;
   `responsive-qa.mjs` (Node/Playwright read-only QA runner);
   `post-merge.sh` (read-only integrity check after merges)
 - **Index / feed / report builders** (regenerate data or output files):
