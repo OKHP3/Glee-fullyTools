@@ -57,6 +57,11 @@ The repository’s current local release commands are listed in
 `docs/deployment.md`. Generated-output checks must remain check-only in CI;
 CI must not silently repair committed files.
 
+The landscape social-card check is a release gate: it verifies the approved
+PNG is 1200×630 and that all published social-preview pages point to it with
+the declared dimensions and alt metadata. `offline.html` is intentionally
+noindex and excluded from this page-family check.
+
 ## Desired branch-protection settings
 
 The owner-side `main` rule should be configured with:
