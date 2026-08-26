@@ -296,6 +296,8 @@ site-specific content genuinely requires a different layout.
 |   |-- agent-skills.md    site-specific agent governance and QA rules
 |   +-- skills/            agent skills consumed by this app
 |-- .github/               GitHub Actions, issue templates
+|   |-- CODEOWNERS         ownership review coverage for release surfaces
+|   +-- dependabot.yml     monthly dependency-update cadence
 |-- .gitignore
 |-- .replit
 |-- .replitignore
