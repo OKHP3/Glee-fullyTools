@@ -90,13 +90,13 @@ Read-only repository inspection on 2026-08-27 found:
 - Custom domain: `glee-fully.tools`
 - HTTPS enforcement: enabled
 - Branch protection for `main`: configured and verified
-- Pull requests required: enabled
-- Required approving reviews: 1, including code-owner review
-- Stale approvals dismissed and conversations required to be resolved
-- Required status checks: the three checks listed above, with branches required to
-  be up to date before merging
+- Pull requests: required
+- Required approving reviews: 1, including code owner review
+- Stale approvals: dismissed; conversations: must be resolved
+- Required status checks: the three checks listed above
+- Branch currency: must be up to date before merging
 - Administrator enforcement: enabled
-- Force pushes and branch deletion: blocked
+- Force pushes: blocked; branch deletion: blocked
 
 Therefore the current release path has repository-owned workflow guardrails,
 CODEOWNERS coverage, and an active GitHub `main` branch rule requiring the
