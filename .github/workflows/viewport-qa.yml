@@ -1,20 +1,12 @@
 name: Viewport QA
 
-# Run whenever CSS, JS, or HTML changes — these are the only inputs that can
-# introduce responsive-layout regressions. Also available on manual trigger.
+# Run on every push and pull request because this check is required by branch
+# protection. Path filters would leave dependency-only PRs permanently blocked.
 on:
   push:
     branches: [main]
-    paths:
-      - 'assets/css/**'
-      - 'assets/js/**'
-      - '**/*.html'
   pull_request:
     branches: [main]
-    paths:
-      - 'assets/css/**'
-      - 'assets/js/**'
-      - '**/*.html'
   workflow_dispatch:
 
 jobs:
