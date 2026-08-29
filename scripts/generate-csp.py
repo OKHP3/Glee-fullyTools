@@ -117,7 +117,7 @@ def build_edge_policy() -> str:
         page_scripts, _ = inline_sources(page)
         scripts.update(page_scripts)
     return (
-        "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://storage.ko-fi.com "
+        "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com "
         + " ".join(sorted(scripts))
         + "; script-src-attr 'none'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; "
         "style-src-attr 'unsafe-inline'; font-src 'self' data: https://fonts.gstatic.com; "
