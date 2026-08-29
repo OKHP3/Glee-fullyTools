@@ -546,17 +546,23 @@ def _check_mermaid_csp_alignment() -> list:
         rel = path.relative_to(ROOT).as_posix()
         kind = page_class(path)
         policy = policies.get(kind, "")
-        style_attr_directive = next(
-            (part.strip() for part in policy.split(";")
-             if part.strip().startswith("style-src-attr")),
+        directives = [part.strip() for part in policy.split(";")]
+        style_directive = next(
+            (part for part in directives if part.startswith("style-src ")),
             "",
         )
-        if "unsafe-inline" not in style_attr_directive:
+        style_attr_directive = next(
+            (part for part in directives if part.startswith("style-src-attr ")),
+            "",
+        )
+        if (
+            "unsafe-inline" not in style_directive
+            or "unsafe-inline" not in style_attr_directive
+        ):
             warnings.append(
                 f"{rel} renders live Mermaid diagrams under the {kind!r} CSP "
-                "class, which only allow-lists static style hashes; Mermaid's "
-                "runtime-generated inline styles will be blocked and diagrams "
-                "will render without theme styling"
+                "class, but style-src and style-src-attr must both allow "
+                "Mermaid's runtime-generated style blocks and inline styles"
             )
     return warnings
 

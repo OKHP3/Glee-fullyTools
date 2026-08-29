@@ -111,7 +111,7 @@ def build_policies() -> dict[str, str]:
 
     common = (
         "default-src 'self'; "
-        "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com "
+        "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://storage.ko-fi.com "
         + " ".join(sorted(hashes["standard"]))
         + "; script-src-attr 'none'; "
         "style-src 'self' https://fonts.googleapis.com "
@@ -157,7 +157,7 @@ def build_policies() -> dict[str, str]:
             )
         policy = (
             "default-src 'self'; "
-            "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com "
+            "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://storage.ko-fi.com "
             + " ".join(sorted(hashes[kind]))
             + "; script-src-attr 'none'; "
             + style_directives
