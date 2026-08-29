@@ -43,9 +43,14 @@ import re
 import sys
 from pathlib import Path
 
+from csp import all_pages, build_policies, page_class
+
 ROOT = Path(__file__).resolve().parent.parent
 SKIP_DIRS = {"node_modules", ".local", ".git", "attached_assets", "assets", ".pythonlibs", ".cache", ".agents"}
 SITE = "https://glee-fully.tools"
+MERMAID_VENDOR_ROOT = ROOT / "assets/vendor/mermaid"
+MERMAID_VENDOR_ENTRY = MERMAID_VENDOR_ROOT / "mermaid.esm.min.mjs"
+MERMAID_VERSION_FILE = MERMAID_VENDOR_ROOT / "VERSION"
 
 # Pages that intentionally point canonical to the homepage / are noindex.
 HOMEPAGE_CANONICAL_OK = {"index.html", "404.html", "under-construction.html"}
@@ -452,7 +457,88 @@ def main() -> int:
     if pwa_issues:
         total_issues += len(pwa_issues)
 
+    # ── Global invariant: Mermaid VERSION pin consistency ───────────────────
+    # assets/vendor/mermaid/VERSION must exist, be a plain semver string, and
+    # match the release actually vendored into mermaid.esm.min.mjs. Does not
+    # check npm for a newer release -- that's the scheduled "Mermaid Version
+    # Watch" GitHub Action, which needs network access this local validator
+    # does not assume. This only catches a partial or forgotten re-vendor.
+    mermaid_version_issues = _check_mermaid_version_pin()
+    for msg in mermaid_version_issues:
+        print(f"\nMermaid VERSION pin: {msg}")
+    if mermaid_version_issues:
+        total_issues += len(mermaid_version_issues)
+
+    # ── Global invariant: Mermaid / CSP class alignment ──────────────────────
+    # Mermaid renders inline style="..." attributes and <style> blocks at
+    # runtime, per diagram, per page load -- a build-time hash allowlist can
+    # never cover that. scripts/csp.py's "diagram" / "embed-diagram" classes
+    # are designed to grant a scoped 'unsafe-inline' to every page that needs
+    # it; this is a consistency safety net that should always come back
+    # clean, catching a future page that picks up a live diagram without
+    # being correctly classified.
+    mermaid_csp_warnings = _check_mermaid_csp_alignment()
+    for msg in mermaid_csp_warnings:
+        print(f"\nMermaid/CSP alignment: {msg}")
+    if mermaid_csp_warnings:
+        total_warnings += len(mermaid_csp_warnings)
+
     return 1 if total_issues else 0
+
+
+def _check_mermaid_version_pin() -> list:
+    """Return Mermaid VERSION-pin / vendored-bundle drift issues."""
+    issues: list = []
+    rel_version_file = MERMAID_VERSION_FILE.relative_to(ROOT).as_posix()
+
+    if not MERMAID_VERSION_FILE.is_file():
+        return [f"{rel_version_file} is missing; create it with the vendored release number"]
+
+    pinned = MERMAID_VERSION_FILE.read_text(encoding="utf-8").strip()
+    if not re.fullmatch(r"\d+\.\d+\.\d+", pinned):
+        return [f"{rel_version_file} pin {pinned!r} is not a plain semver string (X.Y.Z)"]
+
+    if not MERMAID_VENDOR_ENTRY.is_file():
+        return [f"{MERMAID_VENDOR_ENTRY.relative_to(ROOT).as_posix()} is missing (vendored Mermaid entry module)"]
+
+    bundle_text = MERMAID_VENDOR_ENTRY.read_text(encoding="utf-8", errors="replace")
+    if pinned not in bundle_text:
+        issues.append(
+            f"{rel_version_file} pin ({pinned}) was not found inside "
+            f"{MERMAID_VENDOR_ENTRY.relative_to(ROOT).as_posix()}; the pin file "
+            "and the vendored runtime have drifted out of sync"
+        )
+    return issues
+
+
+def _page_renders_mermaid(raw: str) -> bool:
+    return bool(re.search(r"""class=["\'][^"\']*\bmermaid\b""", raw, re.IGNORECASE))
+
+
+def _check_mermaid_csp_alignment() -> list:
+    """Return pages that render live Mermaid but whose CSP class can't style it."""
+    warnings: list = []
+    policies = build_policies()
+    for path in all_pages():
+        raw = path.read_text(encoding="utf-8", errors="replace")
+        if not _page_renders_mermaid(raw):
+            continue
+        rel = path.relative_to(ROOT).as_posix()
+        kind = page_class(path)
+        policy = policies.get(kind, "")
+        style_attr_directive = next(
+            (part.strip() for part in policy.split(";")
+             if part.strip().startswith("style-src-attr")),
+            "",
+        )
+        if "unsafe-inline" not in style_attr_directive:
+            warnings.append(
+                f"{rel} renders live Mermaid diagrams under the {kind!r} CSP "
+                "class, which only allow-lists static style hashes; Mermaid's "
+                "runtime-generated inline styles will be blocked and diagrams "
+                "will render without theme styling"
+            )
+    return warnings
 
 
 def _check_offline_shell() -> list:
