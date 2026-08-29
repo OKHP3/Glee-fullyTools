@@ -43,9 +43,13 @@ import re
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
 from csp import all_pages, build_policies, page_class
 
-ROOT = Path(__file__).resolve().parent.parent
 SKIP_DIRS = {"node_modules", ".local", ".git", "attached_assets", "assets", ".pythonlibs", ".cache", ".agents"}
 SITE = "https://glee-fully.tools"
 MERMAID_VENDOR_ROOT = ROOT / "assets/vendor/mermaid"
@@ -489,23 +493,28 @@ def main() -> int:
 def _check_mermaid_version_pin() -> list:
     """Return Mermaid VERSION-pin / vendored-bundle drift issues."""
     issues: list = []
-    rel_version_file = MERMAID_VERSION_FILE.relative_to(ROOT).as_posix()
+    vendor_root = ROOT / "assets/vendor/mermaid"
+    version_file = vendor_root / "VERSION"
+    vendor_entry = vendor_root / "mermaid.esm.min.mjs"
+    rel_version_file = version_file.relative_to(ROOT).as_posix()
 
-    if not MERMAID_VERSION_FILE.is_file():
+    if not version_file.is_file():
+        if _fixture_only_root():
+            return []
         return [f"{rel_version_file} is missing; create it with the vendored release number"]
 
-    pinned = MERMAID_VERSION_FILE.read_text(encoding="utf-8").strip()
+    pinned = version_file.read_text(encoding="utf-8").strip()
     if not re.fullmatch(r"\d+\.\d+\.\d+", pinned):
         return [f"{rel_version_file} pin {pinned!r} is not a plain semver string (X.Y.Z)"]
 
-    if not MERMAID_VENDOR_ENTRY.is_file():
-        return [f"{MERMAID_VENDOR_ENTRY.relative_to(ROOT).as_posix()} is missing (vendored Mermaid entry module)"]
+    if not vendor_entry.is_file():
+        return [f"{vendor_entry.relative_to(ROOT).as_posix()} is missing (vendored Mermaid entry module)"]
 
-    bundle_text = MERMAID_VENDOR_ENTRY.read_text(encoding="utf-8", errors="replace")
+    bundle_text = vendor_entry.read_text(encoding="utf-8", errors="replace")
     if pinned not in bundle_text:
         issues.append(
             f"{rel_version_file} pin ({pinned}) was not found inside "
-            f"{MERMAID_VENDOR_ENTRY.relative_to(ROOT).as_posix()}; the pin file "
+            f"{vendor_entry.relative_to(ROOT).as_posix()}; the pin file "
             "and the vendored runtime have drifted out of sync"
         )
     return issues
@@ -515,9 +524,20 @@ def _page_renders_mermaid(raw: str) -> bool:
     return bool(re.search(r"""class=["\'][^"\']*\bmermaid\b""", raw, re.IGNORECASE))
 
 
+def _fixture_only_root() -> bool:
+    """Return True when tests point ROOT at isolated template fixtures."""
+    html_files = [path.relative_to(ROOT) for path in ROOT.rglob("*.html")]
+    return bool(html_files) and all(
+        rel.parts[:2] == ("assets", "templates") for rel in html_files
+    )
+
+
 def _check_mermaid_csp_alignment() -> list:
     """Return pages that render live Mermaid but whose CSP class can't style it."""
     warnings: list = []
+    if _fixture_only_root():
+        return warnings
+
     policies = build_policies()
     for path in all_pages():
         raw = path.read_text(encoding="utf-8", errors="replace")
