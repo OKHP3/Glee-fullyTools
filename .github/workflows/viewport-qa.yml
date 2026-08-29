@@ -9,6 +9,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: viewport-qa-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   viewport-qa:
     runs-on: ubuntu-latest

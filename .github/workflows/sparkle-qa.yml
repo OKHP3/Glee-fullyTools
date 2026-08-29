@@ -9,6 +9,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: sparkle-qa-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   sparkle-qa:
     runs-on: ubuntu-latest
