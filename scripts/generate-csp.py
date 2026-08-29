@@ -121,7 +121,7 @@ def build_edge_policy() -> str:
         + " ".join(sorted(scripts))
         + "; script-src-attr 'none'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; "
         "style-src-attr 'unsafe-inline'; font-src 'self' data: https://fonts.gstatic.com; "
-        "img-src 'self' data: https:; "
+        "img-src 'self' data:; "
         "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; "
         "frame-src 'self' https://okhp3.github.io; "
         "object-src 'none'; base-uri 'self'; form-action 'self'; "

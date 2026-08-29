@@ -109,6 +109,17 @@ def build_policies() -> dict[str, str]:
         hashes[kind].update(scripts)
         style_hashes[kind].update(styles)
 
+    # img-src is scoped to 'self' data: rather than a wide-open https:
+    # wildcard. No page, template, or stylesheet in this repo references
+    # an external image host today (verified via
+    # `grep -rhoE 'src="https://[^"/]+' --include=*.html .` and the CSS
+    # equivalent for url(https://...)); og:image/twitter:image are
+    # same-origin (glee-fully.tools) and already covered by 'self'.
+    # storage.ko-fi.com is allowed in script-src for a future Ko-fi
+    # widget, but no page currently loads that widget script or an
+    # image from it, so it is intentionally left out of img-src too --
+    # add it here (and to the loop below) if/when a live Ko-fi badge or
+    # widget image actually ships.
     common = (
         "default-src 'self'; "
         "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://storage.ko-fi.com "
@@ -119,7 +130,7 @@ def build_policies() -> dict[str, str]:
         + "; style-src-attr 'unsafe-hashes' "
         + " ".join(sorted(style_hashes["standard"]))
         + "; font-src 'self' data: https://fonts.gstatic.com; "
-        "img-src 'self' data: https:; "
+        "img-src 'self' data:; "
         "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; "
         "object-src 'none'; base-uri 'self'; form-action 'self'; "
         "manifest-src 'self'; upgrade-insecure-requests"
@@ -155,6 +166,7 @@ def build_policies() -> dict[str, str]:
                 + " ".join(sorted(style_hashes[kind]))
                 + "; "
             )
+        # img-src rationale: see comment above `common`, near the top of this function.
         policy = (
             "default-src 'self'; "
             "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://storage.ko-fi.com "
@@ -162,7 +174,7 @@ def build_policies() -> dict[str, str]:
             + "; script-src-attr 'none'; "
             + style_directives
             + "font-src 'self' data: https://fonts.gstatic.com; "
-            "img-src 'self' data: https:; "
+            "img-src 'self' data:; "
             "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; "
             + (f"frame-src 'self' {frame}; " if frame else "")
             + "object-src 'none'; base-uri 'self'; form-action 'self'; "
