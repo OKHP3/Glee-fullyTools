@@ -90,9 +90,9 @@ def main() -> int:
         )
         return 1
     if updated:
-        print(f"  CSS token → {token}  ({updated} file(s) updated, {unchanged} already current)")
+        print(f"  CSS token -> {token}  ({updated} file(s) updated, {unchanged} already current)")
     else:
-        print(f"  CSS token → {token}  (all {unchanged} file(s) already current)")
+        print(f"  CSS token -> {token}  (all {unchanged} file(s) already current)")
 
     return 0
 
