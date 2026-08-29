@@ -30,6 +30,11 @@ ROOT = Path(__file__).resolve().parent.parent
 SKIP_DIRS = {"node_modules", ".local", ".git", "attached_assets", "assets"}
 
 THEME = "#d35b2d"
+# Dark-mode browser-chrome color, sourced from assets/css/theme.css:
+#   html[data-color-scheme="dark"] .glee-main { --color-bg: #1e1b19; }
+# (the page background var the dark toggle / prefers-color-scheme actually
+# switches to -- keep this in sync with theme.css if that value changes).
+DARK_THEME = "#1e1b19"
 
 CANONICAL_BLOCK = """    <link rel="icon" href="/assets/img/favicons/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
@@ -40,9 +45,27 @@ CANONICAL_BLOCK = """    <link rel="icon" href="/assets/img/favicons/favicon.svg
 
 
 def fix_theme_color(html: str) -> tuple[str, bool]:
-    pat = re.compile(r'(<meta\s+name="theme-color"\s+content=")[^"]*(")')
+    """Stamp each theme-color meta with the color matching its media query.
+
+    A page carries two theme-color metas: one unqualified (light/default)
+    and one scoped to media="(prefers-color-scheme: dark)". Previously both
+    were stamped to the same THEME value here, so dark-mode browser chrome
+    never actually changed even though the site has a working dark/light
+    toggle (see the glee-color-scheme localStorage init script + the
+    html[data-color-scheme="dark"] rules in assets/css/theme.css). The
+    dark-media tag now gets DARK_THEME instead of THEME.
+    """
+    pat = re.compile(
+        r'<meta\s+name="theme-color"\s+content="[^"]*"(\s+media="[^"]*")?\s*/?>'
+    )
+
+    def _replace(match: re.Match[str]) -> str:
+        media_attr = match.group(1) or ""
+        color = DARK_THEME if "prefers-color-scheme: dark" in media_attr else THEME
+        return f'<meta name="theme-color" content="{color}"{media_attr} />'
+
     if pat.search(html):
-        new = pat.sub(lambda m: m.group(1) + THEME + m.group(2), html)
+        new = pat.sub(_replace, html)
         return new, new != html
     # Insert before </head>
     insert = f'    <meta name="theme-color" content="{THEME}" />\n'
