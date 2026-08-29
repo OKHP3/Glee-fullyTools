@@ -1020,16 +1020,18 @@ def _check_css_lines_drift(tolerance: int = 50) -> str:
 
 def _check_css_token_drift(hashlib_mod) -> list:
     """Return a list of paths whose theme.css?v=<token> does not match the
-    current SHA-256 of assets/css/theme.css.
+    current stable SHA-256 of assets/css/theme.css.
 
-    Uses the same first-8-hex-chars hash as scripts/sync-css-version.py.
+    Uses the same normalized first-8-hex-chars hash as
+    scripts/sync-css-version.py.
     Returns an empty list when all files are in sync or theme.css is absent.
     """
     theme_css = ROOT / "assets" / "css" / "theme.css"
     if not theme_css.exists():
         return []
 
-    expected = hashlib_mod.sha256(theme_css.read_bytes()).hexdigest()[:8]
+    normalized = theme_css.read_bytes().replace(b"\r\n", b"\n")
+    expected = hashlib_mod.sha256(normalized).hexdigest()[:8]
     token_re = re.compile(r"theme\.css\?v=([^\"' >]+)")
 
     mismatches = []

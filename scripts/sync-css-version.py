@@ -38,8 +38,9 @@ CSS_REF_RE = re.compile(r"(theme\.css\?v=)([^\"' >]+)")
 
 
 def css_hash(path: Path) -> str:
-    """Return the first 8 hex chars of the SHA-256 of *path*."""
-    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    """Return a stable 8-char hash for the CSS payload."""
+    normalized = path.read_bytes().replace(b"\r\n", b"\n")
+    digest = hashlib.sha256(normalized).hexdigest()
     return digest[:8]
 
 
