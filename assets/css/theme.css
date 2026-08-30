@@ -6087,6 +6087,16 @@ html[data-color-scheme="dark"] .glee-main {
   --color-inline-link:  #f07585;   /* AA normal text on dark surfaces */
 }
 
+html[data-color-scheme="dark"] .glee-search-page__form {
+  background: var(--color-surface);
+  border-color: rgba(255, 216, 210, 0.12);
+}
+
+html[data-color-scheme="dark"] .glee-search-page__results > li {
+  background: var(--color-surface);
+  border-color: rgba(255, 216, 210, 0.12);
+}
+
 /* ── Glee dark mode: component-level overrides ──────────────────────────────
    Token overrides above reach all var(--color-*) consumers automatically.
    These extra rules fix elements that have hardcoded hex values the token
@@ -6608,6 +6618,16 @@ html[data-color-scheme="dark"] .arcade-eyebrow {
     --color-fg:           #f2ede8;
     --color-muted:        #b5a9a1;
     --color-inline-link:  #f07585;
+  }
+
+  html:not([data-color-scheme="light"]) .glee-search-page__form {
+    background: var(--color-surface);
+    border-color: rgba(255, 216, 210, 0.12);
+  }
+
+  html:not([data-color-scheme="light"]) .glee-search-page__results > li {
+    background: var(--color-surface);
+    border-color: rgba(255, 216, 210, 0.12);
   }
 }
 @media (prefers-color-scheme: dark) {
