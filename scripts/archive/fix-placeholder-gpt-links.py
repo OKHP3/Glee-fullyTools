@@ -71,7 +71,7 @@ HEALTHY_BEEING_FIXES = [
     },
 ]
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent.parent
 changed = 0
 
 # Apply Healthy Bee-ing wrong-URL fixes (simple string replacement)

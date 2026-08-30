@@ -16,7 +16,7 @@ from __future__ import annotations
 import re, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 SKIP = {"_replit", ".local", "attached_assets", "node_modules", "dist", ".git"}
 
 COLOR_SCHEME = '    <meta name="color-scheme" content="dark light" />\n'

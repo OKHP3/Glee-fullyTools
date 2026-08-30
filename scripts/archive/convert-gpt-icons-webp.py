@@ -22,7 +22,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 IMG_DIR = REPO / "assets" / "img"
 WEBP_DIR = REPO / "assets" / "img" / "webp"
 TARGET_WIDTHS = [150, 300, 512, 600, 1024]

@@ -25,7 +25,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 EXCLUDE_DIRS = {"_replit", ".local", "attached_assets", "node_modules", ".git"}
 
 # Only content-hashed assets are owned by this synchronizer. app.js uses an

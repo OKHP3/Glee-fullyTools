@@ -25,7 +25,7 @@ import sys
 from pathlib import Path
 
 # ── Configuration ────────────────────────────────────────────────────────────
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 TEMPLATE_ROOT = REPO_ROOT / "assets" / "templates"
 
 # Path prefixes (relative to REPO_ROOT) that are NEVER scanned.

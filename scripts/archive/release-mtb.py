@@ -35,7 +35,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-CHECKER = Path(__file__).parent / "check-mtb-version.py"
+CHECKER = Path(__file__).parent.parent / "check-mtb-version.py"
 
 
 def parse_args():

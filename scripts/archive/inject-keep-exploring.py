@@ -7,7 +7,7 @@ Injects immediately before </main> on each tool-ette page.
 from pathlib import Path
 import html as html_lib
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent.parent
 
 # Branch metadata: (branch_slug, branch_display_name, [toolette_slugs])
 BRANCHES = [

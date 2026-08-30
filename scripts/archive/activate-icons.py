@@ -27,7 +27,7 @@ import sys
 from pathlib import Path
 from urllib.parse import quote
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 IMG_DIR = ROOT / "assets" / "img"
 SITE = "https://glee-fully.tools"
 

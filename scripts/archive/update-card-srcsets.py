@@ -21,7 +21,7 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 SKIP_DIRS = {"node_modules", ".local", ".git", "attached_assets", ".pythonlibs", ".cache", ".agents"}
 WEBP_PREFIX = "/assets/img/webp/"
 

@@ -20,7 +20,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 SKIP_DIRS = {"node_modules", ".local", ".git", "attached_assets"}
 IMG_DIR = ROOT / "assets" / "img"
 

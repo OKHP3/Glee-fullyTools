@@ -20,7 +20,7 @@ import json
 import urllib.parse
 from pathlib import Path
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent.parent
 IMG_DIR = ROOT / "assets" / "img"
 SKIP_DIRS = {".git", "node_modules", ".pythonlibs", ".cache", ".local"}
 

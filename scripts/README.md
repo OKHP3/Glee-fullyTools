@@ -53,7 +53,7 @@ the current validation or release pipeline: `add-noreferrer.py`,
 `viewport-qa.py` is reference-only, not active, despite the similar name to
 the active `run-viewport-qa.py`: nothing in CI or in any other script
 invokes it directly (confirmed by exact-match search, not just a filename
-substring check — `viewport-qa.py` is a literal substring of
+substring check: `viewport-qa.py` is a literal substring of
 `run-viewport-qa.py`, which produced a false positive on the first pass of
 this audit). `run-viewport-qa.py` is the one both `pages.yml` and
 `viewport-qa.yml` actually call.

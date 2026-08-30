@@ -21,7 +21,7 @@ import sys
 from pathlib import Path
 from xml.etree import ElementTree
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent.parent
 
 # (html_page, img_src_prefix, artwork_path)
 TARGETS = [

@@ -23,7 +23,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup, Comment, NavigableString, Tag
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 TPL_DIR = ROOT / "assets" / "templates"
 
 TEMPLATES = [

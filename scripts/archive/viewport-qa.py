@@ -111,7 +111,7 @@ PAGES = [
     ("tool-07g",           "/toolbox/07-identity-known/07g-self-fixer/"),
 ]
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 import datetime as _dt
 _TODAY = _dt.date.today().isoformat()
 SCREENSHOTS_DIR = ROOT / "assets" / "audit" / "screenshots" / _TODAY

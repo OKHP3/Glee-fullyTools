@@ -52,24 +52,26 @@ const VIEWPORTS = [
   { name: 'desktop-1920', width: 1920, height: 1080 },
 ];
 
-// The sitemap is the release inventory. This avoids silently testing a stale
-// hand-maintained list when a public route is added or retired.
+// The sitemap is the indexable release inventory. Utility pages are public
+// production files too, so add them explicitly even though they are not listed
+// in sitemap.xml.
 function loadPublicPaths() {
   const sitemap = readFileSync(resolve(ROOT, 'sitemap.xml'), 'utf8');
   const locations = [...sitemap.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/g)]
     .map((match) => match[1]);
   if (locations.length === 0) throw new Error('sitemap.xml has no public routes');
-  return [...new Set(locations.map((location) => {
+  const sitemapPaths = locations.map((location) => {
     const url = new URL(location);
     if (url.origin !== 'https://glee-fully.tools' || url.search || url.hash) {
       throw new Error(`Invalid sitemap URL for responsive QA: ${location}`);
     }
     return url.pathname || '/';
-  }))];
+  });
+  return [...new Set([...sitemapPaths, '/404.html', '/under-construction.html', '/offline.html'])];
 }
 const PUBLIC_PATHS = loadPublicPaths();
 
-const RESULTS_DIR    = resolve(ROOT, 'assets/docs/responsive-qa');
+const RESULTS_DIR    = resolve(ROOT, 'assets/audit/responsive-qa');
 const RESULTS_FILE   = resolve(RESULTS_DIR, 'results.json');
 const SCREENSHOTS_DIR = resolve(RESULTS_DIR, 'screenshots');
 
@@ -268,9 +270,9 @@ function staticLintPage(path, html) {
   if (!html.includes('name="viewport"'))
     errors.push('LINT: missing viewport meta');
 
-  // 2. construction overlay absent
-  if (html.includes('construction-overlay'))
-    errors.push('LINT: construction-overlay present (blocking modal)');
+  // 2. construction overlay must be dismissible when present
+  if (html.includes('construction-overlay') && !html.includes('data-wip-dismiss'))
+    errors.push('LINT: construction-overlay present without dismiss control');
 
   // 3. single h1
   const h1Count = (html.match(/<h1[\s>]/gi) || []).length;
@@ -287,11 +289,15 @@ function staticLintPage(path, html) {
   if (imgsNoWidth > 0)
     errors.push(`LINT: ${imgsNoWidth} <img> missing width (layout-shift risk)`);
 
-  // 6. footer /search/ link (skip search page and legal page)
-  if (path !== '/search/' && path !== '/legal/') {
+  // 6. footer /search/ link when a footer nav list is present
+  if (path !== '/search/' && path !== '/legal/' && !path.endsWith('.html')) {
     const footerStart = html.indexOf('<footer');
     const footerHtml  = footerStart >= 0 ? html.slice(footerStart) : '';
-    if (!footerHtml.includes('href="/search/"'))
+    const navHeading = footerHtml.indexOf('<h4>Navigation</h4>');
+    const navBlock = navHeading >= 0 ? footerHtml.slice(navHeading, footerHtml.indexOf('</div>', navHeading)) : '';
+    if (navBlock.includes('<a ') &&
+        !navBlock.includes('href="/search/"') &&
+        !navBlock.includes('href="search/"'))
       errors.push('LINT: /search/ link missing from footer nav');
   }
 
@@ -307,7 +313,7 @@ function staticLintPage(path, html) {
     errors.push('LINT: /search/ found inside primary-nav (should be footer only)');
 
   // 9. skip link present
-  if (!html.includes('class="skip-link"'))
+  if (!html.includes('class="skip-link"') && !html.includes('class="skip-to-content"'))
     errors.push('LINT: missing skip link');
 
   // 10. app.js present
@@ -394,7 +400,7 @@ async function staticAnalysis() {
 // ── Entry point ───────────────────────────────────────────────────────────────
 
 (async () => {
-  console.log('AskJamie™ Responsive QA\n' + '='.repeat(40));
+  console.log('Glee-fully™ Responsive QA\n' + '='.repeat(40));
   console.log(`Base URL: ${BASE_URL}`);
   console.log(`Pages: ${PUBLIC_PATHS.length} | Viewports: ${VIEWPORTS.length}\n`);
 

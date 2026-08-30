@@ -193,7 +193,7 @@ def fix_missing_dimensions(path, content):
 # ---------------------------------------------------------------------------
 
 def main():
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     overlay_fixed = 0
     dim_fixed = 0
     files_touched = 0

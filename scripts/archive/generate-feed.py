@@ -16,7 +16,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 SITE = "https://glee-fully.tools"
 
 # Deterministic build date — bump manually when content actually changes so

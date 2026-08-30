@@ -21,7 +21,7 @@ import re, sys, shutil
 from pathlib import Path
 from urllib.parse import unquote
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 SKIP_DIRS = {"_replit", ".local", "attached_assets", "node_modules", "dist", ".git"}
 LIBRARY = ROOT / "assets" / "img" / "library"
 EXEMPT_DIRS = {LIBRARY, ROOT / "assets" / "img" / "favicons"}

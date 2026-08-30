@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 SKIP_DIRS = {"_replit", ".local", "attached_assets", "node_modules", ".git"}
 
 # Match a self-closing or opening <img ... src="/assets/img/...png" ...>

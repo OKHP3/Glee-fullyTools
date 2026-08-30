@@ -22,7 +22,7 @@ import re
 import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent
 SKIP_DIRS = {"node_modules", ".local", ".git", "attached_assets", ".pythonlibs", ".cache"}
 
 WEBP_QUALITY = 85

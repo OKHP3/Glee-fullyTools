@@ -19,7 +19,7 @@ Decision rule:
 from pathlib import Path
 import re
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent.parent
 
 SLIM_BRANCHES = [
     "toolbox/01-discovered-careers/index.html",

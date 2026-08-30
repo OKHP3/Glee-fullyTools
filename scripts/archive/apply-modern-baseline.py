@@ -39,7 +39,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 EXCLUDE_DIRS = {".local", "attached_assets", "node_modules", ".cache",
                 ".git", ".vscode", "templates"}
 

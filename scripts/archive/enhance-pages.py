@@ -31,7 +31,7 @@ import sys
 from pathlib import Path
 from datetime import date
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 SITE_ORIGIN = "https://askjamie.bot"
 TODAY = date.today().isoformat()
 

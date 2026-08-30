@@ -16,7 +16,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent.parent
 
 SKIP_SEARCH_SELF   = {"search/index.html"}   # the search page itself
 SKIP_SHOWCASE_SELF = {"showcase/index.html"}  # the showcase page itself
