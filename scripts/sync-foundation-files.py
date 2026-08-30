@@ -55,6 +55,7 @@ Exit codes
     2  a write was applied but a commit could not be made (e.g. another
        process is actively holding that repo's .git/index.lock)
     3  a repo path is missing/not a git checkout -- config problem
+    4  dirty local work would be overwritten or mixed into an automated commit
 
 This script is identical across all three sibling repos' scripts/ dirs (the
 same pattern as check-csp.py). It locates its siblings relative to its own
@@ -75,11 +76,16 @@ FOUNDATION_FILES = [
     "assets/js/mermaid-init.js",
 ]
 
-# Local mirror-root directory names, matching the OKHP3 GitHub org repos:
-#   overkill-hill    -> OKHP3/OverKill-Hill   (overkillhill.com)
-#   glee-fullytools   -> OKHP3/Glee-fullyTools (glee-fully.tools)
-#   askjamie          -> OKHP3/AskJamie        (askjamie.bot)
-REPO_DIRS = ["overkill-hill", "glee-fullytools", "askjamie"]
+# Stable logical repo keys. Discovery accepts the historical lower-case mirror
+# names and the default GitHub clone names so the script works on
+# case-sensitive and case-insensitive filesystems.
+REPO_DIR_CANDIDATES = {
+    "overkill-hill": ["overkill-hill", "OverKill-Hill"],
+    "glee-fullytools": ["glee-fullytools", "Glee-fullyTools"],
+    "askjamie": ["askjamie", "AskJamie"],
+}
+REPO_DIRS = list(REPO_DIR_CANDIDATES)
+STALE_LOCK_SECONDS = 15 * 60
 
 # Repos that need their own downstream housekeeping re-run after a
 # foundation file is written into them. Learned the hard way during the
@@ -103,9 +109,23 @@ def mirror_root() -> Path:
 
 def discover_repos(root: Path) -> dict[str, Path]:
     repos = {}
-    for name in REPO_DIRS:
-        path = root / name
-        repos[name] = path
+    children_by_lower = {
+        child.name.lower(): child
+        for child in root.iterdir()
+        if child.is_dir()
+    } if root.is_dir() else {}
+
+    for key, candidates in REPO_DIR_CANDIDATES.items():
+        exact = next((root / name for name in candidates if (root / name).is_dir()), None)
+        if exact is not None:
+            repos[key] = exact
+            continue
+
+        folded = next(
+            (children_by_lower.get(name.lower()) for name in candidates if name.lower() in children_by_lower),
+            None,
+        )
+        repos[key] = folded if folded is not None else root / candidates[0]
     return repos
 
 
@@ -147,23 +167,62 @@ def read_bytes(repo: Path, relpath: str) -> bytes | None:
     return full.read_bytes()
 
 
-def clear_stale_lock(repo: Path) -> None:
-    """Move aside a .git/index.lock so a genuinely stale lock (left by an
-    earlier crashed process) doesn't block us. If the lock is reinstated by
-    an active process immediately after, that's detected separately in
-    commit_repo() and treated as a live hold, not stale."""
+def git_status_paths(repo: Path, relpaths: list[str] | None = None) -> set[str]:
+    cmd = ["git", "status", "--porcelain=v1"]
+    if relpaths:
+        cmd.extend(["--", *relpaths])
+    out = subprocess.run(
+        cmd,
+        cwd=repo,
+        capture_output=True,
+        text=True,
+        timeout=20,
+    )
+    if out.returncode != 0:
+        raise RuntimeError(out.stderr.strip() or "git status failed")
+
+    changed = set()
+    for line in out.stdout.splitlines():
+        if not line:
+            continue
+        path = line[3:]
+        if " -> " in path:
+            path = path.split(" -> ", 1)[1]
+        changed.add(path)
+    return changed
+
+
+def clear_stale_lock(repo: Path) -> tuple[bool, str]:
+    """Move aside only a demonstrably old .git/index.lock.
+
+    A fresh lock may belong to VS Code, Git GUI, GitHub Desktop, or another Git
+    process. Removing it would defeat Git's concurrency protection, so this
+    function leaves fresh locks in place and reports a commit block instead.
+    """
     lock = repo / ".git" / "index.lock"
-    if lock.exists():
-        stale = repo / ".git" / f"index.lock.stale-{int(time.time())}"
-        try:
-            lock.rename(stale)
-        except OSError:
-            pass  # permission denied etc.; commit_repo() will surface this
+    if not lock.exists():
+        return True, "no lock"
+
+    age = time.time() - lock.stat().st_mtime
+    if age < STALE_LOCK_SECONDS:
+        return False, (
+            f".git/index.lock is {int(age)}s old; refusing to move a possible active Git lock"
+        )
+
+    stale = repo / ".git" / f"index.lock.stale-{int(time.time())}"
+    try:
+        lock.rename(stale)
+    except OSError as exc:
+        return False, f"could not move stale-looking .git/index.lock: {exc}"
+    return True, f"moved stale lock to {stale.name}"
 
 
 def commit_repo(repo: Path, relpaths: list[str], message: str) -> tuple[bool, str]:
     """Stage exactly relpaths (never -A) and commit. Returns (ok, detail)."""
-    clear_stale_lock(repo)
+    lock_ok, lock_detail = clear_stale_lock(repo)
+    if not lock_ok:
+        return False, lock_detail
+
     add = subprocess.run(
         ["git", "add", "--"] + relpaths,
         cwd=repo,
@@ -181,11 +240,12 @@ def commit_repo(repo: Path, relpaths: list[str], message: str) -> tuple[bool, st
         text=True,
         timeout=20,
     )
-    staged_files = set(staged.stdout.split())
-    if staged_files != set(relpaths):
+    staged_files = set(staged.stdout.splitlines())
+    intended_files = set(relpaths)
+    if staged_files != intended_files:
         return False, (
             "refusing to commit: staged set does not match intended set "
-            f"(staged={sorted(staged_files)}, intended={sorted(relpaths)})"
+            f"(staged={sorted(staged_files)}, intended={sorted(intended_files)})"
         )
 
     commit = subprocess.run(
@@ -321,7 +381,32 @@ def main() -> int:
 
     had_conflict = False
     had_lock_block = False
+    had_dirty_block = False
+    had_hook_failure = False
     writes_by_repo: dict[str, list[str]] = {}
+    hook_failures: list[dict[str, str]] = []
+
+    if apply_writes:
+        dirty_checks: dict[str, set[str]] = {}
+        for repo_name, repo_path in repos.items():
+            relpaths = None if args.commit else target_files
+            dirty = git_status_paths(repo_path, relpaths)
+            if dirty:
+                dirty_checks[repo_name] = dirty
+
+        if dirty_checks:
+            had_dirty_block = True
+            if args.json:
+                print(json.dumps({
+                    "error": "dirty worktree would be overwritten or mixed into an automated commit",
+                    "dirty": {name: sorted(paths) for name, paths in dirty_checks.items()},
+                }, indent=2))
+            else:
+                print("Cannot proceed -- dirty local work needs review before automated sync:")
+                for name, paths in dirty_checks.items():
+                    scope = "worktree" if args.commit else "foundation file(s)"
+                    print(f"  - {name}: dirty {scope}: {', '.join(sorted(paths))}")
+            return 4
 
     for plan in plans:
         if plan["status"] == "conflict":
@@ -336,7 +421,28 @@ def main() -> int:
                 writes_by_repo.setdefault(w["repo"], []).append(plan["file"])
                 if not args.no_hooks:
                     for hook in POST_WRITE_HOOKS.get(w["repo"], {}).get(plan["file"], []):
-                        subprocess.run(hook, cwd=repo_path, capture_output=True, text=True, timeout=60)
+                        hook_result = subprocess.run(
+                            hook,
+                            cwd=repo_path,
+                            capture_output=True,
+                            text=True,
+                            timeout=60,
+                        )
+                        if hook_result.returncode != 0:
+                            had_hook_failure = True
+                            hook_failures.append({
+                                "repo": w["repo"],
+                                "file": plan["file"],
+                                "hook": " ".join(hook),
+                                "stderr": hook_result.stderr.strip(),
+                                "stdout": hook_result.stdout.strip(),
+                            })
+                            continue
+                        if args.commit:
+                            for changed in git_status_paths(repo_path):
+                                writes_by_repo.setdefault(w["repo"], [])
+                                if changed not in writes_by_repo[w["repo"]]:
+                                    writes_by_repo[w["repo"]].append(changed)
             # content no longer needed after writing/reporting; drop it so
             # the JSON report below doesn't dump raw file bytes
             w.pop("content", None)
@@ -364,6 +470,7 @@ def main() -> int:
             ],
             "writes_by_repo": writes_by_repo,
             "commit_results": commit_results,
+            "hook_failures": hook_failures,
         }
         print(json.dumps(out, indent=2, default=str))
     else:
@@ -400,6 +507,14 @@ def main() -> int:
                 print(f"  {name}: {status} -- {res['detail']}")
             print()
 
+        if hook_failures:
+            print("-- post-write hook failures --")
+            for failure in hook_failures:
+                print(f"  {failure['repo']}: {failure['hook']} failed for {failure['file']}")
+                detail = failure["stderr"] or failure["stdout"] or "no output"
+                print(f"    {detail}")
+            print()
+
         if not apply_writes and any(p["status"] == "sync-needed" for p in plans):
             print("Dry run only. Re-run with --apply to write files, or --commit to also commit per repo.")
 
@@ -407,6 +522,10 @@ def main() -> int:
         return 1
     if had_lock_block:
         return 2
+    if had_hook_failure:
+        return 2
+    if had_dirty_block:
+        return 4
     return 0
 
 
