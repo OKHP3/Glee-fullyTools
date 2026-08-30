@@ -12,7 +12,8 @@ Usage:
 
 Conventions:
 - Only rewrites refs whose path resolves to a real file under the repo root.
-- Hash is the first 8 chars of sha256 of the file bytes.
+- Hash is the first 8 chars of sha256 of the UTF-8 text after normalizing
+  CRLF line endings to LF, matching the canonical CSS synchronizer.
 - Skips _replit/, .local/, attached_assets/, node_modules/.
 """
 
@@ -27,16 +28,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 EXCLUDE_DIRS = {"_replit", ".local", "attached_assets", "node_modules", ".git"}
 
-# Match href="/path/to/asset.ext?v=ANYTHING"  or src="..."
+# Only content-hashed assets are owned by this synchronizer. app.js uses an
+# intentional release token (for example, ?v=3) and must not be rewritten.
 PATTERN = re.compile(
-    r'((?:href|src)=")(/[^"?#]+\.(?:css|js))\?v=([^"&#]+)(")'
+    r'((?:href|src)=")(/[^"?#]+/(?:theme\.css|mermaid-init\.js))\?v=([^"&#]+)(")'
 )
 
 
 def file_hash(path: Path) -> str | None:
     if not path.is_file():
         return None
-    h = hashlib.sha256(path.read_bytes()).hexdigest()
+    normalized = path.read_bytes().replace(b"\r\n", b"\n")
+    h = hashlib.sha256(normalized).hexdigest()
     return h[:8]
 
 
@@ -48,13 +51,13 @@ def iter_html_files(root: Path):
         yield p
 
 
-def rewrite_one(html: str) -> tuple[str, int]:
+def rewrite_one(html: str, root: Path = ROOT) -> tuple[str, int]:
     changes = 0
 
     def repl(m: re.Match) -> str:
         nonlocal changes
         prefix, asset_path, old_ver, suffix = m.groups()
-        candidate = ROOT / asset_path.lstrip("/")
+        candidate = root / asset_path.lstrip("/")
         new_ver = file_hash(candidate)
         if new_ver is None or new_ver == old_ver:
             return m.group(0)
@@ -78,7 +81,7 @@ def main() -> int:
     for html_path in iter_html_files(ROOT):
         total_files += 1
         original = html_path.read_text(encoding="utf-8")
-        new, n = rewrite_one(original)
+        new, n = rewrite_one(original, ROOT)
         if n > 0:
             changed_files += 1
             total_subs += n
