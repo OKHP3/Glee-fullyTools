@@ -1,7 +1,7 @@
 # Glee-fully.tools — Automated Site Audit
 
-**Pages scanned:** 63
-**Total issues:** 48
+**Pages scanned:** 63  
+**Total issues:** 44
 
 ## Sitemap reconciliation
 
@@ -22,12 +22,6 @@
 
 ### `legal/index.html`
 - Description is 177 chars (>165)
-
-### `offline.html`
-- Missing og:title
-- Missing og:description
-- Missing og:image
-- Missing og:url
 
 ### `persona/index.html`
 - Description is 189 chars (>165)
@@ -136,3 +130,4 @@
 
 ### `under-construction.html`
 - In-page anchor href="#why" has no matching id
+
