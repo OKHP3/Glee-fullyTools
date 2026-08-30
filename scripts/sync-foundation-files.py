@@ -36,9 +36,12 @@ repos at once: group the three copies of the file by exact byte content.
 
 Recency is read from `git log -1 --format=%at -- <path>` in each repo (the
 commit timestamp of the last commit that touched the file), not filesystem
-mtime, which is unreliable across clones/checkouts/OS. If a repo has no git
-history for the file (new/untracked), filesystem mtime is used as a
-fallback and the run is flagged so a human can sanity-check that repo.
+mtime, which is unreliable across clones/checkouts/OS. If the file has
+uncommitted work, the dry-run report marks that source as `dirty` so it is
+not mistaken for the previous commit timestamp; write modes stop before
+changing files. If a repo has no git history for the file (new/untracked),
+filesystem mtime is used as a fallback and the run is flagged so a human can
+sanity-check that repo.
 
 Usage
 -----
@@ -140,7 +143,13 @@ def validate_repos(repos: dict[str, Path]) -> list[str]:
 
 
 def git_last_touch_epoch(repo: Path, relpath: str) -> tuple[int | None, str]:
-    """Return (epoch, source) where source is 'git' or 'mtime' or 'missing'."""
+    """Return (epoch, source) where source is git, dirty, mtime, or missing."""
+    try:
+        if relpath in git_status_paths(repo, [relpath]):
+            return int(time.time()), "dirty"
+    except Exception:
+        pass
+
     try:
         out = subprocess.run(
             ["git", "log", "-1", "--format=%at", "--", relpath],
@@ -461,13 +470,11 @@ def main() -> int:
                 had_lock_block = True
 
     if args.json:
+        files_report = [dict(plan) for plan in plans]
         out = {
             "mirror_root": str(root),
             "mode": "commit" if args.commit else ("apply" if args.apply else "dry-run"),
-            "files": [
-                {k: v for k, v in p.items() if k != "writes" or True}
-                for p in plans
-            ],
+            "files": files_report,
             "writes_by_repo": writes_by_repo,
             "commit_results": commit_results,
             "hook_failures": hook_failures,
