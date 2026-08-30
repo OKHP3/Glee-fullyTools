@@ -682,14 +682,34 @@ baseline -- update it here when the inventory changes materially.
 - `assets/data/icon-map.json` -- slug-to-icon-path registry for GPT tool icons
 
 **Glee-fully-specific scripts not on siblings:**
-`activate-icons.py`, `add-toolbox-to-footer.py`, `check-accent-contrast.py`,
+Active: `check-accent-contrast.py`, `check-glee-dark-coverage.py`,
+`check-public-headers.py`, `check-workflow-actions.py`, `run-viewport-qa.py`,
+`serve-site.py`, `sparkle-qa.py`, `sync-css-version.py`, `sync-image-alt.py`,
+`sync-portfolio-stats.py`, `sync-social-card.py`, `sync-sparkle-fallback.py`.
+`activate-icons.py`, `add-toolbox-to-footer.py`, `add-noreferrer.py`,
 `convert-gpt-icons-webp.py`, `fix-audit-2026-05-12.py`,
-`fix-placeholder-gpt-links.py`, `generate-illustrations.py`,
-`inject-gpt-icon-picture.py`, `inject-keep-exploring.py`,
-`inject-showcase-footer.py`, `inject-showcase-subnav.py`,
-`inject-toolette-hub.py`,
-`reclassify-construction-banners.py`, `run-viewport-qa.py`,
-`sync-portfolio-stats.py`, `update-card-srcsets.py`, `wire-illustrations.py`.
+`fix-footer-nav-2026-07-20.py`, `fix-placeholder-gpt-links.py`,
+`generate-illustrations.py`, `inject-gpt-icon-picture.py`,
+`inject-keep-exploring.py`, `inject-showcase-footer.py`,
+`inject-showcase-subnav.py`, `inject-toolette-hub.py`,
+`reclassify-construction-banners.py`, `update-card-srcsets.py`, `viewport-qa.py`,
+and `wire-illustrations.py` were also Glee-fully-specific but are
+reference-only or retired as of 2026-08-30 -- see `scripts/README.md`,
+they now live in `scripts/archive/` and are no longer part of the active
+toolchain.
+
+**Using `scripts/`:** `scripts/README.md` classifies every script as active,
+reference-only, or retired -- only active scripts remain at the top level of
+`scripts/`; everything else lives in `scripts/archive/` with the
+classification and rationale recorded there. Use `scripts/audit-site.py`
+for the canonical site audit, `scripts/validate-site.py` for structural
+validation, and `scripts/check-links.py`/`scripts/responsive-qa.mjs` for
+link and responsive QA. Do not run an archived script without reading its
+header and confirming its target paths still apply -- several were written
+for an earlier repo layout or reference sibling-site constants. This
+convention was ported from `askjamie/scripts/README.md`; see
+`overkill-hill/docs/sxs-infrastructure-audit-2026-08-29.md` for the full
+classification evidence.
 
 
 ---
