@@ -79,7 +79,7 @@ def main() -> int:
             unchanged += 1
         else:
             if args.check:
-                print(f"  STALE: {path.relative_to(REPO)}")
+                print(f"  STALE: {path.relative_to(REPO).as_posix()}")
             else:
                 path.write_text(patched, encoding="utf-8")
             updated += 1
