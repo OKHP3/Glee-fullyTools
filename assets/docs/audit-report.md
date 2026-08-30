@@ -1,6 +1,6 @@
 # Glee-fully.tools — Automated Site Audit
 
-**Pages scanned:** 63  
+**Pages scanned:** 63
 **Total issues:** 48
 
 ## Sitemap reconciliation
@@ -136,4 +136,3 @@
 
 ### `under-construction.html`
 - In-page anchor href="#why" has no matching id
-
