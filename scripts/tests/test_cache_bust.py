@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression tests for scripts/cache-bust.py."""
+"""Regression tests for archived scripts/cache-bust.py."""
 from __future__ import annotations
 
 import hashlib
@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 
 
-_SCRIPT = Path(__file__).resolve().parent.parent / "cache-bust.py"
+_SCRIPT = Path(__file__).resolve().parent.parent / "archive" / "cache-bust.py"
 _SPEC = importlib.util.spec_from_file_location("_cache_bust", _SCRIPT)
 _MODULE = importlib.util.module_from_spec(_SPEC)
 assert _SPEC.loader is not None

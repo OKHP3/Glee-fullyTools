@@ -184,6 +184,40 @@ def build_policies() -> dict[str, str]:
     return policies
 
 
+def build_edge_policy() -> str:
+    """Build the enforcing header policy, broad enough for every page class.
+
+    style-src stays 'unsafe-inline' rather than hash-only: this envelope has
+    to be broad enough to cover the "diagram" and "embed-diagram" page
+    classes too (see build_policies), and a hash-source alongside
+    'unsafe-inline' in the same directive causes browsers to ignore
+    'unsafe-inline' entirely. Per-page meta policies remain the real,
+    tighter enforcement for every other page; this header is only ever
+    meant to be a permissive outer bound, matching overkillhill.com's own
+    scripts/csp.py::build_edge_policy. It remains unenforced in production
+    today (GitHub Pages does not serve `_headers`), same as before this
+    change -- this is a forward-looking correctness fix, not a live-behavior
+    change, ready for a host that does serve it.
+    """
+    scripts: set[str] = set()
+    for page in all_pages():
+        page_scripts, _ = inline_sources(page)
+        scripts.update(page_scripts)
+    return (
+        "default-src 'self'; "
+        "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://storage.ko-fi.com "
+        + " ".join(sorted(scripts))
+        + "; script-src-attr 'none'; "
+        "style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; "
+        "style-src-attr 'unsafe-inline'; font-src 'self' data: https://fonts.gstatic.com; "
+        "img-src 'self' data:; "
+        "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com; "
+        "frame-src 'self' https://okhp3.github.io; "
+        "object-src 'none'; base-uri 'self'; form-action 'self'; "
+        "manifest-src 'self'; upgrade-insecure-requests"
+    )
+
+
 def meta_policy(path: Path) -> str | None:
     source = path.read_text(encoding="utf-8", errors="replace")
     match = META_RE.search(source)
