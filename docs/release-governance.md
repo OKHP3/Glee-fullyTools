@@ -47,6 +47,14 @@ names:
 | Viewport QA | `Responsive viewport QA (all pages × 8 viewports)` |
 | Sparkle Banner QA | `Sparkle banner smoke test (5 pages)` |
 
+The Viewport QA and Sparkle Banner QA workflows intentionally have no
+`paths` or `paths-ignore` filters. They run for every pull request targeting
+`main`, so documentation- and governance-only pull requests still receive
+completed successful statuses for the required browser checks. A pull request
+that changes HTML, CSS, JavaScript, or `assets/data/sparkle.json` runs the same
+full browser jobs; do not restore path filtering to optimize these required
+checks.
+
 The Pages workflow intentionally triggers on `push` to `main` and
 `workflow_dispatch`, not on pull requests. Its
 `Validate release commit and build Pages artifact` job is therefore a
@@ -56,6 +64,13 @@ must prevent deployment because the deploy job depends on it.
 The repository’s current local release commands are listed in
 `docs/deployment.md`. Generated-output checks must remain check-only in CI;
 CI must not silently repair committed files.
+
+GitHub verification on 2026-08-31 confirmed the workflow-only pull request
+that introduced this policy completed all three required checks successfully.
+The subsequent protected release pull request also completed the three checks
+successfully, while the earlier governance-only pull request (before this
+policy) had no browser-check statuses. This confirms both the repair and the
+failure mode it prevents.
 
 The landscape social-card check is a release gate: it verifies the approved
 PNG is 1200×630 and that all published social-preview pages point to it with
@@ -82,26 +97,31 @@ and rechecks them in GitHub.
 
 ## Current observed GitHub settings
 
-Read-only repository inspection on 2026-08-27 found:
+Repository inspection rechecked on 2026-08-31 found:
 
 - Default branch: `main`
 - Visibility: public
 - Pages source: GitHub Actions workflow, branch `main`, root path
 - Custom domain: `glee-fully.tools`
 - HTTPS enforcement: enabled
-- Branch protection for `main`: configured and verified
-- Pull requests: required
-- Required approving reviews: 1, including code owner review
-- Stale approvals: dismissed; conversations: must be resolved
-- Required status checks: the three checks listed above
-- Branch currency: must be up to date before merging
+- Branch protection for `main`: **configured and active**
+- Pull requests: required before merging
+- Required approving reviews: `1`, including a code-owner approval
+- Stale approvals: dismissed when new commits are pushed
+- Required conversations: all conversations must be resolved
+- Required status checks:
+  - `Validate site HTML, links, and structure`
+  - `Responsive viewport QA (all pages × 8 viewports)`
+  - `Sparkle banner smoke test (5 pages)`
+- Branch freshness: required; the branch must be up to date before merging
+- Force pushes: blocked
+- Branch deletion: blocked
 - Administrator enforcement: enabled
-- Force pushes: blocked; branch deletion: blocked
 
-Therefore the current release path has repository-owned workflow guardrails,
-CODEOWNERS coverage, and an active GitHub `main` branch rule requiring the
-documented pull-request review and validation path. Direct pushes are not part of
-the normal release path.
+The verified branch rule now blocks routine direct pushes and makes the
+documented pull-request release path enforceable. Emergency bypasses remain an
+owner decision and must be recorded and followed by the same validation and
+release review.
 
 ## Dependency update cadence
 
