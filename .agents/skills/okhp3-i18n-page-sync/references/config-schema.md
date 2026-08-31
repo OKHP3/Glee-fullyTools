@@ -24,7 +24,7 @@ ever writes this file.
 
 - `schema_version`: always `"1.0"` for this script's current contract.
 - `search_index`: path, relative to the repository root, to the site's own
-  generated search index. The script reads this file's `entries[].url`
+  generated search index. The script reads this file's `entries[].url` or `pages[].url`
   values as the canonical list of real content pages instead of walking the
   filesystem itself, so it inherits whatever the site's own search-index
   builder already treats as a page. It does not regenerate this file and
@@ -84,7 +84,7 @@ A site that already has translated pages before this skill was added (for
 example, a completed pilot) has no ledger yet. Run:
 
 ```bash
-python3 scripts/i18n-page-sync.py --root . --mode adopt
+python3 .agents/skills/okhp3-i18n-page-sync/scripts/i18n-page-sync.py --root . --mode adopt
 ```
 
 once. This records every existing target-locale page's current state as the
@@ -99,7 +99,7 @@ Whoever completes the actual translation (a human, or an agent running the
 matching `okhp3-translation-en-us-<pair>` skill) should run:
 
 ```bash
-python3 scripts/i18n-page-sync.py --root . --mode adopt --routes "/about/"
+python3 .agents/skills/okhp3-i18n-page-sync/scripts/i18n-page-sync.py --root . --mode adopt --routes "/about/"
 ```
 
 to confirm the ledger against the new content. This script never performs

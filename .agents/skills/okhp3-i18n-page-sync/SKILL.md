@@ -63,7 +63,7 @@ never one compounded skill.
 ## Procedure
 
 1. Load `i18n/sync.config.json`. If it does not exist, stop here and report "not configured" with exit code 0. This is not an error state.
-2. Load the site's search index and take its `entries[].url` values as the candidate page list, excluding any URL containing `#` (a fragment, not a page) and any URL already under a configured target locale's root.
+2. Load the site's search index and take its `entries[].url` or `pages[].url` values as the candidate page list, excluding any URL containing `#` (a fragment, not a page) and any URL already under a configured target locale's root.
 3. If `in_scope_routes` is set, narrow the candidate list to exactly those routes. A route never listed there can never appear in a drift report, no matter how long its translation has lagged. This is what makes a partial pilot rollout safe to run in CI without failing the build over content nobody has committed to translating.
 4. For each in-scope English page and each configured target locale, compare the target file's presence and the ledger's recorded `synced_source_sha256` against the page's current source hash to classify it `missing`, `stale`, `needs_baseline` (a translation exists but was never confirmed in the ledger), or `in_sync`.
 5. Also report `orphan`: a ledger entry whose English source page no longer appears in the search index at all. This is a warning, not build-breaking drift; a page can be legitimately retired.
@@ -90,7 +90,7 @@ Return `Configured` (yes/no), `Missing routes` (route, locale, skill to run), `S
 
 - Read `references/config-schema.md` before writing or editing a consuming site's `i18n/sync.config.json`.
 - Copy `templates/i18n-page-sync-workflow.yml` into a consuming repository's `.github/workflows/` to wire this into CI. It requires no secrets and calls no external service.
-- Run `scripts/i18n-page-sync.py --help` before using it directly. Use `--mode report` to preview drift, `--mode check` to verify a repository the way CI does, and `--mode adopt` only once a translation is actually confirmed.
+- Run `.agents/skills/okhp3-i18n-page-sync/scripts/i18n-page-sync.py --help` before using it directly. Use `--mode report` to preview drift, `--mode check` to verify a repository the way CI does, and `--mode adopt` only once a translation is actually confirmed.
 
 ## Evaluation and release
 

@@ -91,9 +91,9 @@ def discover_english_pages(
             f"missing {search_index_path}; run the site's search-index builder first"
         )
     index = load_json(search_index_path)
-    entries = index.get("entries")
+    entries = index.get("entries", index.get("pages"))
     if not isinstance(entries, list):
-        raise ValueError(f"{search_index_path}: expected an 'entries' array")
+        raise ValueError(f"{search_index_path}: expected an 'entries' or 'pages' array")
     locale_prefixes = tuple(f"/{r.strip('/')}/" for r in target_roots)
     scope = set(in_scope_routes) if in_scope_routes is not None else None
     routes: List[str] = []
@@ -207,7 +207,7 @@ def adopt(root: Path, config: Dict[str, Any], ledger: Dict[str, Any], only_route
     results = scan(root, config, ledger, only_routes)
     adopted: List[Dict[str, Any]] = []
     pages_ledger = ledger["pages"]
-    for item in results["needs_baseline"]:
+    for item in results["needs_baseline"] + results["stale"]:
         route = item["route"]
         locale_key = item["locale"]
         source_path = root / item["source_path"]

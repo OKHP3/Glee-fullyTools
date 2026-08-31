@@ -1,22 +1,28 @@
 #!/usr/bin/env python3
-"""Plan en-US source artifacts and es-ES targets without writing files."""
+"""Plan en-US source artifacts and fr-FR targets without writing files."""
 
 from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from validate_en_us_to_es_es import (
-    SOURCE_LOCALE,
-    TARGET_LOCALE,
-    load_json,
-    load_supporting_controls,
-    validate_manifest,
-)
+VALIDATOR_PATH = Path(__file__).with_name("validate-en-us-to-fr-fr.py")
+VALIDATOR_SPEC = importlib.util.spec_from_file_location("validate_en_us_to_fr_fr", VALIDATOR_PATH)
+if VALIDATOR_SPEC is None or VALIDATOR_SPEC.loader is None:
+    raise ImportError(f"Unable to load validator from {VALIDATOR_PATH}")
+validator = importlib.util.module_from_spec(VALIDATOR_SPEC)
+VALIDATOR_SPEC.loader.exec_module(validator)
+
+SOURCE_LOCALE = validator.SOURCE_LOCALE
+TARGET_LOCALE = validator.TARGET_LOCALE
+load_json = validator.load_json
+load_supporting_controls = validator.load_supporting_controls
+validate_manifest = validator.validate_manifest
 
 
 def sha256(path: Path) -> str:
@@ -75,7 +81,7 @@ def build_plan(project: Dict[str, Any], base_dir: Path, voice_profile: Dict[str,
 
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--project", required=True, type=Path, help="single-pair en-US to es-ES project JSON manifest")
+    parser.add_argument("--project", required=True, type=Path, help="single-pair en-US to fr-FR project JSON manifest")
     parser.add_argument("--base-dir", type=Path, default=Path("."), help="directory against which manifest roots are resolved")
     parser.add_argument("--format", choices=("text", "json"), default="text")
     args = parser.parse_args(argv)
@@ -100,12 +106,12 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(json.dumps(output, indent=2, ensure_ascii=False))
     else:
         print("PASS" if output["passed"] else "FAIL")
-        print("Language pair: en-US -> es-ES")
+        print("Language pair: en-US -> fr-FR")
         if output["passed"]:
             plan = output["plan"]
             missing = sum(artifact["state"] == "missing" for artifact in plan["artifacts"])
             print(f"Source artifacts: {plan['source_artifact_count']}")
-            print(f"Missing es-ES targets: {missing}")
+            print(f"Missing fr-FR targets: {missing}")
         else:
             for error in output["errors"]:
                 print(f"ERROR: {error}")

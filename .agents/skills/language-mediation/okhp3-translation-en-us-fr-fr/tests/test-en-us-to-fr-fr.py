@@ -7,8 +7,8 @@ from pathlib import Path
 
 
 PACKAGE = Path(__file__).parents[1]
-VALIDATOR = PACKAGE / "scripts" / "validate_en_us_to_fr_fr.py"
-PLANNER = PACKAGE / "scripts" / "plan_en_us_to_fr_fr.py"
+VALIDATOR = PACKAGE / "scripts" / "validate-en-us-to-fr-fr.py"
+PLANNER = PACKAGE / "scripts" / "plan-en-us-to-fr-fr.py"
 
 
 PROJECT = {

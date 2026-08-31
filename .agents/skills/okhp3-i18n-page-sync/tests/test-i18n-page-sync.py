@@ -17,6 +17,10 @@ def search_index(entries):
     return {"site": "https://example.test", "generated": "static", "count": len(entries), "entries": entries}
 
 
+def pages_search_index(entries):
+    return {"site": "https://example.test", "generated": "static", "count": len(entries), "pages": entries}
+
+
 def config(root: Path, in_scope=None):
     payload = {
         "schema_version": "1.0",
@@ -90,6 +94,34 @@ class I18nPageSyncTests(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             payload = run(root, "report")
             self.assertEqual(json.loads(payload.stdout)["stale"][0]["route"], "/about/")
+
+    def test_pages_search_index_schema_is_supported(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            write(root / "about" / "index.html")
+            write(root / "assets" / "data" / "search-index.json", json.dumps(pages_search_index([{"url": "/about/"}])))
+            config(root)
+            result = run(root, "report")
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["missing"][0]["route"], "/about/")
+
+    def test_adopt_refreshes_selected_stale_translation(self):
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            write(root / "about" / "index.html", "english v1")
+            write(root / "fr" / "about" / "index.html", "french v1")
+            write(root / "assets" / "data" / "search-index.json", json.dumps(search_index([{"url": "/about/"}])))
+            config(root)
+            subprocess.run([sys.executable, str(SCRIPT), "--root", str(root), "--mode", "adopt"], check=False)
+            write(root / "about" / "index.html", "english v2")
+            write(root / "fr" / "about" / "index.html", "french v2")
+            self.assertEqual(run(root, "check").returncode, 1)
+            adopt_result = subprocess.run(
+                [sys.executable, str(SCRIPT), "--root", str(root), "--mode", "adopt", "--routes", "/about/"],
+                capture_output=True, text=True, check=False,
+            )
+            self.assertEqual(adopt_result.returncode, 0, adopt_result.stdout + adopt_result.stderr)
+            self.assertEqual(run(root, "check").returncode, 0)
 
     def test_out_of_scope_routes_are_never_flagged(self):
         with tempfile.TemporaryDirectory() as raw:

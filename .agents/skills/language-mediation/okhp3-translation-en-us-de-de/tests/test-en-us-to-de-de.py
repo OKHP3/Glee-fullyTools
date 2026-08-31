@@ -7,16 +7,16 @@ from pathlib import Path
 
 
 PACKAGE = Path(__file__).parents[1]
-VALIDATOR = PACKAGE / "scripts" / "validate_en_us_to_es_es.py"
-PLANNER = PACKAGE / "scripts" / "plan_en_us_to_es_es.py"
+VALIDATOR = PACKAGE / "scripts" / "validate-en-us-to-de-de.py"
+PLANNER = PACKAGE / "scripts" / "plan-en-us-to-de-de.py"
 
 
 PROJECT = {
     "schema_version": "2.0",
-    "project_id": "fixture-en-us-es-es",
-    "language_pair": {"source_locale": "en-US", "target_locale": "es-ES", "direction": "one-way"},
+    "project_id": "fixture-en-us-de-de",
+    "language_pair": {"source_locale": "en-US", "target_locale": "de-DE", "direction": "one-way"},
     "source": {"locale": "en-US", "register_state": "plainspoken", "root": "content/en", "voice_profile": "config/voice.en-us.json", "register_mediation_record": None},
-    "target": {"locale": "es-ES", "root": "content/fr", "dictionary": "config/dictionary.en-us-es-es.json", "status": "draft", "needs_native_review": True},
+    "target": {"locale": "de-DE", "root": "content/de", "dictionary": "config/dictionary.en-us-de-de.json", "status": "draft", "needs_native_review": True},
     "rules": {"slug_policy": "stable", "preserve_urls": True, "default_status": "machine-drafted", "allowed_extensions": [".md"]},
 }
 
@@ -30,12 +30,12 @@ VOICE_PROFILE = {
 
 DICTIONARY = {
     "schema_version": "1.0",
-    "language_pair": {"source_locale": "en-US", "target_locale": "es-ES", "direction": "one-way"},
+    "language_pair": {"source_locale": "en-US", "target_locale": "de-DE", "direction": "one-way"},
     "entries": [{"source": "Home", "target": "Accueil", "handling": "translate", "context": "navigation"}],
 }
 
 
-class EnUsToEsEsValidatorTests(unittest.TestCase):
+class EnUsToDeDeValidatorTests(unittest.TestCase):
     def write_project(self, directory: Path, value=PROJECT) -> Path:
         path = directory / "project.json"
         path.write_text(json.dumps(value), encoding="utf-8")
@@ -51,7 +51,7 @@ class EnUsToEsEsValidatorTests(unittest.TestCase):
         config_root = directory / "config"
         config_root.mkdir()
         (config_root / "voice.en-us.json").write_text(json.dumps(voice_profile), encoding="utf-8")
-        (config_root / "dictionary.en-us-es-es.json").write_text(json.dumps(dictionary), encoding="utf-8")
+        (config_root / "dictionary.en-us-de-de.json").write_text(json.dumps(dictionary), encoding="utf-8")
 
     def test_valid_pair_and_protected_tokens_pass(self):
         with tempfile.TemporaryDirectory() as raw:
@@ -66,20 +66,20 @@ class EnUsToEsEsValidatorTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             payload = json.loads(result.stdout)
             self.assertTrue(payload["passed"])
-            self.assertEqual(payload["language_pair"]["target_locale"], "es-ES")
+            self.assertEqual(payload["language_pair"]["target_locale"], "de-DE")
 
     def test_rejects_any_other_language_pair_or_many_targets(self):
         with tempfile.TemporaryDirectory() as raw:
             directory = Path(raw)
             invalid = json.loads(json.dumps(PROJECT))
-            invalid["language_pair"]["target_locale"] = "es-419"
-            invalid["target"]["locale"] = "es-419"
+            invalid["language_pair"]["target_locale"] = "de-AT"
+            invalid["target"]["locale"] = "de-AT"
             invalid["targets"] = [{"locale": "es-ES"}]
             project = self.write_project(directory, invalid)
             result = self.run_validator(project)
             self.assertEqual(result.returncode, 1)
             errors = json.loads(result.stdout)["errors"]
-            self.assertTrue(any("es-ES" in item for item in errors))
+            self.assertTrue(any("de-DE" in item for item in errors))
             self.assertTrue(any("targets is not allowed" in item for item in errors))
 
     def test_rejects_specialist_register_without_completed_plainspoken_stage(self):
@@ -115,7 +115,7 @@ class EnUsToEsEsValidatorTests(unittest.TestCase):
             self.assertTrue(any("URL drift" in item for item in errors))
             self.assertTrue(any("placeholders" in item for item in errors))
 
-    def test_planner_reports_only_es_es_targets_without_writing(self):
+    def test_planner_reports_only_de_de_targets_without_writing(self):
         with tempfile.TemporaryDirectory() as raw:
             directory = Path(raw)
             project = self.write_project(directory)
@@ -131,7 +131,7 @@ class EnUsToEsEsValidatorTests(unittest.TestCase):
             )
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             payload = json.loads(result.stdout)
-            self.assertEqual(payload["plan"]["language_pair"]["target_locale"], "es-ES")
+            self.assertEqual(payload["plan"]["language_pair"]["target_locale"], "de-DE")
             self.assertEqual(payload["plan"]["artifacts"][0]["state"], "missing")
             self.assertFalse(payload["plan"]["writes_performed"])
             self.assertFalse(payload["plan"]["translation_performed"])
@@ -158,13 +158,13 @@ class EnUsToEsEsValidatorTests(unittest.TestCase):
             directory = Path(raw)
             project = self.write_project(directory)
             invalid_dictionary = json.loads(json.dumps(DICTIONARY))
-            invalid_dictionary["language_pair"]["target_locale"] = "es-419"
+            invalid_dictionary["language_pair"]["target_locale"] = "de-AT"
             invalid_dictionary["entries"] = []
             self.write_controls(directory, invalid_dictionary)
             result = self.run_validator(project)
             self.assertEqual(result.returncode, 1)
             errors = json.loads(result.stdout)["errors"]
-            self.assertTrue(any("en-US to es-ES" in item for item in errors))
+            self.assertTrue(any("en-US to de-DE" in item for item in errors))
             self.assertTrue(any("entries must be a non-empty array" in item for item in errors))
 
     def test_validator_rejects_incomplete_voice_profile(self):
