@@ -82,26 +82,31 @@ and rechecks them in GitHub.
 
 ## Current observed GitHub settings
 
-Read-only repository inspection on 2026-08-27 found:
+Repository inspection rechecked on 2026-08-31 found:
 
 - Default branch: `main`
 - Visibility: public
 - Pages source: GitHub Actions workflow, branch `main`, root path
 - Custom domain: `glee-fully.tools`
 - HTTPS enforcement: enabled
-- Branch protection for `main`: configured and verified
-- Pull requests: required
-- Required approving reviews: 1, including code owner review
-- Stale approvals: dismissed; conversations: must be resolved
-- Required status checks: the three checks listed above
-- Branch currency: must be up to date before merging
+- Branch protection for `main`: **configured and active**
+- Pull requests: required before merging
+- Required approving reviews: `1`, including a code-owner approval
+- Stale approvals: dismissed when new commits are pushed
+- Required conversations: all conversations must be resolved
+- Required status checks:
+  - `Validate site HTML, links, and structure`
+  - `Responsive viewport QA (all pages × 8 viewports)`
+  - `Sparkle banner smoke test (5 pages)`
+- Branch freshness: required; the branch must be up to date before merging
+- Force pushes: blocked
+- Branch deletion: blocked
 - Administrator enforcement: enabled
-- Force pushes: blocked; branch deletion: blocked
 
-Therefore the current release path has repository-owned workflow guardrails,
-CODEOWNERS coverage, and an active GitHub `main` branch rule requiring the
-documented pull-request review and validation path. Direct pushes are not part of
-the normal release path.
+The verified branch rule now blocks routine direct pushes and makes the
+documented pull-request release path enforceable. Emergency bypasses remain an
+owner decision and must be recorded and followed by the same validation and
+release review.
 
 ## Dependency update cadence
 
