@@ -43,6 +43,8 @@ def resolve_root(base_dir: Path, raw_root: str, label: str) -> Path:
 def build_plan(project: Dict[str, Any], base_dir: Path, voice_profile: Dict[str, Any], dictionary: Dict[str, Any]) -> Dict[str, Any]:
     source_root = resolve_root(base_dir, project["source"]["root"], "source.root")
     target_root = resolve_root(base_dir, project["target"]["root"], "target.root")
+    if source_root == target_root:
+        raise ValueError("source.root and target.root must resolve to different directories")
     if not source_root.is_dir():
         raise ValueError(f"missing en-US source root: {source_root}")
     extensions = set(project["rules"]["allowed_extensions"])

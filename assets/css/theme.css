@@ -6746,6 +6746,15 @@ html[data-color-scheme="dark"] .arcade-eyebrow {
   }
 }
 @media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .glee-main .site-header .okh-search-trigger {
+    color: var(--glee-paper-fg);
+    border-color: rgba(46, 43, 41, 0.25);
+  }
+  html:not([data-color-scheme="light"]) .glee-main .site-header .okh-search-trigger kbd {
+    color: var(--glee-paper-muted);
+    border-color: rgba(46, 43, 41, 0.2);
+    background: rgba(46, 43, 41, 0.05);
+  }
   html:not([data-color-scheme="light"]) .site-specials--glee {
     background: rgba(200, 146, 26, 0.18);
     color: var(--color-fg);
