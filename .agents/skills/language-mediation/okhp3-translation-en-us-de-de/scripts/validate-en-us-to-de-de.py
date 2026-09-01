@@ -18,7 +18,10 @@ from typing import Any, Dict, List, Optional, Tuple
 
 SOURCE_LOCALE = "en-US"
 TARGET_LOCALE = "de-DE"
-URL_RE = re.compile(r"https?://[^\s)\]>\"']+", re.IGNORECASE)
+URL_RE = re.compile(r"(?:https?|mailto|tel|sms|ftp):[^\s)\]>\"']+", re.IGNORECASE)
+EMAIL_RE = re.compile(r"(?<![\w.+-])[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?![\w.-])")
+MARKDOWN_TARGET_RE = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+HTML_TARGET_RE = re.compile(r"\b(?:href|src|action)=['\"]([^'\"]+)['\"]", re.IGNORECASE)
 PLACEHOLDER_RE = re.compile(
     r"\{\{[^{}]+\}\}|\$\{[^{}]+\}|%\([A-Za-z_][A-Za-z0-9_.-]*\)[a-z]|"
     r"\{[A-Za-z_][A-Za-z0-9_.-]*\}|(?<!\w):[A-Za-z][A-Za-z0-9_-]*"
@@ -206,9 +209,18 @@ def validate_manifest(project: Any, path: Path) -> List[str]:
     return errors
 
 
+def protected_values(text: str) -> List[str]:
+    values: List[str] = []
+    values.extend(URL_RE.findall(text))
+    values.extend(EMAIL_RE.findall(text))
+    values.extend(MARKDOWN_TARGET_RE.findall(text))
+    values.extend(HTML_TARGET_RE.findall(text))
+    return values
+
+
 def tokens(text: str) -> Dict[str, List[Any]]:
     return {
-        "urls": URL_RE.findall(text),
+        "urls": protected_values(text),
         "placeholders": PLACEHOLDER_RE.findall(text),
         "inline_code": INLINE_CODE_RE.findall(text),
         "fenced_code": FENCE_RE.findall(text),
