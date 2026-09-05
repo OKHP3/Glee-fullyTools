@@ -96,7 +96,7 @@ If remote-tracking refs may be stale, run `git fetch --all` separately and
 inspect its result. Do **not** add `--prune`: pruning before classification
 destroys evidence about stale remote branches.
 
-> **NON-NEGOTIABLE — NO EARLY PRUNING:** Never run `git fetch --all --prune`,
+> **NON-NEGOTIABLE  -  NO EARLY PRUNING:** Never run `git fetch --all --prune`,
 > `git fetch --prune`, or `git remote prune` until **every** stale remote branch
 > has been classified. Refresh refs without pruning during discovery.
 
@@ -159,22 +159,22 @@ Use this exact report shape:
 
 ```markdown
 ## Branches & PRs
-- KEEP: <branch> — <evidence>
-- MERGE: <branch> — <PR and check evidence>
-- DELETE: <branch> — <merged or owner-confirmed abandonment evidence>
-- REVIEW: <branch> — <unknown fact and smallest next check>
+- KEEP: <branch>  -  <evidence>
+- MERGE: <branch>  -  <PR and check evidence>
+- DELETE: <branch>  -  <merged or owner-confirmed abandonment evidence>
+- REVIEW: <branch>  -  <unknown fact and smallest next check>
 
 ## A. DELETE
-- <path> — <why it is verified disposable>
+- <path>  -  <why it is verified disposable>
 
 ## B. GITIGNORE-AND-UNTRACK
-- <path> — <why it is generated but currently tracked>
+- <path>  -  <why it is generated but currently tracked>
 
 ## C. TRIAGE-THEN-DELETE
-- <path> — <what must be inspected first>
+- <path>  -  <what must be inspected first>
 
 ## D. RENAME
-- <old> → <new> — <rule, import/link impact, validation>
+- <old> → <new>  -  <rule, import/link impact, validation>
 ```
 
 Stop. General approval of "the cleanup" is not approval of every destructive
@@ -244,15 +244,15 @@ Return:
 
 ## Resources
 
-- `scripts/audit-repo.py` — deterministic, no-fetch-by-default JSON audit of
+- `scripts/audit-repo.py`  -  deterministic, no-fetch-by-default JSON audit of
   branches, naming violations, and nested detritus.
-- `references/naming-conventions.md` — portable kebab-case policy and structural
+- `references/naming-conventions.md`  -  portable kebab-case policy and structural
   exceptions.
-- `references/foundry-architecture.md` — Phase 1 intent, scope, and brand
+- `references/foundry-architecture.md`  -  Phase 1 intent, scope, and brand
   decision for this renamed skill.
-- `evals/evals.json` — three live-evaluation prompts with four anchored
+- `evals/evals.json`  -  three live-evaluation prompts with four anchored
   expectations each.
-- `benchmarks/benchmark.json` — version-matched Foundry evidence after live
+- `benchmarks/benchmark.json`  -  version-matched Foundry evidence after live
   execution.
 
 ---

@@ -9,12 +9,22 @@ from pathlib import Path
 
 SCRIPT = Path(__file__).parents[1] / "scripts" / "audit-repo.py"
 SPEC = importlib.util.spec_from_file_location("audit_repo", SCRIPT)
-assert SPEC and SPEC.loader
+if SPEC is None or SPEC.loader is None:
+    raise RuntimeError(f"Cannot load audit module: {SCRIPT}")
 audit_repo = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(audit_repo)
 
 
 class AuditRepoTests(unittest.TestCase):
+    def test_directories_and_components_are_validated(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ["Feature Components", "my_folder", "UPPER"]:
+                (root / name).mkdir()
+            for name in ["chat-pane.tsx", "my_component.tsx", "component file.jsx"]:
+                (root / name).touch()
+            self.assertEqual(len(audit_repo.audit_naming(root)), 6)
+
     def test_naming_exceptions_and_violations(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -60,6 +60,11 @@ jobs:
       - name: Run client behavior regressions
         run: node scripts/tests/test-client-regressions.cjs
 
+      - name: Check skill identities and branch-audit regressions
+        run: |
+          python3 .agents/skills/okhp3-skill-cataloger/scripts/gen-skills-readme.py --skills-dir .agents/skills --check --quiet
+          python3 .agents/skills/okhp3-replit-repl-janitor/tests/test-audit-repo.py
+
       - name: Run social-card synchronizer regressions
         run: python3 -m unittest scripts/tests/test_sync_social_card.py
 

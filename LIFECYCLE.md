@@ -20,7 +20,7 @@
 ## Current state: Active
 
 The Glee-fully Tools site is publicly deployed at `https://glee-fully.tools` and
-actively maintained. The current phase is **active growth and refinement**  - 
+actively maintained. The current phase is **active growth and refinement**.
 new Tool-ettes are added as the GPT suite expands, and the toolbox structure is
 stable. The public site is a catalog and routing hub; it does not imply that
 every externally hosted GPT is finished.

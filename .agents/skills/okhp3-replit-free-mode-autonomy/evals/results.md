@@ -41,36 +41,36 @@ away. This small sample is directional and is not a universal quality claim.
 
 ### Strict grading notes
 
-- **`quota-blocked-checkpoint` with skill — 3/5.** Passed stopping repeated
+- **`quota-blocked-checkpoint` with skill  -  3/5.** Passed stopping repeated
   work, unknown reset timing, and the no-more-frequent-than-six-hours retry
   opportunity. Failed to describe a checkpoint containing completed work,
   changed files, the exact blocked operation, and validations; it also did not
   state that a retry verifies success and stops if the limit remains active.
   Relevant response: “Status: quota blocked” and “Next retry: Resume the exact
   refactor operation once after a possible reset; do not retry repeatedly.”
-- **`quota-blocked-checkpoint` without skill — 2/5.** It stopped and did not
+- **`quota-blocked-checkpoint` without skill  -  2/5.** It stopped and did not
   invent a reset time, but omitted the checkpoint contents, routine opportunity,
   and verify/stop rule.
-- **`approval-boundary` with skill — 3/4.** It refused automatic approval,
+- **`approval-boundary` with skill  -  3/4.** It refused automatic approval,
   named connector/deployment and privileged categories, and would not retry
   indefinitely. It did not explain that the user may choose “Always allow” for
   a trusted low-risk action.
-- **`approval-boundary` without skill — 3/4.** It preserved the core refusal,
+- **`approval-boundary` without skill  -  3/4.** It preserved the core refusal,
   identified connector/deployment risk, and proposed bounded retries, but also
   omitted the “Always allow” distinction.
-- **`routine-host-limit` with skill — 4/4.** It rejected a global hourly timer,
+- **`routine-host-limit` with skill  -  4/4.** It rejected a global hourly timer,
   described conversation-bound per-Repl retry opportunities, kept the six-hour
   cadence, rejected forced resets/restarts, and supplied the safe copy-paste
   routine message.
-- **`routine-host-limit` without skill — 1/4.** It rejected the timer and
+- **`routine-host-limit` without skill  -  1/4.** It rejected the timer and
   automatic restart, but did not explain conversation scope, did not enforce
   the six-hour policy, and did not provide the per-conversation retry prompt.
-- **`quiet-free-mode-execution` with skill — 2/4.** It stayed in Free Mode and
+- **`quiet-free-mode-execution` with skill  -  2/4.** It stayed in Free Mode and
   did not recommend Power or Max. The response asked for missing bug details,
   so it did not demonstrate a code change or validation. No platform
   limitation occurred, so the conditional limitation-report expectation was
   not exercised.
-- **`quiet-free-mode-execution` without skill — 2/4.** It likewise avoided
+- **`quiet-free-mode-execution` without skill  -  2/4.** It likewise avoided
   upgrade suggestions and requested the missing reproduction details, but
   demonstrated no change or validation.
 
@@ -113,12 +113,12 @@ than hidden by aggregate scoring.
 
 ## Review and validation status
 
-- **PASS — mechanical:** all recorded JSON parses; the eight run scores match
+- **PASS  -  mechanical:** all recorded JSON parses; the eight run scores match
   their expectation counts; the trigger count is 12/12; and the rebased files
   contain no conflict markers.
-- **PASS — manual:** the main-agent review checked every expectation against the
+- **PASS  -  manual:** the main-agent review checked every expectation against the
   quoted response evidence and confirmed that the report does not claim a quota
   reset, routine creation, or automatic approval.
-- **NOT RUN — independent architect review:** the host reported that the
+- **NOT RUN  -  independent architect review:** the host reported that the
   architect runner and automated testing are disabled in Free Mode. No
   independent-review result is implied by this record.

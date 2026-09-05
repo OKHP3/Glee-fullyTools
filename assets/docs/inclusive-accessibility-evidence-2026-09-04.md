@@ -1,4 +1,4 @@
-# Inclusive Hub Experience — Current Evidence
+# Inclusive Hub Experience  -  Current Evidence
 
 **Site:** glee-fully.tools  
 **Evidence date:** 2026-09-04  

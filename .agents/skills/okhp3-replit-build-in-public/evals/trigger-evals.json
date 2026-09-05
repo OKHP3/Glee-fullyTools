@@ -2,20 +2,20 @@
   "skill_name": "okhp3-replit-build-in-public",
   "skill_version": "1.0.1",
   "phase": 8,
-  "description_evaluated": "Full playbook for a Replit Designathon competition submission — canvas organisation for judges, artifact selection, dual deployment (Replit Publish + GitHub Pages), session-to-session narrative continuity, and building-in-public commit discipline. Activate for \"designathon\", \"competition\", \"building in public\", \"judges\", \"showcase\", \"submission\", \"dual deploy\", \"GitHub Pages + Replit\", or any request to prepare a Replit project for public or competitive review.",
+  "description_evaluated": "Full playbook for a Replit Designathon competition submission  -  canvas organization for judges, artifact selection, dual deployment (Replit Publish + GitHub Pages), session-to-session narrative continuity, and building-in-public commit discipline. Activate for \"designathon\", \"competition\", \"building in public\", \"judges\", \"showcase\", \"submission\", \"dual deploy\", \"GitHub Pages + Replit\", or any request to prepare a Replit project for public or competitive review.",
   "evaluator": "independent trigger subagent",
   "queries": [
     {
       "query": "Prepare this Replit project for a Designathon submission",
       "should_trigger": true,
       "triggered": true,
-      "rationale": "Names 'Replit', 'Designathon', and 'submission' explicitly — a direct match to the description's core purpose and trigger keywords."
+      "rationale": "Names 'Replit', 'Designathon', and 'submission' explicitly  -  a direct match to the description's core purpose and trigger keywords."
     },
     {
       "query": "Organize the canvas so competition judges can review the work",
       "should_trigger": true,
       "triggered": true,
-      "rationale": "Combines 'competition', 'judges', and canvas organisation for judge review — squarely within the described canvas-for-judges scope."
+      "rationale": "Combines 'competition', 'judges', and canvas organization for judge review  -  squarely within the described canvas-for-judges scope."
     },
     {
       "query": "Which app, deck, and video artifacts should judges see first?",
@@ -39,19 +39,19 @@
       "query": "Create a short handoff so the next Designathon session keeps the narrative",
       "should_trigger": true,
       "triggered": true,
-      "rationale": "Maps to 'session-to-session narrative continuity' plus the 'Designathon' keyword — clear match."
+      "rationale": "Maps to 'session-to-session narrative continuity' plus the 'Designathon' keyword  -  clear match."
     },
     {
       "query": "Run a pre-submission showcase check for public review",
       "should_trigger": true,
       "triggered": true,
-      "rationale": "Contains 'submission', 'showcase', and 'public review' — three signals aligned with the description's activation clause."
+      "rationale": "Contains 'submission', 'showcase', and 'public review'  -  three signals aligned with the description's activation clause."
     },
     {
       "query": "Switch the Replit canvas from building mode to judging mode",
       "should_trigger": true,
       "triggered": true,
-      "rationale": "The building-vs-judging canvas distinction and canvas organisation for judges are central to the description; Replit context reinforces it."
+      "rationale": "The building-vs-judging canvas distinction and canvas organization for judges are central to the description; Replit context reinforces it."
     },
     {
       "query": "Keep both public URLs visible to competition reviewers",
@@ -81,7 +81,7 @@
       "query": "Organize canvas frames for an internal engineering meeting",
       "should_trigger": false,
       "triggered": false,
-      "rationale": "Canvas organisation overlaps, but the audience is an internal meeting, not judges or competitive review — outside the description's activation context."
+      "rationale": "Canvas organization overlaps, but the audience is an internal meeting, not judges or competitive review  -  outside the description's activation context."
     },
     {
       "query": "Write a social-media launch post about building in public",
@@ -99,7 +99,7 @@
       "query": "Create a pitch deck for an investor meeting unrelated to a competition",
       "should_trigger": false,
       "triggered": false,
-      "rationale": "Pitch deck overlaps with an artifact type, but the query explicitly disclaims competition context — the description activates for Designathon/competition, not investor decks."
+      "rationale": "Pitch deck overlaps with an artifact type, but the query explicitly disclaims competition context  -  the description activates for Designathon/competition, not investor decks."
     },
     {
       "query": "Produce a marketing video for an existing product launch",

@@ -112,8 +112,6 @@ def is_exception(path: Path, root: Path) -> bool:
         return True
     if name.startswith("."):
         return True
-    if path.suffix.lower() in {".tsx", ".jsx"}:
-        return True
     if path.suffix.lower() == ".ts" and re.match(r"^use[A-Z]", path.stem):
         return True
     return False
@@ -128,6 +126,14 @@ def iter_visible(root: Path) -> Iterable[Path]:
 
 
 def naming_reason(path: Path, root: Path) -> str | None:
+    if path.is_dir():
+        if path.name.startswith(".") or KEBAB_OK.fullmatch(path.name):
+            return None
+        return "directory name is not kebab-case"
+    if path.suffix.lower() in {".tsx", ".jsx"}:
+        if path.suffix == path.suffix.lower() and re.fullmatch(r"[A-Z][A-Za-z0-9]*", path.stem):
+            return None
+        return "component filename must be PascalCase with a lowercase extension"
     if is_exception(path, root):
         return None
     name = path.name
@@ -150,8 +156,6 @@ def naming_reason(path: Path, root: Path) -> str | None:
 def audit_naming(root: Path) -> list[dict[str, str]]:
     violations: list[dict[str, str]] = []
     for path in iter_visible(root):
-        if path.is_dir():
-            continue
         reason = naming_reason(path, root)
         if reason:
             violations.append({
