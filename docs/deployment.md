@@ -33,6 +33,28 @@ GitHub Pages custom-domain and HTTPS settings remain attached to `glee-fully.too
 
 ## Release guardrails
 
+Prepare changes on a temporary `codex/` branch. Generate the search index,
+then portfolio stats, then rebuild the index if the stats changed page copy.
+Run `scripts/sync-css-version.py` last: it updates CSS references and derives
+the offline cache version from every precached file. Its `--check` mode blocks
+releases with stale offline assets. Post-merge verification is read-only so
+pulling a published commit cannot create another generated-content commit.
+
+Replit's Sync button pushes the currently selected branch; it cannot supply
+the approving review required by protected `main`. Publish the temporary
+branch through a pull request, finish its reviews and checks, then fast-forward
+Replit's clean `main` from `origin/main`. Keep the origin URL set to
+`https://github.com/OKHP3/Glee-fullyTools.git`. A stored PAT authenticates the
+request but does not replace the review gate. Retire task branches only after
+their work is merged or preserved with an explicit recovery reference.
+
+The cross-browser test uses a local HTTP server. For those test documents only,
+the runner removes CSP's HTTPS upgrade directive and disables service workers
+in the navigation contexts so cached production HTML cannot override that
+fixture. Production policies remain intact. A separate Chromium lifecycle
+context tests real service-worker control, warm-page offline recovery, and
+cache replacement.
+
 Run the repository-owned checks from a clean checkout before merging a release
 change:
 

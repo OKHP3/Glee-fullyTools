@@ -27,12 +27,12 @@ available. The authoritative promise and inventory contract is
 - `assets/js/mermaid-init.js` — External Mermaid v11 init (used by ecosystem + universe pages). Both pages also carry a single `.mermaid-referral` credit linking to the paid-referral URL `https://mermaidchart.cello.so/UhVlNtC2MlS` in Mermaid hot-pink `#FF3670`. `scripts/validate-site.py` enforces a one-instance-per-Mermaid-page invariant so this credit can never silently be dropped.
 - `assets/img/` — Branded butterfly and GPT icons
 - `sw.js` — Root-scoped service worker with a versioned, same-origin offline shell and `/offline.html` fallback
-- `toolbox/` — Central hub with 1 Toolbox page, 7 thematic branches, and 42
+- `toolbox/`  -  Central hub with 1 Toolbox page, 7 thematic branches, and 42
   Tool-ette pages
 - `about/`, `contact/`, `legal/`, `persona/`, `universe/`, `ecosystem/`, `showcase/` — Supporting pages (`showcase/` is the portfolio case-study page added 2026-05-27)
 - `robots.txt` — Bot policy (GPTBot blocked for training; OAI-SearchBot, ChatGPT-User allowed)
-- `sitemap.xml` — 60 indexable public URLs
-- `feed.xml` — 49 branch and Tool-ette update entries (not a full-site mirror)
+- `sitemap.xml`  -  60 indexable public URLs
+- `feed.xml`  -  49 branch and Tool-ette update entries (not a full-site mirror)
 
 ## Workflows
 

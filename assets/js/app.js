@@ -37,8 +37,8 @@
   }
 
   function loadAnalytics() {
-    if (document.querySelector('script[data-glee-analytics]')) return;
     window["ga-disable-" + MEASUREMENT_ID] = false;
+    if (document.querySelector('script[data-glee-analytics]')) return;
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () {
       window.dataLayer.push(arguments);
@@ -1036,16 +1036,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!fallbackSelector) return;
       const fallback = document.querySelector(fallbackSelector);
       if (!fallback) return;
+      let fallbackTimer;
       const showFallback = () => {
+        window.clearTimeout(fallbackTimer);
         fallback.hidden = false;
         fallback.classList.add("visible");
       };
       frame.addEventListener("load", () => {
+        window.clearTimeout(fallbackTimer);
         fallback.hidden = true;
         fallback.classList.remove("visible");
       }, { once: true });
       frame.addEventListener("error", showFallback, { once: true });
-      window.setTimeout(showFallback, Number(frame.dataset.timeout || 8000));
+      fallbackTimer = window.setTimeout(showFallback, Number(frame.dataset.timeout || 8000));
     });
   }
 

@@ -1154,37 +1154,6 @@ OverKill Hill industrial stripes.
   border-radius: 20px;
 }
 
-.arcade-embed-fallback {
-  position: absolute;
-  inset: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  background: #1a1f3c;
-  color: #f6f2ee;
-  text-align: center;
-}
-
-.arcade-embed-fallback a {
-  color: #f5d576;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.privacy-controls {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0.75rem 0 0;
-}
-
-.privacy-controls .btn {
-  font-size: 0.85rem;
-}
 
 /* ===================================================================== */
 
@@ -5340,6 +5309,42 @@ html[data-theme="light"] .glee-main {
 
 /* Paper-surface text roles used by the Glee header and special banner. These
    remain stable when dark-scheme tokens are applied to the rest of the page. */
+.glee-main .arcade-embed-fallback {
+  position: absolute;
+  inset: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--color-surface);
+  color: var(--color-fg);
+  text-align: center;
+}
+
+.glee-main .arcade-embed-fallback a {
+  color: var(--color-inline-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.glee-main .privacy-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+}
+
+.glee-main .privacy-controls .btn {
+  font-size: 0.85rem;
+}
+
+.glee-main .arcade-embed-fallback[hidden] {
+  display: none;
+}
+
 .glee-main {
   --glee-paper-fg: #2e2b29;
   --glee-paper-muted: #5a4a44;

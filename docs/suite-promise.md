@@ -1,4 +1,4 @@
-# Glee-fully Tools — Suite Promise
+# Glee-fully Tools  -  Suite Promise
 
 **Status:** Current contract  
 **Last reviewed:** 2026-09-04  
@@ -61,14 +61,14 @@ generated reports, and agent files are not public catalog entries.
 
 The status terms below are deliberately conservative:
 
-- **Met** — repository evidence demonstrates the public capability.
-- **Partially met** — an important public layer exists, but a boundary,
+- **Met**  -  repository evidence demonstrates the public capability.
+- **Partially met**  -  an important public layer exists, but a boundary,
   dependency, or verification gap remains.
-- **Unverified** — the goal is claimed or designed, but this repository does
+- **Unverified**  -  the goal is claimed or designed, but this repository does
   not contain enough evidence to confirm it.
-- **Intentionally deferred** — the owner has kept it out of the current phase
+- **Intentionally deferred**  -  the owner has kept it out of the current phase
   and recorded why.
-- **Out of scope** — this project does not claim responsibility for it.
+- **Out of scope**  -  this project does not claim responsibility for it.
 
 | Goal | Status | Repository evidence and limit |
 |---|---|---|
@@ -211,14 +211,14 @@ release blockers or resolved facts.
 | Decision | Current disposition | Owner, rationale, and review condition |
 |---|---|---|
 | Lifecycle state | **Retained: Active** | Project owner; the site is deployed, maintained, and still receiving suite growth and refinement. Review after 90 days with no new tool or content work, or immediately if hosting/repository changes. |
-| B1 — stronger branch visual indices | **Intentionally deferred** | Project owner/editor; current branch hubs already route visitors and bespoke layouts should not be homogenized. Review during the next branch redesign or when a new branch is added. |
-| B3 — placement of portfolio positioning copy | **Retained as a content split** | Project owner/editor; README stays a concise repository orientation while the homepage, About, and Showcase carry public story and portfolio detail. Revisit only if the owner wants one marketing surface to become canonical. |
-| C2 — visible per-page “Last updated” timestamps | **Intentionally deferred** | Project owner/editor; a stable visible date source and a brand placement decision are still needed. Review during the next metadata/editorial pass. |
-| C3 — per-Tool-ette FAQ JSON-LD | **Intentionally deferred** | Project owner/editor; each answer requires authored, current content and must not be fabricated from page scaffolding. Review when the editorial owner can supply and maintain the Q&A set. |
+| B1  -  stronger branch visual indices | **Intentionally deferred** | Project owner/editor; current branch hubs already route visitors and bespoke layouts should not be homogenized. Review during the next branch redesign or when a new branch is added. |
+| B3  -  placement of portfolio positioning copy | **Retained as a content split** | Project owner/editor; README stays a concise repository orientation while the homepage, About, and Showcase carry public story and portfolio detail. Revisit only if the owner wants one marketing surface to become canonical. |
+| C2  -  visible per-page “Last updated” timestamps | **Intentionally deferred** | Project owner/editor; a stable visible date source and a brand placement decision are still needed. Review during the next metadata/editorial pass. |
+| C3  -  per-Tool-ette FAQ JSON-LD | **Intentionally deferred** | Project owner/editor; each answer requires authored, current content and must not be fabricated from page scaffolding. Review when the editorial owner can supply and maintain the Q&A set. |
 | PurgeCSS or CSS minification build step | **Intentionally deferred** | Project owner/maintainer; the no-build static philosophy is currently more valuable than an unmeasured byte reduction. Review only with a measured performance case and a reversible CI design. |
 | Orphaned butterfly artwork | **Intentionally deferred** | Project owner/asset curator; source art may still be wanted and deleting it is irreversible. Review during an explicit asset-curation pass. |
-| B2 — Keep exploring trays | **Resolved** | Existing implementation is present on all 42 Tool-ette pages; re-open only if visitor testing shows the route choices are confusing. |
-| B5 — complete-branch construction overlays | **Resolved as status badges** | Complete branch surfaces use slim badges rather than blocking overlays; re-open when a branch's actual publication state changes. |
+| B2  -  Keep exploring trays | **Resolved** | Existing implementation is present on all 42 Tool-ette pages; re-open only if visitor testing shows the route choices are confusing. |
+| B5  -  complete-branch construction overlays | **Resolved as status badges** | Complete branch surfaces use slim badges rather than blocking overlays; re-open when a branch's actual publication state changes. |
 
 ## Evidence maintenance
 

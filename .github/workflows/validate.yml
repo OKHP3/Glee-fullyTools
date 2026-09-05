@@ -54,6 +54,12 @@ jobs:
       - name: Run template metadata regressions
         run: python3 -m unittest scripts/tests/test_validate_template_metadata.py
 
+      - name: Run publication and offline release regressions
+        run: python3 scripts/tests/test-reconciliation.py
+
+      - name: Run client behavior regressions
+        run: node scripts/tests/test-client-regressions.cjs
+
       - name: Run social-card synchronizer regressions
         run: python3 -m unittest scripts/tests/test_sync_social_card.py
 

@@ -39,10 +39,15 @@ class PageParser(HTMLParser):
         self.description = ""
         self.h1 = ""
         self._tag = ""
+        self.launch_destinations = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         self._tag = tag
         attrs_d = dict(attrs)
+        if tag == "a" and {"btn", "button"} & set((attrs_d.get("class") or "").split()):
+            href = attrs_d.get("href") or ""
+            if re.match(r"https://(?:chatgpt\.com|chat\.openai\.com)/g/g-[a-z0-9]+", href, re.I) and not is_placeholder(href):
+                self.launch_destinations.append(href)
         if tag == "meta" and attrs_d.get("name", "").lower() == "description":
             self.description = attrs_d.get("content", "") or ""
 
@@ -57,13 +62,9 @@ class PageParser(HTMLParser):
 
 def launch_urls(html: str) -> list[str]:
     """Return only primary CTA destinations, not sibling-card links."""
-    matches = re.findall(
-        r'<a\b[^>]*href="(https://chatgpt\.com/g/[^"]+)"[^>]*>'
-        r'.*?(?:Launch|Open\s+[^<]*GPT).*?</a>',
-        html,
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-    return sorted(set(matches))
+    parser = PageParser()
+    parser.feed(html)
+    return sorted(set(parser.launch_destinations))
 
 
 def is_placeholder(url: str | None) -> bool:

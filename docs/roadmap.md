@@ -4,7 +4,7 @@ This roadmap outlines the near-term public direction for the **Glee-fully Tools*
 repository. The authoritative current promise, inventory, publication states,
 and completion criteria are in [`docs/suite-promise.md`](suite-promise.md).
 
-## Current phase — Active growth and refinement
+## Current phase  -  Active growth and refinement
 
 - Maintain the public catalog and routing hub while new Tool-ettes move through
   live, beta, construction, unavailable, or retired states.
@@ -41,7 +41,7 @@ and completion criteria are in [`docs/suite-promise.md`](suite-promise.md).
 - **Offline shell** — Versioned same-origin service-worker cache with an
   explicit offline fallback page; third-party resources remain outside the
   cache boundary.
-- **Resilient web behavior (2026-09-04)** — `scripts/resilience-qa.py` records
+- **Resilient web behavior (2026-09-04)**  -  `scripts/resilience-qa.py` records
   static crawler/installability checks, Chromium/Firefox/WebKit journeys,
   offline/reconnect lifecycle evidence, and blocked-third-party fallback
   behavior. See [`docs/resilience.md`](resilience.md).
