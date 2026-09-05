@@ -1,6 +1,7 @@
 const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const { join } = require('node:path');
+const { URL } = require('node:url');
 const vm = require('node:vm');
 const source = readFileSync(join(__dirname, '../../assets/js/glee-site-enhancements.js'), 'utf8');
 function block() {
@@ -9,7 +10,7 @@ function block() {
 }
 let installed = false;
 const analytics = {
-  window: {}, navigator: {}, fetch: () => Promise.resolve({ ok: false }), localStorage: { getItem: () => null, setItem() {} },
+  window: { location: { href: 'http://test/' } }, URL, navigator: {}, fetch: () => Promise.resolve({ ok: false }), localStorage: { getItem: () => null, setItem() {} },
   document: {
     readyState: 'complete', querySelector: () => installed,
     querySelectorAll: () => [], createElement: () => ({dataset: {}}),
@@ -30,7 +31,7 @@ for (const event of ['load', 'error', 'timeout']) {
   const frame = { dataset: {}, getAttribute: () => '#fallback', addEventListener: (name, fn) => { listeners[name] = fn; } };
   vm.runInNewContext(block(), {
     document: { readyState: 'complete', querySelectorAll: () => [frame], querySelector: () => fallback },
-    window: { setTimeout: (fn) => { timer = fn; return 1; }, clearTimeout: () => { timer = null; } }, navigator: {}, fetch: () => Promise.resolve({ ok: false }),
+    window: { location: { href: 'http://test/' }, setTimeout: (fn) => { timer = fn; return 1; }, clearTimeout: () => { timer = null; } }, URL, navigator: {}, fetch: () => Promise.resolve({ ok: false }),
   });
   if (event === 'timeout') timer();
   else listeners[event]();
