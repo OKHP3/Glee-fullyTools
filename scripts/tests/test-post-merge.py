@@ -1,5 +1,8 @@
 """Run the real post-merge shell hook with mocked validation commands."""
 import os
+import importlib.util
+import io
+from contextlib import redirect_stdout
 from pathlib import Path
 import shutil
 import subprocess
@@ -16,7 +19,7 @@ CALLS = [
     "scripts/sync-css-version.py --check",
     "scripts/check-csp.py",
     "scripts/validate-site.py",
-    "scripts/check-links.py",
+    "scripts/check-links.py --no-report",
 ]
 REQUIRED = ("index.html", "assets/css/theme.css", "assets/js/app.js")
 SUCCESS = "Post-merge: all checks passed."
@@ -28,7 +31,7 @@ python3() {
 }
 tree() { echo 'Unexpected tree command' >&2; return 97; }
 export -f python3 tree
-bash ./post-merge.sh
+source ./post-merge.sh
 """
 
 
@@ -78,6 +81,29 @@ class PostMergeTests(unittest.TestCase):
 
     def test_hook_retains_lf_line_endings(self):
         self.assertNotIn(b"\r", HOOK.read_bytes())
+
+    def test_link_check_no_report_preserves_findings_and_disk(self):
+        spec = importlib.util.spec_from_file_location("links", HOOK.parent / "check-links.py")
+        links = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(links)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            links.ROOT = root
+            (root / "index.html").write_text('<a href="/missing/">Broken</a>', encoding="utf-8")
+            (root / "sitemap.xml").write_text(f"<loc>{links.SITE}/</loc>", encoding="utf-8")
+            with redirect_stdout(io.StringIO()):
+                self.assertEqual(links.main(["--no-report"]), 1)
+            self.assertFalse((root / "assets").exists())
+            audit = root / "assets/audit"
+            audit.mkdir(parents=True)
+            report = audit / f"links-report-{links.REPORT_DATE}.json"
+            report.write_bytes(b"existing audit evidence")
+            with redirect_stdout(io.StringIO()):
+                self.assertEqual(links.main(["--no-report"]), 1)
+            self.assertEqual(report.read_bytes(), b"existing audit evidence")
+            with redirect_stdout(io.StringIO()):
+                self.assertEqual(links.main([]), 1)
+            self.assertIn('"broken_links"', report.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

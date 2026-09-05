@@ -26,6 +26,6 @@ echo "Post-merge: validating site structure..."
 python3 scripts/validate-site.py
 
 echo "Post-merge: checking links and sitemap..."
-python3 scripts/check-links.py
+python3 scripts/check-links.py --no-report
 
 echo "Post-merge: all checks passed."
