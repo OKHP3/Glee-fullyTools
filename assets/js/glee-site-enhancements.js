@@ -91,7 +91,7 @@
     fetch("/assets/data/search-index.json", { credentials: "same-origin" })
       .then((response) => response.ok ? response.json() : Promise.reject(new Error("index request failed")))
       .then((data) => {
-        const entries = Array.isArray(data.entries) ? data.entries : [];
+        const entries = Array.isArray(data.entries) ? data.entries : (Array.isArray(data.pages) ? data.pages : []);
         let category = "all";
         const render = () => {
           const terms = searchInput.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
