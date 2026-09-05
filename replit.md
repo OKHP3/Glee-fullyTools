@@ -14,8 +14,9 @@ available. The authoritative promise and inventory contract is
   ASKJAMIE, and CROSS-BRAND sections. Glee-fully pages use the coral and cream
   brand contract documented in `AGENTS.md`.
 - **Fonts:** Google Fonts (Fredoka, Open Sans, Poppins, and DM Sans)
-- **Dependencies:** Browser services load via CDN (Mermaid.js v11, Ko-fi, and
-  Google Analytics G-89W66VMGPB). Optional local Node metadata exists for
+- **Dependencies:** Mermaid v11 is vendored locally. Google Fonts is external;
+  Google Analytics G-89W66VMGPB loads only after opt-in. Ko-fi is an outbound
+  link. Optional local Node metadata exists for
   Lighthouse and Puppeteer, but the site does not run on Node or a bundler.
 - **Hosting:** Static site served with Python's built-in HTTP server in dev
 
@@ -37,6 +38,13 @@ available. The authoritative promise and inventory contract is
 ## Workflows
 
 - **Start application:** `python3 scripts/serve-site.py` (port 5000, no-cache webview)
+
+On Windows, set `$env:PYTHONUTF8='1'` in PowerShell and use an existing working
+Python 3 interpreter instead of `python3`. `py -3` works only if its registered
+interpreter exists. The September 5 local checks used the installed Codex
+bundled Python when the system launcher pointed to a missing executable.
+Browser runners require an already installed Playwright runtime/browser;
+static-lint fallback is not browser evidence. No install is part of this runbook.
 
 ## CI Gate (GitHub Actions)
 
@@ -197,8 +205,8 @@ HTML navigations for repeat visits, and serves `offline.html` when a navigation
 cannot reach the network. It never intercepts or caches third-party requests,
 including fonts, analytics, Ko-fi, ChatGPT, Mermaid, and the arcade iframe.
 
-When changing a pre-cached asset, increment `CACHE_NAME` in `sw.js` and update
-the CSS cache token with `python3 scripts/sync-css-version.py`. The offline page
+After changing a pre-cached asset, run `python3 scripts/sync-css-version.py`
+last to derive the cache version and CSS token from content. The offline page
 is deliberately excluded from the search index and sitemap.
 
 **Why no Lunr.js or Algolia:** The site has 60 indexable pages and the raw text trims to ~130 KB. A homemade weighted scorer (title × 10, headings × 5, description × 4, body × 1) is plenty fast at this scale and adds zero external dependencies, matching the site's no-build philosophy.
@@ -223,7 +231,30 @@ The sparkle banner (`<section class="site-specials">`) appears in the `<header>`
 
 The sync script is idempotent: safe to re-run; it skips files already up to date.
 
-## Validation tooling (2026-05-03)
+## Current maintenance commands (2026-09-05)
+
+`scripts/README.md` is the active script inventory. Source editing is followed
+by these serial generators, with the generated diff reviewed before validation:
+
+```bash
+python3 scripts/build-search-index.py
+python3 scripts/sync-portfolio-stats.py
+python3 scripts/build-search-index.py
+python3 scripts/sync-css-version.py
+```
+
+The second index pass captures any stats copy changes. Then run the check-only
+release sequence above and the focused regressions relevant to the change.
+`bash scripts/post-merge.sh` checks committed index, stats, CSS/offline versions,
+CSP, structure and links. It does not regenerate or repair files. Run it only in
+a Bash environment with a working `python3`; use the equivalent Python checks
+directly on Windows when that environment is unavailable.
+
+`feed.xml` and `icon-map.json` have archived generators and are not routine
+release outputs. Feed/date policy remains deferred under `docs/suite-promise.md`.
+Do not execute the historical commands below against the current site.
+
+## Historical validation tooling (2026-05-03, superseded)
 
 Seven standalone Python scripts under `scripts/` keep the site honest. **Run order
 matters** — `inject-jsonld` reads `og:image` to set `primaryImageOfPage`, so it

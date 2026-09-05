@@ -592,7 +592,14 @@ def _check_offline_shell() -> list:
     sw = worker.read_text(encoding="utf-8", errors="replace")
     if not re.search(r'CACHE_NAME\s*=\s*["\']glee-fully-shell-v\d+["\']', sw):
         issues.append("sw.js cache name is not versioned")
-    if 'caches.match("/offline.html")' not in sw:
+    # Accept the tested cache-scoped helper as well as the legacy direct call.
+    # This is a source-presence gate; worker regressions prove fallback behavior.
+    direct_fallback = re.search(r'''\bcaches\.match\(\s*["']/offline\.html["']\s*\)''', sw)
+    scoped_fallback = (
+        re.search(r'''\bcachedResponse\(\s*["']/offline\.html["']\s*\)''', sw)
+        and re.search(r'\basync\s+function\s+cachedResponse\s*\(', sw)
+    )
+    if not (direct_fallback or scoped_fallback):
         issues.append("sw.js has no /offline.html navigation fallback")
     if not re.search(r'register\("/sw\.js",\s*\{\s*scope:\s*"/"\s*\}\)', registration_text):
         issues.append("client runtime registration is not root-scoped")

@@ -63,6 +63,16 @@ jobs:
       - name: Run client behavior regressions
         run: node scripts/tests/test-client-regressions.cjs
 
+      - name: Run discovery, publication, asset, and artifact regressions
+        run: |
+          python3 scripts/tests/test-visitor-truth.py
+          python3 scripts/tests/test-search-index.py
+          python3 scripts/tests/test_public_artifact.py
+          python3 scripts/tests/test_svg_assets.py
+          python3 scripts/tests/test_offline_validation.py
+          node --test scripts/tests/test-sw-resilience.cjs
+          node scripts/tests/test-sw-bootstrap.cjs
+
       - name: Check skill identities and branch-audit regressions
         run: |
           python3 .agents/skills/okhp3-skill-cataloger/scripts/gen-skills-readme.py --skills-dir .agents/skills --check --quiet

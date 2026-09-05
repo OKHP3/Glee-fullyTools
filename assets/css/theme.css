@@ -5965,12 +5965,18 @@ html:has(
 }
 
 /* ===== Glee-fully general styles =================================== */
+/* The hero sits on paper in this brand, including when the shared theme
+   attribute selects light mode. Use the local effective text token. */
+html .glee-main .hero-eyebrow {
+  color: var(--color-muted);
+}
+
 /* Headers */
 .glee-main h1,
 .glee-main h2,
 .glee-main h3 {
   font-family: "Fredoka", "Poppins", sans-serif;
-  color: var(--color-accent-2);
+  color: var(--color-heading, var(--color-accent-2));
 }
 
 /* Buttons */
@@ -6264,6 +6270,7 @@ html[data-color-scheme="dark"] .glee-main {
   --color-fg:           #f2ede8;   /* warm near-white ink */
   --color-muted:        #b5a9a1;   /* muted warm grey */
   --color-inline-link:  #f07585;   /* AA normal text on dark surfaces */
+  --color-heading:      var(--color-fg);
 }
 
 /* ── Glee dark mode: component-level overrides ──────────────────────────────
@@ -6787,6 +6794,7 @@ html[data-color-scheme="dark"] .arcade-eyebrow {
     --color-fg:           #f2ede8;
     --color-muted:        #b5a9a1;
     --color-inline-link:  #f07585;
+    --color-heading:      var(--color-fg);
   }
 }
 @media (prefers-color-scheme: dark) {

@@ -23,7 +23,8 @@ follows the same convention as `askjamie/scripts/README.md`.
 | `csp.py` | active | Canonical CSP policy generation module |
 | `generate-csp.py` | active | Apply CSP policies to every page |
 | `inclusive-accessibility-qa.py` | active | Browser evidence for inclusive keyboard, search, fallback, and constrained-environment journeys |
-| `post-merge.sh` | active | Post-merge rebuild and validation hook |
+| `post-merge.sh` | active | Check-only post-merge integrity hook; run with Bash, never Python |
+| `public-artifact.py` | active | Stage and verify the reviewed public inventory, transferred bytes, and final Pages archive |
 | `responsive-qa.mjs` | active | Responsive QA entry point |
 | `run-viewport-qa.py` | active | Full browser viewport QA runner (`.github/workflows/pages.yml`, `viewport-qa.yml`) |
 | `resilience-qa.py` | active | Installability, offline lifecycle, cross-browser, crawler, and third-party failure acceptance checks |
@@ -32,7 +33,7 @@ follows the same convention as `askjamie/scripts/README.md`.
 | `sync-foundation-files.py` | active | 3-way sync of theme.css/app.js/mermaid-init.js across the three sibling repos |
 | `sync-css-version.py` | active | CSS cache-version sync (has its own test coverage) |
 | `sync-image-alt.py` | active | Image alt-text sync (invoked by `validate-site.py`) |
-| `sync-portfolio-stats.py` | active | Portfolio stats sync (invoked by `post-merge.sh`) |
+| `sync-portfolio-stats.py` | active | Portfolio stats sync; the post-merge hook uses `--check` only |
 | `sync-social-card.py` | active | Social-card sync (has its own test coverage) |
 | `sync-sparkle-fallback.py` | active | Sparkle fallback sync (invoked by `validate-site.py`) |
 | `validate-site.py` | active | Structural site validation |

@@ -14,17 +14,19 @@ and completion criteria are in [`docs/suite-promise.md`](suite-promise.md).
   external GPT availability or behavior.
 
 ## Maintainer operations
-- Quality gates: `scripts/audit-site.py` — run on every meaningful HTML change
-- Responsive QA: `node scripts/responsive-qa.mjs --static` — run after major edit rounds
-- Portfolio stats sync: `python3 scripts/sync-portfolio-stats.py` — run after content updates
+- Follow the active release sequence in `replit.md`: regenerate search, stats,
+  search again if stats changed content, then CSS/offline versions. Review diffs.
+- Run structural and link gates after meaningful changes; inspect the advisory
+  audit separately. `bash scripts/post-merge.sh` checks committed outputs only.
+- Run real browser QA after rendered changes. `node scripts/responsive-qa.mjs
+  --static` is structural lint and does not establish browser behavior.
 
 ## Next
 - **Submit sitemap** to Google Search Console and Bing Webmaster Tools.
-- **CSP hardening** — refactor inline script handlers into external JS files
-  so `script-src 'unsafe-inline'` can eventually be removed from the configured
-  CSP policy. Per-page CSP meta policies are enforced by browsers; the portable
-  policy in `_headers` still requires a compatible host for HTTP response
-  delivery.
+- **HTTP security policy delivery**: review the residual GitHub Pages header
+  limitations. Hash-based page CSP is already implemented in `scripts/csp.py`
+  and checked by `scripts/check-csp.py`; script `unsafe-inline` is absent.
+  `_headers` still requires a compatible host for HTTP response delivery.
 - **Organization JSON-LD `sameAs`** — add social profile URLs.
 
 ## Later

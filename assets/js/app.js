@@ -591,6 +591,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const INDEX_URL = SEARCH_INDEXES[pageLocale] || "/assets/data/search-index.json";
   const usesEnglishFallback = pageLocale === "de" || pageLocale === "es";
   const scopeNotice = usesEnglishFallback ? " Search English content." : "";
+  const isGlee = () => document.body.classList.contains("glee-main");
+  const searchCopy = () => isGlee() ? {
+    label: "Search Glee‑fully Tools",
+    placeholder: "Search tools, branches, and everyday tasks…",
+    introduction: "Find Tool-ettes, branch guides, and pages across the Glee‑fully Toolbox.",
+    suggestions: ["resume", "budget", "scheduling", "travel", "journal"],
+  } : {
+    label: "Search OverKill Hill",
+    placeholder: "Search the Forge: articles, projects, ideas…",
+    introduction: "Search across writings, projects, manifesto, and the Council archives.",
+    suggestions: ["mermaid", "ROY", "council", "manifesto", "diagram", "visual edition"],
+  };
 
   // ----- index loader (cached promise) -----
   let _indexPromise = null;
@@ -602,9 +614,9 @@ document.addEventListener("DOMContentLoaded", () => {
           return r.json();
         })
         .then((d) => {
-          if (Array.isArray(d.entries)) return d.entries;
-          if (Array.isArray(d.pages)) return d.pages;
-          return [];
+          const entries = Array.isArray(d.entries) ? d.entries : d.pages;
+          if (!Array.isArray(entries)) throw new Error("Invalid search index schema");
+          return entries.map((entry) => ({ ...entry, category: entry.category || entry.section || "Page" }));
         })
         .catch((err) => {
           console.warn("[okh-search] index load failed:", err);
@@ -616,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ----- scoring -----
   function tokenize(q) {
-    return q.toLowerCase().split(/[^a-z0-9'-]+/i).filter((t) => t.length >= 2);
+    return q.toLowerCase().split(/[^\p{L}\p{N}'-]+/u).filter((t) => t.length >= 2);
   }
   function scoreEntry(entry, tokens) {
     if (!tokens.length) return 0;
@@ -666,7 +678,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ----- snippet + highlight -----
   function escapeHtml(s) {
-    return s.replace(/[&<>"']/g, (c) => ({
+    return String(s).replace(/[&<>"']/g, (c) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
     }[c]));
   }
@@ -703,6 +715,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return (
       '<div class="okh-search-result-meta">' +
         '<span class="okh-search-result-cat">'  + escapeHtml(e.category || "Page") + "</span>" +
+        (e.branch_label ? '<span>' + escapeHtml(e.branch_label) + '</span>' : "") +
+        (e.publication_state ? '<span class="okh-search-result-state">' + escapeHtml({live: "Live catalog entry", beta: "Beta", unavailable: "Unavailable"}[e.publication_state] || e.publication_state) + '</span>' : "") +
         '<span class="okh-search-result-url">'  + escapeHtml(e.url) + "</span>" +
       "</div>" +
       '<h3 class="okh-search-result-title">' + highlight(e.title || e.url, tokens) + "</h3>" +
@@ -717,7 +731,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wrap.className = "okh-search-overlay";
     wrap.setAttribute("role", "dialog");
     wrap.setAttribute("aria-modal", "true");
-    wrap.setAttribute("aria-label", "Search OverKill Hill");
+    wrap.setAttribute("aria-label", searchCopy().label);
     wrap.innerHTML = (
       '<div class="okh-search-panel" role="document">' +
         '<div class="okh-search-input-row">' +
@@ -725,7 +739,7 @@ document.addEventListener("DOMContentLoaded", () => {
             '<circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />' +
           "</svg>" +
           '<input type="search" class="okh-search-input" autocomplete="off" spellcheck="false" ' +
-            'placeholder="Search the Forge — articles, projects, ideas…" aria-label="Search" />' +
+            'placeholder="' + escapeHtml(searchCopy().placeholder) + '" aria-label="Search" />' +
           '<button type="button" class="okh-search-close" aria-label="Close search">Esc</button>' +
         "</div>" +
         '<div class="okh-search-results" role="list" aria-label="Search results"></div>' +
@@ -747,14 +761,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function emptyStateHtml() {
     return (
       '<div class="okh-search-empty">' +
-        "<p>Search across writings, projects, manifesto, and the Council archives.</p>" +
+        "<p>" + escapeHtml(searchCopy().introduction) + "</p>" +
         '<ul class="okh-search-hint-list">' +
-          '<li><button type="button" data-q="mermaid">Mermaid</button></li>' +
-          '<li><button type="button" data-q="ROY">ROY</button></li>' +
-          '<li><button type="button" data-q="council">Council</button></li>' +
-          '<li><button type="button" data-q="manifesto">Manifesto</button></li>' +
-          '<li><button type="button" data-q="diagram">diagram</button></li>' +
-          '<li><button type="button" data-q="visual edition">v0.3 Visual Edition</button></li>' +
+          searchCopy().suggestions.map((q) => '<li><button type="button" data-q="' + escapeHtml(q) + '">' + escapeHtml(q) + '</button></li>').join("") +
         "</ul>" +
       "</div>"
     );
@@ -819,6 +828,7 @@ document.addEventListener("DOMContentLoaded", () => {
       lastFocus = null;
     }
     function renderEmpty() {
+      overlay.querySelector(".okh-search-footer a").href = "/search/";
       list.innerHTML = emptyStateHtml();
       status.textContent = "Search ready. Enter a term or choose a suggested search.";
       list.querySelectorAll("button[data-q]").forEach((btn) => {
@@ -843,14 +853,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function render() {
       const q = input.value.trim();
+      overlay.querySelector(".okh-search-footer a").href = "/search/" + (q ? "?q=" + encodeURIComponent(q) : "");
       if (!q) { renderEmpty(); currentResults = []; lastTokens = []; return; }
       lastTokens     = tokenize(q);
       currentResults = search(entries, q, 12);
       if (!currentResults.length) {
         list.innerHTML =
           '<div class="okh-search-noresults"><p>No matches for <strong>' +
-          escapeHtml(q) + "</strong>.</p><p>Try <em>mermaid</em>, <em>ROY</em>, " +
-          "<em>council</em>, or <em>manifesto</em>.</p></div>";
+          escapeHtml(q) + "</strong>.</p><p>Try " + searchCopy().suggestions.map(escapeHtml).join(", ") + ".</p></div>";
         status.textContent = "No search results for " + q + ".";
         return;
       }
@@ -942,27 +952,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ── Dedicated /search/ page ─────────────────────────────────────────────
   function initSearchPage() {
-    const input = document.getElementById("search-page-input");
-    const list  = document.getElementById("search-results");
-    const stats = document.getElementById("search-stats");
-    const cats  = document.getElementById("search-categories");
+    const input = document.getElementById("search-page-input") || document.querySelector("[data-glee-search-inline-input]");
+    const list  = document.getElementById("search-results") || document.querySelector("[data-glee-search-inline-results]");
+    const stats = document.getElementById("search-stats") || document.querySelector("[data-glee-search-inline-status]");
+    const cats  = document.getElementById("search-categories") || document.querySelector("[data-glee-search-inline-categories]");
     if (!input || !list) return;
 
     let entries        = [];
     let activeCategory = "all";
     let indexLoadError = null;
+    let activeIdx = 0;
+    let editingQuery = false;
+    const listMarkup = (html) => list.tagName === "UL" ? "<li>" + html + "</li>" : html;
 
     function setIndexLoadError(error) {
       indexLoadError = error || null;
       if (error) {
-        list.innerHTML =
+        list.innerHTML = listMarkup(
           '<div class="okh-search-noresults okh-search-noresults--error">' +
             "<p>Search could not load the index.</p>" +
             "<p>Check your connection, then try again.</p>" +
-            '<a class="okh-search-retry" href="' +
-              escapeHtml(window.location.pathname + window.location.search) +
-            '">Retry search index</a>' +
-          "</div>";
+            '<button type="button" class="okh-search-retry">Retry search index</button>' +
+          "</div>");
+        list.querySelector(".okh-search-retry").addEventListener("click", () => initialize(true));
         if (stats) stats.textContent = "Search index failed to load.";
         return true;
       }
@@ -982,7 +994,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (category && category !== "all") url.searchParams.set("cat", category);
       else url.searchParams.delete("cat");
       const method = replace ? "replaceState" : "pushState";
-      window.history[method]({}, "", url.toString());
+      if (url.toString() !== window.location.href) window.history[method]({}, "", url.toString());
     }
 
     function normalizeCategory(category) {
@@ -1006,7 +1018,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const historyMode = options && options.historyMode === "push" ? "push" : "replace";
       const q = input.value.trim();
       writeQueryToURL(q, activeCategory, historyMode === "replace");
-      if (!q) {
+      if (!q && !isGlee()) {
         list.innerHTML = "";
         if (stats) stats.textContent = entries.length
           ? "Type to search " + entries.length + " indexed entries." + scopeNotice
@@ -1018,24 +1030,40 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       const tokens = tokenize(q);
-      const results  = search(entries, q, { limit: 60, category: activeCategory });
+      const results = q ? search(entries, q, { limit: 60, category: activeCategory })
+        : entries.filter((entry) => activeCategory === "all" || entry.category === activeCategory)
+          .slice(0, 60).map((entry) => ({ entry }));
       if (!results.length) {
-        list.innerHTML =
+        list.innerHTML = listMarkup(
           '<div class="search-empty-state"><p>No matches for <strong>' +
           escapeHtml(q) + "</strong>" +
           (activeCategory !== "all" ? ' in <em>' + escapeHtml(activeCategory) + "</em>" : "") +
-          ".</p></div>";
+          ".</p></div>");
         if (stats) stats.textContent = "0 results";
         return;
       }
       if (stats) stats.textContent =
         results.length + " result" + (results.length === 1 ? "" : "s") +
-        " for \u201c" + q + "\u201d" + scopeNotice;
+        (q ? " for \u201c" + q + "\u201d" : ". Type to search the catalog.") + scopeNotice;
       list.innerHTML = results.map((r) => (
-        '<a class="okh-search-result" href="' + escapeHtml(r.entry.url) + '">' +
+        listMarkup('<a class="okh-search-result" href="' + escapeHtml(r.entry.url) + '">' +
           renderResultHtml(r, tokens) +
-        "</a>"
+        "</a>")
       )).join("");
+      setActive(0, false);
+    }
+
+    function setActive(index, scroll) {
+      const links = list.querySelectorAll(".okh-search-result");
+      activeIdx = Math.max(0, Math.min(index, links.length - 1));
+      links.forEach((link, position) => {
+        if (position === activeIdx) link.setAttribute("data-active", "true");
+        else link.removeAttribute("data-active");
+      });
+      if (scroll && links[activeIdx]) {
+        links[activeIdx].scrollIntoView({ block: "nearest" });
+        if (stats) stats.textContent = "Selected: " + links[activeIdx].querySelector("h3").textContent;
+      }
     }
 
     function buildCategoryChips() {
@@ -1054,6 +1082,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }).join("");
       cats.querySelectorAll("button").forEach((b) => {
         b.addEventListener("click", () => {
+          editingQuery = false;
           activeCategory = b.getAttribute("data-cat") || "all";
           cats.querySelectorAll("button").forEach((x) =>
             x.setAttribute("aria-pressed", x === b ? "true" : "false")
@@ -1064,6 +1093,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function syncFromURL(skipFocus) {
+      editingQuery = false;
       const urlState = readQueryFromURL();
       input.value = urlState.q;
       activeCategory = normalizeCategory(urlState.category || "all");
@@ -1076,21 +1106,41 @@ document.addEventListener("DOMContentLoaded", () => {
       syncFromURL(true);
     });
 
-    loadIndex().then((d) => {
-      entries = d;
-      const initial = readQueryFromURL();
-      input.value = initial.q;
-      activeCategory = initial.category || "all";
-      buildCategoryChips();
-      activeCategory = normalizeCategory(activeCategory);
-      syncCategoryButtons();
-      input.focus();
-      render();
-    }).catch((err) => {
-      setIndexLoadError(err);
-    });
+    function initialize(retry) {
+      if (stats) stats.textContent = "Loading index…";
+      loadIndex(retry).then((d) => {
+        indexLoadError = null;
+        entries = d;
+        const initial = readQueryFromURL();
+        input.value = initial.q;
+        activeCategory = initial.category || "all";
+        buildCategoryChips();
+        activeCategory = normalizeCategory(activeCategory);
+        syncCategoryButtons();
+        input.focus();
+        render();
+      }).catch(setIndexLoadError);
+    }
+    input.value = readQueryFromURL().q;
+    initialize(false);
 
-    input.addEventListener("input", render);
+    input.addEventListener("input", () => {
+      render({ historyMode: editingQuery ? "replace" : "push" });
+      editingQuery = true;
+    });
+    input.addEventListener("change", () => { editingQuery = false; });
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        setActive(activeIdx + (event.key === "ArrowDown" ? 1 : -1), true);
+      } else if (event.key === "Enter") {
+        event.preventDefault();
+        const links = list.querySelectorAll(".okh-search-result");
+        if (links[activeIdx]) window.location.href = links[activeIdx].getAttribute("href");
+      }
+    });
+    const form = input.closest("form");
+    if (form) form.addEventListener("submit", (event) => { event.preventDefault(); render(); });
   }
 
   // ── Bootstrap ────────────────────────────────────────────────────────────
@@ -1110,7 +1160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function start() {
     loadBrandModule();
-    if (document.getElementById("search-page-input") && document.getElementById("search-results")) {
+    if ((document.getElementById("search-page-input") && document.getElementById("search-results")) || document.querySelector("[data-glee-search-inline-input]")) {
       initSearchPage();
       initOverlay(); // search button still works on the search page itself
     } else {
