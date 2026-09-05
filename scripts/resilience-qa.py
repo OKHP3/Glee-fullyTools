@@ -205,9 +205,15 @@ def static_checks() -> tuple[list[dict], list[str]]:
     ]
     if external_precache:
         failures.append(f"service worker precaches third-party URLs: {external_precache}")
-    if 'scope: "/"' not in (ROOT / "assets/js/app.js").read_text(
-        encoding="utf-8", errors="replace"
-    ):
+    registration_text = "\n".join(
+        path.read_text(encoding="utf-8", errors="replace")
+        for path in (
+            ROOT / "assets/js/app.js",
+            ROOT / "assets/js/glee-site-enhancements.js",
+        )
+        if path.is_file()
+    )
+    if 'scope: "/"' not in registration_text:
         failures.append("service-worker registration is not root scoped")
 
     for kind, route in CRAWLER_ROUTES:
