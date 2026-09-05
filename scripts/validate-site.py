@@ -676,10 +676,12 @@ def _check_stat_markers_drift(tolerance: int = 2) -> list:
     tool_ettes = [p for p in real if tool_ette_pat.match(p["url"])]
     branches   = [p for p in real if branch_pat.match(p["url"])]
 
+    import runpy
+    launch_urls = runpy.run_path(str(Path(__file__).with_name("audit-tool-ette-promises.py")))["launch_urls"]
     gpt_count = 0
     for f in sorted(ROOT.glob("toolbox/*/*/index.html")):
         html_text = f.read_text(encoding="utf-8", errors="replace")
-        if re.search(r"chatgpt\.com|chat\.openai\.com", html_text):
+        if launch_urls(html_text):
             gpt_count += 1
 
     live = {

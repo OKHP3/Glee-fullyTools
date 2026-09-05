@@ -1,14 +1,14 @@
 // Glee-fully Tools offline shell.
 // Keep this list intentional: same-origin public shell assets only.
-const CACHE_NAME = "glee-fully-shell-v1";
+const CACHE_NAME = "glee-fully-shell-v354147247328463779";
 const PRECACHE_URLS = [
   "/",
   "/search/",
   "/toolbox/",
   "/about/",
   "/offline.html",
-  "/assets/css/theme.css?v=1b4bb2d6",
-  "/assets/js/app.js",
+  "/assets/css/theme.css?v=cff617f6",
+  "/assets/js/app.js?v=3",
   "/assets/data/search-index.json",
   "/assets/data/sparkle.json",
   "/site.webmanifest",
@@ -45,7 +45,7 @@ function cacheNavigation(request) {
   return fetch(request).then((response) => {
     if (response.ok && response.type === "basic") {
       const copy = response.clone();
-      caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+      return caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).then(() => response);
     }
     return response;
   }).catch(() =>

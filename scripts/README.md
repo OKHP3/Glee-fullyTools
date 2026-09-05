@@ -11,6 +11,7 @@ follows the same convention as `askjamie/scripts/README.md`.
 | Script | Classification | Use |
 | --- | --- | --- |
 | `audit-site.py` | active | Site audit |
+| `audit-tool-ette-promises.py` | active | Check all 42 Tool-ette pages for a description, unique identity, publication signal, and primary CTA state |
 | `build-search-index.py` | active | Rebuild the generated search index |
 | `check-accent-contrast.py` | active | Accent contrast check (has its own test coverage) |
 | `check-csp.py` | active | CI guard against CSP drift |
@@ -21,9 +22,11 @@ follows the same convention as `askjamie/scripts/README.md`.
 | `check-workflow-actions.py` | active | GitHub Actions pin/version check (has its own test coverage) |
 | `csp.py` | active | Canonical CSP policy generation module |
 | `generate-csp.py` | active | Apply CSP policies to every page |
+| `inclusive-accessibility-qa.py` | active | Browser evidence for inclusive keyboard, search, fallback, and constrained-environment journeys |
 | `post-merge.sh` | active | Post-merge rebuild and validation hook |
 | `responsive-qa.mjs` | active | Responsive QA entry point |
 | `run-viewport-qa.py` | active | Full browser viewport QA runner (`.github/workflows/pages.yml`, `viewport-qa.yml`) |
+| `resilience-qa.py` | active | Installability, offline lifecycle, cross-browser, crawler, and third-party failure acceptance checks |
 | `serve-site.py` | active | Local preview server |
 | `sparkle-qa.py` | active | Sparkle-loader QA (`.github/workflows/sparkle-qa.yml`) |
 | `sync-foundation-files.py` | active | 3-way sync of theme.css/app.js/mermaid-init.js across the three sibling repos |

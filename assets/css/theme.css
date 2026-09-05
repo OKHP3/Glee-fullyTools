@@ -243,6 +243,10 @@ body {
   overflow-x: hidden;
 }
 
+html.okh-search-open {
+  overflow: hidden;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -763,7 +767,6 @@ button {
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
   border-color: var(--okh-orange, #c46a2c);
-  outline: none;
 }
 .theme-toggle .tt-icon {
   width: 1rem;
@@ -1150,6 +1153,7 @@ OverKill Hill industrial stripes.
   border: 0;
   border-radius: 20px;
 }
+
 
 /* ===================================================================== */
 
@@ -5305,6 +5309,42 @@ html[data-theme="light"] .glee-main {
 
 /* Paper-surface text roles used by the Glee header and special banner. These
    remain stable when dark-scheme tokens are applied to the rest of the page. */
+.glee-main .arcade-embed-fallback {
+  position: absolute;
+  inset: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--color-surface);
+  color: var(--color-fg);
+  text-align: center;
+}
+
+.glee-main .arcade-embed-fallback a {
+  color: var(--color-inline-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.glee-main .privacy-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+}
+
+.glee-main .privacy-controls .btn {
+  font-size: 0.85rem;
+}
+
+.glee-main .arcade-embed-fallback[hidden] {
+  display: none;
+}
+
 .glee-main {
   --glee-paper-fg: #2e2b29;
   --glee-paper-muted: #5a4a44;
@@ -6333,6 +6373,27 @@ html[data-theme="light"] .glee-main .footer-bottom {
   background: #1a1f3c;
   overflow: hidden;
 }
+
+/* Arcade page callout and closing actions. Keep these in the shared stylesheet
+   so the enforced page CSP does not discard the page's inline presentation. */
+.arcade-callout {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg, 1.25rem);
+  padding: 1.75rem 2rem;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.arcade-callout .feature-list {
+  margin: 0;
+}
+
+.arcade-closing-cta {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
 .arcade-embed-note {
   text-align: center;
   font-size: .9rem;

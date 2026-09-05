@@ -33,6 +33,28 @@ GitHub Pages custom-domain and HTTPS settings remain attached to `glee-fully.too
 
 ## Release guardrails
 
+Prepare changes on a temporary `codex/` branch. Generate the search index,
+then portfolio stats, then rebuild the index if the stats changed page copy.
+Run `scripts/sync-css-version.py` last: it updates CSS references and derives
+the offline cache version from every precached file. Its `--check` mode blocks
+releases with stale offline assets. Post-merge verification is read-only so
+pulling a published commit cannot create another generated-content commit.
+
+Replit's Sync button pushes the currently selected branch; it cannot supply
+the approving review required by protected `main`. Publish the temporary
+branch through a pull request, finish its reviews and checks, then fast-forward
+Replit's clean `main` from `origin/main`. Keep the origin URL set to
+`https://github.com/OKHP3/Glee-fullyTools.git`. A stored PAT authenticates the
+request but does not replace the review gate. Retire task branches only after
+their work is merged or preserved with an explicit recovery reference.
+
+The cross-browser test uses a local HTTP server. For those test documents only,
+the runner removes CSP's HTTPS upgrade directive and disables service workers
+in the navigation contexts so cached production HTML cannot override that
+fixture. Production policies remain intact. A separate Chromium lifecycle
+context tests real service-worker control, warm-page offline recovery, and
+cache replacement.
+
 Run the repository-owned checks from a clean checkout before merging a release
 change:
 
@@ -47,6 +69,7 @@ python3 scripts/check-links.py
 python3 scripts/audit-site.py --quiet
 python3 scripts/check-accent-contrast.py --strict
 python3 scripts/check-glee-dark-coverage.py --section all --require-both
+python3 scripts/resilience-qa.py --static-only
 ```
 
 The Pages workflow repeats the required checks and performs browser QA before
@@ -54,7 +77,10 @@ building the artifact. The previous reference to an external
 `publishing-trigger-check` command is not an executable prerequisite in this
 checkout and has been removed from the release contract. The repository
 validation workflows continue to protect HTML, links, responsive layout, and
-sparkle behavior.
+sparkle behavior. The resilience runner is the release proof for installability,
+offline lifecycle, cross-browser behavior, crawler-visible metadata, and
+third-party failure fallback; CI runs its full browser mode after installing
+Chromium, Firefox, and WebKit.
 
 ## Release identity and header delivery
 
@@ -71,3 +97,10 @@ It is non-blocking because these missing headers are a known host limitation;
 an owner reviewing a release must treat any missing-header output as a finding,
 not as a passing security control. A future hosting change must re-run the
 smoke test before claiming those headers are deployed.
+
+Each published HTML page also carries a generated page-level CSP `<meta>` tag.
+That tag is enforced by the browser for the page itself and is separate from
+HTTP response headers. It allows Google Fonts and the optional, visitor-enabled
+Google Analytics path, while only Arcade page classes receive the
+`okhp3.github.io` frame permission. The page-level policy does not turn
+`_headers` into a GitHub Pages response-header configuration.

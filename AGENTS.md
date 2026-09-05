@@ -37,7 +37,7 @@ invariant).
 - [Glee-fullyTools-FoundRy](https://github.com/OKHP3/Glee-fullyTools-FoundRy)
 - [glee-fully-gpt00-personalizable-tools](https://github.com/OKHP3/glee-fully-gpt00-personalizable-tools)
 
-## Verified repository context (2026-07-24)
+## Verified repository context (2026-09-04)
 
 This section records the current project understanding from repository evidence.
 Update it when the structure, runtime, deployment model, or validation baseline
@@ -59,17 +59,20 @@ dates and counts.
 - **Confirmed user value:** The homepage, README, and Showcase position the suite
   as a warm, approachable way to use domain-specific AI for everyday life, work,
   planning, and personal organization.
-- **Inferred vision:** Grow the suite while preserving one shared design language,
-  the trunk-to-branch-to-tool-ette taxonomy, and a coherent visitor path.
-- **Current status:** The site is implemented and deployable as a static website.
-  The homepage still describes the product as in a pre-opening or early-emergence
-  state, so content completeness should not be assumed.
+- **Current vision and boundary:** Grow a warm, structured public catalog and
+  routing hub while preserving one shared design language, the
+  trunk-to-branch-to-tool-ette taxonomy, and a coherent visitor path. The public
+  hub does not certify the behavior or availability of externally hosted GPTs.
+- **Current status:** The site is implemented and deployable as a static website
+  in the **active growth and refinement** phase. It has 60 indexable public
+  pages, 7 branch hubs, and 42 Tool-ettes; publication states and the meaning of
+  complete are authoritative in `docs/suite-promise.md`.
 
 ### Architecture and entry points
 
-- Production content is 63 HTML pages: the homepage, supporting pages, the
-  Toolbox hub, seven branch pages, 42 tool-ette pages, and the site's utility
-  pages. HTML under `assets/`
+- Production content is 63 validator-scoped HTML files: the homepage,
+  supporting pages, the Toolbox hub, seven branch pages, 42 tool-ette pages,
+  and the site's utility/fallback pages. HTML under `assets/`
   and `.agents/` is development or agent content and is excluded by site tools.
 - `assets/css/theme.css` is the shared stylesheet. `assets/js/app.js` provides
   shared browser behavior, including navigation, search, theme handling, and
@@ -91,13 +94,13 @@ The repository's latest recorded validation passed on 2026-08-29, re-run after
 scoping the CSP `img-src` allowlist (see `scripts/csp.py`) and fixing the
 dark-mode `theme-color` value (see `scripts/normalize-head.py`) -- both
 confirmed clean at 63 production HTML pages, 0 issues, 0 warnings, 0 broken
-links, 60 sitemap URLs. The current tree still contains 63 production HTML
-pages and 60 sitemap URLs. Re-run these commands after any content or tooling
-change to establish a current baseline:
+links, 60 sitemap URLs. The current tree contains 63 production HTML files, 60
+sitemap URLs, and 49 Atom feed entries. Re-run these commands after any content
+or tooling change to establish a current baseline:
 
 ```bash
 python3 scripts/validate-site.py
-# Expected: 63 pages; 0 issues; 0 warnings
+# Expected: 63 files; 0 issues; 0 warnings
 
 python3 scripts/check-links.py
 # Expected: 0 broken links and 0 sitemap mismatches; link totals vary by content
@@ -118,6 +121,8 @@ Playwright runner documented in `replit.md`.
 - It is unknown whether the optional Lighthouse and Puppeteer package metadata is
   still actively maintained. Do not add or upgrade dependencies without owner
   approval.
+- Do not infer Tool-ette availability from a passing HTML/link check. Use the
+  publication register and state precedence in `docs/suite-promise.md`.
 
 ### Governance files added 2026-08-03
 
@@ -608,8 +613,10 @@ Script categories (last updated 2026-08-23; describes what each script does, by 
   `responsive-qa.mjs` (Node/Playwright read-only QA runner);
   `post-merge.sh` (read-only integrity check after merges)
 - **Index / feed / report builders** (regenerate data or output files):
-  `build-search-index.py`, `generate-feed.py`, `generate-illustrations.py`,
-  `generate-templates.py`, `extract-templates.py`
+  `build-search-index.py`; the checked-in `feed.xml` has a historical generator
+  under `scripts/archive/` and is not part of the active pipeline;
+  `generate-illustrations.py`, `generate-templates.py`, `extract-templates.py`
+  are archived reference tools.
 - **Idempotent mutators** (safe to re-run; AUTOGEN-marker or presence-check-driven):
   `normalize-head.py`, `inject-jsonld.py`, `inject-breadcrumb.py`,
   `inject-color-scheme-init.py`, `inject-gpt-icon-picture.py`,
@@ -670,7 +677,7 @@ baseline -- update it here when the inventory changes materially.
 | `assets/templates/` | 10 templates + `INDEX.md` | Toolbox-specific types: `template--hub-branch.html`, `template--hub-toolbox.html`, `template--tool-detail.html` |
 | `docs/` | `adr/` subfolder with 5 ADRs + `README.md` + `template.md`, `roadmap.md`, and `threat-model.md`; `.gitkeep` | ADRs added 2026-08-03; planning and security documents live here |
 | `docs/archive/` | `.gitkeep` only | Add archived sprint docs here |
-| `scripts/` | <!-- STAT:SCRIPTS-PY -->22<!-- /STAT:SCRIPTS-PY --> active Python scripts + <!-- STAT:SCRIPTS-OTHER -->2<!-- /STAT:SCRIPTS-OTHER --> non-Python runners (`responsive-qa.mjs`, `post-merge.sh`); 47 reference-only/retired Python scripts moved to `scripts/archive/` | Updated 2026-08-30; see `scripts/README.md` for the current active/archive classification (supersedes the counts in Script categories below) |
+| `scripts/` | <!-- STAT:SCRIPTS-PY -->25<!-- /STAT:SCRIPTS-PY --> active Python scripts + <!-- STAT:SCRIPTS-OTHER -->2<!-- /STAT:SCRIPTS-OTHER --> non-Python runners (`responsive-qa.mjs`, `post-merge.sh`); 47 reference-only/retired Python scripts moved to `scripts/archive/` | Updated 2026-09-04; see `scripts/README.md` for the current active/archive classification (supersedes the counts in Script categories below) |
 
 **Glee-fully-specific sub-folders under `assets/img/`:**
 - `assets/img/tool-ettes/` -- per-tool-ette hero images (one image per tool-ette
@@ -684,7 +691,8 @@ baseline -- update it here when the inventory changes materially.
 **Glee-fully-specific scripts not on siblings:**
 Active: `check-accent-contrast.py`, `check-glee-dark-coverage.py`,
 `check-public-headers.py`, `check-workflow-actions.py`, `run-viewport-qa.py`,
-`serve-site.py`, `sparkle-qa.py`, `sync-css-version.py`, `sync-image-alt.py`,
+`inclusive-accessibility-qa.py`, `serve-site.py`, `sparkle-qa.py`,
+`sync-css-version.py`, `sync-image-alt.py`,
 `sync-foundation-files.py`, `sync-portfolio-stats.py`, `sync-social-card.py`,
 `sync-sparkle-fallback.py`.
 `activate-icons.py`, `add-toolbox-to-footer.py`, `add-noreferrer.py`,

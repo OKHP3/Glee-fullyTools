@@ -95,6 +95,30 @@ def main() -> int:
     else:
         print(f"  CSS token -> {token}  (all {unchanged} file(s) already current)")
 
+    worker = REPO / "sw.js"
+    if worker.exists():
+        source = worker.read_text(encoding="utf-8")
+        patched = CSS_REF_RE.sub(replacement, source)
+        patched = patched.replace('"/assets/js/app.js",', '"/assets/js/app.js?v=3",')
+        entries = re.search(r"const PRECACHE_URLS\s*=\s*\[(.*?)\];", patched, re.S)
+        if not entries:
+            print("ERROR: service-worker precache list is missing")
+            return 1
+        digest = hashlib.sha256()
+        for entry in re.findall(r'"([^"\n]+)"', entries.group(1)):
+            local_path = REPO / entry.split("?", 1)[0].lstrip("/")
+            if local_path.is_dir():
+                local_path /= "index.html"
+            digest.update(entry.encode("utf-8"))
+            digest.update(local_path.read_bytes().replace(b"\r\n", b"\n"))
+        version = str(int(digest.hexdigest()[:16], 16))
+        patched = re.sub(r'glee-fully-shell-v\d+', 'glee-fully-shell-v' + version, patched)
+        if patched != source:
+            if args.check:
+                print("ERROR: offline shell is stale. Run scripts/sync-css-version.py after all content generators.")
+                return 1
+            worker.write_text(patched, encoding="utf-8")
+            print("  Offline shell version and precache URLs synchronized")
     return 0
 
 
