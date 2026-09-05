@@ -19,4 +19,13 @@ python3 scripts/sync-portfolio-stats.py --check
 echo "Post-merge: checking offline shell and CSS versions..."
 python3 scripts/sync-css-version.py --check
 
+echo "Post-merge: checking CSP policies..."
+python3 scripts/check-csp.py
+
+echo "Post-merge: validating site structure..."
+python3 scripts/validate-site.py
+
+echo "Post-merge: checking links and sitemap..."
+python3 scripts/check-links.py
+
 echo "Post-merge: all checks passed."

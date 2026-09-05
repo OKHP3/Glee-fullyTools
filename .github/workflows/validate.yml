@@ -57,6 +57,9 @@ jobs:
       - name: Run publication and offline release regressions
         run: python3 scripts/tests/test-reconciliation.py
 
+      - name: Run post-merge hook regressions
+        run: python3 scripts/tests/test-post-merge.py
+
       - name: Run client behavior regressions
         run: node scripts/tests/test-client-regressions.cjs
 
