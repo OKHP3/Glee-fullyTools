@@ -95,6 +95,12 @@ First checkpoint: all three Workers confirmed execution. Platform detected a pos
 
 ## Reviewed local dispositions after integration
 
+### Architect-requested CLS QA correction
+
+The Architect's inspection required correcting A19/R11 measurement semantics. Experience Worker `/root/search_consent` (`01a07296-3a57-72f3-9cb1-c0a7b5a47652`) received exclusive ownership of the experience runner, `scripts/tests/test-cls-session-window.cjs`, its method note, and new dated evidence. PM independently reviewed the implementation and historical-data classification, owns this register, the integration record and PR draft, and commits the correction. Public source, generated outputs, the existing artifact, and accepted commits remain frozen.
+
+Acceptance: six synthetic tests pass, covering separate bursts, strict one-/five-second boundaries, recent-input exclusion, and maximum-window selection. One constrained-home cold/repeat pair records zero shifts in both visits. PM independently verified all 152 reassessment rows across seven overlapping reports: 55 complete empty observations support zero; 97 lack sufficient timestamps/raw entries and remain legacy totals with unknown CLS. These are report rows, not independent observations. Historical files are unchanged, and all 23 previously fingerprinted public source files still match. See `experience-performance.md` and `assets/audit/remaining-program-2026-09-05/pm-cls-review-2026-09-05.json` (repository-relative) for evidence. No broad sweep or performance sampling was repeated. Local QA acceptance does not close the existing release gates.
+
 The starting tables above preserve dispatch history. This table supersedes their in-progress labels. All public source changes are frozen, generated outputs are current, and the checks below use the integrated source. Exact implementation and artifact provenance are recorded in `pm-integration-record.md` after the local commit. Release, policy, and evidence decisions remain open as individually identified.
 
 | Finding | Reviewed local disposition | Evidence / remaining dependency |
@@ -117,7 +123,7 @@ The starting tables above preserve dispatch history. This table supersedes their
 | A16 | Active factual corrections and reviewable runbook delivered | Platform report and current governance distinguish observed settings, policy, generated checks and release evidence. G03/G07/D08 remain open. |
 | A17 | Concrete promotion contract delivered; execution pending | Full source/target/blob inventory and failure cases in platform report. No executor or sibling synchronization claimed; D03. |
 | A18 | Concrete pin/runtime policy and evidence delivered; adoption pending | Installed runtime results, exact candidate provenance, host-aware setup proposal. No install or pin change; D04. |
-| A19 | Measurement/prototype work delivered; two bounded optimizations accepted | Search reserves loading space; homepage selects existing correct image size (100,926 bytes less at desktop DPR1). One 0.20863 homepage CLS observation remains unattributed; six isolated follow-up cases did not reproduce it. No zero-CLS or field claim. |
+| A19 | Measurement/prototype work delivered; CLS method corrected after Architect review | Search reserves loading space; homepage selects existing correct image size (100,926 bytes less at desktop DPR1). The historical 0.20863 homepage value is a legacy layout-shift total without timestamps, so session-window CLS cannot be recovered. Six isolated follow-up cases recorded no shifts; the new bounded two-visit smoke also records zero. No broad zero-CLS or field claim. |
 | A20 | Accepted locally; preserved | All 43 SVGs parse and affected illustration decodes; final full sweep passes. |
 
 | Broader recommendation | Delivered disposition and owner dependency |
@@ -127,7 +133,7 @@ The starting tables above preserve dispatch history. This table supersedes their
 | R06-R08 | Showcase/architecture/proof/metadata/schema copy corrected; all 38 advisories individually disposed; actual `/#why` route repaired. |
 | R09 | Meaningful date review delivered; historical feed explicitly retained pending concrete D02 policy proposal. |
 | R10 | Local keyboard/reflow/motion/color-mode evidence delivered. Actual zoom and human AT remain NOT RUN, not conformance PASS. |
-| R11 | Measured transfer/index/render costs, proposed regression budgets and focused image/search corrections delivered. Branded fonts and field evidence remain unverified. |
+| R11 | Measured transfer/index/render costs, proposed regression budgets and focused image/search corrections delivered. Architect-requested CLS correction separates maximum session-window score from raw total; legacy data cannot validate the proposed CLS budget. Branded fonts and field evidence remain unverified. |
 | R12 | Retain-Pages/proxy/alternate-host decision packet and acceptance/rollback delivered. D06 remains required before changes. |
 | R13 | No-new-tracking task-study and provider-evidence/field-measurement proposal delivered; provider settings, field performance and user outcomes remain unknown. D07. |
 | R14-R16 | Explicit-source promotion, immutable-version/runtime options and desired/observed release governance documented. D03/D04/D08/D09 remain open. |

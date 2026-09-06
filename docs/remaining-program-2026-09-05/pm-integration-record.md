@@ -53,6 +53,16 @@ Raw before/failure and after evidence lives under `assets/audit/remaining-progra
 
 The Node fallback in PM runs resolved to system Node 24.11.1 with the existing Playwright 1.62.1 package; the platform inventory separately verified bundled Node 24.19.0. The report records actual runtime versions, not a claim that those executables are interchangeable. Python was the bundled 3.12.14 runtime.
 
+## CLS measurement correction after Architect inspection
+
+The Architect identified that the experience runner's original `cls` field summed all non-input shifts over the observation lifetime. The corrected runner uses the maximum session-window sum, joining shifts only when the gap is less than 1,000 ms and the elapsed window duration is less than 5,000 ms. `layoutShiftTotal` separately retains the lifetime total, and raw shifts retain timestamps and recent-input flags. The implementation follows the [CLS method](https://web.dev/articles/cls) and [session-window rationale](https://web.dev/blog/evolving-cls).
+
+Experience Worker implemented the bounded QA change. PM independently reviewed the logic, reran all six synthetic tests and syntax validation, checked each derived historical row against its original, and verified all 23 prior public source fingerprints. The six tests exercise separated bursts, both exact boundaries and just-below cases, input-shift exclusion without bridging, maximum selection, and empty/input-only observations. One new constrained-home cold/repeat smoke pair records CLS 0 and raw total 0 in both visits, with no failed readiness assertions. The broad suites above were not rerun for this QA-only correction.
+
+[Reassessment evidence](../../assets/audit/remaining-program-2026-09-05/experience-cls-reassessment-2026-09-05.json) preserves source hashes and identifies 152 rows across seven overlapping reports: 55 complete empty observations support zero, while 97 lack enough timestamps or raw entries to reconstruct CLS. No nonempty timestamped historical sequence was available to recalculate. The historical nonzero search values and homepage 0.20863 are now explicitly legacy totals. Their recorded movement and the separate image-byte savings remain valid observations, but numerical before/after CLS improvement and compliance with the proposed 0.02 CLS budget are not established. The new smoke does not resolve the intermittent historical homepage movement.
+
+[PM independent review](../../assets/audit/remaining-program-2026-09-05/pm-cls-review-2026-09-05.json) records the checks; [new smoke evidence](../../assets/audit/remaining-program-2026-09-05/experience-cls-session-smoke-2026-09-05.json) records the current runner's output. All historical raw reports remain unchanged. Public implementation remains `6f5d4d5c472c4e2bc66bf1a29e58464e692463a8`, with the same staged directory and tar provenance; neither was rebuilt. The correction adds a focused QA/evidence commit after `b15257b6d6177b7d900a5eacd27187903f6a2567` and rewrites no accepted commit. No new dependency or external publication occurred.
+
 ## Reviewable artifacts
 
 - [Content, all advisory dispositions, meaningful dates, and feed policy](content-and-dates.md).
@@ -74,7 +84,7 @@ Known limits remain explicit:
 - Bundled Python lacks Playwright. Installed Firefox fails before page creation. Node fallback does not execute the Python CI suites; WebKit native Tab excludes ordinary links in the isolated fixture.
 - True browser zoom, NVDA/VoiceOver and representative user studies were not performed. Reflow and emulated motion/colors are narrower evidence.
 - Google Fonts requests are denied in the lab environment, so loaded branded-font performance and appearance require later verification.
-- One constrained homepage repeat sample recorded CLS 0.20863. Six isolated follow-up observations were zero, so the original result is retained as an intermittent, unattributed lab finding. No safe source correction or zero-homepage-CLS claim is justified.
+- One constrained homepage repeat sample recorded a legacy layout-shift total of 0.20863. Its raw shifts lack timestamps, so corrected session-window CLS cannot be recovered. Six isolated follow-up observations recorded no shifts. The original movement remains an intermittent, unattributed lab finding; no safe source correction or broad zero-homepage-CLS claim is justified.
 - An optional upstream inventory refresh failed and its escalated approval/tool wait was interrupted. The packet distinguishes earlier individually observed candidate pins from the failed refreshed evidence. No upgrade or successful refresh is claimed.
 - Historical feed summaries/dates and provider-side retention remain known decision/evidence gaps. Hosted headers, actual transferred bytes, deployed provenance, live routes and external services require release-stage checks.
 

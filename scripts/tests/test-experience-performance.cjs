@@ -1,4 +1,70 @@
 // Existing Playwright only. Local lab observations are not field Core Web Vitals.
+function createLayoutShiftAccumulator() {
+  let cls = 0;
+  let layoutShiftTotal = 0;
+  let windowStart = null;
+  let previousShift = null;
+  let windowValue = 0;
+  return {
+    add(entry) {
+      if (!entry.hadRecentInput) {
+        layoutShiftTotal += entry.value;
+        if (windowStart !== null && entry.startTime - previousShift < 1000 && entry.startTime - windowStart < 5000) {
+          windowValue += entry.value;
+        } else {
+          windowStart = entry.startTime;
+          windowValue = entry.value;
+        }
+        previousShift = entry.startTime;
+        cls = Math.max(cls, windowValue);
+      }
+      return { cls, layoutShiftTotal };
+    },
+    snapshot() { return { cls, layoutShiftTotal }; },
+  };
+}
+module.exports = { createLayoutShiftAccumulator };
+
+if (require.main === module && process.argv[2] === '--reassess-cls') {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const crypto = require('node:crypto');
+  const directory = path.resolve(__dirname, '../../assets/audit/remaining-program-2026-09-05');
+  const destination = process.argv[3];
+  if (!destination || fs.existsSync(destination)) throw new Error('Supply a new evidence filename; existing evidence will not be overwritten.');
+  const result = { assessedAt: new Date().toISOString(), method: 'Maximum non-input session-window sum; gap <1000ms and elapsed <5000ms. Originals are preserved and identified by SHA-256.',
+    references: ['https://web.dev/articles/cls','https://web.dev/blog/evolving-cls'],
+    note: 'Historical files overlap and include an initial duplicate; row counts are not independent sample counts.', sources: [], rows: [] };
+  for (const filename of fs.readdirSync(directory).filter(name => name.startsWith('experience') && name.endsWith('.json')).sort()) {
+    const bytes = fs.readFileSync(path.join(directory, filename));
+    const report = JSON.parse(bytes);
+    if (!report.performance?.length) continue;
+    result.sources.push({ filename, sha256: crypto.createHash('sha256').update(bytes).digest('hex'), rows: report.performance.length });
+    report.performance.forEach((row, index) => {
+      const initial = row.initialViewport;
+      const shifts = initial?.shifts;
+      const legacyTotal = initial?.layoutShiftTotal ?? initial?.cls ?? null;
+      const derived = { source: filename, row: index, profile: row.profile, route: row.route, repetition: row.repetition, cache: row.cache,
+        originalFieldName: initial?.layoutShiftTotal === undefined ? 'cls (legacy lifetime total)' : 'layoutShiftTotal',
+        layoutShiftTotal: legacyTotal, rawShiftsPointer: `/performance/${index}/initialViewport/shifts`, cls: null,
+        interpretation: 'legacy-total-insufficient-timestamps' };
+      if (Array.isArray(shifts) && shifts.every(s => Number.isFinite(s.startTime) && Number.isFinite(s.value))) {
+        const accumulator = createLayoutShiftAccumulator();
+        for (const shift of [...shifts].sort((a,b) => a.startTime-b.startTime)) accumulator.add(shift);
+        const measured = accumulator.snapshot();
+        if (legacyTotal !== null && Math.abs(measured.layoutShiftTotal - legacyTotal) < 1e-10) {
+          derived.cls = measured.cls;
+          derived.interpretation = shifts.length ? 'recomputed-from-timestamped-shifts' : 'confirmed-empty-shift-observation';
+        } else derived.interpretation = 'incomplete-raw-shifts-total-mismatch';
+      }
+      result.rows.push(derived);
+    });
+  }
+  result.summary = result.rows.reduce((counts,row) => {counts[row.interpretation]=(counts[row.interpretation]||0)+1;return counts;},{});
+  fs.mkdirSync(path.dirname(path.resolve(destination)),{recursive:true});
+  fs.writeFileSync(destination,JSON.stringify(result,null,2)+'\n');
+  console.log(JSON.stringify({destination,summary:result.summary}));
+} else if (require.main === module) {
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -8,7 +74,7 @@ const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 const { chromium } = require('playwright');
 const root = path.resolve(__dirname, '../..');
-const output = path.resolve(process.env.EXPERIENCE_OUTPUT || path.join(root, 'assets/audit/remaining-program-2026-09-05/experience-performance.json'));
+const output = path.resolve(process.env.EXPERIENCE_OUTPUT || path.join(root, `assets/audit/remaining-program-2026-09-05/experience-performance-session-${new Date().toISOString().replace(/[:.]/g,'-').toLowerCase()}.json`));
 const screenshots = process.env.EXPERIENCE_SCREENSHOTS;
 const repetitions = Number(process.env.EXPERIENCE_REPETITIONS || 2);
 const selectedRoutes = process.env.EXPERIENCE_ROUTES?.split(',');
@@ -39,6 +105,10 @@ const report = {
       'Initial viewport LCP and CLS are observation-window values, not field p75.', 'Synthetic search latency is not INP.',
       'Two samples per condition identify candidates; they do not establish reliable percentile claims.'] },
   sourceAssets: {}, performance: [], accessibility: [], failures: [],
+  layoutShiftMethod: { cls: 'maximum session-window sum; consecutive gap <1000ms and duration from window start <5000ms; excludes hadRecentInput',
+    layoutShiftTotal: 'sum of all non-input shifts within this observation lifetime; not CLS',
+    references: ['https://web.dev/articles/cls','https://web.dev/blog/evolving-cls'],
+    boundary: 'Foreground local navigation observation only; not full page lifetime, field p75 or cross-frame aggregation.' },
 };
 for (const file of ['assets/css/theme.css', 'assets/js/app.js', 'assets/js/glee-site-enhancements.js', 'assets/data/search-index.json']) {
   const data = fs.readFileSync(path.join(root, file));
@@ -177,12 +247,16 @@ async function completeDiagrams(page) {
       if (process.env.EXPERIENCE_PROFILES && !process.env.EXPERIENCE_PROFILES.split(',').includes(profile.name)) continue;
       for (let repetition = 1; repetition <= repetitions; repetition++) {
         const context = await browser.newContext({ viewport: profile.viewport, serviceWorkers: 'block' });
-        await context.addInitScript(() => {
-          window.__lab = { lcp: null, cls: 0, shifts: [], longTasks: [] };
+        await context.addInitScript({content: `(${(createAccumulator => {
+          const accumulator = createAccumulator();
+          window.__lab = { lcp: null, cls: 0, layoutShiftTotal: 0, shifts: [], longTasks: [] };
           new PerformanceObserver(list => { for (const entry of list.getEntries()) window.__lab.lcp = { ms: entry.startTime, element: entry.element?.tagName, url: entry.url }; }).observe({ type: 'largest-contentful-paint', buffered: true });
-          new PerformanceObserver(list => { for (const entry of list.getEntries()) if (!entry.hadRecentInput) {window.__lab.cls += entry.value; window.__lab.shifts.push({value:entry.value,startTime:entry.startTime,readyState:document.readyState,sources:entry.sources.map(s=>({tag:s.node?.tagName,class:s.node?.className,parent:s.node?.parentElement?.outerHTML.slice(0,700),previous:s.previousRect.toJSON(),current:s.currentRect.toJSON()})),heroPseudo:[...document.querySelectorAll('.glee-hero-card,.hero-eyebrow,body')].map(el=>{const style=getComputedStyle(el,'::before');return {class:el.className,bounds:el.getBoundingClientRect().toJSON(),content:style.content,width:style.width,height:style.height,position:style.position,transform:style.transform,animation:style.animationName};})});} }).observe({ type: 'layout-shift', buffered: true });
+          new PerformanceObserver(list => { for (const entry of list.getEntries()) {
+            Object.assign(window.__lab, accumulator.add(entry));
+            window.__lab.shifts.push({value:entry.value,startTime:entry.startTime,hadRecentInput:entry.hadRecentInput,readyState:document.readyState,sources:entry.sources.map(s=>({tag:s.node?.tagName,class:s.node?.className,parent:s.node?.parentElement?.outerHTML.slice(0,700),previous:s.previousRect.toJSON(),current:s.currentRect.toJSON()})),heroPseudo:[...document.querySelectorAll('.glee-hero-card,.hero-eyebrow,body')].map(el=>{const style=getComputedStyle(el,'::before');return {class:el.className,bounds:el.getBoundingClientRect().toJSON(),content:style.content,width:style.width,height:style.height,position:style.position,transform:style.transform,animation:style.animationName};})});
+          } }).observe({ type: 'layout-shift', buffered: true });
           new PerformanceObserver(list => { for (const entry of list.getEntries()) window.__lab.longTasks.push(entry.duration); }).observe({ type: 'longtask', buffered: true });
-        });
+        }).toString()})(${createLayoutShiftAccumulator.toString()});`});
         const page = await context.newPage();
         const cdp = await setup(context, page, profile);
         let resources = new Map(), pageErrors = [], consoleErrors = [];
@@ -339,3 +413,4 @@ async function completeDiagrams(page) {
   console.log(JSON.stringify({ output, performanceCases: report.performance.length, accessibilityCases: report.accessibility.length, failures: report.failures.length }));
   process.exitCode = report.failures.length ? 1 : 0;
 })().catch(error => { report.fatal = error.stack; save(); console.error(error); process.exitCode = 1; server.close(); });
+}
