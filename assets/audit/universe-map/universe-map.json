@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "generator": "0.1.0",
+  "generator": "0.1.1",
   "config_sha256": "fb638816bd37feb7badbf804f76e9a867510ca24f2cfc89571cc3c388673694c",
   "sources": [
     {
       "origin": "https://glee-fully.tools",
-      "sha256": "1fbfae9b96f278dee85d8d6454bbda32d2ce96097d1345422c5ad56a5d8dd8d6",
+      "sha256": "38f1c49fdd1b93ddf97c6460ca4fa13f395aeb842b49a5ef2383e1f6fcf7dcce",
       "records": 60
     }
   ],

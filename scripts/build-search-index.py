@@ -406,7 +406,7 @@ def main() -> int:
         print(f"Committed {out_path.relative_to(REPO_ROOT)} is current — {len(entries)} pages")
         return 0
 
-    out_path.write_text(rendered, encoding="utf-8")
+    out_path.write_text(rendered, encoding="utf-8", newline="\n")
     size_kb = out_path.stat().st_size / 1024
     print(f"\nWrote {out_path.relative_to(REPO_ROOT)} — {len(entries)} pages, {size_kb:.1f} KB")
     if duplicates or bad_home:

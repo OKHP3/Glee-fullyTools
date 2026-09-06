@@ -1,6 +1,6 @@
 # Automatic universe maps
 
-The canonical package is `OKHP3/skillz/mermaid/okhp3-universe-map`, version 0.1.0. The local `.agents/skills/okhp3-universe-map` copy is installed without changes to its core files. Site configuration belongs in `universe-map.config.json`.
+The canonical package is `OKHP3/skillz/mermaid/okhp3-universe-map`, version 0.1.1. The local `.agents/skills/okhp3-universe-map` copy is installed without changes to its core files. Site configuration belongs in `universe-map.config.json`.
 
 ## Active integration
 
