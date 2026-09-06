@@ -18,6 +18,7 @@ import json
 import re
 import sys
 import argparse
+import subprocess
 import runpy
 from html.parser import HTMLParser
 from datetime import datetime, timezone
@@ -236,8 +237,14 @@ def trim_text(text: str, max_words: int = 1600) -> str:
     return " ".join(words[:max_words])
 
 
+def strip_universe_map(raw: str) -> str:
+    """Generated navigation must not feed its own labels into the search index."""
+    return re.sub(r'<!-- AUTOGEN:UNIVERSE-MAP -->.*?<!-- /AUTOGEN:UNIVERSE-MAP -->', '', raw, flags=re.S)
+
+
 def build_entry(path: Path) -> dict | None:
     raw = path.read_text(encoding="utf-8", errors="ignore")
+    raw = strip_universe_map(raw)
     parser = PageParser()
     try:
         parser.feed(raw)
@@ -354,14 +361,27 @@ def main() -> int:
     if duplicates or bad_home:
         print("\nIndex written but VALIDATION FAILED — please review.", file=sys.stderr)
 
+    revision_time = subprocess.run(
+        ["git", "show", "-s", "--format=%cI", "HEAD"], cwd=REPO_ROOT,
+        capture_output=True, text=True, check=False,
+    )
+    generated_at = revision_time.stdout.strip() if revision_time.returncode == 0 else "unversioned"
     payload = {
-        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "generated_at": generated_at,
         "version": 2,
         "site": "https://glee-fully.tools",
         "count": len(entries),
         "pages": entries,
     }
 
+    # A no-op rebuild retains the original timestamp and source hash.
+    if out_path.exists():
+        try:
+            previous = json.loads(out_path.read_text(encoding="utf-8"))
+            if {k: v for k, v in previous.items() if k != "generated_at"} == {k: v for k, v in payload.items() if k != "generated_at"}:
+                payload["generated_at"] = previous["generated_at"]
+        except (ValueError, KeyError):
+            pass
     rendered = json.dumps(payload, ensure_ascii=False, indent=2)
     if args.check:
         if not out_path.exists():
@@ -389,7 +409,9 @@ def main() -> int:
     out_path.write_text(rendered, encoding="utf-8")
     size_kb = out_path.stat().st_size / 1024
     print(f"\nWrote {out_path.relative_to(REPO_ROOT)} — {len(entries)} pages, {size_kb:.1f} KB")
-    return 0 if not (duplicates or bad_home) else 2
+    if duplicates or bad_home:
+        return 2
+    return subprocess.run([sys.executable, "-B", str(REPO_ROOT / "scripts/sync-universe-map.py")], check=False).returncode
 
 
 if __name__ == "__main__":

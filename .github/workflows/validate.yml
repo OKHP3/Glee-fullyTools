@@ -36,6 +36,19 @@ jobs:
       - name: Install dependencies
         run: pip install beautifulsoup4
 
+      - name: Generate current search and universe maps
+        run: |
+          python3 scripts/build-search-index.py
+          python3 scripts/sync-portfolio-stats.py
+          python3 scripts/build-search-index.py
+          python3 scripts/sync-css-version.py
+
+      - name: Check universe integration and freshness
+        run: |
+          python3 scripts/tests/test-universe-integration.py
+          python3 .agents/skills/okhp3-universe-map/tests/test-universe-map.py
+          python3 scripts/sync-universe-map.py --check
+
       - name: Check committed search index is current
         run: python3 scripts/build-search-index.py --check
 
