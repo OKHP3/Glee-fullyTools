@@ -45,3 +45,13 @@ All assessment JSON parses. Tracked production diff remains empty in the source 
 ## Translation follow-up
 
 The user clarified the skill/Python translation direction. The assessment PM received a concrete R12 interface/cleanup design assignment coordinated with R2 search. See `translation-transition-review.md`. Five ignored-only old skill roots were removed locally; the five active pair skills and drift workflow were retained. PR #22 is now merged at `9b4ade05`; implementation must refresh the earlier base before editing. The persistent implementation task still has no confirmed runnable thread identity at this follow-up, so no additional execution is claimed.
+
+## Implementation startup confirmed
+
+The implementation PM reported from thread `01a07294-4270-7660-8040-9bc5cee80973`. This supersedes the earlier pending-startup observations. Its isolated branch is `codex/first-wave-repairs-2026-09-05`, explicitly based on merged main `9b4ade05dbe6f8c755f20c2e7bc2e19b03da1b47`. Three Workers are executing Visual R10, Runtime R1/R2/R11 with a single JavaScript writer, and Content R3/narrow R4. The PM reports reproduced baseline defects, passing structural/link checks, and the existing 22/23 macOS unit result. These are delegated progress reports, not final Architect validation.
+
+The Architect forwarded the user's translation clarification and linked the transition review. R2 must preserve the active skills/Python detector and PR #22 menu support while isolating stale site-specific locale assumptions where possible within its bounded patch. Broader R12 interface work stays a concrete follow-on proposal. No translated pages, locale adoption, or publication is authorized by this steering. Work remains local; completion and publication are not yet reported.
+
+## Full-backlog ownership and cost policy
+
+The owner's subsequent clarification expanded PM ownership beyond the first wave and required lighter PM/Worker models. The current dispatches, package mapping, model settings and completion boundaries are recorded in [the assignment register](assignment-register.md). That dated register supersedes the earlier statement that later packages remain unassigned. Two new PM creation requests are queued; they must not be represented as running Workers until startup is confirmed. The existing PM's final integration checks remain open.
