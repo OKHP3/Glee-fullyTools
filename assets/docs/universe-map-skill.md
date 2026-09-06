@@ -1,8 +1,8 @@
 # Automatic universe maps
 
-The canonical package is `OKHP3/skillz/mermaid/okhp3-universe-map`, version 0.1.3. The local `.agents/skills/okhp3-universe-map` copy is installed without changes to its core files. Site configuration belongs in `universe-map.config.json`.
+The canonical package is `OKHP3/skillz/mermaid/okhp3-universe-map`, version 0.1.4. The local `.agents/skills/okhp3-universe-map` copy is installed without changes to its core files. Site configuration belongs in `universe-map.config.json`.
 
-Canonical source revision: `e3f4559b923472ce52d3dd88984cf8bb9fee01dd` (Skillz PR 78). All 12 installed files were compared directly with that immutable Git tree.
+Canonical source revision: `9d3677ad89f51d68ec946174f9ddff1c1f3f5b53` (Skillz PR 79). All 12 installed files were compared directly with that immutable Git tree.
 
 ## Active integration
 
@@ -31,4 +31,4 @@ Tool-ette states come from the existing `audit-tool-ette-promises.py` publicatio
 
 ### Portable skill 0.1.4
 
-Includes the final PR76 hierarchy fix for slashless URLs, explicit-parent handling for ambiguous slash aliases, and validated trusted local index paths. All 18 generator regression tests pass. Existing indexed page links and rendering are preserved.
+Includes the final PR76 hierarchy fix for slashless URLs, explicit-parent handling for ambiguous slash aliases, and validated trusted local index paths. All 19 generator regression tests pass. Existing indexed page links and rendering are preserved.
