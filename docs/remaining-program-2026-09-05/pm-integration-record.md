@@ -2,6 +2,8 @@
 
 Date: September 5, 2026. Local implementation is accepted for Architect review; the overall program and release remain open at the explicit decisions and gates below.
 
+Release continuation: the subsequent owner/Architect instruction authorizes publication and verified cleanup. [Current release dispositions](release-dispositions-2026-09-06.md) supersede historical pending authorization labels in this record. The original assessment history is preserved in merge `547d1c12`; the portable proposal is now committed with release preparation. Native browser and CLS gates are wired into PR CI before publication. Git-backed preflight passes 63-page validation and CSP checks; the earlier archive/sandbox failures remain environment evidence. Both temporary QA copies and their source tar were removed after preserving results. See `assets/audit/release-2026-09-06/` for the preservation, preflight, and cleanup records.
+
 ## Identity and preservation
 
 - Worktree: `C:/Users/jamie/.codex/worktrees/73b4/glee-fullytools`.

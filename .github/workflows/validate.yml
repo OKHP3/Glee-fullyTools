@@ -63,6 +63,9 @@ jobs:
       - name: Run client behavior regressions
         run: node scripts/tests/test-client-regressions.cjs
 
+      - name: Run CLS session-window regressions
+        run: node --test scripts/tests/test-cls-session-window.cjs
+
       - name: Run discovery, publication, asset, and artifact regressions
         run: |
           python3 scripts/tests/test-visitor-truth.py

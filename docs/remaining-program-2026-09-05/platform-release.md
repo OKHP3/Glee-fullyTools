@@ -301,15 +301,17 @@ foreach ($releaseCheck in $releaseChecks) {
   & $releasePython @releaseCheck
   if ($LASTEXITCODE) { throw "Release check failed: $releaseCheck" }
 }
-# These three checks always write reports. Run them in an exact HEAD archive
-# outside the checkout; their report side effects remain in that evidence copy.
+# These three checks always write reports and need tracked-file Git metadata.
+# Use an isolated local clone; report side effects remain in that evidence copy.
+$releaseSource = (git rev-parse --show-toplevel).Trim()
+if ($LASTEXITCODE) { throw 'Source repository lookup failed.' }
 $releaseEvidence = Join-Path $env:TEMP ('glee-checks-' + [guid]::NewGuid().ToString())
-New-Item -ItemType Directory -Path $releaseEvidence | Out-Null
-$releaseSourceTar = Join-Path $env:TEMP ('glee-source-' + [guid]::NewGuid().ToString() + '.tar')
-git archive --format=tar --output=$releaseSourceTar $releaseSha
-if ($LASTEXITCODE) { throw 'Source archive creation failed.' }
-tar -xf $releaseSourceTar -C $releaseEvidence
-if ($LASTEXITCODE) { throw 'Source archive extraction failed.' }
+git clone --no-hardlinks --no-checkout -- $releaseSource $releaseEvidence
+if ($LASTEXITCODE) { throw 'Local evidence clone failed.' }
+git -C $releaseEvidence checkout --detach $releaseSha
+if ($LASTEXITCODE) { throw 'Exact release checkout failed.' }
+$releaseEvidenceSha = (git -C $releaseEvidence rev-parse HEAD).Trim()
+if ($LASTEXITCODE -or $releaseEvidenceSha -ne $releaseSha) { throw 'Evidence clone SHA mismatch.' }
 Push-Location $releaseEvidence
 try {
   foreach ($releaseCheck in @(
@@ -349,11 +351,16 @@ Side-effect correction: `check-links.py --no-report` is an accepted flag;
 `validate-site.py --no-report` is **not** supported and is silently ignored.
 The earlier local validator pass remains valid as a result, but the earlier
 no-write interpretation was incorrect. Validator, strict accent, and resilience
-static mode write fixed reports; the archive-copy block above confines those
+static mode write fixed reports; the local-clone block above confines those
 writes outside the source checkout. Advisory audit tools may also write reports
 and are not covered by a blanket no-writes claim. Python child tests require
 `PYTHONUTF8=1` on this Windows runtime. These final commands are a handoff, not
 a claim that every command in the revised block was executed by this worker.
+An earlier plain-archive recipe was invalid because CSP page discovery calls
+`git ls-files`; absent Git metadata made validation fail with exit 128 even
+after reporting 63 HTML pages without issues. The replacement clones only the
+existing local repository, retains independent Git metadata/objects, and checks
+out the exact release SHA. It performs no remote fetch or dependency install.
 
 Required artifact assertions: 63 validator-scoped HTML pages; 60 search entries
 and sitemap URLs; 42 Tool-ette states (1 live, 24 beta, 17 unavailable) unless an

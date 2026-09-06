@@ -2,6 +2,14 @@
 
 Date: September 5, 2026. Accountable integrator: Implementation PM task `01a07294-1521-77f3-bc34-a7176b6e0444`. Architect: `01a07280-c6e5-7d70-8aa1-feba93994a47`.
 
+## Authorized release continuation and agent configuration
+
+The owner's subsequent consolidation instruction authorizes this reviewed program's PR, CI, squash merge, deployment, live verification, and verified cleanup. D09 is authorized. [Release dispositions](release-dispositions-2026-09-06.md) supersede the historical pending authorization labels below and account for all 53 A/R/D/G rows. Optional policy/prototype adoption and external human evidence retain their separate limits.
+
+The operating model is Architect approval, PM planning/delegation/review/integration, and bounded Worker execution. The Architect confirmed an app dispatch requesting PM `gpt-5.6-luna` with `medium` reasoning for this continuation. Runtime model identity is not independently exposed to the PM. Earlier Workers inherited settings; their actual model and effort are unknown and are not retroactively labeled Luna. Those Workers completed their active assignments and will not receive new work under unverified inherited settings. Future Workers use an explicit `gpt-5.6-luna` dispatch with `low` reasoning for mechanical work, or `medium` for evidenced CI/logic diagnosis, with concise task context.
+
+The Architect's separate read-only acceptance Worker `01a074ba-1396-72c2-832c-8dc0ff211dea` was requested as Luna/low and found no actionable release-preparation defect. Its conflicting self-description is not runtime metadata. That review did not execute CI or deployment. The original three Workers' final release-preparation roles were: platform workflow wiring/runbook correction; experience portable-prototype preservation; and content all-row disposition plus independent merge preservation. PM retains sole mutation/integration ownership.
+
 This is the durable assignment and acceptance ledger for the owner's continuation. Assignment is not completion. Initial implementation and evidence commits `8dea009c7b1887b129a1c5540ec1a39f6c028841` and `f5f33986e6ee287fb165c75e82ef01e5d3ed1f99` were accepted locally. The starting worktree is clean; main is `9b4ade05dbe6f8c755f20c2e7bc2e19b03da1b47`. Accepted commits, other worktrees, and the original assessment remain preserved.
 
 ## Owners and exclusive assignments
