@@ -50,9 +50,28 @@ def measurement_url(url: str) -> bool:
                for domain in ("googletagmanager.com", "google-analytics.com"))
 
 
+def adapt_local_http_navigation(url: str, base_url: str, content_type: str,
+                                body: str, *, is_navigation: bool) -> str | None:
+    """Adapt only loopback HTTP HTML navigations for WebKit's local fixture.
+
+    Production HTML and policy allowlists remain unchanged. The helper removes
+    only the transport-upgrade directive that makes WebKit rewrite local HTTP
+    subresources to HTTPS, where the test server has no TLS endpoint.
+    """
+    base = urlsplit(base_url)
+    target = urlsplit(url)
+    local_http = base.scheme == "http" and base.hostname in {"localhost", "127.0.0.1"}
+    if not (local_http and is_navigation and target.scheme == base.scheme
+            and target.netloc == base.netloc and "text/html" in content_type):
+        return None
+    return body.replace("; upgrade-insecure-requests", "")
+
+
 def run_checks(browser, expect, args) -> list[dict]:
     base = args.base_url.rstrip("/")
-    origin = urlsplit(base).netloc
+    parsed_base = urlsplit(base)
+    origin = parsed_base.netloc
+    local_http = parsed_base.scheme == "http" and parsed_base.hostname in {"localhost", "127.0.0.1"}
     results = []
 
     def wait_for_page_condition(page, expression: str) -> None:
@@ -94,6 +113,17 @@ def run_checks(browser, expect, args) -> list[dict]:
 
         def route_request(route):
             url = route.request.url
+            if local_http and route.request.is_navigation_request() and first_party(url):
+                response = route.fetch()
+                adapted = adapt_local_http_navigation(
+                    url, base, response.headers.get("content-type", ""), response.text(),
+                    is_navigation=True,
+                )
+                if adapted is not None:
+                    route.fulfill(response=response, body=adapted)
+                else:
+                    route.fulfill(response=response)
+                return
             if first_party(url):
                 route.continue_()
             else:
@@ -122,7 +152,13 @@ def run_checks(browser, expect, args) -> list[dict]:
             result.update(status="FAIL", error=str(error))
         finally:
             result["health"] = health
+            result["local_http_fixture"] = {
+                "enabled": local_http,
+                "scope": "same-origin loopback HTTP navigation HTML only",
+                "transformation": "remove ; upgrade-insecure-requests only",
+            }
             result["blocked_external_requests"] = len(blocked_external)
+            result["blocked_external_urls"] = blocked_external
             result["blocked_measurement_attempts"] = len(measurement_attempts)
             if args.screenshots:
                 try:
