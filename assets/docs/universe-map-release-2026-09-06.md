@@ -8,7 +8,7 @@ Index writes invoke the adapter. Both release jobs regenerate index, portfolio s
 
 ## Local evidence
 
-- Portable generator: 14 regression tests passed.
+- Portable generator: 16 regression tests passed.
 - Integration: 6 regression tests passed (addition/removal, idempotency, malformed-input preservation, marker safety, feedback exclusion, trailing-slash origin).
 - Public artifact tests: 12 tests, 11 passed and one platform-specific case skipped on Windows.
 - Existing reconciliation: 3 tests passed; client regressions passed.

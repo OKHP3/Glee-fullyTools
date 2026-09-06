@@ -2,6 +2,8 @@
 
 The canonical package is `OKHP3/skillz/mermaid/okhp3-universe-map`, version 0.1.3. The local `.agents/skills/okhp3-universe-map` copy is installed without changes to its core files. Site configuration belongs in `universe-map.config.json`.
 
+Canonical source revision: `e3f4559b923472ce52d3dd88984cf8bb9fee01dd` (Skillz PR 78). All 12 installed files were compared directly with that immutable Git tree.
+
 ## Active integration
 
 `build-search-index.py` regenerates the local index, then invokes `sync-universe-map.py`. The adapter generates in memory, replaces exactly one `AUTOGEN:UNIVERSE-MAP` block in `universe/index.html`, and writes `assets/data/universe-map.json` for coverage and source hashes. There is no growing staging directory to prune as pages disappear.
