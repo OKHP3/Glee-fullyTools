@@ -80,6 +80,23 @@ class UniverseIntegrationTests(unittest.TestCase):
         content = '<main>Authored<!-- AUTOGEN:UNIVERSE-MAP --><h2>Generated</h2><!-- /AUTOGEN:UNIVERSE-MAP -->Tail</main>'
         self.assertEqual(indexer.strip_universe_map(content), '<main>AuthoredTail</main>')
 
+    def test_origin_with_trailing_slash_keeps_catalog_overlay_valid(self):
+        self.write_index(False)
+        config = json.loads(self.config.read_text())
+        config['sites'][0]['origin'] += '/'
+        self.config.write_text(json.dumps(config))
+        (self.root / 'scripts').mkdir()
+        (self.root / 'scripts/audit-tool-ette-promises.py').write_text(
+            'def launch_urls(source): return []\ndef publication_state(source, urls): return "unavailable"\n')
+        tool = self.root / 'toolbox/branch/tool/index.html'
+        tool.parent.mkdir(parents=True)
+        tool.write_text('<h1>Tool</h1>')
+        index = json.loads(self.index.read_text())
+        index['pages'].append({'url': '/toolbox/branch/tool/', 'title': 'Tool'})
+        self.index.write_text(json.dumps(index))
+        self.sync.sync(self.root)
+        self.assertIn('Catalog: unavailable', self.page.read_text())
+
 
 if __name__ == '__main__':
     unittest.main()

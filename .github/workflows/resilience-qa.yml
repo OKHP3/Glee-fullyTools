@@ -55,7 +55,7 @@ jobs:
         run: python3 scripts/resilience-qa.py --base-url http://localhost:5000
 
       - name: Verify generated maps in all installed engines
-        run: python3 scripts/tests/test_universe_browser.py
+        run: python3 scripts/tests/test-universe-browser.py
 
       - name: Run native visitor acceptance in all installed engines
         run: |

@@ -2,7 +2,6 @@
 """Publish the local index as bounded maps using the installed portable skill."""
 import argparse
 import hashlib
-import html
 import importlib.util
 import json
 from pathlib import Path
@@ -18,6 +17,7 @@ END = '<!-- /AUTOGEN:UNIVERSE-MAP -->'
 def generate(root):
     config = json.loads((root / 'universe-map.config.json').read_text(encoding='utf-8'))
     for site in config['sites']:
+        site['origin'] = site['origin'].rstrip('/')
         site['index'] = str((root / site['index']).resolve())
     # Reuse the existing publication contract; never infer GPT readiness from indexing.
     authority = root / 'scripts/audit-tool-ette-promises.py'

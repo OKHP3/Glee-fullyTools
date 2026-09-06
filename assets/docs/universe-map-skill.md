@@ -1,6 +1,6 @@
 # Automatic universe maps
 
-The canonical package is `OKHP3/skillz/mermaid/okhp3-universe-map`, version 0.1.1. The local `.agents/skills/okhp3-universe-map` copy is installed without changes to its core files. Site configuration belongs in `universe-map.config.json`.
+The canonical package is `OKHP3/skillz/mermaid/okhp3-universe-map`, version 0.1.2. The local `.agents/skills/okhp3-universe-map` copy is installed without changes to its core files. Site configuration belongs in `universe-map.config.json`.
 
 ## Active integration
 
@@ -22,6 +22,6 @@ Tool-ette states come from the existing `audit-tool-ette-promises.py` publicatio
 - `py -3 -X utf8 scripts/sync-universe-map.py --check`
 - `py -3 -X utf8 scripts/tests/test-universe-integration.py`
 - `py -3 -X utf8 .agents/skills/okhp3-universe-map/tests/test-universe-map.py`
-- `py -3 -X utf8 scripts/tests/test_universe_browser.py` with the release Playwright runtime and a local server on port 5000; `UNIVERSE_BASE_URL` can select an owned preview server.
+- `py -3 -X utf8 scripts/tests/test-universe-browser.py` with the release Playwright runtime and a local server on port 5000; `UNIVERSE_BASE_URL` can select an owned preview server.
 
 `assets/audit/universe-map/` retains generator-only staging evidence. The public page and `assets/data/universe-map.json` are the active release outputs.
