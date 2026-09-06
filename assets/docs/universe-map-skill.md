@@ -27,3 +27,8 @@ Tool-ette states come from the existing `audit-tool-ette-promises.py` publicatio
 - `py -3 -X utf8 scripts/tests/test-universe-browser.py` with the release Playwright runtime and a local server on port 5000; `UNIVERSE_BASE_URL` can select an owned preview server.
 
 `assets/audit/universe-map/` retains generator-only staging evidence. The public page and `assets/data/universe-map.json` are the active release outputs.
+
+
+### Portable skill 0.1.4
+
+Includes the final PR76 hierarchy fix for slashless URLs, explicit-parent handling for ambiguous slash aliases, and validated trusted local index paths. All 18 generator regression tests pass. Existing indexed page links and rendering are preserved.
