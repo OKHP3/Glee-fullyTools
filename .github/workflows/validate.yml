@@ -66,6 +66,7 @@ jobs:
       - name: Run discovery, publication, asset, and artifact regressions
         run: |
           python3 scripts/tests/test-visitor-truth.py
+          python3 scripts/tests/test_content_claims.py
           python3 scripts/tests/test-search-index.py
           python3 scripts/tests/test_public_artifact.py
           python3 scripts/tests/test_svg_assets.py

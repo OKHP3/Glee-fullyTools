@@ -395,12 +395,25 @@ document.addEventListener("DOMContentLoaded", () => {
   // Smooth scroll for internal anchors
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (e) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
       const href = link.getAttribute("href");
       if (!href || href === "#") return;
-      const target = document.querySelector(href);
+      let target;
+      try { target = document.getElementById(decodeURIComponent(href.slice(1))); }
+      catch (error) { return; }
       if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Move keyboard navigation with the viewport, including non-focusable main.
+      if (!target.hasAttribute("tabindex") && target.tabIndex < 0) {
+        target.setAttribute("tabindex", "-1");
+        target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
+      }
+      target.focus({ preventScroll: true });
+      if (location.hash !== href) history.pushState(history.state, "", href);
+      target.scrollIntoView({
+        behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start"
+      });
     });
   });
 
@@ -782,6 +795,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentResults = [];
     let lastTokens     = [];
     let lastFocus      = null;
+    let focusTimer     = null;
 
     function setLoadError(error) {
       list.innerHTML =
@@ -807,9 +821,10 @@ document.addEventListener("DOMContentLoaded", () => {
       )).filter((el) => el.offsetParent !== null || el === input);
     }
 
-    function open() {
+    function open(opener) {
       if (overlay.dataset.open === "true") return;
-      lastFocus = document.activeElement;
+      // Pointer activation does not focus buttons in every browser.
+      lastFocus = opener || document.activeElement;
       overlay.dataset.open = "true";
       document.documentElement.style.overflow = "hidden";
       loadIndex().then((d) => {
@@ -817,9 +832,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (input.value.trim()) render();
         else renderEmpty();
       }).catch(setLoadError);
-      setTimeout(() => input.focus(), 30);
+      focusTimer = setTimeout(() => {
+        if (overlay.dataset.open === "true") input.focus();
+      }, 30);
     }
     function close() {
+      clearTimeout(focusTimer);
       overlay.dataset.open = "false";
       document.documentElement.style.overflow = "";
       if (lastFocus && typeof lastFocus.focus === "function") {
@@ -934,7 +952,7 @@ document.addEventListener("DOMContentLoaded", () => {
       '<span class="okh-search-label">Search</span>' +
       '<kbd>' + shortcut + '</kbd>'
     );
-    btn.addEventListener("click", (e) => { e.preventDefault(); openFn(); });
+    btn.addEventListener("click", (e) => { e.preventDefault(); openFn(btn); });
 
     // Primary: prepend into .header-controls so search sits left of theme toggle
     const controls = document.querySelector(".header-controls");

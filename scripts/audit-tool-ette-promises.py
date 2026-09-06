@@ -44,6 +44,10 @@ AUTHORING_MARKERS = (
     "describe the custom instructions schema",
     "suggest an easy first use case",
     "link to the other tool ettes that live",
+    "connect this tool",
+    "show users how this gpt",
+    "help users take their first step",
+    "spell out why this pre tuned",
 )
 
 

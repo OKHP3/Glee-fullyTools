@@ -22,6 +22,12 @@ and completion criteria are in [`docs/suite-promise.md`](suite-promise.md).
   --static` is structural lint and does not establish browser behavior.
 
 ## Next
+- **Reviewed release readiness (2026-09-05)**: finish the exact-commit browser,
+  CI, artifact-transfer, and live gates in
+  [`platform-release.md`](remaining-program-2026-09-05/platform-release.md).
+  Dependency/action pins, host-header delivery, and explicit-source sibling
+  promotion are concrete owner choices in that packet; none is applied by a
+  successful local check.
 - **Submit sitemap** to Google Search Console and Bing Webmaster Tools.
 - **HTTP security policy delivery**: review the residual GitHub Pages header
   limitations. Hash-based page CSP is already implemented in `scripts/csp.py`

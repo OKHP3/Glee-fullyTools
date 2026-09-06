@@ -23,8 +23,8 @@ available. The authoritative promise and inventory contract is
 ## Project Structure
 
 - `index.html` — Main landing page with JSON-LD WebSite+Organization schema
-- `assets/css/theme.css` — Central stylesheet (6,552 lines), organized into scope-grouped sections: GLOBAL → OVERKILL → GLEE → ASKJAMIE → CROSS-BRAND. Each scope has a boxed banner. Within each scope, sections retain original relative order so cascade is unchanged.
-- `assets/js/app.js` — Shared JS (907 lines): progress bar, theme toggle, mobile nav, sticky-TOC module, and the full search engine (search.js merged into app.js 2026-05-04). Exposes `window.GleeSearch` for debugging.
+- `assets/css/theme.css` — Central stylesheet, organized into scope-grouped sections: GLOBAL → OVERKILL → GLEE → ASKJAMIE → CROSS-BRAND. Each scope has a boxed banner. Current counts come from the source and generated portfolio statistics; historical scope-map counts below retain their original dates.
+- `assets/js/app.js` — Shared JS: progress bar, theme toggle, mobile nav, sticky-TOC module, and the full search engine (search.js merged into app.js 2026-05-04). Exposes `window.GleeSearch` for debugging.
 - `assets/js/mermaid-init.js` — External Mermaid v11 init (used by ecosystem + universe pages). Both pages also carry a single `.mermaid-referral` credit linking to the paid-referral URL `https://mermaidchart.cello.so/UhVlNtC2MlS` in Mermaid hot-pink `#FF3670`. `scripts/validate-site.py` enforces a one-instance-per-Mermaid-page invariant so this credit can never silently be dropped.
 - `assets/img/` — Branded butterfly and GPT icons
 - `sw.js` — Root-scoped service worker with a versioned, same-origin offline shell and `/offline.html` fallback
@@ -52,7 +52,7 @@ static-lint fallback is not browser evidence. No install is part of this runbook
 
 1. **`validate-site.py`** — checks all pages for title, h1, description, canonical, og:url, theme-color, manifest, favicon, skip link, JSON-LD parseability, Mermaid referral invariant. Also enforces a global **CSS-lines drift invariant**: the `<!-- STAT:CSS-LINES -->` value in `showcase/index.html` must be within ±50 lines of the actual `theme.css` line count (fix by running `python3 scripts/sync-portfolio-stats.py`). Exits non-zero on any critical issue.
 2. **`check-links.py`** — validates every internal href against the filesystem and cross-references against `sitemap.xml`. Exits non-zero on broken links or sitemap mismatches.
-3. **`build-search-index.py`** — rebuilds `assets/data/search-index.json`; fails the workflow if the index file is missing after the build.
+3. **`build-search-index.py --check`** — compares `assets/data/search-index.json` with the source without rewriting it; fails if committed output is missing or stale.
 
 This gate prevents regressions (deprecated meta tags, broken hrefs, missing metadata, stale search index) from reaching the live GitHub Pages deployment.
 
@@ -111,6 +111,14 @@ artifact contains the homepage, 404 page, robots policy, sitemap, and manifest.
 The Pages workflow also runs the supported browser viewport/asset QA before
 deployment. The standalone viewport workflow remains useful for fast feedback
 on responsive changes.
+
+The current detailed release handoff, runtime inventory, and unresolved CI/host
+choices are in `docs/remaining-program-2026-09-05/platform-release.md`.
+`scripts/tests/test-release-readiness.cjs` can exercise installed Node Playwright
+engines. It is supplementary evidence, not execution of the Python browser gates.
+The Python viewport and inclusive runners still call the Nix/gcc shim setup
+unconditionally; do not invoke that host-specific setup on Windows. The proposed
+host-aware fix is documented in the handoff and remains separately reviewed work.
 
 The three companion repositories use the same release stages but retain
 site-specific adapters for domains, page inventories, generated files, browser

@@ -76,3 +76,8 @@ upgrade-insecure-requests
 ### Future hardening
 - Consider HTTP policy delivery only through an owner-approved hosting decision.
 - A violation-reporting endpoint remains a proposal; none is introduced here.
+- The concrete retain-Pages, proxy, and alternate-static-host choices and their
+  required owner decisions are recorded in
+  [the September 5 platform handoff](../remaining-program-2026-09-05/platform-release.md#host-header-decision).
+  Before applying `_headers` to a new host, review its immutable-cache rules,
+  combined HTTP/meta CSP behavior, embedding policy, and HSTS subdomain coverage.
