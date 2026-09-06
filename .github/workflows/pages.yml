@@ -48,6 +48,19 @@ jobs:
       - name: Install browsers for browser release gate
         run: playwright install --with-deps chromium firefox webkit
 
+      - name: Generate current search and universe maps
+        run: |
+          python3 scripts/build-search-index.py
+          python3 scripts/sync-portfolio-stats.py
+          python3 scripts/build-search-index.py
+          python3 scripts/sync-css-version.py
+
+      - name: Check universe integration and freshness
+        run: |
+          python3 scripts/tests/test-universe-integration.py
+          python3 .agents/skills/okhp3-universe-map/tests/test-universe-map.py
+          python3 scripts/sync-universe-map.py --check
+
       - name: Check generated search index
         run: python3 scripts/build-search-index.py --check
 
@@ -94,6 +107,9 @@ jobs:
           done
           curl --silent --fail http://127.0.0.1:5000/ >/dev/null \
             || { cat /tmp/glee-pages-server.log; exit 1; }
+
+      - name: Verify generated map browser journeys
+        run: python3 scripts/tests/test-universe-browser.py
 
       - name: Run browser responsive and asset QA
         run: python3 scripts/run-viewport-qa.py
@@ -165,6 +181,19 @@ jobs:
         with:
           name: pages-site-${{ github.sha }}
           path: ${{ runner.temp }}/glee-public-site
+
+      - name: Set up the matching generation runtime
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Reproduce generated release files from the exact commit
+        run: |
+          python3 scripts/build-search-index.py
+          python3 scripts/sync-portfolio-stats.py
+          python3 scripts/build-search-index.py
+          python3 scripts/sync-css-version.py
+          python3 scripts/sync-universe-map.py --check
 
       - name: Verify transferred inventory, hidden public files, and release bytes
         run: python3 scripts/public-artifact.py verify --output "$RUNNER_TEMP/glee-public-site"

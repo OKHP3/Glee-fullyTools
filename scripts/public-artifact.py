@@ -28,7 +28,7 @@ ROOT_FILES = {
 }
 PAGE_DIRS = {"about", "arcade", "contact", "ecosystem", "legal", "persona",
              "search", "showcase", "toolbox", "universe"}
-DATA_FILES = {"search-index.json", "sparkle.json", "icon-map.json"}
+DATA_FILES = {"search-index.json", "sparkle.json", "icon-map.json", "universe-map.json"}
 IMAGE_EXTENSIONS = {".svg", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico", ".avif"}
 # Add a specific filename only when it becomes an intentional visitor download.
 DOWNLOAD_FILES: set[str] = set()
