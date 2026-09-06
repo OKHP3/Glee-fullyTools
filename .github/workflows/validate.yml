@@ -55,13 +55,30 @@ jobs:
         run: python3 -m unittest scripts/tests/test_validate_template_metadata.py
 
       - name: Run publication and offline release regressions
-        run: python3 scripts/tests/test-reconciliation.py
+        run: |
+          python3 scripts/tests/test-reconciliation.py
+          python3 scripts/tests/test_sync_css_version.py
+          python3 -m unittest scripts.tests.test_browser_acceptance_fixture
 
       - name: Run post-merge hook regressions
         run: python3 scripts/tests/test-post-merge.py
 
       - name: Run client behavior regressions
         run: node scripts/tests/test-client-regressions.cjs
+
+      - name: Run CLS session-window regressions
+        run: node --test scripts/tests/test-cls-session-window.cjs
+
+      - name: Run discovery, publication, asset, and artifact regressions
+        run: |
+          python3 scripts/tests/test-visitor-truth.py
+          python3 scripts/tests/test_content_claims.py
+          python3 scripts/tests/test-search-index.py
+          python3 scripts/tests/test_public_artifact.py
+          python3 scripts/tests/test_svg_assets.py
+          python3 scripts/tests/test_offline_validation.py
+          node --test scripts/tests/test-sw-resilience.cjs
+          node scripts/tests/test-sw-bootstrap.cjs
 
       - name: Check skill identities and branch-audit regressions
         run: |

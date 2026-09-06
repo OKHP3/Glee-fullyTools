@@ -19,7 +19,13 @@ owner-side configuration.
 
 ## Artifact and paths
 
-The published artifact is the repository root. It contains the root `index.html`, `offline.html`, `sw.js`, `assets/`, each public route directory, generated data files, and the committed `CNAME`. There is no bundler, framework build, or alternate output directory.
+The repository is the source; the published artifact is the reviewed inventory
+staged by `scripts/public-artifact.py` into `$RUNNER_TEMP/glee-public-site`.
+It contains the public pages and runtime assets, `CNAME`, `.nojekyll`, and
+`.well-known/security.txt`. Development templates, documentation, agent/skill
+packages, and tooling configuration are excluded. The workflow verifies the
+complete inventory, bytes, and commit before upload, after download, and inside
+the final Pages tar. There is no bundler or framework build.
 
 The site is served at the domain root. Existing root-relative links, asset references, and direct route directories (`/about/`, `/legal/`, and toolbox routes) are preserved exactly as authored. No base-path prefix or HTML rewrite is applied.
 
@@ -41,7 +47,8 @@ releases with stale offline assets. Post-merge verification is read-only so
 pulling a published commit cannot create another generated-content commit.
 
 Replit's Sync button pushes the currently selected branch; it cannot supply
-the approving review required by protected `main`. Publish the temporary
+the approving review required by repository policy (the latest observed remote
+rule requires zero approvals; see the governance record). Publish the temporary
 branch through a pull request, finish its reviews and checks, then fast-forward
 Replit's clean `main` from `origin/main`. Keep the origin URL set to
 `https://github.com/OKHP3/Glee-fullyTools.git`. A stored PAT authenticates the

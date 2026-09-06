@@ -7,8 +7,10 @@
     try { return localStorage.getItem(consentKey); } catch (_) { return null; }
   }
   function writeConsent(value) {
-    try { localStorage.setItem(consentKey, value); } catch (_) {}
+    try { localStorage.setItem(consentKey, value); return true; } catch (_) { return false; }
   }
+  let effectiveConsent = readConsent() === "granted" ? "granted" : "denied";
+  let consentSaved = true;
   function loadAnalytics() {
     window["ga-disable-" + measurementId] = false;
     if (document.querySelector("script[data-glee-analytics]")) return;
@@ -26,30 +28,38 @@
     script.dataset.gleeAnalytics = "true";
     document.head.appendChild(script);
   }
-  function setAnalyticsConsent(value) {
-    writeConsent(value);
-    if (value === "granted") loadAnalytics();
+  function applyAnalyticsConsent() {
+    if (effectiveConsent === "granted") loadAnalytics();
     else window["ga-disable-" + measurementId] = true;
     document.querySelectorAll("[data-analytics-status]").forEach((status) => {
-      status.textContent = value === "granted"
-        ? "Optional analytics is on for this browser."
-        : "Optional analytics is off for this browser.";
+      const state = effectiveConsent === "granted" ? "on" : "off";
+      status.textContent = consentSaved
+        ? "Optional analytics is " + state + " for this browser."
+        : "Optional analytics is " + state + " for this page. Your choice could not be saved; reloading uses the last saved choice, or off if storage is unavailable.";
     });
+  }
+  function setAnalyticsConsent(value) {
+    effectiveConsent = value === "granted" ? "granted" : "denied";
+    consentSaved = writeConsent(effectiveConsent);
+    applyAnalyticsConsent();
   }
   window.gleeAnalytics = {
     enable: () => setAnalyticsConsent("granted"),
     disable: () => setAnalyticsConsent("denied"),
-    status: readConsent,
+    status: () => effectiveConsent,
   };
-  if (readConsent() === "granted") loadAnalytics();
+  applyAnalyticsConsent();
   document.querySelectorAll("[data-analytics-action]").forEach((button) => {
     button.addEventListener("click", () => setAnalyticsConsent(button.dataset.analyticsAction));
   });
 
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
+    const registerServiceWorker = () => {
       navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch(() => {});
-    });
+    };
+    // Dynamic imports can finish after load has already fired.
+    if (document.readyState === "complete") registerServiceWorker();
+    else window.addEventListener("load", registerServiceWorker, { once: true });
   }
 
   document.querySelectorAll("[data-external-frame]").forEach((frame) => {
@@ -78,37 +88,5 @@
     .then((data) => { if (data) applySparkle(data); })
     .catch(() => {});
 
-  // Glee's dedicated search markup intentionally differs from the shared
-  // search-page shell, so it owns this small inline adapter.
-  const searchInput = document.querySelector("[data-glee-search-inline-input]");
-  const searchStatus = document.querySelector("[data-glee-search-inline-status]");
-  const searchResults = document.querySelector("[data-glee-search-inline-results]");
-  const searchCategories = document.querySelector("[data-glee-search-inline-categories]");
-  if (searchInput && searchStatus && searchResults) {
-    const escapeHtml = (value) => String(value).replace(/[&<>\"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
-    const query = new URL(window.location.href).searchParams.get("q") || "";
-    searchInput.value = query;
-    fetch("/assets/data/search-index.json", { credentials: "same-origin" })
-      .then((response) => response.ok ? response.json() : Promise.reject(new Error("index request failed")))
-      .then((data) => {
-        const entries = Array.isArray(data.entries) ? data.entries : (Array.isArray(data.pages) ? data.pages : []);
-        let category = "all";
-        const render = () => {
-          const terms = searchInput.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
-          const matches = entries.filter((entry) => category === "all" || (entry.category || "Page") === category)
-            .filter((entry) => !terms.length || terms.every((term) => [entry.title, entry.description, entry.body, entry.headings && entry.headings.join(" ")].join(" ").toLowerCase().includes(term)))
-            .slice(0, 60);
-          searchResults.innerHTML = matches.map((entry) => '<li><a href="' + escapeHtml(entry.url) + '"><strong>' + escapeHtml(entry.title || entry.url) + '</strong><span>' + escapeHtml(entry.description || "") + '</span></a></li>').join("");
-          searchStatus.textContent = terms.length ? matches.length + " result" + (matches.length === 1 ? "" : "s") + " found." : "Type to search " + entries.length + " indexed entries.";
-        };
-        if (searchCategories) {
-          const categories = ["all"].concat([...new Set(entries.map((entry) => entry.category || "Page"))].sort());
-          searchCategories.innerHTML = categories.map((name) => '<button type="button" data-category="' + escapeHtml(name) + '" aria-pressed="' + (name === "all") + '">' + escapeHtml(name === "all" ? "All" : name) + '</button>').join("");
-          searchCategories.querySelectorAll("button").forEach((button) => button.addEventListener("click", () => { category = button.dataset.category || "all"; searchCategories.querySelectorAll("button").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); render(); }));
-        }
-        searchInput.addEventListener("input", render);
-        render();
-      })
-      .catch(() => { searchStatus.textContent = "Search could not load the index. Refresh to retry."; });
-  }
+  // Both Glee search surfaces use the shared engine and controls in app.js.
 }());

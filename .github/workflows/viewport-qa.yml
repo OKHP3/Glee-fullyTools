@@ -78,6 +78,9 @@ jobs:
       - name: Run inclusive accessibility QA
         run: python3 scripts/inclusive-accessibility-qa.py
 
+      - name: Run native visitor acceptance in Chromium
+        run: python3 scripts/tests/test_browser_acceptance.py --base-url http://localhost:5000 --browser chromium --output assets/audit/browser-acceptance-chromium.json
+
       - name: Upload QA report and failure screenshots
         uses: actions/upload-artifact@v7
         if: always()
@@ -86,5 +89,6 @@ jobs:
           path: |
             assets/audit/viewport-qa-full-*.json
             assets/audit/inclusive-accessibility-qa-*.json
+            assets/audit/browser-acceptance-chromium.json
             assets/audit/screenshots/
           retention-days: 30

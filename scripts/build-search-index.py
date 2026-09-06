@@ -3,27 +3,38 @@
 Build a static client-side search index from every published HTML page.
 
 Walks every *.html in the repo (excluding utility fallbacks / partials),
-extracts title / description / canonical URL / h1-h3 headings / visible body
+extracts title / description / canonical URL / h1-h3 headings / visible main
 text, and writes assets/data/search-index.json.
 
 Run from repo root:
     python3 scripts/build-search-index.py
 
-The output JSON is loaded by /assets/js/search.js at runtime.
+The output JSON is loaded by /assets/js/app.js at runtime.
 """
 
 from __future__ import annotations
 
 import json
-import os
 import re
 import sys
 import argparse
+import runpy
 from html.parser import HTMLParser
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlsplit
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+PROMISE = runpy.run_path(str(REPO_ROOT / "scripts" / "audit-tool-ette-promises.py"))
+BRANCH_LABELS = {
+    "01-discovered-careers": "Discovered Careers",
+    "02-treasured-finds": "Treasured Finds",
+    "03-tasty-tracker": "Tasty Tracker",
+    "04-travelers-guide": "Traveler's Guide",
+    "05-organized-life": "Organized Life",
+    "06-healthy-bee-ing": "Healthy Bee-ing",
+    "07-identity-known": "Identity Known",
+}
 EXCLUDE_FILES = {"404.html", "under-construction.html", "offline.html"}
 EXCLUDE_DIRS = {
     ".git",
@@ -41,7 +52,8 @@ EXCLUDE_DIRS = {
 
 # Embedded frames use raw-text parsing rules that vary across Python HTMLParser
 # patch releases. Their fallback markup is not page body content to index.
-SKIP_TAGS = {"script", "style", "noscript", "svg", "template", "iframe"}
+SKIP_TAGS = {"script", "style", "noscript", "svg", "template", "iframe", "nav", "footer"}
+VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 HEADING_TAGS = {"h1", "h2", "h3"}
 
 
@@ -54,16 +66,16 @@ class PageParser(HTMLParser):
         self.description: str = ""
         self.canonical: str = ""
         self.keywords: str = ""
+        self.noindex = False
         self.headings: list[str] = []
         self.body_chunks: list[str] = []
 
         self._in_title = False
         self._in_head = False
         self._in_body = False
-        self._skip_depth = 0
+        self._stack: list[tuple[str, bool]] = []
         self._heading_tag: str | None = None
         self._heading_buf: list[str] = []
-        self._aria_hidden_depth = 0
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attrs_d = {k: (v or "") for k, v in attrs}
@@ -84,18 +96,21 @@ class PageParser(HTMLParser):
                 self.description = content
             elif name == "keywords" and content:
                 self.keywords = content
+            elif name == "robots" and "noindex" in content.lower():
+                self.noindex = True
         elif tag == "link" and self._in_head:
             if attrs_d.get("rel", "").lower() == "canonical":
                 self.canonical = attrs_d.get("href", "").strip()
 
-        if tag in SKIP_TAGS:
-            self._skip_depth += 1
-
-        # Skip aria-hidden subtrees (decorative)
-        if attrs_d.get("aria-hidden", "").lower() == "true":
-            self._aria_hidden_depth += 1
-
-        if self._in_body and tag in HEADING_TAGS and self._skip_depth == 0:
+        # Keep the actual ancestor stack: nested inline tags must not end a
+        # hidden subtree early. Void elements never become ancestors.
+        excluded = (tag in SKIP_TAGS or "hidden" in attrs_d
+                    or attrs_d.get("aria-hidden", "").lower() == "true"
+                    or bool({"construction-overlay", "keep-exploring", "glee-keep-exploring"}
+                            & set(attrs_d.get("class", "").split())))
+        if tag not in VOID_TAGS:
+            self._stack.append((tag, excluded))
+        if tag in HEADING_TAGS and self._visible_main():
             self._heading_tag = tag
             self._heading_buf = []
 
@@ -106,27 +121,31 @@ class PageParser(HTMLParser):
             self._in_body = False
         elif tag == "title":
             self._in_title = False
-        if tag in SKIP_TAGS and self._skip_depth > 0:
-            self._skip_depth -= 1
-        if self._aria_hidden_depth > 0 and tag not in SKIP_TAGS:
-            # decrement only if this tag is the one currently hiding; coarse approximation
-            self._aria_hidden_depth -= 1
-            if self._aria_hidden_depth < 0:
-                self._aria_hidden_depth = 0
         if tag in HEADING_TAGS and self._heading_tag == tag:
             text = clean_text("".join(self._heading_buf))
             if text:
                 self.headings.append(text)
             self._heading_tag = None
             self._heading_buf = []
+        for index in range(len(self._stack) - 1, -1, -1):
+            if self._stack[index][0] == tag:
+                del self._stack[index:]
+                break
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in VOID_TAGS:
+            self.handle_endtag(tag)
+
+    def _visible_main(self):
+        return (self._in_body and any(tag == "main" for tag, _ in self._stack)
+                and not any(excluded for _, excluded in self._stack))
 
     def handle_data(self, data: str) -> None:
         if self._in_title:
             self.title += data
             return
-        if not self._in_body or self._skip_depth > 0:
-            return
-        if self._aria_hidden_depth > 0:
+        if not self._visible_main():
             return
         if self._heading_tag is not None:
             self._heading_buf.append(data)
@@ -199,7 +218,7 @@ def collect_html_files() -> list[Path]:
     files: list[Path] = []
     for path in REPO_ROOT.rglob("*.html"):
         rel_parts = path.relative_to(REPO_ROOT).parts
-        if rel_parts[:2] == ("assets", "templates"):
+        if rel_parts[0] == "assets":
             continue
         if any(part in EXCLUDE_DIRS for part in rel_parts):
             continue
@@ -209,8 +228,8 @@ def collect_html_files() -> list[Path]:
     return sorted(files)
 
 
-def trim_text(text: str, max_words: int = 220) -> str:
-    """Cap body text so the index stays small (~3-5 KB per page)."""
+def trim_text(text: str, max_words: int = 1600) -> str:
+    """Bound useful main content while retaining deeper function descriptions."""
     words = text.split()
     if len(words) <= max_words:
         return text
@@ -225,6 +244,8 @@ def build_entry(path: Path) -> dict | None:
     except Exception as exc:
         print(f"  ! parse error in {path}: {exc}", file=sys.stderr)
         return None
+    if parser.noindex:
+        return None
 
     title = clean_text(parser.title)
     description = clean_text(parser.description)
@@ -238,7 +259,7 @@ def build_entry(path: Path) -> dict | None:
     url = derive_url(path)
     file_is_home = url == "/"
 
-    if canonical:
+    if canonical and urlsplit(canonical).netloc == "glee-fully.tools":
         m = re.match(r"https?://[^/]+(/.*)?$", canonical)
         if m:
             canonical_path = m.group(1) or "/"
@@ -253,7 +274,9 @@ def build_entry(path: Path) -> dict | None:
                 url = canonical_path
 
     body_text = clean_text(" ".join(parser.body_chunks))
-    body_text = trim_text(body_text, max_words=220)
+    # Leaf functions can appear below their introduction. Bound useful main
+    # content generously enough to preserve those specific discovery terms.
+    body_text = trim_text(body_text, max_words=1600)
 
     headings = [clean_text(h) for h in parser.headings if clean_text(h)]
     # Dedupe headings while preserving order
@@ -275,8 +298,12 @@ def build_entry(path: Path) -> dict | None:
         "title": title,
         "description": description,
         "section": section,
+        "category": "Tool-ette" if section == "Tool" else section,
         "branch": branch,
-        "headings": unique_headings[:12],
+        "branch_label": BRANCH_LABELS.get(branch, ""),
+        "publication_state": (PROMISE["publication_state"](raw, PROMISE["launch_urls"](raw))
+                              if section == "Tool" else ""),
+        "headings": unique_headings[:32],
         "keywords": parser.keywords,
         "body": body_text,
     }
@@ -329,7 +356,7 @@ def main() -> int:
 
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "version": 1,
+        "version": 2,
         "site": "https://glee-fully.tools",
         "count": len(entries),
         "pages": entries,
