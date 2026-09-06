@@ -35,6 +35,13 @@ jobs:
       - name: Start local HTTP server
         run: python3 scripts/serve-site.py > /tmp/resilience-server.log 2>&1 &
 
+      - name: Generate the same universe inventory as publication
+        run: |
+          python3 scripts/build-search-index.py
+          python3 scripts/sync-portfolio-stats.py
+          python3 scripts/build-search-index.py
+          python3 scripts/sync-css-version.py
+
       - name: Wait for server to be ready
         run: |
           for i in $(seq 1 30); do
@@ -46,6 +53,9 @@ jobs:
 
       - name: Run resilient web behavior acceptance checks
         run: python3 scripts/resilience-qa.py --base-url http://localhost:5000
+
+      - name: Verify generated maps in all installed engines
+        run: python3 scripts/tests/test_universe_browser.py
 
       - name: Run native visitor acceptance in all installed engines
         run: |
