@@ -4,6 +4,8 @@ Assessment date: September 5, 2026. Target: `OKHP3/Glee-fullyTools`, https://gle
 
 **Implementation update:** The subsequent corrective wave has passed local Architect review. See [Architect acceptance](architect-acceptance.md) for completed scope, exact commits, fresh checks, and outstanding release gates. Findings below retain the original assessment baseline.
 
+**Continuation update:** The remaining authorized local corrections and proposal deliverables have also passed Architect review, including a requested correction to the lab's CLS calculation and historical evidence claims. See [continuation review](architect-continuation-review.md). Publication, live acceptance and proposal adoption remain open.
+
 ## Architectural judgment
 
 **Keep the static architecture. Make discovery trustworthy, then make the release gates prove the visitor experience.** The site has an appropriate technical foundation, a distinctive identity, substantial content, and working deployment controls. Its weaknesses are the contracts between those parts: shared code carries the wrong brand, generated search data does not match its consumers, publication withdrawals do not cover all entry points, and source-level validation does not prove the packaged or rendered product.

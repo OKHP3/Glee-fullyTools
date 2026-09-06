@@ -1,18 +1,24 @@
 # Architect review of the remaining-program submission
 
-Review date: September 5, 2026. Status: **Review in progress; one QA correction returned to the PM.**
+Review date: September 5, 2026. Status: **Approved for the bounded local implementation and delivered proposals. AR01 is closed after correction and independent verification. Release, live acceptance and proposal adoption remain open.**
 
 ## Submission and scope
 
 The implementation PM submitted source commit `6f5d4d5c472c4e2bc66bf1a29e58464e692463a8` and evidence commit `b15257b6d6177b7d900a5eacd27187903f6a2567` on `codex/assessment-corrections-20260905`, at `C:/Users/jamie/.codex/worktrees/73b4/glee-fullytools`. The clean branch preserves the earlier corrective commits and PR #22; it is four commits ahead of the recorded main baseline `9b4ade05`.
 
+The subsequent QA correction is `f782ba8097a17d3d0bb6bca8746fe9926f5915d1`, the clean branch HEAD at final review. Its nine changed files are two QA scripts, four Markdown records and three new JSON evidence files. Public source and existing artifact provenance remain at `6f5d4d5c`; no accepted commit or historical raw report was rewritten.
+
 The submission implements the remaining authorized local corrections and supplies prototypes and policy proposals for decisions outside that implementation scope. Its assignment register accounts for A01-A20, R01-R16, D01-D09 and G01-G08. Completing a proposal is not implementing that proposal, and neither constitutes release or live acceptance.
 
 ## Review findings
 
-**AR01, P2: correct the reusable layout-shift measurement before full measurement acceptance.** `scripts/tests/test-experience-performance.cjs` adds every non-input layout-shift value to a field named `cls`. Current CLS is the largest session-window score, using the one-second gap and five-second window boundaries, rather than the total of all observation-window shifts. Multiple separated bursts can therefore be overstated. This is a test-instrumentation defect, not an established production regression. The raw outlier and single-shift results are not thereby disproved.
+**AR01, P2, CLOSED: reusable layout-shift calculation and evidence claims corrected.** The submitted `scripts/tests/test-experience-performance.cjs` added every non-input layout-shift value to a field named `cls`. Current CLS is the largest session-window score, using the one-second gap and five-second window boundaries, rather than the total of all observation-window shifts. Multiple separated bursts could therefore be overstated. This was a test-instrumentation defect, not an established production regression.
 
-The PM has been directed to delegate the smallest correction, add synthetic burst/boundary/input-exclusion tests, preserve original reports, inspect timestamped evidence for any changed interpretation, label legacy totals where recomputation is impossible, and run one focused smoke. Broad browser sampling and production modifications are not needed for this correction. Definition: [Chrome's CLS guidance](https://web.dev/articles/cls).
+The PM delegated the correction and independently reviewed it. The corrected shared accumulator selects the maximum qualifying window, excludes recent-input shifts without letting them extend a window, and separately retains the raw non-input total and timed shift records. Definition: [Chrome's CLS guidance](https://web.dev/articles/cls).
+
+The Architect freshly ran all six tests covering separate bursts, strict one-second/five-second boundaries, input exclusion, maximum-window selection and empty observations; all passed. Runner syntax passes. The Architect reproduced all 152 derived rows exactly and checked every retained source hash. These rows include overlapping runs and a duplicate report, not 152 independent samples. Fifty-five complete empty observations support zero scores; 97 rows lack sufficient timing evidence (80 lack raw arrays; 17 nonzero records lack timestamps). No nonempty historical sequence could be recomputed. Numerical before/after CLS improvement and acceptance of the proposed 0.02 budget have therefore been withdrawn. Movement evidence and measured image-byte savings remain supported; the historical homepage 0.20863 value is a legacy total, not certified CLS. The PM's bounded two-visit smoke with the corrected observer passes; no broad rerun was necessary.
+
+Independent derived evidence: `C:/Users/jamie/.codex/visualizations/2026/09/05/01a07280-c6e5-7d70-8aa1-feba93994a47/architect-cls-reassessment.json`. The method note, assignment register, integration record and PR draft reflect the corrected interpretation. The intermittent homepage movement remains unresolved rather than being erased by the metric repair.
 
 No other actionable introduced production defect was identified in this review. The Architect inspected content/schema changes, significant-date evidence, governance and proposals. A separate read-only Assessment PM reviewed modal opener capture and timer cancellation, fragment focus/history/reduced motion, dark-theme selector precedence, responsive homepage image sizes, and reserved search space. That review found no introduced production blocker.
 
@@ -43,4 +49,4 @@ Platform materials provide actionable source/target promotion rules, dependency/
 
 Python browser CI, actual GitHub transfer, publication and live checks remain open. Installed Firefox fails before website navigation; WebKit native next-link Tab, actual browser zoom, human assistive technology, loaded Google Fonts, provider settings and field outcomes remain unverified. The lab's retained homepage shift outlier remains unattributed after six nonreproducing observations; there is no basis to erase it or claim zero homepage layout shift.
 
-Production changes can be considered separately from the measurement correction, but full local submission acceptance is held until AR01 is reviewed. Final owner/release approval, proposal adoption and deployed-site acceptance remain distinct decisions after this local review.
+**Architect decision:** accept the completed bounded local corrections, their stated local verification, and delivery of the reviewable prototypes and policy proposals. No actionable introduced defect remains open from this review. This accepts proposal delivery, not adoption. Final owner/release approval, actual CI and artifact transfer, deployment/live acceptance, human accessibility evidence and the separately enumerated policy decisions remain outstanding. The overall improvement program is not declared complete.
