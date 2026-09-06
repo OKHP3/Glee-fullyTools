@@ -6,6 +6,7 @@ const vm = require('node:vm');
 const { test } = require('node:test');
 const source = fs.readFileSync(path.join(__dirname, '../../sw.js'), 'utf8');
 const origin = 'https://glee-fully.tools';
+const enhancementUrl = source.match(/\/assets\/js\/glee-site-enhancements\.js(?:\?v=[^"']+)?/)[0];
 
 function harness(options = {}) {
   const handlers = {};
@@ -101,7 +102,7 @@ test('cold offline shell includes the dynamically loaded Glee adapter', async ()
   const worker = harness();
   await worker.lifecycle('install');
   worker.options.offline = true;
-  assert.ok(await worker.request('/assets/js/glee-site-enhancements.js', 'cors'));
+  assert.ok(await worker.request(enhancementUrl, 'cors'));
 });
 
 test('activation deletes only stale Glee cache namespaces', async () => {

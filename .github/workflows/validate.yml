@@ -55,7 +55,9 @@ jobs:
         run: python3 -m unittest scripts/tests/test_validate_template_metadata.py
 
       - name: Run publication and offline release regressions
-        run: python3 scripts/tests/test-reconciliation.py
+        run: |
+          python3 scripts/tests/test-reconciliation.py
+          python3 scripts/tests/test_sync_css_version.py
 
       - name: Run post-merge hook regressions
         run: python3 scripts/tests/test-post-merge.py

@@ -19,6 +19,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import re
+import time
 from urllib.parse import parse_qs, urljoin, urlsplit
 
 
@@ -54,6 +55,23 @@ def run_checks(browser, expect, args) -> list[dict]:
     origin = urlsplit(base).netloc
     results = []
 
+    def wait_for_page_condition(page, expression: str) -> None:
+        """Poll a page expression without asking the page to compile eval code.
+
+        The production CSP intentionally omits ``unsafe-eval``. Playwright's
+        string form of ``wait_for_function`` compiles a predicate in the page
+        realm and is therefore rejected by that policy. ``page.evaluate`` runs
+        the same read-only probe through Playwright's evaluation channel, so a
+        bounded Python poll preserves the assertion without asking the page
+        to compile a new predicate under the real CSP.
+        """
+        deadline = time.monotonic() + args.timeout_ms / 1000
+        while time.monotonic() < deadline:
+            if page.evaluate(expression):
+                return
+            page.wait_for_timeout(50)
+        raise AssertionError(f"Timed out waiting for page condition: {expression}")
+
     def first_party(url):
         parsed = urlsplit(url)
         return parsed.scheme == urlsplit(base).scheme and parsed.netloc == origin
@@ -63,7 +81,7 @@ def run_checks(browser, expect, args) -> list[dict]:
         assert response and response.ok, f"Navigation failed: {route}"
         expect(page.locator("h1")).to_be_visible()
         assert page.title().strip(), f"Blank page title: {route}"
-        page.wait_for_function("Boolean(window.gleeAnalytics)")
+        wait_for_page_condition(page, "Boolean(window.gleeAnalytics)")
         page.wait_for_load_state("networkidle")
 
     def check(name, action, **context_options):
@@ -177,7 +195,7 @@ def run_checks(browser, expect, args) -> list[dict]:
         links = page.locator("[data-glee-search-inline-results] a")
         expect(links.first).to_be_visible()
         input_box.fill("budget")
-        page.wait_for_function("new URL(location.href).searchParams.get('q') === 'budget'")
+        wait_for_page_condition(page, "new URL(location.href).searchParams.get('q') === 'budget'")
         expect(links.first).to_be_visible()
         first_budget = links.first.get_attribute("href")
         chip = page.locator('[data-glee-search-inline-categories] button[data-cat="Tool-ette"]')
@@ -227,7 +245,7 @@ def run_checks(browser, expect, args) -> list[dict]:
         assert page.evaluate("localStorage.getItem('glee-analytics-consent')") == "denied"
         before = len(attempts)
         page.reload(wait_until="load")
-        page.wait_for_function("Boolean(window.gleeAnalytics)")
+        wait_for_page_condition(page, "Boolean(window.gleeAnalytics)")
         expect(status).to_contain_text("is off for this browser")
         expect(page.locator("script[data-glee-analytics]")).to_have_count(0)
         assert len(attempts) == before, "Measurement attempted after saved denial"

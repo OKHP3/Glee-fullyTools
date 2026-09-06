@@ -100,7 +100,7 @@ The two supplied archive refs resolve to their intended exact tips: `refs/archiv
 
 The reviewed prototype is preserved at [the development-only catalog proposal](../../assets/templates/catalog-prototype-2026-09-05/readme.md). Six portable implementation/data/image files match the original, which remains intact. Browser filters, relative assets, and focus checks pass; production scope remains 63 HTML pages, 60 search entries and 60 sitemap URLs. Public packaging excludes the prototype. This completes durable proposal delivery without adopting production UI or changing D01.
 
-The actual PR and gate URLs will be added when supplied by the PM. This is release-evidence collection, not pending D09 authorization. No Git mutation or broad test rerun was performed by this Worker.
+The reviewed release is [PR #23](https://github.com/OKHP3/Glee-fullyTools/pull/23), targeting `main`; its [current-head checks](https://github.com/OKHP3/Glee-fullyTools/pull/23/checks) are the durable premerge gate references. The PR opened at `e2274b22ce2d7ee6d31777908af4188b66e2a40a`. The [Pages workflow history](https://github.com/OKHP3/Glee-fullyTools/actions/workflows/pages.yml) and public `release-provenance.json` must identify the eventual merge SHA. Final run/deployment/live results and cleanup evidence belong in the PR closure record and Architect handoff. These links establish where closure evidence is recorded; they do not turn running or unexecuted checks into passes. This is release-evidence collection, not pending D09 authorization. No Git mutation or broad test rerun was performed by the disposition Worker.
 
 ## Proposed closure wording
 

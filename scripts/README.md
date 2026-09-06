@@ -32,7 +32,7 @@ follows the same convention as `askjamie/scripts/README.md`.
 | `serve-site.py` | active | Local preview server |
 | `sparkle-qa.py` | active | Sparkle-loader QA (`.github/workflows/sparkle-qa.yml`) |
 | `sync-foundation-files.py` | active, review required | Dry-run foundation inventory; legacy write modes choose by Git touch time and require explicit per-file source/target review before use |
-| `sync-css-version.py` | active | CSS cache-version sync (has its own test coverage) |
+| `sync-css-version.py` | active | CSS and JavaScript cache-version sync, including the dynamic adapter import and offline shell; run after content generators (has its own test coverage) |
 | `sync-image-alt.py` | active | Image alt-text sync (invoked by `validate-site.py`) |
 | `sync-portfolio-stats.py` | active | Portfolio stats sync; the post-merge hook uses `--check` only |
 | `sync-social-card.py` | active | Social-card sync (has its own test coverage) |

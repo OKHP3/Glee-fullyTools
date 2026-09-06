@@ -52,8 +52,10 @@ const server = createServer((request, response) => {
   try {
     await run('automatic service-worker registration after a late adapter import', async (page, context) => {
       let releaseAdapter;
+      let adapterIntercepted = false;
       const gate = new Promise(resolve => { releaseAdapter = resolve; });
-      await context.route('**/assets/js/glee-site-enhancements.js', async route => {
+      await context.route(/\/assets\/js\/glee-site-enhancements\.js(?:\?|$)/, async route => {
+        adapterIntercepted = true;
         await gate;
         await route.continue();
       });
@@ -61,6 +63,7 @@ const server = createServer((request, response) => {
         await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
         await page.waitForFunction(() => document.readyState === 'complete');
       } finally { releaseAdapter(); }
+      assert.equal(adapterIntercepted, true, 'late adapter route intercepted the requested URL');
       await page.waitForFunction(() => window.gleeAnalytics);
       await page.waitForFunction(() => navigator.serviceWorker.controller !== null, null, { timeout: 15000 });
       assert.equal(await page.evaluate(async () => Boolean((await navigator.serviceWorker.getRegistration('/'))?.active)), true);

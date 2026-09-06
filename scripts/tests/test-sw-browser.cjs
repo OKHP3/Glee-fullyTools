@@ -85,7 +85,8 @@ const server = http.createServer(async (request, response) => {
     const cdp = await context.newCDPSession(page);
     await cdp.send('Network.clearBrowserCache');
     await context.setOffline(true);
-    const adapter = page.waitForResponse(response => response.url().endsWith('/assets/js/glee-site-enhancements.js'));
+    const adapter = page.waitForResponse(response =>
+      new URL(response.url()).pathname.endsWith('/assets/js/glee-site-enhancements.js'));
     await page.goto(base + '/search/?q=resume&case=offline', { waitUntil: 'load' });
     const adapterResponse = await adapter;
     assert.equal(adapterResponse.status(), 200);

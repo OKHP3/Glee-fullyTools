@@ -640,16 +640,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ----- scoring -----
+  function normalizeSearchText(value) {
+    return String(value || "")
+      .normalize("NFKD")
+      .replace(/\p{M}/gu, "")
+      .toLowerCase();
+  }
   function tokenize(q) {
-    return q.toLowerCase().split(/[^\p{L}\p{N}'-]+/u).filter((t) => t.length >= 2);
+    return normalizeSearchText(q)
+      .split(/[^\p{L}\p{N}'-]+/gu)
+      .filter((t) => t.length >= 2);
   }
   function scoreEntry(entry, tokens) {
     if (!tokens.length) return 0;
-    const title    = (entry.title       || "").toLowerCase();
-    const desc     = (entry.description || "").toLowerCase();
-    const headings = (entry.headings    || []).join(" ").toLowerCase();
-    const body     = (entry.body        || "").toLowerCase();
-    const url      = (entry.url         || "").toLowerCase();
+    const title    = normalizeSearchText(entry.title);
+    const desc     = normalizeSearchText(entry.description);
+    const headings = normalizeSearchText((entry.headings || []).join(" "));
+    const body     = normalizeSearchText(entry.body);
+    const url      = normalizeSearchText(entry.url);
 
     let score = 0;
     let allHit = true;
@@ -698,7 +706,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function snippetFor(entry, tokens, length) {
     const body = entry.body || entry.description || "";
     if (!body) return "";
-    const lower = body.toLowerCase();
+    const lower = normalizeSearchText(body);
     let bestIdx = -1;
     for (const t of tokens) {
       const i = lower.indexOf(t);
@@ -1165,7 +1173,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function loadBrandModule() {
     const body = document.body;
     const moduleUrl = body.classList.contains("glee-main")
-      ? "/assets/js/glee-site-enhancements.js"
+      ? "/assets/js/glee-site-enhancements.js?v=ebfa263e"
       : body.classList.contains("askjamie-main")
         ? "/assets/js/askjamie-analytics.js"
         : null;
