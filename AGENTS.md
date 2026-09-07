@@ -99,13 +99,13 @@ The repository's latest recorded validation passed on 2026-08-29, re-run after
 scoping the CSP `img-src` allowlist (see `scripts/csp.py`) and fixing the
 dark-mode `theme-color` value (see `scripts/normalize-head.py`) -- both
 confirmed clean at 63 production HTML pages, 0 issues, 0 warnings, 0 broken
-links, 60 sitemap URLs. The current tree contains 63 production HTML files, 60
+links, 60 sitemap URLs. The current tree contains 64 production HTML files, 61
 sitemap URLs, and 49 Atom feed entries. Re-run these commands after any content
 or tooling change to establish a current baseline:
 
 ```bash
 python3 scripts/validate-site.py
-# Expected: 63 files; 0 issues; 0 warnings
+# Expected: 64 files; 0 issues; 0 warnings
 
 python3 scripts/check-links.py
 # Expected: 0 broken links and 0 sitemap mismatches; link totals vary by content

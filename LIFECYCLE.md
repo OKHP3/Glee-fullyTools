@@ -30,8 +30,8 @@ criteria are maintained in [`docs/suite-promise.md`](docs/suite-promise.md).
 
 ### Evidence
 
-- 63 production HTML files, including fallback pages
-- 60 indexable public pages (the sitemap and search index)
+- 64 production HTML files, including fallback pages
+- 61 indexable public pages (the sitemap and search index)
 - 1 Toolbox hub, 7 branch hubs, and 42 Tool-ettes
 - Tool-ette states: 1 live, 24 beta, 17 unavailable
 - Tool-ette behavior verification: 25 partial, 2 blocked by missing owner
@@ -39,7 +39,7 @@ criteria are maintained in [`docs/suite-promise.md`](docs/suite-promise.md).
 - 49 Atom entries (7 branches + 42 Tool-ettes; not a full-site page count)
 - GitHub Actions CI validates HTML, links, and sitemap on every push
 - `scripts/validate-site.py` and `scripts/check-links.py` pass with 0 issues
-- `assets/data/search-index.json` indexes all 60 indexable pages
+- `assets/data/search-index.json` indexes all 61 indexable pages
 
 ---
 

@@ -110,3 +110,13 @@ test('activation deletes only stale Glee cache namespaces', async () => {
   await worker.lifecycle('activate');
   assert.deepEqual(worker.deleted, ['glee-fully-shell-v1']);
 });
+
+for (const route of ['/foundry/', '/foundry/index.html']) {
+  test(`visited FoundRy page is available offline: ${route}`, async () => {
+    const worker = harness();
+    await worker.request(route);
+    assert.ok(worker.entries.has(origin + "/foundry/"));
+    worker.options.offline = true;
+    assert.equal((await worker.request(route)).label, origin + route);
+  });
+}
