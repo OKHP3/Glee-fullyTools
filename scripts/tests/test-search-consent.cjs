@@ -155,6 +155,37 @@ const server = createServer((request, response) => {
       await page.locator('.okh-search-trigger').click();
       assert.equal(await page.locator('.okh-search-overlay').getAttribute('aria-label'), 'Search OverKill Hill');
     });
+    for (const [brand, locale, expectedIndex, fallback] of [
+      ['glee-main', 'en', 'search-index.json', false],
+      ['glee-main', 'en-US', 'search-index.json', false],
+      ['glee-main', 'en-GB', 'search-index.json', false],
+      ['glee-main', 'fr-FR', 'search-index.fr.json', false],
+      ['glee-main', 'fr-CA', 'search-index.fr.json', false],
+      ['glee-main', 'es-ES', 'search-index.json', true],
+      ['glee-main', 'es-MX', 'search-index.json', true],
+      ['', 'fr-FR', 'search-index.fr.json', false],
+      ['askjamie-main', 'es-MX', 'search-index.json', true],
+    ]) {
+      await run('catalog locale boundary ' + brand + ' ' + locale, async (page, context) => {
+        const requestedIndexes = [];
+        await context.route('**/locale-fixture/**', route => route.fulfill({ contentType: 'text/html', body:
+          '<html lang="' + locale + '"><head><title>Locale fixture</title><script defer src="/assets/js/app.js"></script></head>' +
+          '<body class="' + brand + '"><header class="site-header"></header><main>' +
+          '<input id="search-page-input"><div id="search-stats"></div><div id="search-categories"></div>' +
+          '<div id="search-results"></div></main></body></html>' }));
+        await context.route(/\/assets\/data\/search-index[^/]*\.json(?:\?|$)/, route => {
+          requestedIndexes.push(new URL(route.request().url()).pathname.split('/').pop());
+          return route.fulfill({ json: { entries: [
+            {title: 'Resume fixture', category: 'Guide', url: '/resume/', body: 'resume guidance'}
+          ]} });
+        });
+        await page.goto(origin + '/locale-fixture/?q=resume');
+        await page.waitForFunction(() => document.querySelector('#search-results a'));
+        assert.deepEqual(requestedIndexes, [expectedIndex], 'only the declared brand catalog is requested');
+        assert.equal((await page.locator('#search-stats').innerText()).includes('Search English content.'), fallback,
+          'undeclared exact locale has an explicit English fallback notice');
+      });
+    }
     for (const initial of [null, 'granted', 'denied']) {
       await run('consent hydration ' + initial, async (page, context, requests) => {
         await page.goto(origin + '/legal/');

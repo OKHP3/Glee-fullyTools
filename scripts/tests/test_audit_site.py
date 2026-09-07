@@ -73,6 +73,21 @@ class AuditSiteTests(unittest.TestCase):
             self.assertIn(str(report.resolve()), console.getvalue())
             self.assertIn("Missing description", report.read_text(encoding="utf-8"))
 
+    def test_symlinked_root_keeps_report_display_relative(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            actual = Path(directory) / "actual"
+            actual.mkdir()
+            alias = Path(directory) / "alias"
+            try:
+                alias.symlink_to(actual, target_is_directory=True)
+            except (OSError, NotImplementedError) as exc:
+                self.skipTest(f"Directory symlinks unavailable: {exc}")
+            console = io.StringIO()
+            self.assertEqual(self.run_cli_fixture(alias, "reports/audit.md", console), 0)
+            self.assertTrue((actual / "reports/audit.md").is_file())
+            self.assertIn("Report written to reports/audit.md", console.getvalue())
+            self.assertIn("Total issues found: 1", console.getvalue())
+
     def test_post_merge_hook_has_durable_lf_checkout_policy(self) -> None:
         repo = _SCRIPT.parent.parent
         attributes = subprocess.check_output(
