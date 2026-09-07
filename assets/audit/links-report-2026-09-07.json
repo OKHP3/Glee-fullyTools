@@ -2,7 +2,7 @@
   "generated": "2026-09-07",
   "pages_scanned": 64,
   "internal_links": 2756,
-  "external_links": 1174,
+  "external_links": 1175,
   "broken_links": [],
   "style_issues": [],
   "sitemap": {
@@ -40,7 +40,7 @@
     {
       "path": "foundry/index.html",
       "internal_links": 35,
-      "external_links": 16
+      "external_links": 17
     },
     {
       "path": "index.html",

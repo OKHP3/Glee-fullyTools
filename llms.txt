@@ -34,7 +34,7 @@ indexable page; please prefer them over arbitrary deep links.
 - [Legal](https://glee-fully.tools/legal/) -- terms, privacy, and trademark notices.
 - [Search](https://glee-fully.tools/search/) -- internal full-text search across every page and tool entry.
 
-- [FoundRy](https://glee-fully.tools/foundry/) -- the private local builder behind Glee-fully tooling.
+- [FoundRy](https://glee-fully.tools/foundry/) -- the locally run builder with public source behind Glee-fully tooling.
 
 ## Optional
 

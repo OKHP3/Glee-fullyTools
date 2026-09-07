@@ -90,7 +90,7 @@ dates and counts.
 
 The September 7, 2026 FoundRy feature-page addition brings the current tree to
 64 production HTML files and 61 indexable pages. `/foundry/` introduces the
-private local builder; it adds no public application runtime. Earlier dated
+locally run builder with public source; it adds no public application runtime. Earlier dated
 validation counts below remain historical.
 
 ### Verified validation baseline
