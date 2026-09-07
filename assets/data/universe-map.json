@@ -5,8 +5,8 @@
   "sources": [
     {
       "origin": "https://glee-fully.tools",
-      "sha256": "12dbc64bead49ab96a61804b63cdc21f9c0db35547979ad6cbafd4045548dd03",
-      "records": 60
+      "sha256": "897beea1443bb3ec4ed54d3d7244c56c69bc5f9181f85756e011d2c02bf06510",
+      "records": 61
     }
   ],
   "nodes": [
@@ -55,6 +55,16 @@
       "url": "https://glee-fully.tools/ecosystem/",
       "title": "Ecosystem — Glee-fully Personalizable Tools™ 🧰🌳",
       "description": "Visual ecosystem map of the Glee-fully Toolbox — from the main trunk GPT through seven Tools (branches) and their Tool-ettes (twigs).",
+      "origin": "https://glee-fully.tools",
+      "status": "Published page",
+      "indexed": true,
+      "parent": "https://glee-fully.tools/"
+    },
+    {
+      "id": "https://glee-fully.tools/foundry/",
+      "url": "https://glee-fully.tools/foundry/",
+      "title": "Glee-fully FoundRy | Glee-fully Personalizable Tools™",
+      "description": "Meet the Glee-fully FoundRy: a private local workbench for shaping useful GPTs, Agent Skills, workflows and web tools, with clear briefs, recorded evidence and portable packages.",
       "origin": "https://glee-fully.tools",
       "status": "Published page",
       "indexed": true,
@@ -622,6 +632,7 @@
         "https://glee-fully.tools/arcade/",
         "https://glee-fully.tools/contact/",
         "https://glee-fully.tools/ecosystem/",
+        "https://glee-fully.tools/foundry/",
         "https://glee-fully.tools/legal/",
         "https://glee-fully.tools/persona/",
         "https://glee-fully.tools/search/",

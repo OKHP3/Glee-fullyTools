@@ -176,7 +176,8 @@ def run_checks(browser, expect, args) -> list[dict]:
         assert response.ok, f"Search JSON returned {response.status}"
         data = response.json()
         entries = data["pages"]
-        assert len(entries) == 60, f"Expected 60 public entries, got {len(entries)}"
+        assert len(entries) == 61, f"Expected 61 public entries, got {len(entries)}"
+        assert any(entry["url"] == "/foundry/" for entry in entries), "FoundRy is missing from search"
         assert len({entry["url"] for entry in entries}) == len(entries)
         assert all(entry.get("category") for entry in entries), "Missing useful categories"
         states = Counter(entry.get("publication_state") for entry in entries if entry.get("publication_state"))

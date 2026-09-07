@@ -30,9 +30,9 @@ available. The authoritative promise and inventory contract is
 - `sw.js` — Root-scoped service worker with a versioned, same-origin offline shell and `/offline.html` fallback
 - `toolbox/`  -  Central hub with 1 Toolbox page, 7 thematic branches, and 42
   Tool-ette pages
-- `about/`, `contact/`, `legal/`, `persona/`, `universe/`, `ecosystem/`, `showcase/` — Supporting pages (`showcase/` is the portfolio case-study page added 2026-05-27)
+- `about/`, `contact/`, `legal/`, `persona/`, `universe/`, `ecosystem/`, `showcase/`, `foundry/` — Supporting pages (`showcase/` is the portfolio case-study page added 2026-05-27)
 - `robots.txt` — Bot policy (GPTBot blocked for training; OAI-SearchBot, ChatGPT-User allowed)
-- `sitemap.xml`  -  60 indexable public URLs
+- `sitemap.xml`  -  61 indexable public URLs
 - `feed.xml`  -  49 branch and Tool-ette update entries (not a full-site mirror)
 
 ## Workflows
@@ -195,10 +195,10 @@ A zero-dependency, fully client-side search engine indexes every published page 
 | Component | Path | Purpose |
 |---|---|---|
 | Index builder | `scripts/build-search-index.py` | Walks every `*.html`, extracts title/description/canonical/h1-h3/body, writes `assets/data/search-index.json` |
-| Search index | `assets/data/search-index.json` | 60 indexable pages, ~130 KB raw (~30 KB gzipped) — committed to repo, no backend needed |
+| Search index | `assets/data/search-index.json` | 61 indexable pages, ~430 KB raw — committed to repo, no backend needed |
 | Runtime | `assets/js/app.js` (search section, line 263+) | Lazy-loads index, tokenizes query, weighted field scoring, renders modal results |
 | Styles | `assets/css/theme.css` (search section at end) | Modal, nav button, result cards, dark-mode aware |
-| Wired into | All 60 HTML pages | `<script src="/assets/js/app.js" defer>` — single script, no separate search.js |
+| Wired into | All 61 indexable HTML pages | `<script src="/assets/js/app.js" defer>` — single script, no separate search.js |
 
 **Triggers:** Click magnifier in nav · press `/` outside an input · press ⌘K / Ctrl+K · arrive at any page with `?s=query` (matches the JSON-LD `SearchAction` declared on the homepage)
 
@@ -217,13 +217,13 @@ After changing a pre-cached asset, run `python3 scripts/sync-css-version.py`
 last to derive the cache version and CSS token from content. The offline page
 is deliberately excluded from the search index and sitemap.
 
-**Why no Lunr.js or Algolia:** The site has 60 indexable pages and the raw text trims to ~130 KB. A homemade weighted scorer (title × 10, headings × 5, description × 4, body × 1) is plenty fast at this scale and adds zero external dependencies, matching the site's no-build philosophy.
+**Why no Lunr.js or Algolia:** The site has 61 indexable pages and the raw search index is ~430 KB. A homemade weighted scorer (title × 10, headings × 5, description × 4, body × 1) is plenty fast at this scale and adds zero external dependencies, matching the site's no-build philosophy.
 
 **Two surfaces, one engine:** The search section of `app.js` powers (a) the global ⌘K/`/` modal injected into every page's nav, and (b) the dedicated `/search/` page. The dedicated page declares `data-glee-search-inline` on `<main>` plus three hooks: `[data-glee-search-inline-input]`, `[data-glee-search-inline-status]`, `[data-glee-search-inline-results]`. On boot it detects the inline marker and runs `attachInline()` instead of opening the modal — and writes the query back into the URL as `?q=` for shareability. The `?s=` param still auto-opens the modal everywhere else.
 
 ## Today's Sparkle management
 
-The sparkle banner (`<section class="site-specials">`) appears in the `<header>` of all 63 HTML pages. It highlights the current featured GPT Tool.
+The sparkle banner (`<section class="site-specials">`) appears in the `<header>` of all 64 HTML pages. It highlights the current featured GPT Tool.
 
 | Component | Path | Purpose |
 |---|---|---|
@@ -234,7 +234,7 @@ The sparkle banner (`<section class="site-specials">`) appears in the `<header>`
 **When you update the sparkle (change `assets/data/sparkle.json`):**
 
 1. Edit `assets/data/sparkle.json` with the new `emoji`, `label`, `description`, `suffix`, and `url`.
-2. Run `python3 scripts/sync-sparkle-fallback.py` to patch the static fallback in all 63 HTML files.
+2. Run `python3 scripts/sync-sparkle-fallback.py` to patch the static fallback in all 64 HTML files.
 3. The runtime loader in `app.js` §6 handles live browser updates automatically — no JS changes needed.
 
 The sync script is idempotent: safe to re-run; it skips files already up to date.

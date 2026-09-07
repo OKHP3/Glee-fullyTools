@@ -64,13 +64,13 @@ dates and counts.
   trunk-to-branch-to-tool-ette taxonomy, and a coherent visitor path. The public
   hub does not certify the behavior or availability of externally hosted GPTs.
 - **Current status:** The site is implemented and deployable as a static website
-  in the **active growth and refinement** phase. It has 60 indexable public
+  in the **active growth and refinement** phase. It has 61 indexable public
   pages, 7 branch hubs, and 42 Tool-ettes; publication states and the meaning of
   complete are authoritative in `docs/suite-promise.md`.
 
 ### Architecture and entry points
 
-- Production content is 63 validator-scoped HTML files: the homepage,
+- Production content is 64 validator-scoped HTML files: the homepage,
   supporting pages, the Toolbox hub, seven branch pages, 42 tool-ette pages,
   and the site's utility/fallback pages. HTML under `assets/`
   and `.agents/` is development or agent content and is excluded by site tools.
@@ -88,19 +88,24 @@ dates and counts.
   to `main`. A separate workflow runs Playwright viewport QA when HTML, CSS, or
   JavaScript changes.
 
+The September 7, 2026 FoundRy feature-page addition brings the current tree to
+64 production HTML files and 61 indexable pages. `/foundry/` introduces the
+private local builder; it adds no public application runtime. Earlier dated
+validation counts below remain historical.
+
 ### Verified validation baseline
 
 The repository's latest recorded validation passed on 2026-08-29, re-run after
 scoping the CSP `img-src` allowlist (see `scripts/csp.py`) and fixing the
 dark-mode `theme-color` value (see `scripts/normalize-head.py`) -- both
 confirmed clean at 63 production HTML pages, 0 issues, 0 warnings, 0 broken
-links, 60 sitemap URLs. The current tree contains 63 production HTML files, 60
+links, 60 sitemap URLs. The current tree contains 64 production HTML files, 61
 sitemap URLs, and 49 Atom feed entries. Re-run these commands after any content
 or tooling change to establish a current baseline:
 
 ```bash
 python3 scripts/validate-site.py
-# Expected: 63 files; 0 issues; 0 warnings
+# Expected: 64 files; 0 issues; 0 warnings
 
 python3 scripts/check-links.py
 # Expected: 0 broken links and 0 sitemap mismatches; link totals vary by content

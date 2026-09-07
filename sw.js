@@ -1,6 +1,6 @@
 // Glee-fully Tools offline shell.
 // Keep this list intentional: same-origin public shell assets only.
-const CACHE_NAME = "glee-fully-shell-v9829826282601181295";
+const CACHE_NAME = "glee-fully-shell-v14539730200136799204";
 const PRECACHE_URLS = [
   "/",
   "/search/",
@@ -45,7 +45,7 @@ function isPrecached(request) {
 // Queries are client-side state on these static pages. Cache one HTML shell per
 // pathname while leaving the visitor's requested URL and query unchanged.
 const MAX_NAVIGATION_ENTRIES = 80;
-const PUBLIC_PAGE_PATH = /^\/(?:index\.html|(?:about|arcade|contact|ecosystem|legal|persona|search|showcase|universe)\/(?:index\.html)?|toolbox\/(?:0[1-7]-[a-z0-9-]+\/(?:0[1-7][a-z]-[a-z0-9-]+\/)?)?(?:index\.html)?|404\.html|offline\.html|under-construction\.html)?$/;
+const PUBLIC_PAGE_PATH = /^\/(?:index\.html|(?:about|arcade|contact|ecosystem|foundry|legal|persona|search|showcase|universe)\/(?:index\.html)?|toolbox\/(?:0[1-7]-[a-z0-9-]+\/(?:0[1-7][a-z]-[a-z0-9-]+\/)?)?(?:index\.html)?|404\.html|offline\.html|under-construction\.html)?$/;
 let cacheWriteQueue = Promise.resolve();
 
 function navigationKey(request) {
