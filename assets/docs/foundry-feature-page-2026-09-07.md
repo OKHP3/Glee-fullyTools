@@ -11,7 +11,7 @@ Universe directory make it discoverable. This change adds one supporting page:
 seven branches and 42 Tool-ettes unchanged.
 
 Only the Glee-fully storefront is changed. The page is an explanation of the
-private local pilot. It does not host the builder, receive project records or
+locally run pilot with intentionally public source. It does not host the builder, receive project records or
 announce a public application launch.
 
 ## Structure and brand
@@ -42,7 +42,7 @@ The page distinguishes a recorded observation from independently verified
 behavior, generated packages from deployed tools, and proposed improvements
 from implemented features. The mentor relationship is reciprocal; Skillz is
 the shared skill catalog, while the regional workbenches retain their own
-purpose and records. Canonical private content is not copied onto this page.
+purpose and records. Canonical source content is not copied onto this page. Ignored local project records remain outside the public repository.
 
 ## Validation evidence
 
@@ -72,5 +72,5 @@ The review branch is not evidence of production deployment. After the normal
 pull-request checks and owner review, publish through the existing Pages
 workflow and smoke-test `/foundry/`, both inbound calls to action and search on
 the live domain. Validate each workbench package type on a real Glee-fully task
-before strengthening the page's maturity claims. Add a public launch link or
-embed only when an actual access route and its operating model exist.
+before strengthening the page's maturity claims. The public GitHub source link supports local setup. Add a hosted launch link or
+embed only when an actual hosted access route and its operating model exist.

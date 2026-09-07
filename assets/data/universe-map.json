@@ -5,7 +5,7 @@
   "sources": [
     {
       "origin": "https://glee-fully.tools",
-      "sha256": "897beea1443bb3ec4ed54d3d7244c56c69bc5f9181f85756e011d2c02bf06510",
+      "sha256": "022fa4e796b55fe5ddc174530783f9ba4b4b17e85ad4e07767b8735688534b22",
       "records": 61
     }
   ],
@@ -64,7 +64,7 @@
       "id": "https://glee-fully.tools/foundry/",
       "url": "https://glee-fully.tools/foundry/",
       "title": "Glee-fully FoundRy | Glee-fully Personalizable Tools™",
-      "description": "Meet the Glee-fully FoundRy: a private local workbench for shaping useful GPTs, Agent Skills, workflows and web tools, with clear briefs, recorded evidence and portable packages.",
+      "description": "Meet the Glee-fully FoundRy: a locally run workbench with public source for shaping useful GPTs, Agent Skills, workflows and web tools, with clear briefs, recorded evidence and portable packages.",
       "origin": "https://glee-fully.tools",
       "status": "Published page",
       "indexed": true,
