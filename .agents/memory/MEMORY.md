@@ -11,3 +11,4 @@
 - [Tool-ette evidence contract](tool-ette-evidence-contract.md) — an HTTP-successful external GPT URL is not behavior, identity, ownership, or safety evidence.
 - [Browser QA environment](browser-qa-environment.md) — Playwright Chromium in this Nix runner needs the shared libgbm setup before importing Playwright.
 - [Release evidence contracts](release-evidence-contracts.md) — discovery outputs and Pages publication must share explicit, tested scope contracts.
+- [Post-merge generated artifacts](post-merge-generated-artifacts.md) — run discovery checks before idempotent cache-version sync so merges cannot leave the offline shell stale.

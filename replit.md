@@ -253,10 +253,12 @@ python3 scripts/sync-css-version.py
 
 The second index pass captures any stats copy changes. Then run the check-only
 release sequence above and the focused regressions relevant to the change.
-`bash scripts/post-merge.sh` checks committed index, stats, CSS/offline versions,
-CSP, structure and links. It does not regenerate or repair files. Run it only in
-a Bash environment with a working `python3`; use the equivalent Python checks
-directly on Windows when that environment is unavailable.
+`bash scripts/post-merge.sh` checks committed index, stats, discovery artifacts,
+CSP, structure and links. It also idempotently synchronizes CSS, JavaScript, and
+offline-shell cache versions so a merge cannot leave the local checkout with a
+stale cache token. Run it only in a Bash environment with a working `python3`;
+use the equivalent Python checks directly on Windows when that environment is
+unavailable.
 
 `feed.xml` is a current generated release output. Rebuild it with
 `scripts/generate-feed.py`; do not hand-edit it. `icon-map.json` uses the
