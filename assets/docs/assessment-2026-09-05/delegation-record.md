@@ -13,7 +13,7 @@ Date: 2026-09-05. Architect source thread: `01a07281-90d0-7db1-b5db-13c4745fa6b8
 
 The Architect submitted a Codex task creation request titled **Glee-fully implementation PM: first repair wave** for the saved Glee-fullyTools Git project, with an isolated worktree environment.
 
-Creation returned client request ID `client-new-thread:d8e45a31-eaa2-4c23-bcf0-78a7af847e69` on the local host. This is a pending creation identifier, not a runnable thread ID. A subsequent Git inventory confirmed a new detached worktree at `/Users/okh/.codex/worktrees/89b7/Glee-fullyTools`, initially based on assessed commit `5da805785d47f9bc29058b07d2a5467da32a1573`.
+Creation returned client request ID `client-new-thread:d8e45a31-eaa2-4c23-bcf0-78a7af847e69` on the local host. This is a pending creation identifier, not a runnable thread ID. A subsequent Git inventory confirmed a new detached worktree (path omitted), initially based on assessed commit `5da805785d47f9bc29058b07d2a5467da32a1573`.
 
 At this checkpoint, worktree creation is confirmed and the app task's final thread identity/running state is not yet returned. Do not report its code changes as implemented or validated merely because the request was accepted. Do not duplicate the task while setup is pending.
 

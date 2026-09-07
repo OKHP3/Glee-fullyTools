@@ -1,5 +1,7 @@
 # Revitalization assignment register
 
+> Historical record. This register is superseded by the reviewed release dispositions in [`docs/remaining-program-2026-09-05/release-dispositions-2026-09-06.md`](../../../docs/remaining-program-2026-09-05/release-dispositions-2026-09-06.md). It is retained for provenance and must not be treated as the current assignment source of truth.
+
 Updated: 2026-09-05. Architect: `01a07281-90d0-7db1-b5db-13c4745fa6b8`.
 
 ## Status correction
@@ -26,7 +28,7 @@ All identified R0-R12 packages and the secondary queue now have an explicit PM o
 
 ## Integration and completion contract
 
-The existing PM owns first-wave integration in `/Users/okh/.codex/worktrees/89b7/Glee-fullyTools`, branch `codex/first-wave-repairs-2026-09-05`, baseline `9b4ade05`. It must provide a verified local commit and changed-file manifest. New PMs can prepare independent documentation, designs and tests, but must coordinate that stable commit before integrating overlapping runtime, HTML, generators or workflow changes. Each works in its own worktree; no PM edits another task's checkout. Source main was observed at `a24d11b3` during this status pass, so each PM must verify its actual base rather than assume the assessment SHA is current.
+The existing PM owns first-wave integration in an isolated worktree (path omitted), branch `codex/first-wave-repairs-2026-09-05`, baseline `9b4ade05`. It must provide a verified local commit and changed-file manifest. New PMs can prepare independent documentation, designs and tests, but must coordinate that stable commit before integrating overlapping runtime, HTML, generators or workflow changes. Each works in its own worktree; no PM edits another task's checkout. Source main was observed at `a24d11b3` during this status pass, so each PM must verify its actual base rather than assume the assessment SHA is current.
 
 Workers implement bounded assignments. PMs review diffs, integrate generated artifacts once in the documented order and run meaningful checks on the combined result. Reports must distinguish assignment, implementation, local verification, remote CI and live deployment. The Architect reviews completion evidence across PMs. Final browser checks are still open in the first wave; the first PM's latest task snapshot also reports an approval-wait flag, without a confirmed approval resolution in this record.
 
@@ -34,7 +36,7 @@ Local commits are allowed. Publication, remote merges, repository-setting change
 
 ## Catalog PM startup and dispatch correction
 
-Catalog and Governance Project Manager startup is now confirmed as task `01a074b6-7363-7f90-9a61-7f276ba0e02f`, in `/Users/okh/.codex/worktrees/6c89/Glee-fullyTools`. It produced planning artifacts, but its Worker creation calls failed. Architect inspection found malformed task-creation arguments and attempts to duplicate CD-1/CD-2 already owned by the first wave. The Architect directed it to use a bounded Luna-low collaboration Worker for authorized R7 corrections, supplied the correct alternate task-creation shape, and explicitly prohibited duplicate crawler/copy work. Successful Worker startup remains to be confirmed. These failures are not evidence of an approval denial or completed implementation.
+Catalog and Governance Project Manager startup is now confirmed as task `01a074b6-7363-7f90-9a61-7f276ba0e02f`, in an isolated detached worktree (path omitted). It produced planning artifacts, but its Worker creation calls failed. Architect inspection found malformed task-creation arguments and attempts to duplicate CD-1/CD-2 already owned by the first wave. The Architect directed it to use a bounded Luna-low collaboration Worker for authorized R7 corrections, supplied the correct alternate task-creation shape, and explicitly prohibited duplicate crawler/copy work. Successful Worker startup remains to be confirmed. These failures are not evidence of an approval denial or completed implementation.
 
 The Catalog PM subsequently confirmed successful R7 Worker dispatch: Carson, agent `01a074b8-ddac-7662-9bbb-dac54c6d0051`, model `gpt-5.6-luna`, low reasoning, limited to the permitted active guidance files. This supersedes the pending Worker-startup status above. CD-1/CD-2 are corrected to external first-wave dependencies. Worker implementation, commit and PM review remain pending.
 

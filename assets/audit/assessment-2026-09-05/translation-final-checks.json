@@ -17,6 +17,6 @@
   },
   "sync": {
     "exit": 0,
-    "stdout": "{\"configured\": false, \"config_path\": \"/Volumes/OKH-Local/04_GitHub_Mirrors/Glee-fullyTools/i18n/sync.config.json\"}\n"
+    "stdout": "{\"configured\": false, \"config_path\": \"i18n/sync.config.json\"}\n"
   }
 }
