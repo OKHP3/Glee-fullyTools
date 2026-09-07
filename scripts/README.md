@@ -84,7 +84,7 @@ overkill-hill's own retired copy of the same file.
 The following scripts are **retired**. They are preserved for history only
 and must not be run against glee-fullytools: `activate-icons.py`,
 `add-toolbox-to-footer.py`, `convert-gpt-icons-webp.py`,
-`convert-hero-webp.py`, `generate-feed.py`, `inject-breadcrumb.py`,
+`convert-hero-webp.py`, `inject-breadcrumb.py`,
 `inject-hero-picture.py`, `inject-jsonld.py`, `inject-nav-logo-webp.py`,
 `inject-showcase-footer.py`, `inject-showcase-subnav.py`,
 `push-to-github.py`, `release-mtb.py`, `site-audit.py`, and

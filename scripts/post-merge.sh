@@ -28,4 +28,8 @@ python3 scripts/validate-site.py
 echo "Post-merge: checking links and sitemap..."
 python3 scripts/check-links.py --no-report
 
+echo "Post-merge: regenerating discovery artifacts..."
+python3 scripts/generate-sitemap.py
+python3 scripts/generate-feed.py
+
 echo "Post-merge: all checks passed."

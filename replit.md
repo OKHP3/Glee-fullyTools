@@ -258,9 +258,10 @@ CSP, structure and links. It does not regenerate or repair files. Run it only in
 a Bash environment with a working `python3`; use the equivalent Python checks
 directly on Windows when that environment is unavailable.
 
-`feed.xml` and `icon-map.json` have archived generators and are not routine
-release outputs. Feed/date policy remains deferred under `docs/suite-promise.md`.
-Do not execute the historical commands below against the current site.
+`feed.xml` is a current generated release output. Rebuild it with
+`scripts/generate-feed.py`; do not hand-edit it. `icon-map.json` uses the
+compatibility audit under `scripts/archive/` and is not part of the discovery
+scope contract.
 
 ## Historical validation tooling (2026-05-03, superseded)
 
@@ -279,9 +280,9 @@ python3 scripts/inject-breadcrumb.py  # visible <nav aria-label="Breadcrumb">
 # 2. Index and asset maintenance
 python3 scripts/build-search-index.py    # rebuilds assets/data/search-index.json
 python3 scripts/sync-portfolio-stats.py  # patches About page stat counts from search-index.json
-python3 scripts/audit-assets.py          # rebuilds assets/data/icon-map.json + assets/audit/asset-inventory-*.json
-# feed.xml is checked in; its historical generator is retired under
-# scripts/archive/ and is not part of the active pipeline.
+python3 scripts/archive/audit-assets.py # compatibility audit for icon-map + dated asset inventory
+python3 scripts/generate-sitemap.py     # rebuilds sitemap.xml from the shared inventory
+python3 scripts/generate-feed.py        # rebuilds feed.xml from the shared inventory
 
 # 3. Validators (exit non-zero on regressions; safe to wire into CI)
 python3 scripts/validate-site.py      # every-page metadata + structure checks
@@ -298,9 +299,11 @@ python3 scripts/update-placeholder-dimensions.py  # update img width/height once
 python3 scripts/post-merge.sh                     # auto-run on every task merge (rebuilds index + syncs portfolio stats)
 ```
 
-Validators write machine-readable JSON to `assets/audit/`. The Markdown audit covers
-(`AUDIT_*_2026-05-03.md`) explain the JSON output for humans. Re-running the
-mutators is byte-idempotent — they are safe to re-run on every content edit.
+Validators write machine-readable JSON to `assets/audit/` using a
+`YYYY-MM-DD` run-date suffix. The current human-readable audit is
+`assets/docs/audit-report.md` and includes its UTC generation time and run date;
+older dated reports remain historical evidence. Re-running the mutators is
+byte-idempotent — they are safe to re-run on every content edit.
 
 ## Template library (`assets/templates/`)
 
