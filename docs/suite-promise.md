@@ -1,7 +1,7 @@
 # Glee-fully Tools  -  Suite Promise
 
 **Status:** Current contract  
-**Last reviewed:** 2026-09-04  
+**Last reviewed:** 2026-09-04; page inventory refreshed 2026-09-07<br>
 **Owner:** Project owner  
 **Current phase:** Active growth and refinement
 
@@ -81,31 +81,31 @@ The status terms below are deliberately conservative:
 | Make the public hub practically accessible and inclusive | Partially met | Static checks cover landmarks, labels, focus, alt text, reduced motion, and tap-target patterns. Manual assistive-technology and live-browser confirmation remain separate work. |
 | Remain useful when network conditions are imperfect | Partially met | `sw.js` provides a same-origin offline shell and fallback page; `docs/resilience.md` and the CI `resilience-qa` reports define and exercise representative online, offline, reconnect, browser, crawler, and blocked-dependency behavior. External GPTs, fonts, analytics, Ko-fi, and other third-party services remain intentionally outside that cache boundary. |
 | Explain privacy and third-party boundaries plainly | Partially met | The Legal page and cache policy describe limitations and third-party services. Production privacy behavior and trust evidence still require dedicated review. |
-| Be discoverable and publishable as a static site | Partially met | 60 indexable URLs, structured metadata, sitemap, feed, robots policy, GitHub Pages workflows, and validators are present. Owner-side live smoke testing and search-engine submission are not proven by this repository alone. |
+| Be discoverable and publishable as a static site | Partially met | 61 indexable URLs, structured metadata, sitemap, feed, robots policy, GitHub Pages workflows, and validators are present. Owner-side live smoke testing and search-engine submission are not proven by this repository alone. |
 | Stay maintainable as the suite grows | Met | `AGENTS.md`, `replit.md`, idempotent maintenance scripts, generated-file rules, CI validation, and the template library provide operating guardrails. |
 | Define “complete” without implying perfection | Met | The completion contract below separates a complete public catalog from finished external GPT behavior and future owner choices. |
 
 ## Public inventory vocabulary
 
-Counts refer to the repository state reviewed on 2026-09-04. A count is only
+Counts include the FoundRy feature-page addition on 2026-09-07. A count is only
 meaningful with its inclusion rule and owning source.
 
 | Term | Count | Inclusion rule | Source of truth |
 |---|---:|---|---|
-| Production HTML files | 63 | Validator-scoped HTML outside `assets/`, `.agents/`, `.local/`, dependencies, and other excluded directories. Includes the 404, offline, and holding pages. | `scripts/validate-site.py` |
-| Indexable public pages | 60 | The 60 public content URLs indexed by the site's search builder and listed in the sitemap. Excludes 404, offline, and holding pages. | `assets/data/search-index.json` and `sitemap.xml` |
-| Supporting public pages | 10 | Homepage, Search, About, Contact, Legal, Persona, Ecosystem, Universe, Showcase, and Arcade. | Search index section labels |
+| Production HTML files | 64 | Validator-scoped HTML outside `assets/`, `.agents/`, `.local/`, dependencies, and other excluded directories. Includes the 404, offline, and holding pages. | `scripts/validate-site.py` |
+| Indexable public pages | 61 | The 61 public content URLs indexed by the site's search builder and listed in the sitemap. Excludes 404, offline, and holding pages. | `assets/data/search-index.json` and `sitemap.xml` |
+| Supporting public pages | 11 | Homepage, Search, About, Contact, Legal, Persona, Ecosystem, Universe, Showcase, Arcade, and FoundRy. | Search index section labels |
 | Toolbox hub | 1 | The top-level `/toolbox/` trunk page. | `toolbox/index.html` |
 | Branch hubs | 7 | One public category page for each numbered branch. | `toolbox/*/index.html` |
 | Tool-ettes | 42 | One authored leaf page for each catalog Tool-ette under a branch. | `toolbox/*/*/index.html` |
-| Catalog pages | 50 | Toolbox hub + seven branch hubs + 42 Tool-ettes. This is a subset of the 60 indexable public pages. | Toolbox filesystem and sitemap |
+| Catalog pages | 50 | Toolbox hub + seven branch hubs + 42 Tool-ettes. This is a subset of the 61 indexable public pages. | Toolbox filesystem and sitemap |
 | Structural templates | 9 files | Non-crawlable development files in `assets/templates/`; they are not extra pages, tools, or URLs. | `assets/templates/INDEX.md` |
-| Atom feed entries | 49 | The seven branch hubs plus the 42 Tool-ettes. The feed is an updates stream, not a complete mirror of the 60-page search index. | Checked-in `feed.xml`; historical generator is archived under `scripts/archive/` |
+| Atom feed entries | 49 | The seven branch hubs plus the 42 Tool-ettes. The feed is an updates stream, not a complete mirror of the 61-page search index. | Checked-in `feed.xml`; historical generator is archived under `scripts/archive/` |
 | Tool-ettes with non-placeholder ChatGPT destinations | 25 | A Tool-ette page contains a reviewed, non-placeholder primary ChatGPT CTA after unavailable or misrouted destinations have been withdrawn. This does not prove external behavior. | Tool-ette HTML and `docs/audit/tool-ette-verification-2026-09-04.md` |
 
-Do not call the 60 indexable pages “60 Tool-ettes,” the 49 feed entries “the
+Do not call the 61 indexable pages “61 Tool-ettes,” the 49 feed entries “the
 whole site,” or the nine templates “published pages.” The 42 Tool-ette count is
-the catalog count; the 60-page count is the public indexable-page count.
+the catalog count; the 61-page count is the public indexable-page count.
 
 ## Publication state semantics
 
@@ -185,7 +185,7 @@ signal, not a claim that every child Tool-ette is available.
 The project is complete for the current **active growth and refinement** phase
 when:
 
-1. The 60 indexable public pages, 50 catalog pages, seven branches, and 42
+1. The 61 indexable public pages, 50 catalog pages, seven branches, and 42
    Tool-ettes are represented consistently in the filesystem, sitemap, search
    index, and applicable feed entries.
 2. Every Tool-ette has one state from the publication register, and public

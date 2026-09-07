@@ -64,13 +64,13 @@ dates and counts.
   trunk-to-branch-to-tool-ette taxonomy, and a coherent visitor path. The public
   hub does not certify the behavior or availability of externally hosted GPTs.
 - **Current status:** The site is implemented and deployable as a static website
-  in the **active growth and refinement** phase. It has 60 indexable public
+  in the **active growth and refinement** phase. It has 61 indexable public
   pages, 7 branch hubs, and 42 Tool-ettes; publication states and the meaning of
   complete are authoritative in `docs/suite-promise.md`.
 
 ### Architecture and entry points
 
-- Production content is 63 validator-scoped HTML files: the homepage,
+- Production content is 64 validator-scoped HTML files: the homepage,
   supporting pages, the Toolbox hub, seven branch pages, 42 tool-ette pages,
   and the site's utility/fallback pages. HTML under `assets/`
   and `.agents/` is development or agent content and is excluded by site tools.
@@ -87,6 +87,11 @@ dates and counts.
 - GitHub Actions runs the Python validation workflow on pushes and pull requests
   to `main`. A separate workflow runs Playwright viewport QA when HTML, CSS, or
   JavaScript changes.
+
+The September 7, 2026 FoundRy feature-page addition brings the current tree to
+64 production HTML files and 61 indexable pages. `/foundry/` introduces the
+private local builder; it adds no public application runtime. Earlier dated
+validation counts below remain historical.
 
 ### Verified validation baseline
 
