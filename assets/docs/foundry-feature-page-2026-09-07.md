@@ -63,6 +63,8 @@ purpose and records. Canonical private content is not copied onto this page.
 The many existing HTML changes are primarily generated CSP meta hashes for the
 new page's structured metadata. Search, Universe directory, sitemap, page-count
 statistics and offline cache version were refreshed with existing scripts.
+The explicit public-artifact page-directory allowlist includes `foundry`, so
+the existing deployment package includes the new route.
 
 ## Publication and next steps
 
