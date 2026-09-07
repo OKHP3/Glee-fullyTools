@@ -158,9 +158,9 @@ const server = createServer((request, response) => {
     for (const [brand, locale, expectedIndex, fallback] of [
       ['glee-main', 'en', 'search-index.json', false],
       ['glee-main', 'en-US', 'search-index.json', false],
-      ['glee-main', 'en-GB', 'search-index.json', true],
-      ['glee-main', 'fr-FR', 'search-index.json', true],
-      ['glee-main', 'fr-CA', 'search-index.json', true],
+      ['glee-main', 'en-GB', 'search-index.json', false],
+      ['glee-main', 'fr-FR', 'search-index.fr.json', false],
+      ['glee-main', 'fr-CA', 'search-index.fr.json', false],
       ['glee-main', 'es-ES', 'search-index.json', true],
       ['glee-main', 'es-MX', 'search-index.json', true],
       ['', 'fr-FR', 'search-index.fr.json', false],
