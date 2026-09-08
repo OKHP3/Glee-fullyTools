@@ -6,7 +6,8 @@ Focused browser coverage for `foundry/index.html`: page landmarks and heading st
 
 ## Evidence
 
-- Source SHA: `0277324983f6db4248245fa319674b18b1878bd6`
+- Site and stylesheet baseline: `89d5bef70e959065a9bc195481d6b755013b173e`.
+  Each runner report records the tested checkout SHA.
 - Runner: [`scripts/tests/foundry-accessibility-qa.mjs`](../../scripts/tests/foundry-accessibility-qa.mjs)
 - Fixture: loopback HTTP server on an ephemeral port, with third-party requests and service workers blocked. The production HTML is not rewritten on disk.
 - Browser driver result on 2026-09-08: **PASS**. The bundled workspace runtime
@@ -24,7 +25,11 @@ When an installed Chromium Playwright driver is available, the runner asserts:
 2. Heading levels do not skip forward by more than one level.
 3. The four visible `.hero-actions` links have non-empty, expected accessible names.
 4. A FAQ `summary` receives focus, opens with Enter, and closes with Space.
-5. Every link, button, and FAQ summary exposes a non-zero visible focus indicator.
+5. A complete keyboard cycle reaches every eligible link, button, and FAQ summary
+   in both closed-menu and open-menu states, with a non-zero focus indicator.
+   Inert, disabled, and collapsed controls are excluded by their current state.
+   The skip link is the initial target and appears inside the viewport after its
+   transition. Escape closes the menu and returns focus to its toggle.
 6. The document does not exceed the viewport width at 320px or 390px, and no page errors occur.
 
 ## Findings and limitations
@@ -33,7 +38,14 @@ The earlier failure at 320px and 390px for the “WHY GLEE‑FULLY” navigation
 was a test-detector issue: programmatic focus included controls in the closed,
 off-canvas mobile navigation and did not establish keyboard `:focus-visible`
 state. The corrected runner uses keyboard navigation and passes without a
-production CSS change.
+production CSS change. Both widths pass all 12 checks, covering 39 controls with
+the menu closed and 50 with it open. A browser-only negative control removes
+the skip link outline and shadow, verifies that the detector rejects it, then
+restores its original style. The fixture resets scroll restoration for a
+deterministic initial visit; this does not test every restored-scroll scenario.
+
+The page and relationship unit tests (W01/W04) now run in Site Validation CI.
+This focused browser runner remains a separate installed-driver check.
 
 If the bundled runtime is unavailable, the runner reports `NOT RUN` rather than
 weakening or skipping an assertion. Run it with the bundled Node runtime and its
