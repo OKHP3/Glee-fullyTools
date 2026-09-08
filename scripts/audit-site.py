@@ -591,9 +591,10 @@ def main() -> int:
 
     report = render_report(per_page, sitemap_missing_disk, disk_missing_sitemap, search_issues)
     out = Path(args.report).expanduser()
-    if not out.is_absolute():
+    report_is_relative = not out.is_absolute()
+    if report_is_relative:
         out = ROOT / out
-    out = out.resolve()
+    out = out.absolute() if report_is_relative else out.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(report, encoding="utf-8")
     try:
