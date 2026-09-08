@@ -618,8 +618,8 @@ Script categories (last updated 2026-08-23; describes what each script does, by 
   `responsive-qa.mjs` (Node/Playwright read-only QA runner);
   `post-merge.sh` (integrity check and cache-version synchronization after merges; may update generated cache tokens)
 - **Index / feed / report builders** (regenerate data or output files):
-  `build-search-index.py`; the checked-in `feed.xml` has a historical generator
-  under `scripts/archive/` and is not part of the active pipeline;
+  `build-search-index.py`, `generate-sitemap.py`, and `generate-feed.py` are
+  active deterministic release-artifact generators;
   `generate-illustrations.py`, `generate-templates.py`, `extract-templates.py`
   are archived reference tools.
 - **Idempotent mutators** (safe to re-run; AUTOGEN-marker or presence-check-driven):
