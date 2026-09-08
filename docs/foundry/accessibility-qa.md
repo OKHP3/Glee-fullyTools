@@ -8,6 +8,10 @@ Focused browser coverage for `foundry/index.html`: page landmarks and heading st
 
 - Site and stylesheet baseline: `89d5bef70e959065a9bc195481d6b755013b173e`.
   Each runner report records the tested checkout SHA.
+- Tested runner revision: `9c47937a0ca1616de95440dc3813fd99be24f2f3`, run on
+  2026-09-08 at 14:00 UTC: 12 PASS, 0 FAIL, 0 NOT RUN. This revision includes
+  the corrected keyboard traversal and waits for stylesheet loading; the
+  subsequent documentation-only commit records that result.
 - Runner: [`scripts/tests/foundry-accessibility-qa.mjs`](../../scripts/tests/foundry-accessibility-qa.mjs)
 - Fixture: loopback HTTP server on an ephemeral port, with third-party requests and service workers blocked. The production HTML is not rewritten on disk.
 - Browser driver result on 2026-09-08: **PASS**. The bundled workspace runtime
