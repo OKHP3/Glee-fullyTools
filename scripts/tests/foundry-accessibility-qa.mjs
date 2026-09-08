@@ -169,7 +169,7 @@ async function run() {
           };
         }, selector);
         const assertIndicator = evidence => assert.ok(
-          evidence.outlineStyle !== 'none' && evidence.outlineWidth !== '0px' || evidence.boxShadow !== 'none',
+          (evidence.outlineStyle !== 'none' && evidence.outlineWidth !== '0px') || evidence.boxShadow !== 'none',
           `no visible focus indicator for ${evidence.name}`,
         );
         const cycle = async state => {
@@ -200,7 +200,7 @@ async function run() {
         };
 
         await page.evaluate(() => { history.scrollRestoration = 'manual'; });
-        await page.reload({ waitUntil: 'domcontentloaded' });
+        await page.reload({ waitUntil: 'load' });
         await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
         await page.waitForFunction(() => scrollY === 0);
         await page.keyboard.press('Tab');
