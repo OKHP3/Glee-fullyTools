@@ -7,6 +7,7 @@ const { test } = require('node:test');
 const source = fs.readFileSync(path.join(__dirname, '../../sw.js'), 'utf8');
 const origin = 'https://glee-fully.tools';
 const enhancementUrl = source.match(/\/assets\/js\/glee-site-enhancements\.js(?:\?v=[^"']+)?/)[0];
+const searchIndexUrl = source.match(/\/assets\/data\/search-index\.json(?:\?v=[^"']+)?/)[0];
 
 function harness(options = {}) {
   const handlers = {};
@@ -94,8 +95,8 @@ test('non-public paths are not retained and third-party requests are not interce
 
 test('missing precached assets still use successful network when storage fails', async () => {
   const worker = harness({ openFailure: true, readFailure: true });
-  assert.equal((await worker.request('/assets/data/search-index.json', 'cors')).label,
-    origin + '/assets/data/search-index.json');
+  assert.equal((await worker.request(searchIndexUrl, 'cors')).label,
+    origin + searchIndexUrl);
 });
 
 test('cold offline shell includes the dynamically loaded Glee adapter', async () => {
