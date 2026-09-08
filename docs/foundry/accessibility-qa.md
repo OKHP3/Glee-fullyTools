@@ -9,10 +9,11 @@ Focused browser coverage for `foundry/index.html`: page landmarks and heading st
 - Source SHA: `0277324983f6db4248245fa319674b18b1878bd6`
 - Runner: [`scripts/tests/foundry-accessibility-qa.mjs`](../../scripts/tests/foundry-accessibility-qa.mjs)
 - Fixture: loopback HTTP server on an ephemeral port, with third-party requests and service workers blocked. The production HTML is not rewritten on disk.
-- Browser driver result on 2026-09-07: **NOT RUN**. The bundled workspace runtime
-  provided Playwright without an installation, but this sandbox rejected the
-  ephemeral loopback listener with `EPERM` before browser assertions could run.
-  A `NOT RUN` result exits with status 2, so automation cannot treat it as a pass.
+- Browser driver result on 2026-09-08: **PASS**. The bundled workspace runtime
+  ran Chromium without an installation. The focused check passes at both narrow
+  widths after using real keyboard Tab navigation; the mobile menu is opened
+  before its links are checked, and the intentionally off-screen skip link is
+  checked separately as the first keyboard target.
 - Human screen-reader testing: **NOT RUN**.
 
 ## Coverage implemented
@@ -28,11 +29,11 @@ When an installed Chromium Playwright driver is available, the runner asserts:
 
 ## Findings and limitations
 
-The bundled Playwright run exercised both viewports. Ten assertions passed; the
-focus-visibility assertion failed at 320px and 390px for the “WHY GLEE‑FULLY”
-navigation link. This is a shared rendered-style finding, not a FoundRy-page
-edit: investigate the focus selector in `assets/css/theme.css` and re-run this
-focused runner before changing any production CSS.
+The earlier failure at 320px and 390px for the “WHY GLEE‑FULLY” navigation link
+was a test-detector issue: programmatic focus included controls in the closed,
+off-canvas mobile navigation and did not establish keyboard `:focus-visible`
+state. The corrected runner uses keyboard navigation and passes without a
+production CSS change.
 
 If the bundled runtime is unavailable, the runner reports `NOT RUN` rather than
 weakening or skipping an assertion. Run it with the bundled Node runtime and its

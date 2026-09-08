@@ -156,20 +156,38 @@ async function run() {
       });
 
       await check('focus visibility', async () => {
-        const interactive = page.locator('a, button, summary');
-        const count = await interactive.count();
+        await page.reload({ waitUntil: 'domcontentloaded' });
+        await page.keyboard.press('Tab');
+        const skip = page.locator(':focus');
+        assert.equal(await skip.getAttribute('class'), 'skip-to-content');
+        const skipStyle = await skip.evaluate(node => {
+          const computed = getComputedStyle(node);
+          return { outlineStyle: computed.outlineStyle, outlineWidth: computed.outlineWidth, boxShadow: computed.boxShadow };
+        });
+        assert.ok(skipStyle.outlineStyle !== 'none' && skipStyle.outlineWidth !== '0px' || skipStyle.boxShadow !== 'none', 'skip link has no visible focus indicator');
+        const navToggle = page.locator('.nav-toggle');
+        assert.equal(await page.locator('.site-header.nav-open').count(), 0, 'mobile navigation should start closed');
+        await navToggle.click();
+        assert.equal(await page.locator('.site-header.nav-open').count(), 1, 'mobile navigation did not open');
         const evidence = [];
-        for (let i = 0; i < count; i += 1) {
-          const item = interactive.nth(i);
-          await item.focus();
+        const names = new Set();
+        for (let i = 0; i < 60; i += 1) {
+          await page.keyboard.press('Tab');
+          const item = page.locator(':focus');
+          if (await item.count() === 0 || await item.evaluate(node => !node.matches('a, button, summary') || !node.getClientRects().length)) continue;
           const style = await item.evaluate(node => {
             const computed = getComputedStyle(node);
             return { name: (node.innerText || node.getAttribute('aria-label') || '').trim().slice(0, 80), outlineStyle: computed.outlineStyle, outlineWidth: computed.outlineWidth, boxShadow: computed.boxShadow };
           });
+          assert.equal(await item.evaluate(node => node === document.activeElement || node.contains(document.activeElement)), true, `focus did not land on ${style.name}`);
           assert.ok(style.outlineStyle !== 'none' && style.outlineWidth !== '0px' || style.boxShadow !== 'none', `no visible focus indicator for ${style.name}`);
           evidence.push(style);
+          names.add(style.name);
         }
-        return { interactiveCount: count, checked: evidence.length };
+        assert.ok([...names].some(name => name.includes('WHY GLEE‑FULLY')), 'keyboard focus did not reach the primary navigation');
+        await navToggle.click();
+        assert.equal(await page.locator('.site-header.nav-open').count(), 0, 'mobile navigation did not close');
+        return { checked: evidence.length, reachable: [...names] };
       });
 
       await check('narrow viewport overflow and console health', async () => {
