@@ -28,11 +28,14 @@ When an installed Chromium Playwright driver is available, the runner asserts:
 
 ## Findings and limitations
 
-No rendered defect is claimed because the sandbox prevented the local-only
-fixture server from starting. The runner deliberately reports that environment
-boundary as `NOT RUN` rather than weakening or skipping an assertion. A later
-assigned run should use an environment that permits loopback binding and record
-concrete reproduction evidence for any failure. Run it with the bundled Node
-runtime and its already-installed Playwright package when available; do not
-install dependencies. Screen-reader semantics and
-announcements remain unverified by this automated check.
+The bundled Playwright run exercised both viewports. Ten assertions passed; the
+focus-visibility assertion failed at 320px and 390px for the “WHY GLEE‑FULLY”
+navigation link. This is a shared rendered-style finding, not a FoundRy-page
+edit: investigate the focus selector in `assets/css/theme.css` and re-run this
+focused runner before changing any production CSS.
+
+If the bundled runtime is unavailable, the runner reports `NOT RUN` rather than
+weakening or skipping an assertion. Run it with the bundled Node runtime and its
+already-installed Playwright package when available; do not install dependencies.
+Screen-reader semantics and announcements remain unverified by this automated
+check.
