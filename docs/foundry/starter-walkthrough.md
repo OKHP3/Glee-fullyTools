@@ -73,12 +73,15 @@ So the safe reading is:
 
 ## How to inspect it locally
 
-If you already have the repository checkout, the local setup is simple:
+The application is in the separate
+[Glee-fullyTools-FoundRy repository](https://github.com/OKHP3/Glee-fullyTools-FoundRy),
+not this public-site repository. Its local setup is:
 
-1. Open the repository in your local environment.
-2. Run `python3 -m app.server` from the repo root.
-3. Open `http://127.0.0.1:8765` in a browser.
-4. Visit the FoundRy app and compare it with the repo docs.
+1. Clone it: `git clone https://github.com/OKHP3/Glee-fullyTools-FoundRy.git`
+2. Enter it: `cd Glee-fullyTools-FoundRy`
+3. Read its [application README](https://github.com/OKHP3/Glee-fullyTools-FoundRy/blob/main/docs/application/README.md).
+4. Run `python3 -m app.server` from that repository root.
+5. Open `http://127.0.0.1:8765` in a browser.
 
 Nothing in the current public docs says you need a special account, paid plan,
 or separate hosted builder to use the local app.

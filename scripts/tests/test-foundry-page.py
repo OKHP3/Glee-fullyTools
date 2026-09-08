@@ -21,26 +21,20 @@ def read_text(path: Path) -> str:
 class FoundryPageTests(unittest.TestCase):
     def setUp(self):
         self.html = read_text(FOUNDRY)
-        self.normalized_html = (
-            self.html.replace("\u2011", "-")
-            .replace("\u2013", "-")
-            .replace("\u2014", "-")
-            .replace("\u2019", "'")
-        )
 
     def test_foundry_route_and_metadata_are_published(self):
         self.assertIn('<link rel="canonical" href="https://glee-fully.tools/foundry/" />', self.html)
         self.assertIn('<meta property="og:url" content="https://glee-fully.tools/foundry/" />', self.html)
         self.assertIn('<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />', self.html)
         self.assertIn('<meta name="description" content="Meet the Glee-fully FoundRy: a locally run workbench with public source for shaping useful GPTs, Agent Skills, workflows and web tools, with clear briefs, recorded evidence and portable packages." />', self.html)
-        self.assertIn('<title>Glee-fully FoundRy | Glee-fully Personalizable Tools™</title>', self.normalized_html)
+        self.assertIn('<title>Glee‑fully FoundRy | Glee‑fully Personalizable Tools™</title>', self.html)
 
     def test_foundry_source_cta_and_local_only_boundary_remain_explicit(self):
         self.assertIn('href="https://github.com/OKHP3/Glee-fullyTools-FoundRy"', self.html)
         self.assertIn('Open the GitHub repository', self.html)
-        self.assertIn("This public page introduces that work. There is currently no hosted builder, account sign-up or embedded application here.", self.normalized_html)
+        self.assertIn("This public page introduces that work. There is currently no hosted builder, account sign-up or embedded application here.", self.html)
         self.assertIn('This feature page does not host the builder.', self.html)
-        self.assertIn("The local application saves projects on the builder's computer.", self.normalized_html)
+        self.assertIn("The local application saves projects on the builder’s computer.", self.html)
 
     def test_foundry_is_listed_in_sitemap_and_search_index(self):
         sitemap = ET.fromstring(read_text(SITEMAP))

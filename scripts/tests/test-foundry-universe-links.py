@@ -16,7 +16,7 @@ UNIVERSE_MAP = ROOT / "assets/data/universe-map.json"
 class Link:
     href: str
     target: str | None
-    rel: tuple[str, ...]
+    rel: frozenset[str]
     text: str
 
 
@@ -45,7 +45,7 @@ class AnchorCollector(HTMLParser):
     def handle_endtag(self, tag):
         if tag != "a" or self._current is None:
             return
-        rel = tuple(filter(None, re.split(r"\s+", self._current["rel"] or "")))
+        rel = frozenset(filter(None, re.split(r"\s+", self._current["rel"] or "")))
         self.links.append(
             Link(
                 href=self._current["href"] or "",
@@ -76,7 +76,7 @@ def read_root_universe_nodes(path: Path) -> set[str]:
 
 
 class FoundryUniverseLinkTests(unittest.TestCase):
-    def assert_link(self, links, text, href, *, target=None, rel=()):
+    def assert_link(self, links, text, href, *, target=None, rel=frozenset()):
         for link in links:
             if link.text == text:
                 self.assertEqual(link.href, href)
@@ -84,6 +84,21 @@ class FoundryUniverseLinkTests(unittest.TestCase):
                 self.assertEqual(link.rel, rel)
                 return
         self.fail(f"missing link text: {text!r}")
+
+    def test_rel_token_order_is_not_semantic(self):
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = Path(directory) / "links.html"
+            fixture.write_text(
+                '<a href="https://example.test" target="_blank" rel="noreferrer noopener">Example</a>',
+                encoding="utf-8",
+            )
+            self.assert_link(
+                read_foundry_links(fixture),
+                "Example",
+                "https://example.test",
+                target="_blank",
+                rel=frozenset(("noopener", "noreferrer")),
+            )
 
     def test_foundry_page_and_universe_map_declare_the_same_core_relationships(self):
         links = read_foundry_links(FOUNDRY_PAGE)
@@ -94,14 +109,14 @@ class FoundryUniverseLinkTests(unittest.TestCase):
             "Open the GitHub repository",
             "https://github.com/OKHP3/Glee-fullyTools-FoundRy",
             target="_blank",
-            rel=("noopener", "noreferrer"),
+            rel=frozenset(("noopener", "noreferrer")),
         )
         self.assert_link(
             links,
             "Skillz",
             "https://okhp3.github.io/skillz/",
             target="_blank",
-            rel=("noopener", "noreferrer"),
+            rel=frozenset(("noopener", "noreferrer")),
         )
         self.assert_link(links, "our universe map", "/universe/")
         self.assert_link(links, "OKHP³™ Universe", "/universe/")

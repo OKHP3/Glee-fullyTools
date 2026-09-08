@@ -61,3 +61,17 @@ ownership, property access, crawlability inside Google or Bing, or indexing.
 This handoff is intentionally narrow. It confirms the sitemap URL and the
 owner-facing submission path, but it does not include account access, live
 submission status, or any claim that search engines have indexed the site.
+
+## FoundRy regression execution boundary
+
+The two FoundRy regressions introduced with this handoff run standalone:
+
+```bash
+python3 scripts/tests/test-foundry-page.py
+python3 scripts/tests/test-foundry-universe-links.py
+```
+
+They are not wired into CI in this change because the reserved CI workflow scope
+belongs to website PR #32. A follow-up should add an explicit regression step
+after that ownership is reconciled; until then, passing site CI does not claim
+these two standalone tests ran.
