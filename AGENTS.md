@@ -616,7 +616,7 @@ Script categories (last updated 2026-08-23; describes what each script does, by 
   `viewport-qa.py`, `site-audit.py`, `sparkle-qa.py`,
   `check-public-headers.py`, `check-workflow-actions.py`, `check-csp.py`;
   `responsive-qa.mjs` (Node/Playwright read-only QA runner);
-  `post-merge.sh` (read-only integrity check after merges)
+  `post-merge.sh` (integrity check and cache-version synchronization after merges; may update generated cache tokens)
 - **Index / feed / report builders** (regenerate data or output files):
   `build-search-index.py`; the checked-in `feed.xml` has a historical generator
   under `scripts/archive/` and is not part of the active pipeline;
