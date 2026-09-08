@@ -7,11 +7,12 @@ Focused browser coverage for `foundry/index.html`: page landmarks and heading st
 ## Evidence
 
 - Source SHA: `0277324983f6db4248245fa319674b18b1878bd6`
-- Runner: [`scripts/foundry-accessibility-qa.mjs`](../../scripts/foundry-accessibility-qa.mjs)
+- Runner: [`scripts/tests/foundry-accessibility-qa.mjs`](../../scripts/tests/foundry-accessibility-qa.mjs)
 - Fixture: loopback HTTP server on an ephemeral port, with third-party requests and service workers blocked. The production HTML is not rewritten on disk.
 - Browser driver result on 2026-09-07: **NOT RUN**. The bundled workspace runtime
   provided Playwright without an installation, but this sandbox rejected the
   ephemeral loopback listener with `EPERM` before browser assertions could run.
+  A `NOT RUN` result exits with status 2, so automation cannot treat it as a pass.
 - Human screen-reader testing: **NOT RUN**.
 
 ## Coverage implemented
@@ -31,5 +32,7 @@ No rendered defect is claimed because the sandbox prevented the local-only
 fixture server from starting. The runner deliberately reports that environment
 boundary as `NOT RUN` rather than weakening or skipping an assertion. A later
 assigned run should use an environment that permits loopback binding and record
-concrete reproduction evidence for any failure. Screen-reader semantics and
+concrete reproduction evidence for any failure. Run it with the bundled Node
+runtime and its already-installed Playwright package when available; do not
+install dependencies. Screen-reader semantics and
 announcements remain unverified by this automated check.

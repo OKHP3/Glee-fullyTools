@@ -9,7 +9,7 @@ import { extname, resolve, sep } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 
-const ROOT = resolve(import.meta.dirname, '..');
+const ROOT = resolve(import.meta.dirname, '..', '..');
 const require = createRequire(import.meta.url);
 const ROUTE = '/foundry/';
 const VIEWPORTS = [
@@ -54,6 +54,13 @@ function result(name, status, evidence, error) {
   return { name, status, ...(evidence ? { evidence } : {}), ...(error ? { error } : {}) };
 }
 
+function notRun(report, reason) {
+  report.runtime = { status: 'NOT RUN', reason };
+  console.log(JSON.stringify(report, null, 2));
+  process.exitCode = 2;
+  return report;
+}
+
 async function run() {
   const report = {
     generatedAt: new Date().toISOString(),
@@ -68,23 +75,26 @@ async function run() {
   try {
     playwright = require('playwright');
   } catch (error) {
-    report.runtime = { status: 'NOT RUN', reason: `Installed Playwright runtime unavailable: ${error.message}` };
-    console.log(JSON.stringify(report, null, 2));
-    return report;
+    return notRun(report, `Installed Playwright runtime unavailable: ${error.message}`);
   }
 
   const server = createServer(serve);
-  await new Promise(resolveServer => server.listen(0, '127.0.0.1', resolveServer));
+  try {
+    await new Promise((resolveServer, rejectServer) => {
+      server.once('error', rejectServer);
+      server.listen(0, '127.0.0.1', resolveServer);
+    });
+  } catch (error) {
+    return notRun(report, `Loopback fixture unavailable: ${error.message}`);
+  }
   const base = `http://127.0.0.1:${server.address().port}`;
   report.baseUrl = base;
   let browser;
   try {
     browser = await playwright.chromium.launch({ headless: true });
   } catch (error) {
-    report.runtime = { status: 'NOT RUN', reason: `Installed Chromium driver unavailable: ${error.message}` };
     await new Promise(resolveServer => server.close(resolveServer));
-    console.log(JSON.stringify(report, null, 2));
-    return report;
+    return notRun(report, `Installed Chromium driver unavailable: ${error.message}`);
   }
 
   report.runtime = { status: 'RUN', driver: 'Playwright Chromium' };
