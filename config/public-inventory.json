@@ -16,6 +16,7 @@
       ".vscode",
       "attached_assets",
       "assets/templates",
+      "docs",
       "node_modules",
       "tools"
     ]

@@ -28,9 +28,9 @@ ARTIFACT_SPEC.loader.exec_module(ARTIFACT)
 
 class PublicInventoryTests(unittest.TestCase):
     def test_current_scope_matches_contract(self):
-        self.assertEqual(len(collect_html_files()), 63)
+        self.assertEqual(len(collect_html_files()), 64)
         pages = collect_indexable_html_files()
-        self.assertEqual(len(pages), 60)
+        self.assertEqual(len(pages), 61)
 
         urls = [ARTIFACT_PATH(p) for p in pages]
         self.assertEqual(sum(page_type(url) == "toolbox_hub" for url in urls), 1)
@@ -76,6 +76,7 @@ class PublicInventoryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "index.html").write_text("<!doctype html>", encoding="utf-8")
+            (root / "release-provenance.json").write_text("{}", encoding="utf-8")
             (root / "foundry").mkdir()
             (root / "foundry" / "index.html").write_text(
                 "<!doctype html>", encoding="utf-8"
