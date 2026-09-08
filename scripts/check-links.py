@@ -106,7 +106,8 @@ def resolve_target(href: str, source_dir: Path) -> Path | None:
     return None
 
 
-def resolves(href: str, source_path: Path, page_fragments: set[str]) -> bool:
+def resolves(href: str, source_path: Path, page_fragments: set[str],
+             fragment_cache: dict[Path, set[str]] | None = None) -> bool:
     """Check the file route and, when present, its exact fragment target."""
     parsed = urlsplit(href)
     target = source_path if not parsed.path else resolve_target(href, source_path.parent)
@@ -120,9 +121,14 @@ def resolves(href: str, source_path: Path, page_fragments: set[str]) -> bool:
     if target == source_path:
         fragments = page_fragments
     else:
-        target_parser = PageLinks()
-        target_parser.feed(target.read_text(encoding="utf-8", errors="replace"))
-        fragments = target_parser.fragments
+        if fragment_cache is not None and target in fragment_cache:
+            fragments = fragment_cache[target]
+        else:
+            target_parser = PageLinks()
+            target_parser.feed(target.read_text(encoding="utf-8", errors="replace"))
+            fragments = target_parser.fragments
+            if fragment_cache is not None:
+                fragment_cache[target] = fragments
     return fragment in fragments
 
 
@@ -162,6 +168,7 @@ def main(argv=None) -> int:
     all_external = 0
     broken: list[dict] = []
     style_issues: list[dict] = []
+    fragment_cache: dict[Path, set[str]] = {}
 
     for path in collect_html_files(ROOT):
         rel = path.relative_to(ROOT)
@@ -174,7 +181,7 @@ def main(argv=None) -> int:
                 n_ext += 1
                 continue
             n_int += 1
-            if not resolves(href, path, link_parser.fragments):
+            if not resolves(href, path, link_parser.fragments, fragment_cache):
                 broken.append({"page": rel.as_posix(), "href": href})
             # style: directory URLs ought to end in trailing /
             clean = urlsplit(href).path
