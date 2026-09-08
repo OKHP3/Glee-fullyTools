@@ -28,9 +28,6 @@ jobs:
       - name: Check GitHub Actions versions
         run: python3 scripts/check-workflow-actions.py
 
-      - name: Run link and audit regression tests
-        run: python3 -m unittest scripts.tests.test_audit_site scripts.tests.test_check_links_fragments
-
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -38,6 +35,9 @@ jobs:
 
       - name: Install dependencies
         run: python3 -m pip install -r requirements-qa.txt
+
+      - name: Run link and audit regression tests
+        run: python3 -m unittest scripts.tests.test_audit_site scripts.tests.test_check_links_fragments
 
       - name: Generate current search and universe maps
         run: |
