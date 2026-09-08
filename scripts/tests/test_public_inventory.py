@@ -72,6 +72,16 @@ class PublicInventoryTests(unittest.TestCase):
             (root / "index.html").write_text("<!doctype html>", encoding="utf-8")
             self.assertEqual(ARTIFACT.check_artifact(root), [])
 
+    def test_artifact_policy_accepts_foundry_section(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "index.html").write_text("<!doctype html>", encoding="utf-8")
+            (root / "foundry").mkdir()
+            (root / "foundry" / "index.html").write_text(
+                "<!doctype html>", encoding="utf-8"
+            )
+            self.assertEqual(ARTIFACT.check_artifact(root), [])
+
 
 def ARTIFACT_PATH(path: Path) -> str:
     rel = path.relative_to(SCRIPTS.parent)
