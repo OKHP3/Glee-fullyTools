@@ -88,6 +88,11 @@ jobs:
       - name: Run client behavior regressions
         run: node scripts/tests/test-client-regressions.cjs
 
+      - name: Run FoundRy page and relationship regressions
+        run: |
+          python3 scripts/tests/test-foundry-page.py
+          python3 scripts/tests/test-foundry-universe-links.py
+
       - name: Run CLS session-window regressions
         run: node --test scripts/tests/test-cls-session-window.cjs
 
