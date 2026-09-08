@@ -1,5 +1,7 @@
 import importlib.util
 import sys
+from contextlib import redirect_stdout
+from io import StringIO
 import tempfile
 import unittest
 from pathlib import Path
@@ -42,6 +44,33 @@ class FragmentLinkTests(unittest.TestCase):
             parser.feed(source.read_text())
             for href in ("#", "#top", "#:~:text=source"):
                 self.assertTrue(check_links.resolves(href, source, parser.fragments))
+
+    def test_protocol_relative_and_non_html_fragments(self):
+        self.assertTrue(check_links.is_external("//cdn.example/site.css"))
+        with tempfile.TemporaryDirectory() as temp:
+            source = Path(temp) / "source.html"
+            pdf = Path(temp) / "guide.pdf"
+            source.write_text("<p>source</p>")
+            pdf.write_bytes(b"%PDF")
+            parser = check_links.PageLinks()
+            parser.feed(source.read_text())
+            self.assertTrue(check_links.resolves("guide.pdf#page=2", source, parser.fragments))
+
+    def test_main_reports_missing_fragments_and_resources(self):
+        original_root = check_links.ROOT
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "index.html").write_text(
+                '<link href="missing.css"><a href="index.html#missing">bad</a>'
+            )
+            (root / "sitemap.xml").write_text("<urlset></urlset>")
+            check_links.ROOT = root
+            output = StringIO()
+            with redirect_stdout(output):
+                self.assertEqual(check_links.main(["--no-report"]), 1)
+            self.assertIn("missing.css", output.getvalue())
+            self.assertIn("index.html#missing", output.getvalue())
+        check_links.ROOT = original_root
 
 
 if __name__ == "__main__":

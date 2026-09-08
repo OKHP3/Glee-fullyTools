@@ -70,7 +70,7 @@ class PageLinks(HTMLParser):
 
     def handle_starttag(self, tag: str, attrs_list) -> None:
         attrs = {key.lower(): (value or "") for key, value in attrs_list}
-        if tag.lower() == "a" and "href" in attrs:
+        if "href" in attrs:
             self.hrefs.append(attrs["href"])
         if "id" in attrs:
             self.fragments.add(attrs["id"])
@@ -80,7 +80,7 @@ class PageLinks(HTMLParser):
 
 def is_external(href: str) -> bool:
     parsed = urlsplit(href)
-    return bool(parsed.scheme or parsed.netloc) and parsed.scheme.lower() not in {""}
+    return bool(parsed.scheme or parsed.netloc)
 
 
 def fragment_is_checkable(fragment: str) -> bool:
@@ -90,7 +90,7 @@ def fragment_is_checkable(fragment: str) -> bool:
 
 def resolve_target(href: str, source_dir: Path) -> Path | None:
     """Does this internal href resolve to a real file or dir/index.html?"""
-    clean = urlsplit(href).path
+    clean = unquote(urlsplit(href).path)
     if not clean:
         return source_dir / "index.html"
     if clean.startswith("/"):
@@ -112,7 +112,10 @@ def resolves(href: str, source_path: Path, page_fragments: set[str]) -> bool:
     target = source_path if not parsed.path else resolve_target(href, source_path.parent)
     if target is None:
         return False
-    if not fragment_is_checkable(unquote(parsed.fragment)):
+    fragment = unquote(parsed.fragment).split(":~:", 1)[0]
+    if not fragment_is_checkable(fragment):
+        return True
+    if target.suffix.lower() not in {".html", ".htm"}:
         return True
     if target == source_path:
         fragments = page_fragments
@@ -120,7 +123,7 @@ def resolves(href: str, source_path: Path, page_fragments: set[str]) -> bool:
         target_parser = PageLinks()
         target_parser.feed(target.read_text(encoding="utf-8", errors="replace"))
         fragments = target_parser.fragments
-    return unquote(parsed.fragment) in fragments
+    return fragment in fragments
 
 
 def route_for_index(path: Path) -> str:
