@@ -201,6 +201,13 @@ async function run() {
 
         await page.evaluate(() => { history.scrollRestoration = 'manual'; });
         await page.reload({ waitUntil: 'load' });
+        await page.waitForFunction(() => [...document.styleSheets].every(sheet => {
+          try {
+            return sheet.cssRules !== null;
+          } catch {
+            return true;
+          }
+        }));
         await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
         await page.waitForFunction(() => scrollY === 0);
         await page.keyboard.press('Tab');
