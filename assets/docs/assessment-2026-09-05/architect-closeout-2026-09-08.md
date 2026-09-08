@@ -36,7 +36,7 @@ The original handoff tips have verified local recovery refs:
 
 These recovery refs preserve superseded local history; they are not claims that the old branch tips were merged into main. Adopted source changes, current test evidence and this disposition record belong to the final closeout PR. Earlier assessment reports keep their historical scope and counts.
 
-The separate Sync Latest and Harden Site task owns reconciliation of local audit-report commit `dc5f64bd` through [PR #39](https://github.com/OKHP3/Glee-fullyTools/pull/39). That coordination avoids competing writes to owner main. The FoundRy/coop program's later accessibility work and its own task cleanup remain with its active coordinator; they are not silently absorbed into this earlier Architect scope.
+The separate Sync Latest and Harden Site task completed reconciliation of local audit-report commit `dc5f64bd`. [PR #39](https://github.com/OKHP3/Glee-fullyTools/pull/39) was closed without merge because that output incorrectly included an excluded development prototype. The original commit is preserved at `refs/archive/2026-09-08/generated-audit-local-main-dc5f64bd`; current generated reports remain authoritative. The coordinator verified clean local-main/origin parity at `89d5bef7`. The FoundRy/coop program's later accessibility work and its own task cleanup remain with its active coordinator; they are not silently absorbed into this earlier Architect scope.
 
 ## Publication acceptance
 
