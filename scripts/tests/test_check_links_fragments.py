@@ -2,6 +2,7 @@ import importlib.util
 import sys
 from contextlib import redirect_stdout
 from io import StringIO
+from unittest.mock import patch
 import tempfile
 import unittest
 from pathlib import Path
@@ -26,51 +27,58 @@ class FragmentLinkTests(unittest.TestCase):
             root = Path(temp)
             source = root / "source.html"
             target = root / "target.html"
-            source.write_text('<h1 id="Résumé">x</h1><a name="legacy">x</a>')
-            target.write_text('<h1 id="CaseSensitive">x</h1>')
+            source.write_text('<h1 id="R&#233;sum&#233;">x</h1><a name="legacy">x</a>', encoding="utf-8")
+            target.write_text('<h1 id="CaseSensitive">x</h1><h2 id="Café">x</h2>', encoding="utf-8")
             parser = check_links.PageLinks()
-            parser.feed(source.read_text())
+            parser.feed(source.read_text(encoding="utf-8"))
             self.assertTrue(check_links.resolves("#R%C3%A9sum%C3%A9", source, parser.fragments))
             self.assertTrue(check_links.resolves("#legacy", source, parser.fragments))
             self.assertFalse(check_links.resolves("#résumé", source, parser.fragments))
             self.assertTrue(check_links.resolves("target.html#CaseSensitive", source, parser.fragments))
             self.assertFalse(check_links.resolves("target.html#casesensitive", source, parser.fragments))
+            self.assertTrue(check_links.resolves("target.html#Caf%C3%A9", source, parser.fragments))
+
+            encoded_dir = root / "encoded dir"
+            encoded_dir.mkdir()
+            (encoded_dir / "index.html").write_text('<h1 id="section">x</h1>', encoding="utf-8")
+            self.assertTrue(check_links.resolves("encoded%20dir/?mode=full#section", source, parser.fragments))
 
     def test_empty_top_and_text_fragments_are_browser_directives(self):
         with tempfile.TemporaryDirectory() as temp:
             source = Path(temp) / "source.html"
-            source.write_text("<p>source</p>")
+            source.write_text('<p id="section">source</p>', encoding="utf-8")
             parser = check_links.PageLinks()
-            parser.feed(source.read_text())
+            parser.feed(source.read_text(encoding="utf-8"))
             for href in ("#", "#top", "#:~:text=source"):
                 self.assertTrue(check_links.resolves(href, source, parser.fragments))
+            self.assertTrue(check_links.resolves("#section:~:text=source", source, parser.fragments))
+            self.assertFalse(check_links.resolves("#missing:~:text=source", source, parser.fragments))
 
     def test_protocol_relative_and_non_html_fragments(self):
         self.assertTrue(check_links.is_external("//cdn.example/site.css"))
         with tempfile.TemporaryDirectory() as temp:
             source = Path(temp) / "source.html"
             pdf = Path(temp) / "guide.pdf"
-            source.write_text("<p>source</p>")
+            source.write_text("<p>source</p>", encoding="utf-8")
             pdf.write_bytes(b"%PDF")
             parser = check_links.PageLinks()
-            parser.feed(source.read_text())
+            parser.feed(source.read_text(encoding="utf-8"))
             self.assertTrue(check_links.resolves("guide.pdf#page=2", source, parser.fragments))
 
     def test_main_reports_missing_fragments_and_resources(self):
-        original_root = check_links.ROOT
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             (root / "index.html").write_text(
                 '<link href="missing.css"><a href="index.html#missing">bad</a>'
             )
-            (root / "sitemap.xml").write_text("<urlset></urlset>")
-            check_links.ROOT = root
             output = StringIO()
-            with redirect_stdout(output):
+            (root / "sitemap.xml").write_text(
+                "<urlset><url><loc>https://glee-fully.tools/</loc></url></urlset>", encoding="utf-8"
+            )
+            with patch.object(check_links, "ROOT", root), redirect_stdout(output):
                 self.assertEqual(check_links.main(["--no-report"]), 1)
             self.assertIn("missing.css", output.getvalue())
             self.assertIn("index.html#missing", output.getvalue())
-        check_links.ROOT = original_root
 
 
 if __name__ == "__main__":
