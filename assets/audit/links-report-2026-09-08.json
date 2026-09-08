@@ -1,8 +1,8 @@
 {
   "generated": "2026-09-08",
-  "pages_scanned": 65,
-  "internal_links": 2772,
-  "external_links": 1181,
+  "pages_scanned": 64,
+  "internal_links": 2756,
+  "external_links": 1175,
   "broken_links": [],
   "style_issues": [],
   "sitemap": {
@@ -31,11 +31,6 @@
       "path": "contact/index.html",
       "internal_links": 31,
       "external_links": 18
-    },
-    {
-      "path": "docs/prototypes/foundry-visitor-journey.html",
-      "internal_links": 16,
-      "external_links": 6
     },
     {
       "path": "ecosystem/index.html",
