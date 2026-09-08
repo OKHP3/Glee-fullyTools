@@ -10,6 +10,7 @@ const enhancementUrl = source.match(/\/assets\/js\/glee-site-enhancements\.js(?:
 const searchIndexUrl = source.match(/\/assets\/data\/search-index\.json(?:\?v=[^"']+)?/)[0];
 
 function harness(options = {}) {
+  const workerSource = options.workerSource || source;
   const handlers = {};
   const entries = new Map();
   const deleted = [];
@@ -42,7 +43,7 @@ function harness(options = {}) {
     },
     async fetch(request) { if (options.offline) throw new Error('Offline'); return response(request.url || request); },
   };
-  vm.runInNewContext(source, context);
+  vm.runInNewContext(workerSource, context);
   return { entries, deleted, handlers, options,
     async request(route, mode = 'navigate') {
       const work = [];
@@ -97,6 +98,24 @@ test('missing precached assets still use successful network when storage fails',
   const worker = harness({ openFailure: true, readFailure: true });
   assert.equal((await worker.request(searchIndexUrl, 'cors')).label,
     origin + searchIndexUrl);
+});
+
+test('old worker cache does not intercept newly versioned search index URL', async () => {
+  const oldSource = source.replace(searchIndexUrl, '/assets/data/search-index.json');
+  const worker = harness({ workerSource: oldSource });
+  await worker.lifecycle('install');
+
+  assert.equal((await worker.request('/assets/data/search-index.json', 'cors')).label,
+    '/assets/data/search-index.json');
+  assert.equal(await worker.request(searchIndexUrl, 'cors'), undefined);
+});
+
+test('new worker serves versioned search index while offline', async () => {
+  const worker = harness();
+  await worker.lifecycle('install');
+  worker.options.offline = true;
+
+  assert.equal((await worker.request(searchIndexUrl, 'cors')).label, searchIndexUrl);
 });
 
 test('cold offline shell includes the dynamically loaded Glee adapter', async () => {
