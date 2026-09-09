@@ -143,8 +143,9 @@ def main() -> int:
             if "glee-site-enhancements" in js_tokens
             else app_source
         )
-        if search_index_token:
-            app_patched = rewrite_search_index_refs(app_patched, search_index_token)
+        # Keep the shared app's search-index URL stable. Cache-bust the HTML
+        # and service-worker references below, but do not rewrite app.js:
+        # shared browser fixtures intercept the stable URL across all sites.
         if app_patched != app_source:
             stale = True
             if args.check:
