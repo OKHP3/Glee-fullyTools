@@ -89,11 +89,12 @@ jobs:
       - name: Check generated CSP policies
         run: python3 scripts/check-csp.py
 
-      - name: Run template metadata regressions
+      - name: Run validation and template metadata regressions
         run: |
           python3 -m unittest \
             scripts/tests/test_validate_template_metadata.py \
-            scripts/tests/test_organization_identity_approval.py
+            scripts/tests/test_organization_identity_approval.py \
+            scripts/tests/test_validation_report.py
 
       - name: Run publication and offline release regressions
         run: |
@@ -132,7 +133,7 @@ jobs:
       - name: Run accent contrast fixture regressions
         run: python3 -m unittest scripts/tests/test_check_accent_contrast.py
 
-      - name: Run site validator
+      - name: Run site validator and preserve unchanged audit evidence
         run: python3 scripts/validate-site.py
 
       - name: Run link checker
