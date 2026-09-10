@@ -152,8 +152,8 @@ class SyncCssVersionTests(unittest.TestCase):
                 _MODULE.THEME_CSS = old_theme
 
 
-    def test_search_index_url_changes_when_an_old_worker_has_unversioned_index(self) -> None:
-        """A new index must use a new cache key for returning visitors."""
+    def test_search_index_url_stays_stable_in_shared_app_and_changes_in_worker(self) -> None:
+        """Shared app URLs stay stable while HTML and the worker get cache keys."""
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             css = root / "assets" / "css" / "theme.css"
@@ -184,7 +184,7 @@ class SyncCssVersionTests(unittest.TestCase):
                 app_text = app.read_text(encoding="utf-8")
                 page_text = page.read_text(encoding="utf-8")
                 worker_text = worker.read_text(encoding="utf-8")
-                self.assertIn(f"search-index.json?mode=test&v={token}#keep", app_text)
+                self.assertIn('search-index.json?mode=test#keep', app_text)
                 self.assertIn(f"app.js?v={_MODULE.normalized_hash(app)}&mode=test#keep", page_text)
                 self.assertIn(f"search-index.json?v={token}", worker_text)
 
@@ -196,7 +196,7 @@ class SyncCssVersionTests(unittest.TestCase):
                 self.assertEqual(self.run_main()[0], 0)
                 new_token = _MODULE.normalized_hash(index)
                 self.assertNotEqual(token, new_token)
-                self.assertIn(f"search-index.json?mode=test&v={new_token}#keep", app.read_text(encoding="utf-8"))
+                self.assertIn('search-index.json?mode=test#keep', app.read_text(encoding="utf-8"))
                 self.assertIn(f"app.js?v={_MODULE.normalized_hash(app)}&mode=test#keep", page.read_text(encoding="utf-8"))
                 self.assertIn(f"search-index.json?v={new_token}", worker.read_text(encoding="utf-8"))
                 self.assertEqual(self.run_main("--check")[0], 0)
