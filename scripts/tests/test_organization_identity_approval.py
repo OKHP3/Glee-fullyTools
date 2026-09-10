@@ -248,7 +248,7 @@ class OrganizationIdentityApprovalTests(unittest.TestCase):
             )
         )
         removed_url = approval_record["approved_urls"][0]
-        homepage_text = original_homepage.decode("utf-8")
+        homepage_text = original_homepage.decode("utf-8").replace("\r\n", "\n")
         identity_line = f'            "{removed_url}",\n'
         self.assertIn(identity_line, homepage_text)
         homepage.write_text(
