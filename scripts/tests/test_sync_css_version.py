@@ -80,6 +80,7 @@ class SyncCssVersionTests(unittest.TestCase):
             css = root / "assets" / "css" / "theme.css"
             app = root / "assets" / "js" / "app.js"
             enhancements = root / "assets" / "js" / "glee-site-enhancements.js"
+            bootstrap = root / "assets" / "js" / "color-scheme-init.js"
             page = root / "about" / "index.html"
             worker = root / "sw.js"
             css.parent.mkdir(parents=True)
@@ -89,8 +90,10 @@ class SyncCssVersionTests(unittest.TestCase):
             css.write_text("body {}\n", encoding="utf-8")
             app.write_bytes(b"console.log('app');\r\n")
             enhancements.write_bytes(b"console.log('enhance');\r\n")
+            bootstrap.write_bytes(b"console.log('theme');\r\n")
             app.write_bytes(b'const moduleUrl = "/assets/js/glee-site-enhancements.js";\r\n')
             page.write_text(
+                '<script src="/assets/js/color-scheme-init.js?v=old"></script>\n'
                 '<script src="/assets/js/app.js?v=stale&mode=test#keep"></script>\n'
                 '<script src="https://cdn.example/assets/js/app.js?v=foreign"></script>\n'
                 '<script src="/assets/js/glee-site-enhancements.js#keep"></script>\n',
@@ -99,7 +102,7 @@ class SyncCssVersionTests(unittest.TestCase):
             worker.write_text(
                 'const CACHE_NAME = "glee-fully-shell-v1";\n'
                 'const PRECACHE_URLS = ["/", "/assets/js/app.js?v=3", '
-                '"/assets/js/glee-site-enhancements.js"];\n',
+                '"/assets/js/glee-site-enhancements.js", "/assets/js/color-scheme-init.js?v=old"];\n',
                 encoding="utf-8",
             )
 
@@ -140,6 +143,8 @@ class SyncCssVersionTests(unittest.TestCase):
                     f'/assets/js/glee-site-enhancements.js?v={tokens["glee-site-enhancements"]}',
                     worker_text,
                 )
+                self.assertIn(f'color-scheme-init.js?v={tokens["color-scheme-init"]}', rewritten)
+                self.assertIn(f'color-scheme-init.js?v={tokens["color-scheme-init"]}', worker_text)
                 stable_worker = worker.read_bytes()
                 stable_page = page.read_bytes()
                 stable_app = app.read_bytes()

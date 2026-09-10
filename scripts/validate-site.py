@@ -339,6 +339,16 @@ def main() -> int:
         total_issues += len(result["issues"])
         total_warnings += len(result["warnings"])
 
+    # ── Global invariant: approved Organization identities ───────────────────
+    # The homepage's structured-data sameAs list is an owner-approved claim.
+    # Keep it synchronized with the human-readable approval record so a future
+    # identity edit cannot ship without updating its evidence.
+    organization_identity_issues = _check_organization_identity_approval()
+    for msg in organization_identity_issues:
+        print(f"\nOrganization identity approval: {msg}")
+    if organization_identity_issues:
+        total_issues += len(organization_identity_issues)
+
     audit_dir = ROOT / "assets" / "audit"
     audit_dir.mkdir(exist_ok=True)
     out = audit_dir / f"validation-report-{date.today().isoformat()}.json"
@@ -350,6 +360,7 @@ def main() -> int:
         "total_issues": total_issues,
         "total_warnings": total_warnings,
         "pages": pages,
+        "organization_identity_issues": organization_identity_issues,
     }
     _write_validation_report(out, report)
 
@@ -476,16 +487,6 @@ def main() -> int:
             "generated HTML token refresh before release."
         )
         total_issues += len(css_token_issues)
-
-    # ── Global invariant: approved Organization identities ───────────────────
-    # The homepage's structured-data sameAs list is an owner-approved claim.
-    # Keep it synchronized with the human-readable approval record so a future
-    # identity edit cannot ship without updating its evidence.
-    organization_identity_issues = _check_organization_identity_approval()
-    for msg in organization_identity_issues:
-        print(f"\nOrganization identity approval: {msg}")
-    if organization_identity_issues:
-        total_issues += len(organization_identity_issues)
 
     # ── Global invariant: template image metadata pairs ─────────────────────
     # Templates live under assets/ and are intentionally excluded from the
