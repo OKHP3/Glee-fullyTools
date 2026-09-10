@@ -6,6 +6,24 @@ Focused browser coverage for `foundry/index.html`: page landmarks and heading st
 
 ## Evidence
 
+- Source SHA: generated at run time by the runner
+- Runner: [`scripts/tests/foundry-accessibility-qa.mjs`](../../scripts/tests/foundry-accessibility-qa.mjs)
+- Fixture: loopback HTTP server on an ephemeral port, with third-party requests and service workers blocked. The production HTML is not rewritten on disk.
+- Supported command: `npm ci && npx playwright install chromium && npm run qa:foundry-accessibility`
+- Optional report output: append `-- --output path/to/foundry-accessibility.json` to
+  write the same JSON evidence that is printed to stdout. The Pages workflow uses
+  the deterministic path `assets/audit/foundry-accessibility.json` and uploads it
+  as a CI artifact after the focused gate completes, whether that gate passes or
+  fails.
+- Dependency boundary: this focused runner uses the exact-pinned Node
+  `playwright` dev dependency and its Chromium driver. It is separate from the
+  exact-pinned Python Playwright dependency used by the broader browser gates;
+  neither runner weakens or replaces the other.
+- CI command: GitHub Pages CI uses Node 22.19.0 from `.node-version`, runs
+  `npm ci`, installs Node Chromium with `--with-deps`, and executes the same
+  npm script. A missing Node package or browser is a failed setup, not a
+  passing or skipped assertion.
+
 - Site and stylesheet baseline: `89d5bef70e959065a9bc195481d6b755013b173e`.
   Each runner report records the tested checkout SHA.
 - Tested runner revision: `9c47937a0ca1616de95440dc3813fd99be24f2f3`, run on
@@ -21,9 +39,13 @@ Focused browser coverage for `foundry/index.html`: page landmarks and heading st
   checked separately as the first keyboard target.
 - Human screen-reader testing: **NOT RUN**.
 
+The JSON report includes both narrow viewport definitions, runtime status,
+`summary` counts for PASS/FAIL/NOT RUN checks, and the explicit human
+screen-reader limitation.
+
 ## Coverage implemented
 
-When an installed Chromium Playwright driver is available, the runner asserts:
+The runner asserts:
 
 1. The intended page title, one `h1`, and `header`, `main`, `nav`, and `footer` landmarks.
 2. Heading levels do not skip forward by more than one level.
@@ -48,8 +70,10 @@ the skip link outline and shadow, verifies that the detector rejects it, then
 restores its original style. The fixture resets scroll restoration for a
 deterministic initial visit; this does not test every restored-scroll scenario.
 
-The page and relationship unit tests (W01/W04) now run in Site Validation CI.
-This focused browser runner remains a separate installed-driver check.
+The page and relationship unit tests (W01/W04) run in Site Validation CI.
+The focused browser runner also runs in Pages CI and preserves its JSON report.
+An additional check opens mobile navigation with Enter and traverses every
+primary and submenu link using Tab.
 
 If the bundled runtime is unavailable, the runner reports `NOT RUN` rather than
 weakening or skipping an assertion. Run it with the bundled Node runtime and its

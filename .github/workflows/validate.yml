@@ -36,6 +36,25 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -r requirements-qa.txt
 
+      - name: Install Chromium for color-scheme browser regression
+        run: playwright install --with-deps chromium
+
+      - name: Start local server for color-scheme browser regression
+        run: |
+          python3 scripts/serve-site.py >/tmp/glee-color-scheme-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:5000/ >/dev/null; then
+              echo "Server ready."
+              break
+            fi
+            sleep 0.5
+          done
+          curl --silent --fail http://127.0.0.1:5000/ >/dev/null \
+            || { cat /tmp/glee-color-scheme-server.log; exit 1; }
+
+      - name: Prove saved color preferences apply before first paint
+        run: python3 scripts/tests/test-color-scheme-init.py --base-url http://127.0.0.1:5000
+
       - name: Run link and audit regression tests
         run: python3 -m unittest scripts.tests.test_audit_site scripts.tests.test_check_links_fragments
 
@@ -73,8 +92,12 @@ jobs:
       - name: Check generated CSP policies
         run: python3 scripts/check-csp.py
 
-      - name: Run template metadata regressions
-        run: python3 -m unittest scripts/tests/test_validate_template_metadata.py
+      - name: Run validation and template metadata regressions
+        run: |
+          python3 -m unittest \
+            scripts/tests/test_validate_template_metadata.py \
+            scripts/tests/test_organization_identity_approval.py \
+            scripts/tests/test_validation_report.py
 
       - name: Run publication and offline release regressions
         run: |
@@ -119,7 +142,7 @@ jobs:
       - name: Run accent contrast fixture regressions
         run: python3 -m unittest scripts/tests/test_check_accent_contrast.py
 
-      - name: Run site validator
+      - name: Run site validator and preserve unchanged audit evidence
         run: python3 scripts/validate-site.py
 
       - name: Run link checker

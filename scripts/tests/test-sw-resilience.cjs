@@ -140,3 +140,12 @@ for (const route of ['/foundry/', '/foundry/index.html']) {
     assert.equal((await worker.request(route)).label, origin + route);
   });
 }
+
+test('cold offline shell serves the exact theme bootstrap requested by HTML', async () => {
+  const html = require('node:fs').readFileSync(require('node:path').join(__dirname, '../../index.html'), 'utf8');
+  const bootstrapUrl = html.match(/src="([^"]*color-scheme-init\.js[^"]*)"/)[1];
+  const worker = harness();
+  await worker.lifecycle('install');
+  worker.options.offline = true;
+  assert.equal((await worker.request(bootstrapUrl, 'cors')).label, bootstrapUrl);
+});

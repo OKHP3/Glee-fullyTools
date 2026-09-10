@@ -43,8 +43,12 @@ On Windows, set `$env:PYTHONUTF8='1'` in PowerShell and use an existing working
 Python 3 interpreter instead of `python3`. `py -3` works only if its registered
 interpreter exists. The September 5 local checks used the installed Codex
 bundled Python when the system launcher pointed to a missing executable.
-Browser runners require an already installed Playwright runtime/browser;
-static-lint fallback is not browser evidence. No install is part of this runbook.
+Python browser runners require the pinned Python Playwright runtime/browser;
+static-lint fallback is not browser evidence. The focused FoundRy Node runner is
+the exception: run `npm ci && npx playwright install chromium && npm run
+qa:foundry-accessibility`. Its Node package and Chromium driver are separate
+from the Python browser gates; a missing dependency is a failed setup, not a
+skipped check.
 
 ## CI Gate (GitHub Actions)
 
@@ -376,4 +380,3 @@ Machine-readable JSON outputs live in `assets/audit/` (written by tools on each 
 - **2026-05-02 — Canonical-URL SEO bug fixed.** 6 inner tool pages (`03b-menu-conductor`, `03c-wishful-tastes`, `03d-pantry-shopper`, `06a-care-check`, `06b-calm-keep`, `06c-snappy-count`) had `<link rel="canonical">` pointing to the homepage instead of themselves — discovered by the search-index validator. All 6 corrected to match their `og:url`. Indexer now fails loud if this regression recurs.
 - **2026-05-02 — Spirited Journal page repaired.** Was missing `<!DOCTYPE html>` and `<head>` opening tag (skipped during initial indexing).
 - **2026-04-11 — Replit App Theme exports.** `gleefully-replit-theme.json` + `gleefully-replit-theme-guide.md` covering Foundation, Actions, Forms (focus border `#d35b2d`), Containers (paper-system surfaces), Charts (5 retro-stripe colors).
-

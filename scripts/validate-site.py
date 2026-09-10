@@ -30,6 +30,11 @@ Global invariant checks (outside per-page loop):
 Writes:
   assets/audit/validation-report-YYYY-MM-DD.json   (machine-readable detail)
 
+The dated report is tracked evidence, not a per-run log.  When the current
+report's validation payload is unchanged, the existing file (including its
+generated_at timestamp) is preserved byte-for-byte.  A changed payload gets a
+fresh UTC generated_at timestamp.
+
 Exit code:
   0 if no critical defects, 1 otherwise.
 
@@ -73,6 +78,32 @@ COLOR_SCHEME_INIT_EXEMPT = {"404.html", "under-construction.html"}
 # The idempotency marker written by scripts/inject-color-scheme-init.py.
 # Its presence confirms the blocking inline script is in <head>.
 COLOR_SCHEME_INIT_MARKER = "<!-- AUTOGEN:COLOR-SCHEME-INIT -->"
+
+
+def _write_validation_report(out: Path, report: dict) -> bool:
+    """Write report evidence only when its validation payload has changed."""
+    serialized = json.dumps(report, indent=2, ensure_ascii=False)
+    try:
+        existing = json.loads(out.read_text(encoding="utf-8"))
+    except (FileNotFoundError, OSError, json.JSONDecodeError):
+        existing = None
+
+    if (
+        isinstance(existing, dict)
+        and isinstance(existing.get("generated_at"), str)
+        and existing["generated_at"].endswith("Z")
+    ):
+        existing_payload = {
+            key: value for key, value in existing.items() if key != "generated_at"
+        }
+        report_payload = {
+            key: value for key, value in report.items() if key != "generated_at"
+        }
+        if existing_payload == report_payload:
+            return False
+
+    out.write_text(serialized, encoding="utf-8")
+    return True
 
 
 def expected_canonical(rel: Path) -> str:
@@ -308,10 +339,20 @@ def main() -> int:
         total_issues += len(result["issues"])
         total_warnings += len(result["warnings"])
 
+    # ── Global invariant: approved Organization identities ───────────────────
+    # The homepage's structured-data sameAs list is an owner-approved claim.
+    # Keep it synchronized with the human-readable approval record so a future
+    # identity edit cannot ship without updating its evidence.
+    organization_identity_issues = _check_organization_identity_approval()
+    for msg in organization_identity_issues:
+        print(f"\nOrganization identity approval: {msg}")
+    if organization_identity_issues:
+        total_issues += len(organization_identity_issues)
+
     audit_dir = ROOT / "assets" / "audit"
     audit_dir.mkdir(exist_ok=True)
     out = audit_dir / f"validation-report-{date.today().isoformat()}.json"
-    out.write_text(json.dumps({
+    report = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "run_date": date.today().isoformat(),
         "report_type": "site-validation",
@@ -319,7 +360,9 @@ def main() -> int:
         "total_issues": total_issues,
         "total_warnings": total_warnings,
         "pages": pages,
-    }, indent=2, ensure_ascii=False), encoding="utf-8")
+        "organization_identity_issues": organization_identity_issues,
+    }
+    _write_validation_report(out, report)
 
     # Human-readable summary
     print(f"\nScanned {len(pages)} pages")
@@ -1090,6 +1133,245 @@ def _check_css_token_drift(hashlib_mod) -> list:
                 )
                 break  # one report per file is enough
     return mismatches
+
+
+def _check_organization_identity_approval() -> list:
+    """Return mismatches between homepage Organization sameAs and its approval record.
+
+    The machine-readable approval record lives beside the human-readable
+    discovery evidence so owner confirmation remains readable during review.
+    The documentation must link to the same record that this check loads.
+    """
+    homepage = ROOT / "index.html"
+    evidence = ROOT / "docs" / "discovery-evidence.md"
+    approval_record = ROOT / "docs" / "organization-identity-approval.json"
+    if not homepage.exists() and not evidence.exists() and not approval_record.exists():
+        # Isolated validator fixtures can omit the repository-level contract.
+        return []
+
+    if not homepage.exists():
+        return ["index.html is missing; cannot verify Organization sameAs"]
+    if not evidence.exists():
+        return ["docs/discovery-evidence.md is missing; cannot verify identity approval"]
+    if not approval_record.exists():
+        return [
+            "docs/organization-identity-approval.json is missing; "
+            "cannot verify identity approval"
+        ]
+
+    homepage_text = homepage.read_text(encoding="utf-8", errors="replace")
+    jsonld_blocks = re.findall(
+        r'<script\s+type="application/ld\+json">\s*(.*?)\s*</script>',
+        homepage_text,
+        re.DOTALL,
+    )
+    organization_nodes = []
+    for block_number, block in enumerate(jsonld_blocks, start=1):
+        try:
+            data = json.loads(block)
+        except json.JSONDecodeError as exc:
+            # check_page reports malformed JSON-LD separately; avoid treating
+            # an unreadable block as an empty identity list here.
+            return [
+                f"homepage JSON-LD block #{block_number} is not parseable: {exc.msg}"
+            ]
+
+        candidates = data.get("@graph", []) if isinstance(data, dict) else []
+        if not isinstance(candidates, list):
+            candidates = []
+        if isinstance(data, dict) and data.get("@type") == "Organization":
+            candidates.append(data)
+        for node in candidates:
+            if not isinstance(node, dict):
+                continue
+            node_type = node.get("@type", [])
+            types = node_type if isinstance(node_type, list) else [node_type]
+            if "Organization" in types:
+                organization_nodes.append(node)
+
+    if len(organization_nodes) != 1:
+        return [
+            f"homepage JSON-LD contains {len(organization_nodes)} Organization nodes; "
+            "expected exactly one"
+        ]
+
+    issues: list[str] = []
+    published = organization_nodes[0].get("sameAs")
+    if not isinstance(published, list) or not all(
+        isinstance(url, str) and re.fullmatch(r"https?://\S+", url)
+        for url in published
+    ):
+        issues.append("homepage Organization sameAs must be a list of absolute HTTP(S) URLs")
+        published_urls: list[str] = []
+    else:
+        published_urls = published
+
+    try:
+        approval = json.loads(
+            approval_record.read_text(encoding="utf-8", errors="replace")
+        )
+    except json.JSONDecodeError as exc:
+        return issues + [
+            "docs/organization-identity-approval.json is not valid JSON: "
+            f"{exc.msg}"
+        ]
+
+    schema_issues = []
+    if not isinstance(approval, dict):
+        schema_issues.append("approval record must contain a JSON object")
+    else:
+        expected_keys = {
+            "schema",
+            "record_type",
+            "approval_date",
+            "reviewer_confirmation",
+            "approved_urls",
+        }
+        missing_keys = sorted(expected_keys - approval.keys())
+        unexpected_keys = sorted(approval.keys() - expected_keys)
+        if missing_keys:
+            schema_issues.append(
+                "approval record is missing required field(s): "
+                + ", ".join(missing_keys)
+            )
+        if unexpected_keys:
+            schema_issues.append(
+                "approval record contains unknown field(s): "
+                + ", ".join(unexpected_keys)
+            )
+        if type(approval.get("schema")) is not int or approval.get("schema") != 1:
+            schema_issues.append("approval record schema must be the integer 1")
+        if approval.get("record_type") != "organization-identity-approval":
+            schema_issues.append(
+                "approval record record_type must be "
+                "'organization-identity-approval'"
+            )
+
+        approval_date = approval.get("approval_date")
+        if not isinstance(approval_date, str) or not re.fullmatch(
+            r"\d{4}-\d{2}-\d{2}", approval_date
+        ):
+            schema_issues.append(
+                "approval record approval_date must be an ISO date (YYYY-MM-DD)"
+            )
+        else:
+            try:
+                date.fromisoformat(approval_date)
+            except ValueError:
+                schema_issues.append(
+                    "approval record approval_date must be a valid calendar date"
+                )
+
+        confirmation = approval.get("reviewer_confirmation")
+        if not isinstance(confirmation, dict):
+            schema_issues.append(
+                "approval record reviewer_confirmation must be an object"
+            )
+        else:
+            confirmation_keys = {"status", "statement"}
+            missing_confirmation_keys = sorted(
+                confirmation_keys - confirmation.keys()
+            )
+            unexpected_confirmation_keys = sorted(
+                confirmation.keys() - confirmation_keys
+            )
+            if missing_confirmation_keys:
+                schema_issues.append(
+                    "approval record reviewer_confirmation is missing required "
+                    "field(s): "
+                    + ", ".join(missing_confirmation_keys)
+                )
+            if unexpected_confirmation_keys:
+                schema_issues.append(
+                    "approval record reviewer_confirmation contains unknown "
+                    "field(s): "
+                    + ", ".join(unexpected_confirmation_keys)
+                )
+            if confirmation.get("status") != "confirmed":
+                schema_issues.append(
+                    "approval record reviewer_confirmation.status must be 'confirmed'"
+                )
+            if not isinstance(confirmation.get("statement"), str) or not (
+                confirmation["statement"].strip()
+            ):
+                schema_issues.append(
+                    "approval record reviewer_confirmation.statement must be non-empty"
+                )
+
+        approved_urls = approval.get("approved_urls")
+        if not isinstance(approved_urls, list) or not approved_urls:
+            schema_issues.append(
+                "approval record approved_urls must be a non-empty list"
+            )
+            approved_urls = []
+        invalid_approved = [
+            url
+            for url in approved_urls
+            if not isinstance(url, str) or not re.fullmatch(r"https?://\S+", url)
+        ]
+        if invalid_approved:
+            schema_issues.append(
+                "approval record approved_urls must contain only absolute HTTP(S) URLs"
+            )
+        if not invalid_approved and len(approved_urls) != len(set(approved_urls)):
+            schema_issues.append("approval record approved_urls contains duplicate URLs")
+
+    if schema_issues:
+        return issues + schema_issues
+
+    evidence_text = evidence.read_text(encoding="utf-8", errors="replace")
+    section_match = re.search(
+        r"(?ms)^##\s+Organization identities\s*$"
+        r"(.*?)(?=^##\s+|\Z)",
+        evidence_text,
+    )
+    if not section_match:
+        return issues + [
+            "docs/discovery-evidence.md has no '## Organization identities' section"
+        ]
+
+    if not re.search(
+        r"\[[^\]]+\]\(organization-identity-approval\.json\)",
+        section_match.group(1),
+    ):
+        issues.append(
+            "Organization identities documentation must link to "
+            "organization-identity-approval.json"
+        )
+
+    approved_urls = approval["approved_urls"]
+    if not approved_urls:
+        issues.append("approval record contains no approved identity URLs")
+    invalid_approved = [
+        url for url in approved_urls if not re.fullmatch(r"https?://\S+", url)
+    ]
+    if invalid_approved:
+        issues.append(
+            "approval record contains non-absolute HTTP(S) identity URL(s): "
+            + ", ".join(repr(url) for url in invalid_approved)
+        )
+
+    if len(published_urls) != len(set(published_urls)):
+        issues.append("homepage Organization sameAs contains duplicate URLs")
+    if len(approved_urls) != len(set(approved_urls)):
+        issues.append("approval record contains duplicate identity URLs")
+
+    published_set = set(published_urls)
+    approved_set = set(approved_urls)
+    missing_approval = sorted(published_set - approved_set)
+    unpublished_approval = sorted(approved_set - published_set)
+    if missing_approval:
+        issues.append(
+            "homepage sameAs URL(s) missing from owner approval: "
+            + ", ".join(missing_approval)
+        )
+    if unpublished_approval:
+        issues.append(
+            "owner-approved URL(s) missing from homepage sameAs: "
+            + ", ".join(unpublished_approval)
+        )
+
+    return issues
 
 
 if __name__ == "__main__":
