@@ -85,8 +85,10 @@ dates and counts.
   no-cache headers. `.replit` uses the same port and deploys the repository root
   as a static site. `CNAME` identifies `glee-fully.tools` as the site origin.
 - GitHub Actions runs the Python validation workflow on pushes and pull requests
-  to `main`. A separate workflow runs Playwright viewport QA when HTML, CSS, or
-  JavaScript changes.
+  to `main`. A separate workflow runs Playwright viewport QA on every push and pull
+  request to `main`. It deliberately carries no path filter, because the check
+  is required by branch protection and path filters would leave
+  dependency-only pull requests permanently blocked.
 
 The September 7, 2026 FoundRy feature-page addition brings the current tree to
 64 production HTML files and 61 indexable pages. `/foundry/` introduces the
@@ -681,7 +683,7 @@ baseline -- update it here when the inventory changes materially.
 | `assets/img/webp/` | 270 WebP files | Fully populated; hero images and all GPT icon variants at 150/300/512/600/1024w |
 | `assets/js/` | `app.js` (40 KB), `mermaid-init.js` | `sparkle-loader.js` removed 2026-05-28; logic merged into `app.js` |
 | `assets/templates/` | 10 templates + `INDEX.md` | Toolbox-specific types: `template--hub-branch.html`, `template--hub-toolbox.html`, `template--tool-detail.html` |
-| `docs/` | `adr/` subfolder with 5 ADRs + `README.md` + `template.md`, `roadmap.md`, and `threat-model.md`; `.gitkeep` | ADRs added 2026-08-03; planning and security documents live here |
+| `docs/` | `adr/` subfolder with 7 ADRs + `README.md` + `template.md`, `roadmap.md`, and `threat-model.md`; `.gitkeep` | ADRs added 2026-08-03; planning and security documents live here |
 | `docs/archive/` | `.gitkeep` only | Add archived sprint docs here |
 | `scripts/` | <!-- STAT:SCRIPTS-PY -->33<!-- /STAT:SCRIPTS-PY --> active Python scripts + <!-- STAT:SCRIPTS-OTHER -->2<!-- /STAT:SCRIPTS-OTHER --> non-Python runners (`responsive-qa.mjs`, `post-merge.sh`); 47 reference-only/retired Python scripts moved to `scripts/archive/` | Updated 2026-09-09; `sync-universe-map.py` generates the public map after indexing. See `scripts/README.md` for active/archive classification. |
 
