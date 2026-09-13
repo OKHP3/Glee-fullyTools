@@ -63,6 +63,28 @@ class StackSafetyTests(unittest.TestCase):
             self.assertEqual(code, 2)
             self.assertFalse(result["pass"])
 
+    def test_failed_repair_cannot_report_success_after_recheck(self):
+        def partial_failure():
+            raise RuntimeError("repair incomplete")
+        report = checker.Report([])
+        report.fail("REPAIR", "repair required", partial_failure)
+        with tempfile.TemporaryDirectory() as root, patch.object(checker, "run_checks", side_effect=[report, checker.Report([])]):
+            code, result = self.invoke(root, "--fix")
+            self.assertEqual(code, 2)
+            self.assertFalse(result["pass"])
+
+    def test_missing_deployment_action_is_a_policy_failure(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / ".github/workflows").mkdir(parents=True)
+            with patch.object(checker, "CHECKS", (checker.check_deploy_action,)):
+                code, result = self.invoke(root)
+                self.assertEqual(code, 1)
+                self.assertFalse(result["pass"])
+                code, result = self.invoke(root, "--warn-only")
+                self.assertEqual(code, 0)
+                self.assertFalse(result["pass"])
+
 
 if __name__ == "__main__":
     unittest.main()

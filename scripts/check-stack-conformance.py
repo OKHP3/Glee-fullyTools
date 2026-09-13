@@ -317,7 +317,7 @@ def check_deploy_action(root: Path, rep: Report):
     if found and not stale:
         rep.ok("DEPLOY_ACTION", "%s in %s" % (DEPLOY_ACTION, found[0][0].name))
     elif not found and not stale:
-        rep.warn("DEPLOY_ACTION", "no deploy-pages action found in any workflow")
+        rep.fail("DEPLOY_ACTION", "no deploy-pages action found in any workflow")
 
 
 def check_forbidden_files(root: Path, rep: Report):
@@ -519,6 +519,9 @@ def main(argv=None):
                 fix_log.append(("FIX-FAILED", finding["code"], str(exc)))
         if not args.dry_run:
             rep = run_checks(root, exemptions)
+        for result, code, message in fix_log:
+            if result == "FIX-FAILED":
+                rep.add(ERROR, "FIX_ERROR", "%s: %s" % (code, message))
 
     if args.json:
         print(
