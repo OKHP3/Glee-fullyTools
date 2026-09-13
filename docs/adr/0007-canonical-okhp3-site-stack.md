@@ -31,7 +31,7 @@ removal is part of this decision.
 | Layer | Current baseline |
 |---|---|
 | Node QA tooling | 22.19.0 in `.node-version` and `package.json` engines |
-| Browser QA | Playwright 1.60.0; retain existing optional Puppeteer tooling |
+| Browser QA | Playwright 1.60.0; retain optional Puppeteer tooling at 25.10.0 |
 | Lighthouse | 13.4.1 |
 | Python QA | beautifulsoup4 4.15.0; Playwright 1.60.0 where declared |
 | Development server | `scripts/serve-site.py` |

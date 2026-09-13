@@ -85,6 +85,30 @@ class StackSafetyTests(unittest.TestCase):
                 self.assertEqual(code, 0)
                 self.assertFalse(result["pass"])
 
+    def test_retained_operating_guidance_is_required(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in checker.REQUIRED_FILES:
+                if name != "replit.md":
+                    (root / name).write_text("AGENTS.md")
+            report = checker.Report([])
+            checker.check_required_files(root, report)
+            self.assertTrue(any(f["message"] == "replit.md is missing" for f in report.failures))
+
+    def test_retained_puppeteer_must_keep_approved_pin(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for version in (None, "0.0.0", "25.10.0"):
+                deps = dict(checker.NPM_REQUIRED)
+                if version is None:
+                    del deps["puppeteer"]
+                else:
+                    deps["puppeteer"] = version
+                (root / "package.json").write_text(json.dumps({"devDependencies": deps}))
+                report = checker.Report([])
+                checker.check_npm_deps(root, report)
+                self.assertEqual(bool(report.failures), version != "25.10.0")
+
 
 if __name__ == "__main__":
     unittest.main()

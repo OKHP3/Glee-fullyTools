@@ -50,6 +50,7 @@ NODE_VERSION = "22.19.0"
 NPM_REQUIRED = {
     "playwright": "1.60.0",
     "lighthouse": "13.4.1",
+    "puppeteer": "25.10.0",
 }
 
 NPM_FORBIDDEN = ()  # Existing optional QA packages are retained.
@@ -77,7 +78,7 @@ FORBIDDEN_TRACKED_SUFFIX = (".pyc",)
 
 FORBIDDEN_FILES = ()  # replit.md remains supported operating documentation.
 
-REQUIRED_FILES = ("AGENTS.md", "CLAUDE.md", ".node-version", "package.json")
+REQUIRED_FILES = ("AGENTS.md", "CLAUDE.md", "replit.md", ".node-version", "package.json")
 
 # Always required.
 GITIGNORE_ALWAYS = ("__pycache__/", "*.pyc")
