@@ -25,6 +25,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      - name: Verify stack checker safety and repository baseline
+        run: |
+          python3 -m unittest scripts.tests.test_stack_conformance
+          python3 scripts/check-stack-conformance.py
+
       - name: Check GitHub Actions versions
         run: python3 scripts/check-workflow-actions.py
 

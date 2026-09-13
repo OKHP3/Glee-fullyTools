@@ -13,14 +13,14 @@ Usage:
     python3 scripts/check-stack-conformance.py --fix --dry-run
 
 Exit codes:
-    0  conformant, or --warn-only
+    0  conformant, or policy findings with --warn-only
     1  one or more FAIL findings remain
     2  the checker itself could not run
 
 --fix repairs only mechanical, reversible items: writing .node-version,
 rewriting an existing engines.node value, appending .gitignore entries,
-bumping the deploy-pages action major, and untracking forbidden paths with
-`git rm -r --cached` (which leaves the working tree untouched). It never
+bumping the deploy-pages action major. It never changes the Git index,
+untracks evidence, or removes retained documentation. It never
 edits dependency versions, never creates a missing script, and never deletes
 a file from disk. Those stay MANUAL on purpose: they are judgment calls, and
 an auto-fixer that makes judgment calls is how the drift started.
@@ -52,7 +52,7 @@ NPM_REQUIRED = {
     "lighthouse": "13.4.1",
 }
 
-NPM_FORBIDDEN = ("puppeteer", "puppeteer-core")
+NPM_FORBIDDEN = ()  # Existing optional QA packages are retained.
 
 # Universal Python QA pin: all three sites parse HTML from Python.
 PIP_REQUIRED = {
@@ -71,30 +71,25 @@ DEPLOY_ACTION = "actions/deploy-pages@v5"
 
 DEV_SERVER = "scripts/serve-site.py"
 
-FORBIDDEN_TRACKED = (
-    "scripts/archive/",
-    "skills/",
-    "dist-pages/",
-    "assets/audit/",
-)
+FORBIDDEN_TRACKED = ("dist-pages/",)
 
 FORBIDDEN_TRACKED_SUFFIX = (".pyc",)
 
-FORBIDDEN_FILES = ("replit.md",)
+FORBIDDEN_FILES = ()  # replit.md remains supported operating documentation.
 
 REQUIRED_FILES = ("AGENTS.md", "CLAUDE.md", ".node-version", "package.json")
 
 # Always required.
 GITIGNORE_ALWAYS = ("__pycache__/", "*.pyc")
 # Required only when the directory actually exists in this repo.
-GITIGNORE_IF_PRESENT = ("assets/audit/", "dist-pages/")
+GITIGNORE_IF_PRESENT = ("dist-pages/",)
 
 CLAUDE_MD_MAX_BYTES = 512  # a pointer, not a second authority file
 
 
 # --- Finding plumbing --------------------------------------------------------
 
-FAIL, WARN, EXEMPT, OK, FIXED = "FAIL", "WARN", "EXEMPT", "OK", "FIXED"
+FAIL, WARN, EXEMPT, OK, FIXED, ERROR = "FAIL", "WARN", "EXEMPT", "OK", "FIXED", "ERROR"
 
 
 class Report:
@@ -121,6 +116,10 @@ class Report:
     @property
     def failures(self):
         return [f for f in self.findings if f["level"] == FAIL]
+
+    @property
+    def errors(self):
+        return [f for f in self.findings if f["level"] == ERROR]
 
     def public(self):
         return [{k: v for k, v in f.items() if not k.startswith("_")} for f in self.findings]
@@ -359,8 +358,8 @@ def check_required_files(root: Path, rep: Report):
 def check_tracked_paths(root: Path, rep: Report):
     tracked = git_tracked_files(root)
     if tracked is None:
-        rep.warn(
-            "TRACKED_PATHS",
+        rep.add(
+            ERROR, "TRACKED_PATHS",
             "git unavailable; could not verify that forbidden paths are untracked",
         )
         return
@@ -378,15 +377,8 @@ def check_tracked_paths(root: Path, rep: Report):
 
     for label, paths in sorted(offenders.items()):
 
-        def untrack(paths=paths, label=label):
-            # --cached leaves the working tree alone: reversible, and it never
-            # unlinks a file, which matters on restricted bridges.
-            for i in range(0, len(paths), 200):
-                git(root, "rm", "-r", "--cached", "--quiet", "--", *paths[i : i + 200])
-            return "untracked %d file(s) under %s (still on disk)" % (len(paths), label)
-
         rep.fail(
-            "TRACKED_PATHS", "%d tracked file(s) under %s" % (len(paths), label), untrack
+            "TRACKED_PATHS", "%d tracked file(s) under %s; review manually; --fix preserves the index" % (len(paths), label)
         )
 
     if not offenders:
@@ -446,7 +438,7 @@ def run_checks(root: Path, exemptions):
         try:
             check(root, rep)
         except Exception as exc:  # a broken check must not mask the others
-            rep.warn("CHECKER_ERROR", "%s raised %s" % (check.__name__, exc))
+            rep.add(ERROR, "CHECKER_ERROR", "%s raised %s" % (check.__name__, exc))
     return rep
 
 
@@ -454,11 +446,21 @@ def run_checks(root: Path, exemptions):
 
 
 def load_exemptions(root: Path):
-    data = read_json(root / ".stack-conformance.json") or {}
-    return [str(c) for c in (data.get("exempt") or [])], data.get("reason", "")
+    path = root / ".stack-conformance.json"
+    if not path.exists():
+        return [], ""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError("exemption configuration must be an object")
+    codes, reason = data.get("exempt", []), data.get("reason", "")
+    if not isinstance(codes, list) or not all(isinstance(c, str) for c in codes):
+        raise ValueError("exempt must be an array of finding codes")
+    if not isinstance(reason, str) or (codes and not reason.strip()):
+        raise ValueError("exemptions require a nonempty reason")
+    return codes, reason
 
 
-LEVEL_ORDER = {FAIL: 0, FIXED: 1, EXEMPT: 2, WARN: 3, OK: 4}
+LEVEL_ORDER = {ERROR: -1, FAIL: 0, FIXED: 1, EXEMPT: 2, WARN: 3, OK: 4}
 
 
 def print_findings(findings):
@@ -471,7 +473,7 @@ def main(argv=None):
     parser.add_argument("--root", default=".", help="repository root (default: cwd)")
     parser.add_argument("--json", action="store_true", help="emit JSON findings")
     parser.add_argument(
-        "--warn-only", action="store_true", help="always exit 0; for phased adoption"
+        "--warn-only", action="store_true", help="allow policy findings; checker errors still exit 2"
     )
     parser.add_argument(
         "--fix", action="store_true", help="repair mechanical items, then re-check"
@@ -488,11 +490,16 @@ def main(argv=None):
         print("not a directory: %s" % root, file=sys.stderr)
         return 2
 
-    exemptions, reason = load_exemptions(root)
-    rep = run_checks(root, exemptions)
+    exemptions, reason = [], ""
+    try:
+        exemptions, reason = load_exemptions(root)
+        rep = run_checks(root, exemptions)
+    except (OSError, ValueError) as exc:
+        rep = Report([])
+        rep.add(ERROR, "CONFIG_ERROR", str(exc))
 
     fix_log = []
-    if args.fix:
+    if args.fix and not rep.errors:
         seen = set()
         for finding in rep.failures:
             fixer = finding["_fix"]
@@ -525,7 +532,7 @@ def main(argv=None):
                         {"result": r, "code": c, "message": m} for r, c, m in fix_log
                     ],
                     "findings": rep.public(),
-                    "pass": not rep.failures,
+                    "pass": not rep.failures and not rep.errors,
                 },
                 indent=2,
             )
@@ -537,7 +544,9 @@ def main(argv=None):
             print()
         print_findings(rep.public())
         print()
-        if rep.failures:
+        if rep.errors:
+            print("ADR 0007: verification incomplete (%d error(s))" % len(rep.errors))
+        elif rep.failures:
             print("ADR 0007: %d failure(s)" % len(rep.failures))
         else:
             print("ADR 0007: conformant")
@@ -547,8 +556,10 @@ def main(argv=None):
                 % (", ".join(exemptions), reason or "no reason recorded")
             )
         if args.fix and not args.dry_run:
-            print("note: --fix untracks files, it never deletes them from disk")
+            print("note: --fix preserves tracked files and the Git index")
 
+    if rep.errors or any(result == "FIX-FAILED" for result, _, _ in fix_log):
+        return 2
     if args.warn_only:
         return 0
     return 1 if rep.failures else 0

@@ -23,7 +23,7 @@ follows the same convention as `askjamie/scripts/README.md`.
 | `check-mtb-version.py` | active | MTB version consistency |
 | `check-pages-artifact.py` | active | Verify the staged Pages artifact against the reviewed public inventory; gates the deploy job in `.github/workflows/pages.yml` |
 | `check-public-headers.py` | active | Public `_headers`/CSP header check |
-| `check-stack-conformance.py` | active | Assert the ADR-0007 canonical OKHP3 stack; `--fix` repairs mechanical items only |
+| `check-stack-conformance.py` | active | Check the ADR-0007 local baseline; CI runs safety regressions; `--fix` preserves tracked evidence and the index |
 | `check-workflow-actions.py` | active | Approved action-major-tag policy check; does not enforce immutable SHA pins |
 | `csp.py` | active | Canonical CSP policy generation module |
 | `generate-csp.py` | active | Apply CSP policies to every page |
