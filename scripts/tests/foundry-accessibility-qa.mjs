@@ -4,14 +4,24 @@
 // This intentionally does not replace the site's full validation or viewport suites.
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
-import { extname, resolve, sep } from 'node:path';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { dirname, extname, resolve, sep } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 
 const ROOT = resolve(import.meta.dirname, '..', '..');
 const require = createRequire(import.meta.url);
 const ROUTE = '/foundry/';
+const OUTPUT_PATH = (() => {
+  const args = process.argv.slice(2);
+  const outputIndex = args.indexOf('--output');
+  if (outputIndex === -1) return null;
+  const output = args[outputIndex + 1];
+  if (!output || output.startsWith('--')) {
+    throw new Error('Usage: foundry-accessibility-qa.mjs [--output <path>]');
+  }
+  return resolve(ROOT, output);
+})();
 const VIEWPORTS = [
   { name: 'narrow-320', width: 320, height: 780 },
   { name: 'narrow-390', width: 390, height: 844 },
@@ -54,8 +64,23 @@ function result(name, status, evidence, error) {
   return { name, status, ...(evidence ? { evidence } : {}), ...(error ? { error } : {}) };
 }
 
-function notRun(report, reason) {
+function summarize(report) {
+  return Object.fromEntries(['PASS', 'FAIL', 'NOT RUN'].map(status => [
+    status,
+    report.checks.filter(check => check.status === status).length,
+  ]));
+}
+
+async function writeReport(report) {
+  if (!OUTPUT_PATH) return;
+  await mkdir(dirname(OUTPUT_PATH), { recursive: true });
+  await writeFile(OUTPUT_PATH, `${JSON.stringify(report, null, 2)}\n`);
+}
+
+async function notRun(report, reason) {
   report.runtime = { status: 'NOT RUN', reason };
+  report.summary = summarize(report);
+  await writeReport(report);
   console.log(JSON.stringify(report, null, 2));
   process.exitCode = 2;
   return report;
@@ -75,7 +100,7 @@ async function run() {
   try {
     playwright = require('playwright');
   } catch (error) {
-    return notRun(report, `Installed Playwright runtime unavailable: ${error.message}`);
+    return await notRun(report, `Installed Playwright runtime unavailable: ${error.message}`);
   }
 
   const server = createServer(serve);
@@ -85,7 +110,7 @@ async function run() {
       server.listen(0, '127.0.0.1', resolveServer);
     });
   } catch (error) {
-    return notRun(report, `Loopback fixture unavailable: ${error.message}`);
+    return await notRun(report, `Loopback fixture unavailable: ${error.message}`);
   }
   const base = `http://127.0.0.1:${server.address().port}`;
   report.baseUrl = base;
@@ -94,7 +119,7 @@ async function run() {
     browser = await playwright.chromium.launch({ headless: true });
   } catch (error) {
     await new Promise(resolveServer => server.close(resolveServer));
-    return notRun(report, `Installed Chromium driver unavailable: ${error.message}`);
+    return await notRun(report, `Installed Chromium driver unavailable: ${error.message}`);
   }
 
   report.runtime = { status: 'RUN', driver: 'Playwright Chromium' };
@@ -251,6 +276,62 @@ async function run() {
         return { closed, open, negativeControl: 'detected missing indicator' };
       });
 
+      await check('expanded mobile navigation keyboard focus', async () => {
+        const navToggle = page.locator('.nav-toggle');
+        const primaryNav = page.locator('#navigation');
+        const primaryLinks = page.locator('#navigation > ul > li > a[href]');
+        const submenuLinks = page.locator('#navigation .submenu a[href]');
+        const navLinks = page.locator('#navigation a[href]');
+
+        // Keep the collapsed-state contract explicit: the focus visibility
+        // check above must continue to exclude this inert region.
+        assert.equal(await navToggle.getAttribute('aria-expanded'), 'false');
+        assert.equal(await primaryNav.getAttribute('aria-hidden'), 'true');
+        assert.notEqual(await primaryNav.getAttribute('inert'), null);
+
+        await navToggle.focus();
+        await page.keyboard.press('Enter');
+        await page.waitForFunction(() => document.activeElement?.matches('#navigation a[href]'));
+
+        assert.equal(await navToggle.getAttribute('aria-expanded'), 'true');
+        assert.equal(await primaryNav.getAttribute('aria-hidden'), 'false');
+        assert.equal(await primaryNav.getAttribute('inert'), null);
+        assert.ok(await primaryLinks.count() > 0, 'expanded navigation has no primary links');
+        assert.ok(await submenuLinks.count() > 0, 'expanded navigation has no submenu links');
+
+        const evidence = [];
+        const count = await navLinks.count();
+        for (let i = 0; i < count; i += 1) {
+          const link = navLinks.nth(i);
+          assert.equal(
+            await link.evaluate(node => node === document.activeElement),
+            true,
+            `navigation link ${i + 1} is not keyboard-reachable`,
+          );
+          const style = await link.evaluate(node => {
+            const computed = getComputedStyle(node);
+            return {
+              name: (node.innerText || node.getAttribute('aria-label') || '').trim().slice(0, 80),
+              outlineStyle: computed.outlineStyle,
+              outlineWidth: computed.outlineWidth,
+              boxShadow: computed.boxShadow,
+            };
+          });
+          assert.ok(
+            style.outlineStyle !== 'none' && style.outlineWidth !== '0px' || style.boxShadow !== 'none',
+            `no visible focus indicator for expanded navigation link ${style.name}`,
+          );
+          evidence.push(style);
+          if (i < count - 1) await page.keyboard.press('Tab');
+        }
+
+        return {
+          primaryLinks: await primaryLinks.count(),
+          submenuLinks: await submenuLinks.count(),
+          checked: evidence,
+        };
+      });
+
       await check('narrow viewport overflow and console health', async () => {
         const metrics = await page.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, innerWidth: innerWidth }));
         assert.ok(metrics.scrollWidth <= metrics.innerWidth + 1, `${metrics.scrollWidth}px document exceeds ${metrics.innerWidth}px viewport`);
@@ -265,7 +346,8 @@ async function run() {
     await new Promise(resolveServer => server.close(resolveServer));
   }
 
-  report.summary = Object.fromEntries(['PASS', 'FAIL', 'NOT RUN'].map(status => [status, report.checks.filter(check => check.status === status).length]));
+  report.summary = summarize(report);
+  await writeReport(report);
   console.log(JSON.stringify(report, null, 2));
   if (report.summary.FAIL > 0) process.exitCode = 1;
   return report;

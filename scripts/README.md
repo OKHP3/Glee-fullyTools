@@ -19,14 +19,18 @@ follows the same convention as `askjamie/scripts/README.md`.
 | `check-csp.py` | active | CI guard against CSP drift |
 | `check-glee-dark-coverage.py` | active | Dark-mode coverage check (invoked by `validate-site.py`) |
 | `check-links.py` | active | Internal target and sitemap check; external links are counted, not fetched |
+| `check-search-coverage.py` | active | Compare sanitized Google/Bing coverage scope with the configured sitemap; no credentials required |
 | `check-mtb-version.py` | active | MTB version consistency |
+| `check-pages-artifact.py` | active | Verify the staged Pages artifact against the reviewed public inventory; gates the deploy job in `.github/workflows/pages.yml` |
 | `check-public-headers.py` | active | Public `_headers`/CSP header check |
+| `check-stack-conformance.py` | active | Check the ADR-0007 local baseline; CI runs safety regressions; `--fix` preserves tracked evidence and the index |
 | `check-workflow-actions.py` | active | Approved action-major-tag policy check; does not enforce immutable SHA pins |
 | `csp.py` | active | Canonical CSP policy generation module |
 | `generate-csp.py` | active | Apply CSP policies to every page |
 | `inclusive-accessibility-qa.py` | active | Browser evidence for inclusive keyboard, search, fallback, and constrained-environment journeys |
 | `post-merge.sh` | active | Post-merge integrity hook; checks generated outputs and idempotently repairs cache-version references and the offline shell; run with Bash, never Python |
 | `public-artifact.py` | active | Stage and verify the reviewed public inventory, transferred bytes, and final Pages archive |
+| `public_inventory.py` | active | Public inventory model imported by `check-pages-artifact.py` and `public-artifact.py`; not run directly |
 | `responsive-qa.mjs` | active | Responsive QA entry point |
 | `run-viewport-qa.py` | active | Full browser viewport QA runner (`.github/workflows/pages.yml`, `viewport-qa.yml`) |
 | `resilience-qa.py` | active | Installability, offline lifecycle, cross-browser, crawler, and third-party failure acceptance checks |
@@ -50,6 +54,11 @@ manifest-driven promotion executor; do not describe the proposed model as implem
 journeys when that runtime and browsers already exist. Missing engines return
 non-success and remain `NOT RUN`; a successful Node journey is not a successful
 run of `tests/test_browser_acceptance.py` or `resilience-qa.py`.
+
+The FoundRy accessibility evidence has an explicit Node runtime boundary:
+`npm ci && npx playwright install chromium && npm run
+qa:foundry-accessibility`. It checks both narrow viewports and keeps human
+screen-reader testing outside the automated result.
 
 The following scripts are **reference-only**. They may still be useful for a
 deliberately scoped maintenance or migration task, but they are not part of

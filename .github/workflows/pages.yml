@@ -34,6 +34,18 @@ jobs:
           fi
           echo "Validated release commit: $checked_out_commit"
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: npm
+
+      - name: Install Node QA dependencies
+        run: npm ci
+
+      - name: Install Node Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
@@ -78,6 +90,9 @@ jobs:
       - name: Check landscape social-card metadata
         run: python3 scripts/sync-social-card.py --check
 
+      - name: Check search coverage scope
+        run: python3 scripts/check-search-coverage.py
+
       - name: Run static release gates
         run: |
           python3 scripts/check-csp.py
@@ -87,12 +102,26 @@ jobs:
           python3 scripts/tests/test_public_artifact.py
           python3 scripts/tests/test_svg_assets.py
           python3 scripts/tests/test_offline_validation.py
+          python3 scripts/tests/test_validation_report.py
           node --test scripts/tests/test-sw-resilience.cjs
           node scripts/tests/test-sw-bootstrap.cjs
           python3 scripts/validate-site.py
           python3 scripts/check-links.py
           python3 scripts/check-accent-contrast.py --strict
           python3 scripts/check-glee-dark-coverage.py --section all --require-both
+
+      - name: Run FoundRy accessibility evidence
+        id: foundry_accessibility
+        run: npm run qa:foundry-accessibility -- --output assets/audit/foundry-accessibility.json
+
+      - name: Upload FoundRy accessibility evidence
+        if: ${{ always() && (steps.foundry_accessibility.outcome == 'success' || steps.foundry_accessibility.outcome == 'failure') }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: foundry-accessibility-${{ github.sha }}
+          path: assets/audit/foundry-accessibility.json
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Run advisory site audit
         continue-on-error: true
