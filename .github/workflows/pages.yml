@@ -96,6 +96,7 @@ jobs:
       - name: Run static release gates
         run: |
           python3 scripts/check-csp.py
+          python3 scripts/tests/test_pages_search_coverage_gate.py
           python3 scripts/tests/test-visitor-truth.py
           python3 scripts/tests/test_content_claims.py
           python3 scripts/tests/test-search-index.py
@@ -103,9 +104,10 @@ jobs:
           python3 scripts/tests/test_svg_assets.py
           python3 scripts/tests/test_offline_validation.py
           python3 scripts/tests/test_validation_report.py
+          python3 scripts/tests/test_pages_validation_evidence.py
           node --test scripts/tests/test-sw-resilience.cjs
           node scripts/tests/test-sw-bootstrap.cjs
-          python3 scripts/validate-site.py
+          python3 scripts/validate-site.py --commit "${{ github.sha }}"
           python3 scripts/check-links.py
           python3 scripts/check-accent-contrast.py --strict
           python3 scripts/check-glee-dark-coverage.py --section all --require-both
@@ -126,6 +128,31 @@ jobs:
       - name: Run advisory site audit
         continue-on-error: true
         run: python3 scripts/audit-site.py --quiet
+
+      - name: Verify validation report provenance
+        id: validation_provenance
+        if: always()
+        env:
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          expected = os.environ["EXPECTED_COMMIT"].lower()
+          matches = []
+          for path in Path("assets/audit").glob("validation-report-*.json"):
+              report = json.loads(path.read_text(encoding="utf-8"))
+              if report.get("provenance", {}).get("validated_commit") == expected:
+                  matches.append(path)
+          if len(matches) != 1:
+              raise SystemExit(f"Expected one validation report for {expected}, got {len(matches)}")
+          report_path = matches[0]
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"report_name={report_path.name}\n")
+          print(f"Verified {report_path} was produced from {expected}")
+          PY
 
       - name: Start local server for browser release gate
         run: |
@@ -182,14 +209,40 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
+      - name: Stage complete validation evidence
+        id: validation_staging
+        if: ${{ success() && steps.validation_provenance.outcome == 'success' }}
+        env:
+          VALIDATION_ARTIFACT_DIR: ${{ runner.temp }}/pages-validation
+          VALIDATION_REPORT_NAME: ${{ steps.validation_provenance.outputs.report_name }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import shutil
+          from pathlib import Path
+
+          artifact_dir = Path(os.environ["VALIDATION_ARTIFACT_DIR"])
+          audit_dir = artifact_dir / "assets" / "audit"
+          shutil.copytree("assets/audit", audit_dir)
+
+          current_report = os.environ["VALIDATION_REPORT_NAME"]
+          for report in audit_dir.glob("validation-report-*.json"):
+              if report.name != current_report:
+                  report.unlink()
+
+          audit_summary = Path("assets/docs/audit-report.md")
+          if audit_summary.is_file():
+              destination = artifact_dir / audit_summary
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(audit_summary, destination)
+          PY
+
       - name: Upload validation reports
-        if: always()
+        if: ${{ always() && steps.validation_provenance.outcome == 'success' && steps.validation_staging.outcome == 'success' }}
         uses: actions/upload-artifact@v7
         with:
           name: pages-validation-${{ github.sha }}
-          path: |
-            assets/audit/
-            assets/docs/audit-report.md
+          path: ${{ runner.temp }}/pages-validation
           if-no-files-found: warn
           retention-days: 14
 
