@@ -1,15 +1,15 @@
 // Glee-fully Tools offline shell.
 // Keep this list intentional: same-origin public shell assets only.
-const CACHE_NAME = "glee-fully-shell-v16354398826750381311";
+const CACHE_NAME = "glee-fully-shell-v4452093802053393708";
 const PRECACHE_URLS = [
   "/",
   "/search/",
   "/toolbox/",
   "/about/",
   "/offline.html",
-  "/assets/css/theme.css?v=a9552094",
+  "/assets/css/theme.css?v=d67880c2",
   "/assets/js/color-scheme-init.js?v=636652ac",
-  "/assets/js/app.js?v=b938b200",
+  "/assets/js/app.js?v=3050198d",
   "/assets/js/glee-site-enhancements.js?v=ebfa263e",
   "/assets/data/search-index.json?v=da80a5d5",
   "/assets/data/sparkle.json",
