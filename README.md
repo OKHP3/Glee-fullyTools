@@ -78,16 +78,19 @@ behind Glee-fully tooling. It is a public explanation, not a hosted builder laun
   Exit 0 = safe to publish.
 * **Mermaid runtime:** the `ecosystem/` and `universe/` diagrams run on
   Mermaid, vendored locally at `assets/vendor/mermaid/` (not loaded from a
-  CDN). `assets/vendor/mermaid/VERSION` pins the exact release; a daily
-  `mermaid-version-watch` GitHub Action compares it against the latest npm
-  release and opens/updates a tracking issue when the vendored copy falls
-  behind -- re-vendoring is a deliberate, reviewed step, never automatic.
-  `scripts/validate-site.py` checks the VERSION pin against the vendored
-  bundle and that every page with a live diagram carries a CSP class that
-  allows Mermaid's runtime-generated inline styles (see `scripts/csp.py`).
-  Every page's CSP is now enforced via a per-page <meta> tag
-  (`scripts/generate-csp.py`) -- previously only defined, unenforced, in
-  `_headers`, which GitHub Pages does not serve.
+  CDN). `assets/vendor/mermaid/VERSION` pins the exact release, currently
+  `12.0.0`; a daily `mermaid-version-watch` GitHub Action compares it against
+  the latest npm release and opens/updates a tracking issue when the vendored
+  copy falls behind. Re-vendoring is a deliberate, reviewed step, never
+  automatic. Mermaid 12 switches its default layout behavior toward ELK, so
+  this repo keeps Mermaid page theming and spacing explicit in
+  `assets/js/mermaid-init.js` and live-verifies the rendered `ecosystem/` and
+  `universe/` diagrams on each reviewed upgrade. `scripts/validate-site.py`
+  checks the VERSION pin against the vendored bundle and that every page with
+  a live diagram carries a CSP class that allows Mermaid's runtime-generated
+  inline styles (see `scripts/csp.py`). Every page's CSP is now enforced via a
+  per-page <meta> tag (`scripts/generate-csp.py`) -- previously only defined,
+  unenforced, in `_headers`, which GitHub Pages does not serve.
  * **Privacy boundary:** optional Google Analytics is off by default and can be
    enabled or withdrawn from [`legal/`](legal/). Google Fonts remains a
    documented brand dependency; Ko-fi is outbound navigation only. The
