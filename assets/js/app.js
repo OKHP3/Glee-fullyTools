@@ -384,7 +384,16 @@ document.addEventListener("DOMContentLoaded", () => {
         { threshold: 0.15 }
       );
 
-      revealEls.forEach((el) => revealObserver.observe(el));
+      revealEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const startsInViewport = rect.bottom > 0 && rect.top < window.innerHeight;
+        if (startsInViewport) {
+          el.classList.add("is-visible");
+        } else {
+          el.classList.add("is-reveal-animate");
+        }
+        revealObserver.observe(el);
+      });
     } else {
       document.querySelectorAll(".reveal-on-scroll").forEach((el) => el.classList.add("is-visible"));
     }
@@ -640,9 +649,7 @@ document.addEventListener("DOMContentLoaded", () => {
     label: "Search OverKill Hill",
     placeholder: "Search the Forge: articles, projects, ideas…",
     introduction: "Search across writings, projects, manifesto, and the Council archives.",
-    suggestions: /^fr(?:-|$)/i.test(document.documentElement.lang || "")
-      ? ["projets", "protocoles", "contact", "IA"]
-      : ["mermaid", "ROY", "council", "manifesto", "diagram", "visual edition"],
+    suggestions: ["mermaid", "ROY", "council", "manifesto", "diagram", "visual edition"],
   };
 
   // ----- index loader (cached promise) -----

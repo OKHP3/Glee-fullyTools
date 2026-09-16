@@ -1166,8 +1166,8 @@ html[data-theme="light"] body:not(.glee-main):not(.askjamie-main) .hero-subline 
 /* Content never waits on JavaScript. Only a delivered intersection starts
    this finite animation; a missing or failed controller leaves it readable. */
 @media (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
-  .reveal-on-scroll.is-visible {
-    animation: none;
+  .reveal-on-scroll.is-visible.is-reveal-animate {
+    animation: scroll-reveal-in 0.5s ease;
   }
 }
 
