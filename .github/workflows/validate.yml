@@ -28,6 +28,7 @@ jobs:
       - name: Verify stack checker safety and repository baseline
         run: |
           python3 -m unittest scripts.tests.test_stack_conformance
+          python3 -m unittest scripts.tests.test_validate_search_coverage_gate
           python3 scripts/check-stack-conformance.py
 
       - name: Check GitHub Actions versions
