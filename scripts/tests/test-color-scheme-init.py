@@ -18,11 +18,13 @@ import json
 import os
 from pathlib import Path
 import sys
+from typing import Literal
 from urllib.parse import urljoin, urlsplit
 
 
 ASSET_PATH = "/assets/js/color-scheme-init.js"
 UTILITY_ROUTES = ("/404.html", "/under-construction.html", "/offline.html")
+FirstPaintStatus = Literal["observed", "unsupported", "unavailable_after_load"]
 SCRIPTS_DIR = Path(__file__).resolve().parents[1]
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
@@ -119,33 +121,64 @@ def bootstrap_events(events: list[tuple[str, str | None]], route: str) -> dict[s
     }
 
 
-def paint_timing(page) -> dict[str, float | None]:
+def paint_timing(page) -> dict[str, float | FirstPaintStatus | None]:
     """Capture the browser's resource and first-paint timing evidence."""
     return page.evaluate(
         """assetPath => {
           const assets = performance.getEntriesByType('resource')
             .filter(entry => new URL(entry.name).pathname === assetPath);
           const asset = assets[assets.length - 1];
-          const paints = performance.getEntriesByType('paint');
+          const canReadPaintEntries =
+            typeof performance.getEntriesByType === 'function';
+          const supportedEntryTypes =
+            typeof PerformanceObserver !== 'undefined' &&
+            Array.isArray(PerformanceObserver.supportedEntryTypes)
+              ? PerformanceObserver.supportedEntryTypes
+              : [];
+          const paintTimingSupported =
+            canReadPaintEntries && supportedEntryTypes.includes('paint');
+          const paints = canReadPaintEntries
+            ? performance.getEntriesByType('paint')
+            : [];
           const firstPaint = paints.find(entry => entry.name === 'first-paint');
           return {
             asset_response_end: asset ? asset.responseEnd : null,
-            first_paint: firstPaint ? firstPaint.startTime : null
+            first_paint: firstPaint ? firstPaint.startTime : null,
+            first_paint_status: firstPaint
+              ? 'observed'
+              : paintTimingSupported
+                ? 'unavailable_after_load'
+                : 'unsupported'
           };
         }""",
         ASSET_PATH,
     )
 
 
-def assert_paint_order(route: str, timing: dict[str, float | None]) -> None:
+def assert_paint_order(
+    route: str,
+    timing: dict[str, float | FirstPaintStatus | None],
+) -> None:
     """Require the bootstrap resource to finish before first paint when exposed."""
-    if timing["first_paint"] is not None:
+    status = timing["first_paint_status"]
+    assert status in {"observed", "unsupported", "unavailable_after_load"}, (
+        f"{route}: unknown first-paint timing status: {timing}"
+    )
+    if status == "observed":
+        assert timing["first_paint"] is not None, (
+            f"{route}: first-paint status was observed without a timing value: "
+            f"{timing}"
+        )
         assert timing["asset_response_end"] is not None, (
             f"{route}: color-scheme asset has no resource timing entry "
             "despite first-paint being available"
         )
         assert timing["asset_response_end"] <= timing["first_paint"], (
             f"{route}: color-scheme asset finished after first-paint: {timing}"
+        )
+    else:
+        assert timing["first_paint"] is None, (
+            f"{route}: first-paint timing was present with status {status}: {timing}"
         )
 
 
