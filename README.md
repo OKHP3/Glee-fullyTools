@@ -68,6 +68,10 @@ behind Glee-fully tooling. It is a public explanation, not a hosted builder laun
 
 ### 🛠 Maintainers' notes
 
+* **Technology updates:** the [inventory and upgrade plan](docs/technology-update-plan.md)
+  covers runtime, QA, platform, and dependency versions. The [version register](docs/technology-version-register.md)
+  includes all npm lock entries and publisher release evidence. Weekly Dependabot
+  PRs and Technology Version Review keep update candidates visible after merge.
 * **Audit evidence:** dated files under `assets/audit/` and `assets/docs/` are
   historical records. Current validator and link reports use the run date;
   never treat an older dated report as current evidence.

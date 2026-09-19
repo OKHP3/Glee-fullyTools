@@ -39,7 +39,7 @@ ACTION_MAJOR_VERSIONS = {
 }
 
 USES_PATTERN = re.compile(
-    r"^\s*uses:\s*(?P<action>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<ref>\S+)"
+    r"^\s*(?:-\s*)?uses:\s*(?P<action>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)@(?P<ref>\S+)"
 )
 MAJOR_PATTERN = re.compile(r"^v(?P<major>[0-9]+)(?:\b|$)", re.IGNORECASE)
 

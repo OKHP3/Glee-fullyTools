@@ -683,9 +683,9 @@ baseline -- update it here when the inventory changes materially.
 | `assets/img/webp/` | 270 WebP files | Fully populated; hero images and all GPT icon variants at 150/300/512/600/1024w |
 | `assets/js/` | `app.js` (40 KB), `mermaid-init.js` | `sparkle-loader.js` removed 2026-05-28; logic merged into `app.js` |
 | `assets/templates/` | 10 templates + `INDEX.md` | Toolbox-specific types: `template--hub-branch.html`, `template--hub-toolbox.html`, `template--tool-detail.html` |
-| `docs/` | `adr/` subfolder with 7 ADRs + `README.md` + `template.md`, `roadmap.md`, and `threat-model.md`; `.gitkeep` | ADRs added 2026-08-03; planning and security documents live here |
+| `docs/` | `adr/` subfolder with 8 ADRs + `README.md` + `template.md`, `roadmap.md`, and `threat-model.md`; `.gitkeep` | ADR-0008 adds recurring technology-version review on 2026-09-18; planning and security documents live here |
 | `docs/archive/` | `.gitkeep` only | Add archived sprint docs here |
-| `scripts/` | <!-- STAT:SCRIPTS-PY -->34<!-- /STAT:SCRIPTS-PY --> active Python scripts + <!-- STAT:SCRIPTS-OTHER -->2<!-- /STAT:SCRIPTS-OTHER --> non-Python runners (`responsive-qa.mjs`, `post-merge.sh`); 47 reference-only/retired Python scripts moved to `scripts/archive/` | Updated 2026-09-09; `sync-universe-map.py` generates the public map after indexing. See `scripts/README.md` for active/archive classification. |
+| `scripts/` | <!-- STAT:SCRIPTS-PY -->35<!-- /STAT:SCRIPTS-PY --> active Python scripts + <!-- STAT:SCRIPTS-OTHER -->2<!-- /STAT:SCRIPTS-OTHER --> non-Python runners (`responsive-qa.mjs`, `post-merge.sh`); 47 reference-only/retired Python scripts moved to `scripts/archive/` | Updated 2026-09-18; `technology-versions.py` inventories versions and checks publisher releases; `sync-universe-map.py` generates the public map after indexing. See `scripts/README.md` for active/archive classification. |
 
 **Glee-fully-specific sub-folders under `assets/img/`:**
 - `assets/img/tool-ettes/` -- per-tool-ette hero images (one image per tool-ette
@@ -702,7 +702,7 @@ Active: `check-accent-contrast.py`, `check-glee-dark-coverage.py`,
 `inclusive-accessibility-qa.py`, `public-artifact.py`, `serve-site.py`, `sparkle-qa.py`,
 `sync-css-version.py`, `sync-image-alt.py`,
 `sync-foundation-files.py`, `sync-portfolio-stats.py`, `sync-social-card.py`,
-`sync-sparkle-fallback.py`.
+`sync-sparkle-fallback.py`, `technology-versions.py`.
 `activate-icons.py`, `add-toolbox-to-footer.py`, `add-noreferrer.py`,
 `convert-gpt-icons-webp.py`, `fix-audit-2026-05-12.py`,
 `fix-footer-nav-2026-07-20.py`, `fix-placeholder-gpt-links.py`,
