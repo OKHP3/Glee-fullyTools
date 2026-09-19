@@ -65,9 +65,18 @@ def adapt_local_http_navigation(
     return True
 
 
-def load_context(browser, base_url: str, init_script: str):
-    context = browser.new_context(service_workers="block")
-    context.add_init_script(init_script)
+def load_context(browser, base_url: str, init_script: str = "", *, preference=None):
+    options = {"service_workers": "block"}
+    if preference is not None:
+        base = urlsplit(base_url)
+        # Seed storage before creating a page, independently of document scripts.
+        options["storage_state"] = {"cookies": [], "origins": [{
+            "origin": f"{base.scheme}://{base.netloc}",
+            "localStorage": [{"name": "glee-color-scheme", "value": preference}],
+        }]}
+    context = browser.new_context(**options)
+    if init_script:
+        context.add_init_script(init_script)
 
     def route_request(route):
         if adapt_local_http_navigation(route, base_url):
@@ -91,8 +100,8 @@ def bootstrap_events(events: list[tuple[str, str | None]], route: str) -> dict[s
     try:
         dcl_index = next(
             index
-            for index, (kind, _) in enumerate(events)
-            if kind == "domcontentloaded"
+            for index, (kind, url) in enumerate(events)
+            if kind == "domcontentloaded" and urlsplit(url or "").path == route
         )
         request_index = next(
             index for kind, index in asset_events if kind == "request"
@@ -219,7 +228,7 @@ def check_saved_preference(
     context = load_context(
         browser,
         base_url,
-        f"localStorage.setItem('glee-color-scheme', {preference!r});",
+        preference=preference,
     )
     page = context.new_page()
     events: list[tuple[str, str | None]] = []
@@ -239,7 +248,7 @@ def check_saved_preference(
             else None
         ),
     )
-    page.on("domcontentloaded", lambda: events.append(("domcontentloaded", None)))
+    page.on("domcontentloaded", lambda: events.append(("domcontentloaded", page.url)))
 
     try:
         results: list[dict[str, object]] = []
@@ -325,7 +334,7 @@ def check_disabled_storage(
             else None
         ),
     )
-    page.on("domcontentloaded", lambda: events.append(("domcontentloaded", None)))
+    page.on("domcontentloaded", lambda: events.append(("domcontentloaded", page.url)))
     page.on("pageerror", lambda error: page_errors.append(str(error)))
     try:
         results: list[dict[str, object]] = []
