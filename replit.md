@@ -52,6 +52,24 @@ skipped check.
 
 ## CI Gate (GitHub Actions)
 
+### Protected-main synchronization
+
+GitHub `main` is the canonical release branch and requires a pull request.
+The local pre-push hook also blocks direct pushes to `main`. New Replit work
+must start on a named branch, be pushed to that branch, and pass the required
+checks in a pull request before merging. A clean working tree can still have
+unpublished commits; inspect `git rev-list --left-right --count HEAD...origin/main`
+after `git fetch origin`.
+
+After the pull request merges, use `git switch main` and
+`git merge --ff-only origin/main` in each clean checkout after fetching.
+If a fast-forward fails, preserve the local tip and inspect the divergence;
+do not repeatedly pull, reset `main`, or force-push. Preserve commit ancestry
+when reconciling commits already made on Replit `main`, so both checkouts can
+fast-forward after the integration PR. Refresh Replit's Git panel separately
+from the Shell; a working Shell transport does not prove the Replit Git
+Providers connector is authenticated.
+
 `.github/workflows/validate.yml` runs on every push and pull request to `main`:
 
 1. **`validate-site.py`** — checks all pages for title, h1, description, canonical, og:url, theme-color, manifest, favicon, skip link, JSON-LD parseability, Mermaid referral invariant. Also enforces a global **CSS-lines drift invariant**: the `<!-- STAT:CSS-LINES -->` value in `showcase/index.html` must be within ±50 lines of the actual `theme.css` line count (fix by running `python3 scripts/sync-portfolio-stats.py`). Exits non-zero on any critical issue.

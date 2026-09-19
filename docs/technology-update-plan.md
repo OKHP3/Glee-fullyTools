@@ -4,6 +4,14 @@ Review date: September 18, 2026, America/Chicago (September 19 UTC).
 Scope: this Glee-fullyTools repository, baseline commit
 `10f6b580bfe53b4c836297ee69641a509ab714c0`, including deployment and QA.
 
+Reconciliation follow-up (September 19 UTC): the integration branch also
+includes the seven previously unpublished Replit commits and the pending
+Mermaid 12.0.0 update from PR #46. All 106 committed Mermaid runtime/license
+files match the publisher's npm tarball. The tables and dated JSON below
+preserve the original September 18 baseline; Mermaid is now 12.0.0 in the
+integration tree. Hosted checks and release acceptance belong to the
+integration PR and its exact merged commit, not the initial local audit.
+
 ## Findings
 
 The delivered website uses HTML, CSS, native JavaScript, browser APIs, and a
