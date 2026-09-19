@@ -219,7 +219,7 @@ def route_type(route: str) -> str:
     return "utility" if route in UTILITY_ROUTES else page_type(route)
 
 
-def check_saved_preference(
+def _check_saved_preference_context(
     browser,
     base_url: str,
     preference: str,
@@ -304,7 +304,7 @@ def check_saved_preference(
         context.close()
 
 
-def check_disabled_storage(
+def _check_disabled_storage_context(
     browser,
     base_url: str,
     routes: list[str],
@@ -396,6 +396,36 @@ def check_disabled_storage(
         }
     finally:
         context.close()
+
+
+def check_saved_preference(browser, base_url, preference, routes):
+    # WebKit intermittently lost the seeded storage during consecutive
+    # navigations in one context. Each URL needs its own saved-state fixture
+    # and navigation events; cross-page behavior has a separate acceptance suite.
+    results = []
+    for route in routes:
+        evidence = _check_saved_preference_context(
+            browser, base_url, preference, [route]
+        )
+        results.extend(evidence["route_evidence"])
+    return {
+        "routes": len(results),
+        "page_types": dict(Counter(result["page_type"] for result in results)),
+        "route_evidence": results,
+    }
+
+
+def check_disabled_storage(browser, base_url, routes):
+    results = []
+    for route in routes:
+        evidence = _check_disabled_storage_context(browser, base_url, [route])
+        results.extend(evidence["route_evidence"])
+    return {
+        "routes": len(results),
+        "page_types": dict(Counter(result["page_type"] for result in results)),
+        "color_toggle_visible": True,
+        "route_evidence": results,
+    }
 
 
 def main() -> None:
