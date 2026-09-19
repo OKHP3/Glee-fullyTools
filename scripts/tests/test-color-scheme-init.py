@@ -266,6 +266,7 @@ def check_saved_preference(
             initial = page.evaluate(
                 """() => ({
                   scheme: document.documentElement.getAttribute('data-color-scheme'),
+                  savedPreference: localStorage.getItem('glee-color-scheme'),
                   readyState: document.readyState,
                   colorSchemeScript: Boolean(document.querySelector(
                     'head > script[src*="color-scheme-init.js"]'
@@ -274,7 +275,8 @@ def check_saved_preference(
             )
             assert initial["scheme"] == preference, (
                 f"{route} did not apply saved {preference} preference at "
-                f"initial DOM assertion: {initial}"
+                f"initial DOM assertion: {initial}; events={events}; "
+                f"timing={paint_timing(page)}"
             )
             assert initial["colorSchemeScript"], (
                 f"{route} does not load the external color-scheme asset"
