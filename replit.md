@@ -25,7 +25,7 @@ available. The authoritative promise and inventory contract is
 - `index.html` — Main landing page with JSON-LD WebSite+Organization schema
 - `assets/css/theme.css` — Central stylesheet, organized into scope-grouped sections: GLOBAL → OVERKILL → GLEE → ASKJAMIE → CROSS-BRAND. Each scope has a boxed banner. Current counts come from the source and generated portfolio statistics; historical scope-map counts below retain their original dates.
 - `assets/js/app.js` — Shared JS: progress bar, theme toggle, mobile nav, sticky-TOC module, and the full search engine (search.js merged into app.js 2026-05-04). Exposes `window.GleeSearch` for debugging.
-- `assets/js/mermaid-init.js` — External Mermaid v12.0.0 init (used by ecosystem + universe pages). Both pages also carry a single `.mermaid-referral` credit linking to the paid-referral URL `https://mermaidchart.cello.so/UhVlNtC2MlS` in Mermaid hot-pink `#FF3670`. `scripts/validate-site.py` enforces a one-instance-per-Mermaid-page invariant so this credit can never silently be dropped.
+- `assets/js/mermaid-init.js`: Local initializer importing vendored Mermaid v12.0.0 (used by ecosystem + universe pages). Both pages also carry a single `.mermaid-referral` credit linking to the paid-referral URL `https://mermaidchart.cello.so/UhVlNtC2MlS` in Mermaid hot-pink `#FF3670`. `scripts/validate-site.py` enforces a one-instance-per-Mermaid-page invariant so this credit can never silently be dropped.
 - `assets/img/` — Branded butterfly and GPT icons
 - `sw.js` — Root-scoped service worker with a versioned, same-origin offline shell and `/offline.html` fallback
 - `toolbox/`  -  Central hub with 1 Toolbox page, 7 thematic branches, and 42
@@ -204,6 +204,10 @@ All 59 HTML pages have been fully audited and updated:
 | Inline style= attributes | ✅ Extracted to utility classes (.mt-075, .mt-1–.mt-4) |
 
 ## Cross-site Sync Notes (overkillhill.com reference)
+
+Historical notes from the April 2026 alignment. Mermaid v11 references here
+describe that earlier state; the current local runtime is pinned by
+`assets/vendor/mermaid/VERSION`.
 
 - CSS utility classes appended to `theme.css` (`.mermaid foreignObject` fix, `.text-amber`, `.link-amber`, `.diagram-*`, `.section-subtitle`, `.council-*`, `.mt-*` spacing helpers)
 - Twitter handle: `@OverKillHillP3` used as site-wide `twitter:site` and `twitter:creator`

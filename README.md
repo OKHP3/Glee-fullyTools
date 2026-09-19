@@ -92,7 +92,7 @@ behind Glee-fully tooling. It is a public explanation, not a hosted builder laun
   Every page's CSP is now enforced via a per-page <meta> tag
   (`scripts/generate-csp.py`) -- previously only defined, unenforced, in
   `_headers`, which GitHub Pages does not serve.
- * **Privacy boundary:** optional Google Analytics is off by default and can be
+* **Privacy boundary:** optional Google Analytics is off by default and can be
    enabled or withdrawn from [`legal/`](legal/). Google Fonts remains a
    documented brand dependency; Ko-fi is outbound navigation only. The
    complete request, storage, embed, and offline-cache inventory is in
@@ -104,7 +104,7 @@ behind Glee-fully tooling. It is a public explanation, not a hosted builder laun
    python3 scripts/generate-sitemap.py
    python3 scripts/generate-feed.py
    ```
- * **Add a new tool-ette page:** drop the new `Glee-fullyTools-GPTIcon-…` PNG
+* **Add a new tool-ette page:** drop the new `Glee-fullyTools-GPTIcon-…` PNG
    into `assets/img/`, place the page inside the shared URL scope in
    `config/public-inventory.json`, then run the
    ```bash
