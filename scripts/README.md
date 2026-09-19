@@ -25,6 +25,7 @@ follows the same convention as `askjamie/scripts/README.md`.
 | `check-public-headers.py` | active | Public `_headers`/CSP header check |
 | `check-stack-conformance.py` | active | Check the ADR-0007 local baseline; CI runs safety regressions; `--fix` preserves tracked evidence and the index |
 | `check-workflow-actions.py` | active | Approved action-major-tag policy check; does not enforce immutable SHA pins |
+| `technology-versions.py` | active | Inventory manifests and query stable publisher releases; writes Markdown/JSON reports without installing or updating dependencies |
 | `csp.py` | active | Canonical CSP policy generation module |
 | `generate-csp.py` | active | Apply CSP policies to every page |
 | `inclusive-accessibility-qa.py` | active | Browser evidence for inclusive keyboard, search, fallback, and constrained-environment journeys |

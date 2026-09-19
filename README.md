@@ -68,6 +68,10 @@ behind Glee-fully tooling. It is a public explanation, not a hosted builder laun
 
 ### 🛠 Maintainers' notes
 
+* **Technology updates:** the [inventory and upgrade plan](docs/technology-update-plan.md)
+  covers runtime, QA, platform, and dependency versions. The [version register](docs/technology-version-register.md)
+  includes all npm lock entries and publisher release evidence. Weekly Dependabot
+  PRs and Technology Version Review keep update candidates visible after merge.
 * **Audit evidence:** dated files under `assets/audit/` and `assets/docs/` are
   historical records. Current validator and link reports use the run date;
   never treat an older dated report as current evidence.
@@ -78,7 +82,7 @@ behind Glee-fully tooling. It is a public explanation, not a hosted builder laun
   Exit 0 = safe to publish.
 * **Mermaid runtime:** the `ecosystem/` and `universe/` diagrams run on
   Mermaid, vendored locally at `assets/vendor/mermaid/` (not loaded from a
-  CDN). `assets/vendor/mermaid/VERSION` pins the exact release; a daily
+  CDN). `assets/vendor/mermaid/VERSION` pins the exact release, currently 12.0.0; a daily
   `mermaid-version-watch` GitHub Action compares it against the latest npm
   release and opens/updates a tracking issue when the vendored copy falls
   behind -- re-vendoring is a deliberate, reviewed step, never automatic.
@@ -88,7 +92,7 @@ behind Glee-fully tooling. It is a public explanation, not a hosted builder laun
   Every page's CSP is now enforced via a per-page <meta> tag
   (`scripts/generate-csp.py`) -- previously only defined, unenforced, in
   `_headers`, which GitHub Pages does not serve.
- * **Privacy boundary:** optional Google Analytics is off by default and can be
+* **Privacy boundary:** optional Google Analytics is off by default and can be
    enabled or withdrawn from [`legal/`](legal/). Google Fonts remains a
    documented brand dependency; Ko-fi is outbound navigation only. The
    complete request, storage, embed, and offline-cache inventory is in
@@ -100,7 +104,7 @@ behind Glee-fully tooling. It is a public explanation, not a hosted builder laun
    python3 scripts/generate-sitemap.py
    python3 scripts/generate-feed.py
    ```
- * **Add a new tool-ette page:** drop the new `Glee-fullyTools-GPTIcon-…` PNG
+* **Add a new tool-ette page:** drop the new `Glee-fullyTools-GPTIcon-…` PNG
    into `assets/img/`, place the page inside the shared URL scope in
    `config/public-inventory.json`, then run the
    ```bash

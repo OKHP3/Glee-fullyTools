@@ -18,11 +18,13 @@ import json
 import os
 from pathlib import Path
 import sys
+from typing import Literal
 from urllib.parse import urljoin, urlsplit
 
 
 ASSET_PATH = "/assets/js/color-scheme-init.js"
 UTILITY_ROUTES = ("/404.html", "/under-construction.html", "/offline.html")
+FirstPaintStatus = Literal["observed", "unsupported", "unavailable_after_load"]
 SCRIPTS_DIR = Path(__file__).resolve().parents[1]
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
@@ -63,9 +65,18 @@ def adapt_local_http_navigation(
     return True
 
 
-def load_context(browser, base_url: str, init_script: str):
-    context = browser.new_context(service_workers="block")
-    context.add_init_script(init_script)
+def load_context(browser, base_url: str, init_script: str = "", *, preference=None):
+    options = {"service_workers": "block"}
+    if preference is not None:
+        base = urlsplit(base_url)
+        # Seed storage before creating a page, independently of document scripts.
+        options["storage_state"] = {"cookies": [], "origins": [{
+            "origin": f"{base.scheme}://{base.netloc}",
+            "localStorage": [{"name": "glee-color-scheme", "value": preference}],
+        }]}
+    context = browser.new_context(**options)
+    if init_script:
+        context.add_init_script(init_script)
 
     def route_request(route):
         if adapt_local_http_navigation(route, base_url):
@@ -89,8 +100,8 @@ def bootstrap_events(events: list[tuple[str, str | None]], route: str) -> dict[s
     try:
         dcl_index = next(
             index
-            for index, (kind, _) in enumerate(events)
-            if kind == "domcontentloaded"
+            for index, (kind, url) in enumerate(events)
+            if kind == "domcontentloaded" and urlsplit(url or "").path == route
         )
         request_index = next(
             index for kind, index in asset_events if kind == "request"
@@ -119,33 +130,64 @@ def bootstrap_events(events: list[tuple[str, str | None]], route: str) -> dict[s
     }
 
 
-def paint_timing(page) -> dict[str, float | None]:
+def paint_timing(page) -> dict[str, float | FirstPaintStatus | None]:
     """Capture the browser's resource and first-paint timing evidence."""
     return page.evaluate(
         """assetPath => {
           const assets = performance.getEntriesByType('resource')
             .filter(entry => new URL(entry.name).pathname === assetPath);
           const asset = assets[assets.length - 1];
-          const paints = performance.getEntriesByType('paint');
+          const canReadPaintEntries =
+            typeof performance.getEntriesByType === 'function';
+          const supportedEntryTypes =
+            typeof PerformanceObserver !== 'undefined' &&
+            Array.isArray(PerformanceObserver.supportedEntryTypes)
+              ? PerformanceObserver.supportedEntryTypes
+              : [];
+          const paintTimingSupported =
+            canReadPaintEntries && supportedEntryTypes.includes('paint');
+          const paints = canReadPaintEntries
+            ? performance.getEntriesByType('paint')
+            : [];
           const firstPaint = paints.find(entry => entry.name === 'first-paint');
           return {
             asset_response_end: asset ? asset.responseEnd : null,
-            first_paint: firstPaint ? firstPaint.startTime : null
+            first_paint: firstPaint ? firstPaint.startTime : null,
+            first_paint_status: firstPaint
+              ? 'observed'
+              : paintTimingSupported
+                ? 'unavailable_after_load'
+                : 'unsupported'
           };
         }""",
         ASSET_PATH,
     )
 
 
-def assert_paint_order(route: str, timing: dict[str, float | None]) -> None:
+def assert_paint_order(
+    route: str,
+    timing: dict[str, float | FirstPaintStatus | None],
+) -> None:
     """Require the bootstrap resource to finish before first paint when exposed."""
-    if timing["first_paint"] is not None:
+    status = timing["first_paint_status"]
+    assert status in {"observed", "unsupported", "unavailable_after_load"}, (
+        f"{route}: unknown first-paint timing status: {timing}"
+    )
+    if status == "observed":
+        assert timing["first_paint"] is not None, (
+            f"{route}: first-paint status was observed without a timing value: "
+            f"{timing}"
+        )
         assert timing["asset_response_end"] is not None, (
             f"{route}: color-scheme asset has no resource timing entry "
             "despite first-paint being available"
         )
         assert timing["asset_response_end"] <= timing["first_paint"], (
             f"{route}: color-scheme asset finished after first-paint: {timing}"
+        )
+    else:
+        assert timing["first_paint"] is None, (
+            f"{route}: first-paint timing was present with status {status}: {timing}"
         )
 
 
@@ -177,7 +219,7 @@ def route_type(route: str) -> str:
     return "utility" if route in UTILITY_ROUTES else page_type(route)
 
 
-def check_saved_preference(
+def _check_saved_preference_context(
     browser,
     base_url: str,
     preference: str,
@@ -186,7 +228,7 @@ def check_saved_preference(
     context = load_context(
         browser,
         base_url,
-        f"localStorage.setItem('glee-color-scheme', {preference!r});",
+        preference=preference,
     )
     page = context.new_page()
     events: list[tuple[str, str | None]] = []
@@ -206,7 +248,7 @@ def check_saved_preference(
             else None
         ),
     )
-    page.on("domcontentloaded", lambda: events.append(("domcontentloaded", None)))
+    page.on("domcontentloaded", lambda: events.append(("domcontentloaded", page.url)))
 
     try:
         results: list[dict[str, object]] = []
@@ -224,6 +266,7 @@ def check_saved_preference(
             initial = page.evaluate(
                 """() => ({
                   scheme: document.documentElement.getAttribute('data-color-scheme'),
+                  savedPreference: localStorage.getItem('glee-color-scheme'),
                   readyState: document.readyState,
                   colorSchemeScript: Boolean(document.querySelector(
                     'head > script[src*="color-scheme-init.js"]'
@@ -232,7 +275,8 @@ def check_saved_preference(
             )
             assert initial["scheme"] == preference, (
                 f"{route} did not apply saved {preference} preference at "
-                f"initial DOM assertion: {initial}"
+                f"initial DOM assertion: {initial}; events={events}; "
+                f"timing={paint_timing(page)}"
             )
             assert initial["colorSchemeScript"], (
                 f"{route} does not load the external color-scheme asset"
@@ -260,7 +304,11 @@ def check_saved_preference(
         context.close()
 
 
-def check_disabled_storage(browser, base_url: str) -> dict[str, object]:
+def _check_disabled_storage_context(
+    browser,
+    base_url: str,
+    routes: list[str],
+) -> dict[str, object]:
     context = load_context(
         browser,
         base_url,
@@ -288,43 +336,96 @@ def check_disabled_storage(browser, base_url: str) -> dict[str, object]:
             else None
         ),
     )
-    page.on("domcontentloaded", lambda: events.append(("domcontentloaded", None)))
+    page.on("domcontentloaded", lambda: events.append(("domcontentloaded", page.url)))
     page.on("pageerror", lambda error: page_errors.append(str(error)))
     try:
-        response = page.goto(urljoin(base_url, "/"), wait_until="domcontentloaded")
-        assert response is not None and response.ok, (
-            f"Page failed when storage was disabled: "
-            f"{response.status if response else 'no response'}"
-        )
-        assert page.locator("h1").is_visible(), (
-            "Representative Glee page did not remain usable with disabled storage"
-        )
-        assert page.locator(".glee-color-toggle").is_visible(), (
-            "Glee color control did not remain usable with disabled storage"
-        )
-        assert not page_errors, f"Page errors with disabled storage: {page_errors}"
-        initial = page.evaluate(
-            """() => ({
-              scheme: document.documentElement.getAttribute('data-color-scheme'),
-              readyState: document.readyState,
-              colorSchemeScript: Boolean(document.querySelector(
-                'head > script[src*="color-scheme-init.js"]'
-              ))
-            })"""
-        )
-        event_evidence = bootstrap_events(events, "/")
-        page.wait_for_load_state("load")
-        timing = paint_timing(page)
-        assert_paint_order("/", timing)
+        results: list[dict[str, object]] = []
+        for route in routes:
+            events.clear()
+            page_errors.clear()
+            response = page.goto(
+                urljoin(base_url, route),
+                wait_until="domcontentloaded",
+            )
+            assert response is not None and response.ok, (
+                f"{route} failed when storage was disabled: "
+                f"{response.status if response else 'no response'}"
+            )
+            assert page.locator("h1").is_visible(), (
+                f"{route} did not retain visible primary content "
+                "with disabled storage"
+            )
+            if route == "/":
+                assert page.locator(".glee-color-toggle").is_visible(), (
+                    "Glee color control did not remain usable with disabled storage"
+                )
+            assert not page_errors, (
+                f"{route} raised page errors with disabled storage: {page_errors}"
+            )
+            initial = page.evaluate(
+                """() => ({
+                  scheme: document.documentElement.getAttribute('data-color-scheme'),
+                  readyState: document.readyState,
+                  colorSchemeScript: Boolean(document.querySelector(
+                    'head > script[src*="color-scheme-init.js"]'
+                  ))
+                })"""
+            )
+            assert initial["readyState"] in {"interactive", "complete"}, (
+                f"{route} did not reach DOMContentLoaded with disabled storage: "
+                f"{initial}"
+            )
+            event_evidence = bootstrap_events(events, route)
+            page.wait_for_load_state("load")
+            timing = paint_timing(page)
+            assert_paint_order(route, timing)
+            results.append({
+                "route": route,
+                "page_type": route_type(route),
+                "h1_visible": True,
+                "page_errors": [],
+                "initial_dom": initial,
+                "bootstrap_events": event_evidence,
+                "timing": timing,
+            })
         return {
-            "h1_visible": True,
+            "routes": len(results),
+            "page_types": dict(Counter(result["page_type"] for result in results)),
             "color_toggle_visible": True,
-            "initial_dom": initial,
-            "bootstrap_events": event_evidence,
-            "timing": timing,
+            "route_evidence": results,
         }
     finally:
         context.close()
+
+
+def check_saved_preference(browser, base_url, preference, routes):
+    # WebKit intermittently lost the seeded storage during consecutive
+    # navigations in one context. Each URL needs its own saved-state fixture
+    # and navigation events; cross-page behavior has a separate acceptance suite.
+    results = []
+    for route in routes:
+        evidence = _check_saved_preference_context(
+            browser, base_url, preference, [route]
+        )
+        results.extend(evidence["route_evidence"])
+    return {
+        "routes": len(results),
+        "page_types": dict(Counter(result["page_type"] for result in results)),
+        "route_evidence": results,
+    }
+
+
+def check_disabled_storage(browser, base_url, routes):
+    results = []
+    for route in routes:
+        evidence = _check_disabled_storage_context(browser, base_url, [route])
+        results.extend(evidence["route_evidence"])
+    return {
+        "routes": len(results),
+        "page_types": dict(Counter(result["page_type"] for result in results)),
+        "color_toggle_visible": True,
+        "route_evidence": results,
+    }
 
 
 def main() -> None:
@@ -373,7 +474,7 @@ def main() -> None:
                     for preference in ("light", "dark")
                 }
                 evidence["disabled_storage"] = check_disabled_storage(
-                    browser, base_url
+                    browser, base_url, ["/", *UTILITY_ROUTES]
                 )
             finally:
                 browser.close()
