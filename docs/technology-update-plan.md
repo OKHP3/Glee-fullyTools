@@ -1,15 +1,16 @@
 # Technology inventory and update plan
 
 Review date: September 18, 2026, America/Chicago (September 19 UTC).
-Scope: this Glee-fullyTools repository, baseline commit
-`10f6b580bfe53b4c836297ee69641a509ab714c0`, including deployment and QA.
+Scope: this Glee-fullyTools repository, including deployment and QA. Initial
+baseline: `10f6b580bfe53b4c836297ee69641a509ab714c0`. The current register was
+refreshed against integration commit `b0fcafb16a070a99c33c947b77ea6edfdf0c158d`.
 
 Reconciliation follow-up (September 19 UTC): the integration branch also
 includes the seven previously unpublished Replit commits and the pending
 Mermaid 12.0.0 update from PR #46. All 106 committed Mermaid runtime/license
-files match the publisher's npm tarball. The tables and dated JSON below
-preserve the original September 18 baseline; Mermaid is now 12.0.0 in the
-integration tree. Hosted checks and release acceptance belong to the
+files match the publisher's npm tarball. The current register and tables below
+include Mermaid 12.0.0. The September 18 JSON remains as historical evidence.
+Hosted checks and release acceptance belong to the
 integration PR and its exact merged commit, not the initial local audit.
 
 ## Findings
@@ -25,7 +26,7 @@ The [generated version register](technology-version-register.md) lists every
 one of the 114 npm lockfile entries, the Python dependencies, runtime selectors,
 vendored Mermaid, and all nine GitHub Actions. Each of its 135 records includes
 current evidence, a publisher release URL, latest stable release, and result.
-The [JSON snapshot](../assets/audit/technology-versions-2026-09-18.json) preserves
+The [JSON snapshot](../assets/audit/technology-versions-2026-09-19.json) preserves
 the same results, including current-major and LTS Node versions and npm engine
 requirements. It is a dated snapshot, not a promise that these remain latest.
 
@@ -39,7 +40,7 @@ requirements. It is a dated snapshot, not a promise that these remain latest.
 | Puppeteer | 25.10.0 | 25.11.0 | Dependabot PR; retain optional QA use |
 | Lighthouse | 13.4.1 | 13.5.0 | Dependabot PR; no production runtime role |
 | Beautiful Soup | 4.15.0 | 4.15.0 | Current; retained declared QA dependency |
-| Mermaid | 11.17.2 | 12.0.0 | Reviewed major upgrade and re-vendoring |
+| Mermaid | 12.0.0 | 12.0.0 | Updated through the reviewed integration of PR #46 |
 | actions/setup-node | v4 | 7.0.0 | Update action policy, tests, and all references together |
 
 Version evidence comes from the publisher endpoints linked on each row in the
@@ -169,7 +170,9 @@ review reports rather than rewrites runtime selectors, Mermaid assets, or
 provider-managed settings. Thus package PR generation is automated, while
 the following plan covers the remaining technologies. Schedules become active
 only after these files are merged to the default branch. No repository
-setting, secret, remote branch, or deployment was changed by this review.
+setting or secret was changed by the inventory implementation. The subsequent
+reconciliation publishes the reviewed work through PR #48 and verifies the
+merged source, both checkouts, and the Pages deployment separately.
 At activation, verify that branch protection requires the new
 `Validate Node dependency updates` check if it must block merging. Adding a
 job to a workflow does not itself change the repository's required-check list.
@@ -191,7 +194,7 @@ committing refreshed reports. For CI monitoring, append `--fail-on-updates`.
 | 2 / maintainer | Move Node to 24.21.0 LTS, or first patch 22 to 22.23.2. Update .node-version, package.json engines, package-lock root engines, the checker Node constant, and dependency policy together | npm ci, Node QA, Python QA, and Pages generation under the exact chosen runtime; choose an npm version whose engines match |
 | 3 / Dependabot + maintainer | Update Puppeteer, Lighthouse, and both Playwright declarations through PRs; regenerate package-lock with npm, never by hand | Python and Node browser suites pass. Reinstall matching browsers; record any intentional difference between the two Playwright versions |
 | 4 / maintainer | Test Python 3.14.7 alongside 3.11, then update every workflow selector and Replit module if supported | All Python regressions, generated files, and Chromium/Firefox/WebKit release tests pass; record installed transitive versions with pip freeze |
-| 5 / maintainer | Review Mermaid 12 release notes, replace the complete published ESM entry/chunk set, preserve LICENSE, update VERSION | Verify bundle/version consistency, CSP, both diagram routes, click behavior, light/dark themes, and generated universe interactions |
+| 5 / maintainer | Mermaid 12.0.0 re-vendoring is included in PR #48 from #46; repeat this process for the next release | Verify bundle/version consistency, CSP, both diagram routes, click behavior, light/dark themes, and generated universe interactions |
 | 6 / maintainer in Replit | Select supported Node/Python modules and Nix channel; verify actual node, npm, python, shell, compiler, and browser versions | Fresh Replit install and preview pass independently of Windows/CI; do not invent a channel name from upstream NixOS |
 | Recurring / maintainer | Review provider notices and standards compatibility monthly; update workstation tools and archived tooling when used | Browser, typography, consent, offline, and deployment smoke checks; record unsupported or deferred changes with a review date |
 
@@ -212,7 +215,7 @@ lockfile locally, with lifecycle scripts skipped; the CI job uses normal
 `npm ci`. Full hosted CI, the complete multi-browser release suite, Replit,
 and live deployment were not run for this local maintenance change.
 
-The final publisher refresh returned 135 records, 11 direct update candidates,
+The integration publisher refresh returned 135 records, 10 direct update candidates,
 and zero incomplete release lookups. Unpinned current versions remain unknown
 as documented above; successful lookup does not fill that evidence gap.
 
@@ -225,6 +228,6 @@ as documented above; successful lookup does not fill that evidence gap.
 | Every vendored Mermaid subcomponent has a known version | Unknown | No retained vendor component lock/SBOM | Capture provenance during re-vendoring |
 | New schedules have run on GitHub | Unknown / not activated locally | Workflow source alone is not a hosted run | Merge, dispatch once, and inspect artifacts |
 
-Next action: review and merge this maintenance change, then begin the ordered
-runtime and package upgrade PRs above. No dependency upgrade is included in
-this inventory and automation change.
+Next action: finish the integration PR's release acceptance, then begin the
+remaining runtime and package upgrade PRs above. Mermaid 12.0.0 is included;
+the remaining available updates are review candidates, not installed upgrades.
