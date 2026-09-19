@@ -64,7 +64,14 @@ class AuditRepoTests(unittest.TestCase):
             self.assertEqual(check["reviewed_head"], reviewed_head)
             self.assertEqual(check["current_head"], reviewed_head)
             self.assertEqual(check["deletion_commands"], [
-                ["git", "push", "upstream", "--delete", "feature/cleanup"],
+                [
+                    "git",
+                    "push",
+                    f"--force-with-lease=refs/heads/feature/cleanup:{reviewed_head}",
+                    "upstream",
+                    "--delete",
+                    "feature/cleanup",
+                ],
                 ["git", "branch", "-d", "feature/cleanup"],
             ])
 

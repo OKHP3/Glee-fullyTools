@@ -113,7 +113,14 @@ def prepare_branch_deletion(
         "bucket": "delete",
         "reason": "branch tip matches reviewed head",
         "deletion_commands": [
-            ["git", "push", remote, "--delete", branch],
+            [
+                "git",
+                "push",
+                f"--force-with-lease=refs/heads/{branch}:{reviewed_head}",
+                remote,
+                "--delete",
+                branch,
+            ],
             ["git", "branch", "-d", branch],
         ],
     })
