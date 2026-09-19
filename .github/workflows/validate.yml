@@ -30,6 +30,7 @@ jobs:
           python3 -m unittest scripts.tests.test_stack_conformance
           python3 scripts/tests/test-technology-versions.py
           python3 -m unittest scripts.tests.test_check_workflow_actions
+          python3 -m unittest scripts.tests.test_validate_search_coverage_gate
           python3 scripts/check-stack-conformance.py
 
       - name: Check GitHub Actions versions

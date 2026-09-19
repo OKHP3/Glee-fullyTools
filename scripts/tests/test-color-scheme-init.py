@@ -18,11 +18,13 @@ import json
 import os
 from pathlib import Path
 import sys
+from typing import Literal
 from urllib.parse import urljoin, urlsplit
 
 
 ASSET_PATH = "/assets/js/color-scheme-init.js"
 UTILITY_ROUTES = ("/404.html", "/under-construction.html", "/offline.html")
+FirstPaintStatus = Literal["observed", "unsupported", "unavailable_after_load"]
 SCRIPTS_DIR = Path(__file__).resolve().parents[1]
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
@@ -119,33 +121,64 @@ def bootstrap_events(events: list[tuple[str, str | None]], route: str) -> dict[s
     }
 
 
-def paint_timing(page) -> dict[str, float | None]:
+def paint_timing(page) -> dict[str, float | FirstPaintStatus | None]:
     """Capture the browser's resource and first-paint timing evidence."""
     return page.evaluate(
         """assetPath => {
           const assets = performance.getEntriesByType('resource')
             .filter(entry => new URL(entry.name).pathname === assetPath);
           const asset = assets[assets.length - 1];
-          const paints = performance.getEntriesByType('paint');
+          const canReadPaintEntries =
+            typeof performance.getEntriesByType === 'function';
+          const supportedEntryTypes =
+            typeof PerformanceObserver !== 'undefined' &&
+            Array.isArray(PerformanceObserver.supportedEntryTypes)
+              ? PerformanceObserver.supportedEntryTypes
+              : [];
+          const paintTimingSupported =
+            canReadPaintEntries && supportedEntryTypes.includes('paint');
+          const paints = canReadPaintEntries
+            ? performance.getEntriesByType('paint')
+            : [];
           const firstPaint = paints.find(entry => entry.name === 'first-paint');
           return {
             asset_response_end: asset ? asset.responseEnd : null,
-            first_paint: firstPaint ? firstPaint.startTime : null
+            first_paint: firstPaint ? firstPaint.startTime : null,
+            first_paint_status: firstPaint
+              ? 'observed'
+              : paintTimingSupported
+                ? 'unavailable_after_load'
+                : 'unsupported'
           };
         }""",
         ASSET_PATH,
     )
 
 
-def assert_paint_order(route: str, timing: dict[str, float | None]) -> None:
+def assert_paint_order(
+    route: str,
+    timing: dict[str, float | FirstPaintStatus | None],
+) -> None:
     """Require the bootstrap resource to finish before first paint when exposed."""
-    if timing["first_paint"] is not None:
+    status = timing["first_paint_status"]
+    assert status in {"observed", "unsupported", "unavailable_after_load"}, (
+        f"{route}: unknown first-paint timing status: {timing}"
+    )
+    if status == "observed":
+        assert timing["first_paint"] is not None, (
+            f"{route}: first-paint status was observed without a timing value: "
+            f"{timing}"
+        )
         assert timing["asset_response_end"] is not None, (
             f"{route}: color-scheme asset has no resource timing entry "
             "despite first-paint being available"
         )
         assert timing["asset_response_end"] <= timing["first_paint"], (
             f"{route}: color-scheme asset finished after first-paint: {timing}"
+        )
+    else:
+        assert timing["first_paint"] is None, (
+            f"{route}: first-paint timing was present with status {status}: {timing}"
         )
 
 
@@ -260,7 +293,11 @@ def check_saved_preference(
         context.close()
 
 
-def check_disabled_storage(browser, base_url: str) -> dict[str, object]:
+def check_disabled_storage(
+    browser,
+    base_url: str,
+    routes: list[str],
+) -> dict[str, object]:
     context = load_context(
         browser,
         base_url,
@@ -291,37 +328,60 @@ def check_disabled_storage(browser, base_url: str) -> dict[str, object]:
     page.on("domcontentloaded", lambda: events.append(("domcontentloaded", None)))
     page.on("pageerror", lambda error: page_errors.append(str(error)))
     try:
-        response = page.goto(urljoin(base_url, "/"), wait_until="domcontentloaded")
-        assert response is not None and response.ok, (
-            f"Page failed when storage was disabled: "
-            f"{response.status if response else 'no response'}"
-        )
-        assert page.locator("h1").is_visible(), (
-            "Representative Glee page did not remain usable with disabled storage"
-        )
-        assert page.locator(".glee-color-toggle").is_visible(), (
-            "Glee color control did not remain usable with disabled storage"
-        )
-        assert not page_errors, f"Page errors with disabled storage: {page_errors}"
-        initial = page.evaluate(
-            """() => ({
-              scheme: document.documentElement.getAttribute('data-color-scheme'),
-              readyState: document.readyState,
-              colorSchemeScript: Boolean(document.querySelector(
-                'head > script[src*="color-scheme-init.js"]'
-              ))
-            })"""
-        )
-        event_evidence = bootstrap_events(events, "/")
-        page.wait_for_load_state("load")
-        timing = paint_timing(page)
-        assert_paint_order("/", timing)
+        results: list[dict[str, object]] = []
+        for route in routes:
+            events.clear()
+            page_errors.clear()
+            response = page.goto(
+                urljoin(base_url, route),
+                wait_until="domcontentloaded",
+            )
+            assert response is not None and response.ok, (
+                f"{route} failed when storage was disabled: "
+                f"{response.status if response else 'no response'}"
+            )
+            assert page.locator("h1").is_visible(), (
+                f"{route} did not retain visible primary content "
+                "with disabled storage"
+            )
+            if route == "/":
+                assert page.locator(".glee-color-toggle").is_visible(), (
+                    "Glee color control did not remain usable with disabled storage"
+                )
+            assert not page_errors, (
+                f"{route} raised page errors with disabled storage: {page_errors}"
+            )
+            initial = page.evaluate(
+                """() => ({
+                  scheme: document.documentElement.getAttribute('data-color-scheme'),
+                  readyState: document.readyState,
+                  colorSchemeScript: Boolean(document.querySelector(
+                    'head > script[src*="color-scheme-init.js"]'
+                  ))
+                })"""
+            )
+            assert initial["readyState"] in {"interactive", "complete"}, (
+                f"{route} did not reach DOMContentLoaded with disabled storage: "
+                f"{initial}"
+            )
+            event_evidence = bootstrap_events(events, route)
+            page.wait_for_load_state("load")
+            timing = paint_timing(page)
+            assert_paint_order(route, timing)
+            results.append({
+                "route": route,
+                "page_type": route_type(route),
+                "h1_visible": True,
+                "page_errors": [],
+                "initial_dom": initial,
+                "bootstrap_events": event_evidence,
+                "timing": timing,
+            })
         return {
-            "h1_visible": True,
+            "routes": len(results),
+            "page_types": dict(Counter(result["page_type"] for result in results)),
             "color_toggle_visible": True,
-            "initial_dom": initial,
-            "bootstrap_events": event_evidence,
-            "timing": timing,
+            "route_evidence": results,
         }
     finally:
         context.close()
@@ -373,7 +433,7 @@ def main() -> None:
                     for preference in ("light", "dark")
                 }
                 evidence["disabled_storage"] = check_disabled_storage(
-                    browser, base_url
+                    browser, base_url, ["/", *UTILITY_ROUTES]
                 )
             finally:
                 browser.close()
