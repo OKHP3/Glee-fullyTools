@@ -35,7 +35,7 @@ jobs:
           echo "Validated release commit: $checked_out_commit"
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version-file: '.node-version'
           cache: npm
